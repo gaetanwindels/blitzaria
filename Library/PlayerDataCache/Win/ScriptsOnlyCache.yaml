@@ -561,4 +561,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/Game Scene.unity
-  playerPath: C:/Users/Dynamix/Desktop/Blitzaria/blitzaria.exe
+  playerPath: G:/truitaria/blitzaria.exe
