@@ -1,0 +1,74 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class WaterDetector : MonoBehaviour
+{
+
+    [SerializeField] float massMitigator = 40f;
+    [SerializeField] float maxMass = 0.2f;
+    [SerializeField] float minVelocityExit = 7f;
+
+    void OnTriggerEnter2D(Collider2D hit)
+    {
+        var ball = hit.GetComponent<Ball>();
+
+        var rigidBody = hit.GetComponent<Rigidbody2D>();
+        
+
+        if (rigidBody  != null && (ball == null || !ball.HasJustSpawned))
+        {
+            var mass = Mathf.Min(maxMass, rigidBody.mass);
+            GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody.velocity.y * mass / massMitigator);
+        }
+
+    }
+
+    void OnTriggerExit2D(Collider2D hit)
+    {
+        var ball = hit.GetComponent<Ball>();
+
+        var rigidBody = hit.GetComponent<Rigidbody2D>();
+
+        if (rigidBody == null) {
+            return;
+        }
+
+        Debug.Log(GetCombinedSpeed(rigidBody));
+        if (GetCombinedSpeed(rigidBody) <= minVelocityExit)
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
+            return;
+        }
+
+        if (rigidBody != null && (ball == null || !ball.HasJustSpawned))
+        {
+            var mass = Mathf.Min(maxMass, rigidBody.mass);
+            GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody.velocity.y * mass / massMitigator);
+        }
+
+        if (ball != null)
+        {
+            ball.HasJustSpawned = false;
+        }
+    }
+
+    public float GetCombinedSpeed(Rigidbody2D body)
+    {
+        var velocity = body.velocity;
+        return Mathf.Sqrt(Mathf.Abs(velocity.x * velocity.x) + (Mathf.Abs(velocity.y * velocity.y)));
+    }
+
+    /*void OnTriggerStay2D(Collider2D Hit)
+    {
+        //print(Hit.name);
+        if (Hit.rigidbody2D != null)
+        {
+            int points = Mathf.RoundToInt(Hit.transform.localScale.x * 15f);
+            for (int i = 0; i < points; i++)
+            {
+                transform.parent.GetComponent<Water>().Splish(Hit.transform.position.x - Hit.transform.localScale.x + i * 2 * Hit.transform.localScale.x / points, Hit.rigidbody2D.mass * Hit.rigidbody2D.velocity.x / 10f / points * 2f);
+            }
+        }
+    }*/
+
+}
