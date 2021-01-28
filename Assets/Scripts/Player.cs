@@ -240,6 +240,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
         animator.SetBool("IsLoadingShoot", Input.GetButton("Fire1"));
+        animator.SetBool("IsShooting", Input.GetButtonUp("Fire1"));
     }
 
     private void ManageRotation()
