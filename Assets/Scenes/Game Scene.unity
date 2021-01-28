@@ -1931,7 +1931,23 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 9b6d2ece3338bed408a0a13910f3d160, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 7189128559172714729, guid: 0696e04b866f8404f91f9badb1af5187,
+        type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189128559172714729, guid: 0696e04b866f8404f91f9badb1af5187,
+        type: 3}
+      propertyPath: boostSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189128559172714729, guid: 0696e04b866f8404f91f9badb1af5187,
+        type: 3}
+      propertyPath: dashSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5643917344132851189, guid: 0696e04b866f8404f91f9badb1af5187, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0696e04b866f8404f91f9badb1af5187, type: 3}
 --- !u!1001 &8795129349411656445
 PrefabInstance:

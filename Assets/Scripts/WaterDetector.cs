@@ -21,6 +21,11 @@ public class WaterDetector : MonoBehaviour
             GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody.velocity.y * mass / massMitigator);
         }
 
+        if (ball != null)
+        {
+            ball.HasJustSpawned = false;
+        }
+
     }
 
     void OnTriggerExit2D(Collider2D hit)
@@ -33,13 +38,13 @@ public class WaterDetector : MonoBehaviour
             return;
         }
 
-        Debug.Log(GetCombinedSpeed(rigidBody));
-        if (GetCombinedSpeed(rigidBody) <= minVelocityExit)
+        if (rigidBody.velocity.magnitude <= minVelocityExit)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
             return;
         }
 
+        Debug.Log(ball == null || !ball.HasJustSpawned);
         if (rigidBody != null && (ball == null || !ball.HasJustSpawned))
         {
             var mass = Mathf.Min(maxMass, rigidBody.mass);
@@ -50,12 +55,6 @@ public class WaterDetector : MonoBehaviour
         {
             ball.HasJustSpawned = false;
         }
-    }
-
-    public float GetCombinedSpeed(Rigidbody2D body)
-    {
-        var velocity = body.velocity;
-        return Mathf.Sqrt(Mathf.Abs(velocity.x * velocity.x) + (Mathf.Abs(velocity.y * velocity.y)));
     }
 
     /*void OnTriggerStay2D(Collider2D Hit)

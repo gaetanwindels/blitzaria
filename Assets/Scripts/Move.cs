@@ -9,8 +9,9 @@ public class Move : MonoBehaviour
     // Parameters
     [SerializeField] int speed = 7;
     [SerializeField] float airSpeed = 0.02f;
-    [SerializeField] int boostSpeed = 10;
-    [SerializeField] int dashSpeed = 20;
+    [SerializeField] float boostSpeed = 10f;
+    [SerializeField] float dashSpeed = 20f;
+    [SerializeField] float grabSpeedFactor = 0.8f;
     [SerializeField] float dashDuration = 0.2f;
     [SerializeField] private float lockedTime = 0.2f;
 
@@ -72,7 +73,12 @@ public class Move : MonoBehaviour
     private void ManageMove()
     {
         var isTouchingWater = collider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
-        var computedSpeed = speed;
+        float computedSpeed = speed;
+
+        if (Input.GetButton("Jump"))
+        {
+            computedSpeed = boostSpeed;
+        }
 
         if (isDashing())
         {
@@ -87,11 +93,12 @@ public class Move : MonoBehaviour
             dashTimer = dashDuration;
         }
 
-        if (Input.GetButton("Jump"))
+        if (this.player.IsGrabbing())
         {
-            computedSpeed = boostSpeed;
+            computedSpeed *= grabSpeedFactor;
         }
 
+        Debug.Log(Input.GetAxis("Horizontal2"));
         float speedX = Input.GetAxis("Horizontal") * computedSpeed;
         float speedY = Input.GetAxis("Vertical") * computedSpeed;
 

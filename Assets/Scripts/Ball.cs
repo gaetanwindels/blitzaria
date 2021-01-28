@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
                 Debug.Log("Velocity collided " + tagName);
                 Collider2D collider = GetComponent<Collider2D>();
                 WaterPushback waterPushback = GetComponent<WaterPushback>();
-                this.player = player;
+                player.Grab(this);
                 Destroy(rigidbody);
                 Destroy(collider);
                 Destroy(waterPushback);
@@ -75,7 +75,7 @@ public class Ball : MonoBehaviour
 
         if (rigidbody != null)
         {
-            rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : 1;
+            rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : 0.8f;
             rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 1f : 0.25f;
         }
 
