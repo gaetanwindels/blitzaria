@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3285326167003531602, guid: 961a59e339a85604fb2afcf5a9e2eb89,
         type: 3}
       propertyPath: m_Name
-      value: deb
+      value: Girl
       objectReference: {fileID: 0}
     - target: {fileID: 3285326167003531564, guid: 961a59e339a85604fb2afcf5a9e2eb89,
         type: 3}
@@ -67,20 +67,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3285326167003531567, guid: 961a59e339a85604fb2afcf5a9e2eb89,
-        type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285326167003531567, guid: 961a59e339a85604fb2afcf5a9e2eb89,
-        type: 3}
-      propertyPath: boostSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285326167003531567, guid: 961a59e339a85604fb2afcf5a9e2eb89,
-        type: 3}
-      propertyPath: dashSpeed
-      value: 8
+    - target: {fileID: 1529211955, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
+      propertyPath: tackleSpeed
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1529211955, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
       propertyPath: maxShotPower
@@ -90,5 +79,52 @@ PrefabInstance:
       propertyPath: minShotPower
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1529211955, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529211955, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
+      propertyPath: boostSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529211955, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
+      propertyPath: dashSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529211955, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
+      propertyPath: playerNumber
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285326167003531603, guid: 961a59e339a85604fb2afcf5a9e2eb89,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7244887407478243098, guid: 83e516282bd06a647aaf733fdd6a3909,
+        type: 3}
+    - target: {fileID: 3285326167003531565, guid: 961a59e339a85604fb2afcf5a9e2eb89,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.053072453
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285326167003531565, guid: 961a59e339a85604fb2afcf5a9e2eb89,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.05843234
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285326167003531565, guid: 961a59e339a85604fb2afcf5a9e2eb89,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.24426365
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285326167003531565, guid: 961a59e339a85604fb2afcf5a9e2eb89,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.4197135
+      objectReference: {fileID: 0}
+    - target: {fileID: 248129412, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9b6d2ece3338bed408a0a13910f3d160, type: 2}
+    m_RemovedComponents:
+    - {fileID: 3285326167003531567, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 961a59e339a85604fb2afcf5a9e2eb89, type: 3}
