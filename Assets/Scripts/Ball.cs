@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class Ball : MonoBehaviour
 {
@@ -18,10 +19,11 @@ public class Ball : MonoBehaviour
 
         var tagName = collision.gameObject.tag;
         Player player = collision.gameObject.GetComponent<Player>();
-        Debug.Log(Input.GetButton("Grab"));
+        
         if (this.player == null && player != null && tagName == "Player")
         {
-            if (Input.GetButton("Grab")) {
+            var rwPlayer = ReInput.players.GetPlayer(player.playerNumber);
+            if (rwPlayer.GetButton("Grab")) {
                 Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
                 Debug.Log("Velocity collided " + tagName);
                 Collider2D collider = GetComponent<Collider2D>();

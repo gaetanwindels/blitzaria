@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class Player : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float shotHitboxTime = 0.3f;
 
     [Header("Move")]
-    [SerializeField] int speed = 7;
+    [SerializeField] float speed = 7f;
     [SerializeField] float airSpeed = 0.02f;
     [SerializeField] float boostSpeed = 10f;
     [SerializeField] float dashSpeed = 20f;
@@ -34,7 +35,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float lockedTime = 0.2f;
 
     [Header("Player Config")]
-    [SerializeField] public int playerNumber = 1;
+    [SerializeField] public int playerNumber = 0;
+    private Rewired.Player rwPlayer;
 
     // Cached variables
     private Rigidbody2D rigidBody;
@@ -60,7 +62,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("IsShooting", false);
         bodyCollider = GetComponent<Collider2D>();
-
+        rwPlayer = ReInput.players.GetPlayer(playerNumber);
 
         if (this.shotHitbox != null)
         {
@@ -72,15 +74,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         ManageGravity();
-
-        if (playerNumber != 1)
-        {
-            return;
-        }
-
         ManageShoot();
         ManageMove();
         ManageTackle();
@@ -102,7 +96,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var hasPressedTackle = Input.GetButtonDown("Fire3");
+        var hasPressedTackle = rwPlayer.GetButtonDown("Tackle");
         if (hasPressedTackle)
         {
             tackleTimer = tackleDuration;
@@ -119,7 +113,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var hasPressedDash = Input.GetButtonDown("Fire2");
+        var hasPressedDash = rwPlayer.GetButtonDown("Dash");
         if (hasPressedDash)
         {
             dashTimer = dashDuration;
@@ -129,18 +123,13 @@ public class Player : MonoBehaviour
 
     private void ManageShoot()
     {
-        if (playerNumber != 1)
-        {
-            return;
-        }
-
-        if (Input.GetButton("Fire1"))
+        if (rwPlayer.GetButton("Shoot"))
         {
             builtupPower += Time.deltaTime;
             builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
         }
 
-        if (Input.GetButtonUp("Fire1") || Input.GetButtonUp("Grab"))
+        if (rwPlayer.GetButtonUp("Shoot") || rwPlayer.GetButtonUp("Grab"))
         {
             GameObject newBall = null;
             if (IsGrabbing())
@@ -155,7 +144,7 @@ public class Player : MonoBehaviour
 
                 var computedShotPower = GetSpeed() + releasePower;
 
-                if (Input.GetButtonUp("Fire1"))
+                if (rwPlayer.GetButtonUp("Shoot"))
                 {
                     computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
                 }
@@ -178,7 +167,7 @@ public class Player : MonoBehaviour
                 builtupPower = 0;
                 Debug.Log(newBallBody.velocity);
 
-            } else if (!IsGrabbing() && Input.GetButtonUp("Fire1")) {
+            } else if (!IsGrabbing() && rwPlayer.GetButtonUp("Shoot")) {
                 Debug.Log("enabling");
                 this.shotHitbox.enabled = true;
                 StartCoroutine("EnableShotHitbox");
@@ -203,7 +192,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (Input.GetButton("Jump"))
+        if (rwPlayer.GetButton("Turbo"))
         {
             computedSpeed = boostSpeed;
         }
@@ -213,23 +202,24 @@ public class Player : MonoBehaviour
             computedSpeed *= grabSpeedFactor;
         }
 
-        float speedX = Input.GetAxis("Horizontal") * computedSpeed;
-        float speedY = Input.GetAxis("Vertical") * computedSpeed;
+        float speedX = rwPlayer.GetAxis("Move Horizontal") * computedSpeed;
+        float speedY = rwPlayer.GetAxis("Move Vertical") * computedSpeed;
+        var speedVector = new Vector2(rwPlayer.GetAxis("Move Horizontal"), rwPlayer.GetAxis("Move Vertical"));
 
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
-            this.rigidBody.velocity = ComputeMoveSpeed(computedSpeed);
+            this.rigidBody.velocity = ComputeMoveSpeed(speedVector.magnitude * computedSpeed);
         }
         else if (!isTouchingWater)
         {
-            var counterForce = this.airSpeed * Input.GetAxis("Horizontal");
+            var counterForce = this.airSpeed * rwPlayer.GetAxis("Move Horizontal");
             this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y);
         }
     }
 
     private void ManageAnimation()
     {
-        var isImmobile = Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0;
+        var isImmobile = rwPlayer.GetAxis("Move Horizontal") == 0 && rwPlayer.GetAxis("Move Vertical") == 0;
         var isInWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
         var isUp = rigidBody.velocity.y >= 0;
         animator.SetBool("IsSwimming", isInWater && !isImmobile);
@@ -239,16 +229,16 @@ public class Player : MonoBehaviour
         animator.SetBool("IsTackling", IsTackling());
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
-        animator.SetBool("IsLoadingShoot", Input.GetButton("Fire1"));
-        animator.SetBool("IsShooting", Input.GetButtonUp("Fire1"));
+        animator.SetBool("IsLoadingShoot", rwPlayer.GetButton("Shoot"));
+        animator.SetBool("IsShooting", rwPlayer.GetButton("Shoot"));
     }
 
     private void ManageRotation()
     {
         var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
         var isMoving = (Math.Abs(this.rigidBody.velocity.x) > 0 || Math.Abs(this.rigidBody.velocity.y) > 0);
-        float speedX = Input.GetAxis("Horizontal");
-        float speedY = Input.GetAxis("Vertical");
+        float speedX = rwPlayer.GetAxis("Move Horizontal");
+        float speedY = rwPlayer.GetAxis("Move Vertical");
 
         var scaleX = this.rigidBody.velocity.x < 0 ? -1 : 1;
         if (!isMoving || (!isTouchingWater && !IsDashing()))
@@ -329,8 +319,8 @@ public class Player : MonoBehaviour
 
     private Vector2 ComputeMoveSpeed(float speedWanted)
     {
-        float speedX = Input.GetAxis("Horizontal");
-        float speedY = Input.GetAxis("Vertical");
+        float speedX = rwPlayer.GetAxis("Move Horizontal");
+        float speedY = rwPlayer.GetAxis("Move Vertical");
         float totalFactor = Math.Abs(speedX) + Math.Abs(speedY);
         float speedSquare = speedWanted * speedWanted;
 
@@ -354,16 +344,16 @@ public class Player : MonoBehaviour
     {
         var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
 
-        float speedX = Input.GetAxis("Horizontal2");
-        float speedY = Input.GetAxis("Vertical2");
+        float speedX = rwPlayer.GetAxis("Move Horizontal 2");
+        float speedY = rwPlayer.GetAxis("Move Vertical 2");
 
         Debug.Log("SPEEDX" + speedX);
         Debug.Log("SPEEDY" + speedY);
 
         if (speedX == 0 && speedY == 0)
         {
-            speedX = Input.GetAxis("Horizontal");
-            speedY = Input.GetAxis("Vertical");
+            speedX = rwPlayer.GetAxis("Move Horizontal");
+            speedY = rwPlayer.GetAxis("Move Vertical");
         }
         
         if (Mathf.Abs(speedX) + Mathf.Abs(speedY) == 0)
@@ -375,6 +365,7 @@ public class Player : MonoBehaviour
         float totalFactor = Mathf.Abs(speedX) + Mathf.Abs(speedY);
         float speedSquare = speedWanted * speedWanted;
 
+        Debug.Log("TitalFactor" + totalFactor);
         var newSpeedX = Mathf.Sqrt((speedSquare * Mathf.Abs(speedX)) / totalFactor);
         var newSpeedY = Mathf.Sqrt((speedSquare * Mathf.Abs(speedY)) / totalFactor);
 
@@ -398,7 +389,6 @@ public class Player : MonoBehaviour
 
     private float GetSpeed()
     {
-        var speed = rigidBody.velocity;
-        return Mathf.Sqrt(speed.x * speed.x + speed.y + speed.y);
+        return rigidBody.velocity.magnitude;
     }
 }
