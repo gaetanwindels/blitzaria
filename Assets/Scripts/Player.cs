@@ -230,7 +230,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
         animator.SetBool("IsLoadingShoot", rwPlayer.GetButton("Shoot"));
-        animator.SetBool("IsShooting", rwPlayer.GetButton("Shoot"));
+        animator.SetBool("IsShooting", rwPlayer.GetButtonUp("Shoot"));
     }
 
     private void ManageRotation()
