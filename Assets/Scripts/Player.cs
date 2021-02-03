@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject ballPrefab;
 
     [Header("Tackle")]
-    [SerializeField] private float tackleSpeed = 10f;
+    [SerializeField] private float tackleSpeed = 8f;
+    [SerializeField] private float tackleReturnSpeed = 8f;
     [SerializeField] private float tackleDuration = 0.1f;
     [SerializeField] private float tackleWindUp = 0.1f;
 
@@ -34,9 +35,15 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDuration = 0.2f;
     [SerializeField] private float lockedTime = 0.2f;
 
+
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
+    [SerializeField] public bool isAI = false;
+
     private Rewired.Player rwPlayer;
+    public Brain brain;
+
+    public InputManager inputManager;
 
     // Cached variables
     private Rigidbody2D rigidBody;
@@ -47,6 +54,8 @@ public class Player : MonoBehaviour
     [Header("State")]
     public float builtupPower = 0;
     public Ball ballGrabbed = null;
+    public Vector2 tackleStartPoint;
+    public bool IsReturnFromTackle = false;
 
     [Header("Timers")]
     public float dashTimer = 0f;
@@ -63,6 +72,12 @@ public class Player : MonoBehaviour
         animator.SetBool("IsShooting", false);
         bodyCollider = GetComponent<Collider2D>();
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
+        inputManager = new RewiredInputManager(playerNumber);
+
+        if (isAI)
+        {
+            inputManager = new SimulatedInputManager(playerNumber);
+        }
 
         if (this.shotHitbox != null)
         {
@@ -71,9 +86,56 @@ public class Player : MonoBehaviour
        
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var go = collision.gameObject;
+        var player = go.GetComponent<Player>();
+
+        if (player != null && IsTackling())
+        {
+            player.ReceiveTackle(this);
+        }
+
+        Debug.Log("Ball collided " + collision.gameObject.name);
+
+        // BALL GRAB COLLISION
+        Ball ball = collision.gameObject.GetComponent<Ball>();
+
+        if (this.ballGrabbed == null)
+        {
+            if (inputManager.GetButton("Grab"))
+            {
+                var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
+                Collider2D collider = ball.GetComponent<Collider2D>();
+                Grab(ball);
+                Destroy(rigidBodyBall);
+                Destroy(collider);
+            }
+            else
+            {
+                var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
+                rigidBodyBall.velocity = rigidBody.velocity * ball.impulseSpeedFactor;
+
+            }
+
+        }
+    }
+
+    public void ReceiveTackle(Player player)
+    {
+        if (IsGrabbing())
+        {
+            this.ballGrabbed.player = null;
+            Destroy(FindObjectOfType<Ball>().gameObject);
+            var newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
+            Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
+            newBallBody.velocity = (-1 * newBallBody.velocity);
+        }
+    }
+
     // Update is called once per frame
     void Update()
-    {
+    {        
         ManageGravity();
         ManageShoot();
         ManageMove();
@@ -92,15 +154,14 @@ public class Player : MonoBehaviour
     {
         if (IsTackling())
         {
-           tackleTimer -= Time.deltaTime;
+            tackleTimer -= Time.deltaTime;
             return;
         }
 
-        var hasPressedTackle = rwPlayer.GetButtonDown("Tackle");
+        var hasPressedTackle = inputManager.GetButtonDown("Tackle");
         if (hasPressedTackle)
         {
             tackleTimer = tackleDuration;
-            tackleWindupTimer = tackleWindUp;
             this.rigidBody.velocity = ComputeMoveSpeed(this.tackleSpeed);
         }
     }
@@ -113,7 +174,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var hasPressedDash = rwPlayer.GetButtonDown("Dash");
+        var hasPressedDash = inputManager.GetButtonDown("Dash");
         if (hasPressedDash)
         {
             dashTimer = dashDuration;
@@ -123,13 +184,13 @@ public class Player : MonoBehaviour
 
     private void ManageShoot()
     {
-        if (rwPlayer.GetButton("Shoot"))
+        if (inputManager.GetButton("Shoot"))
         {
             builtupPower += Time.deltaTime;
             builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
         }
 
-        if (rwPlayer.GetButtonUp("Shoot") || rwPlayer.GetButtonUp("Grab"))
+        if (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Grab"))
         {
             GameObject newBall = null;
             if (IsGrabbing())
@@ -144,7 +205,7 @@ public class Player : MonoBehaviour
 
                 var computedShotPower = GetSpeed() + releasePower;
 
-                if (rwPlayer.GetButtonUp("Shoot"))
+                if (inputManager.GetButtonUp("Shoot"))
                 {
                     computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
                 }
@@ -167,7 +228,7 @@ public class Player : MonoBehaviour
                 builtupPower = 0;
                 Debug.Log(newBallBody.velocity);
 
-            } else if (!IsGrabbing() && rwPlayer.GetButtonUp("Shoot")) {
+            } else if (!IsGrabbing() && inputManager.GetButtonUp("Shoot")) {
                 Debug.Log("enabling");
                 this.shotHitbox.enabled = true;
                 StartCoroutine("EnableShotHitbox");
@@ -192,7 +253,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (rwPlayer.GetButton("Turbo"))
+        if (inputManager.GetButton("Turbo"))
         {
             computedSpeed = boostSpeed;
         }
@@ -202,9 +263,9 @@ public class Player : MonoBehaviour
             computedSpeed *= grabSpeedFactor;
         }
 
-        float speedX = rwPlayer.GetAxis("Move Horizontal") * computedSpeed;
-        float speedY = rwPlayer.GetAxis("Move Vertical") * computedSpeed;
-        var speedVector = new Vector2(rwPlayer.GetAxis("Move Horizontal"), rwPlayer.GetAxis("Move Vertical"));
+        float speedX = inputManager.GetAxis("Move Horizontal") * computedSpeed;
+        float speedY = inputManager.GetAxis("Move Vertical") * computedSpeed;
+        var speedVector = new Vector2(inputManager.GetAxis("Move Horizontal"), inputManager.GetAxis("Move Vertical"));
 
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
@@ -212,14 +273,14 @@ public class Player : MonoBehaviour
         }
         else if (!isTouchingWater)
         {
-            var counterForce = this.airSpeed * rwPlayer.GetAxis("Move Horizontal");
+            var counterForce = this.airSpeed * inputManager.GetAxis("Move Horizontal");
             this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y);
         }
     }
 
     private void ManageAnimation()
     {
-        var isImmobile = rwPlayer.GetAxis("Move Horizontal") == 0 && rwPlayer.GetAxis("Move Vertical") == 0;
+        var isImmobile = inputManager.GetAxis("Move Horizontal") == 0 && inputManager.GetAxis("Move Vertical") == 0;
         var isInWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
         var isUp = rigidBody.velocity.y >= 0;
         animator.SetBool("IsSwimming", isInWater && !isImmobile);
@@ -229,16 +290,16 @@ public class Player : MonoBehaviour
         animator.SetBool("IsTackling", IsTackling());
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
-        animator.SetBool("IsLoadingShoot", rwPlayer.GetButton("Shoot"));
-        animator.SetBool("IsShooting", rwPlayer.GetButtonUp("Shoot"));
+        animator.SetBool("IsLoadingShoot", inputManager.GetButton("Shoot"));
+        animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
     private void ManageRotation()
     {
         var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
         var isMoving = (Math.Abs(this.rigidBody.velocity.x) > 0 || Math.Abs(this.rigidBody.velocity.y) > 0);
-        float speedX = rwPlayer.GetAxis("Move Horizontal");
-        float speedY = rwPlayer.GetAxis("Move Vertical");
+        float speedX = inputManager.GetAxis("Move Horizontal");
+        float speedY = inputManager.GetAxis("Move Vertical");
 
         var scaleX = this.rigidBody.velocity.x < 0 ? -1 : 1;
         if (!isMoving || (!isTouchingWater && !IsDashing()))
@@ -264,7 +325,7 @@ public class Player : MonoBehaviour
 
     public bool IsTackling()
     {
-        return tackleTimer > 0 && tackleWindUp > 0;
+        return tackleTimer > 0;
     }
 
     public bool IsGrabbing()
@@ -319,10 +380,15 @@ public class Player : MonoBehaviour
 
     private Vector2 ComputeMoveSpeed(float speedWanted)
     {
-        float speedX = rwPlayer.GetAxis("Move Horizontal");
-        float speedY = rwPlayer.GetAxis("Move Vertical");
+        float speedX = inputManager.GetAxis("Move Horizontal");
+        float speedY = inputManager.GetAxis("Move Vertical");
         float totalFactor = Math.Abs(speedX) + Math.Abs(speedY);
         float speedSquare = speedWanted * speedWanted;
+
+        if (totalFactor == 0)
+        {
+            return new Vector2(0, 0);
+        }
 
         var newSpeedX = Mathf.Sqrt((speedSquare * Math.Abs(speedX)) / totalFactor);
         var newSpeedY = Mathf.Sqrt((speedSquare * Math.Abs(speedY)) / totalFactor);
@@ -344,16 +410,16 @@ public class Player : MonoBehaviour
     {
         var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
 
-        float speedX = rwPlayer.GetAxis("Move Horizontal 2");
-        float speedY = rwPlayer.GetAxis("Move Vertical 2");
+        float speedX = inputManager.GetAxis("Move Horizontal 2");
+        float speedY = inputManager.GetAxis("Move Vertical 2");
 
         Debug.Log("SPEEDX" + speedX);
         Debug.Log("SPEEDY" + speedY);
 
         if (speedX == 0 && speedY == 0)
         {
-            speedX = rwPlayer.GetAxis("Move Horizontal");
-            speedY = rwPlayer.GetAxis("Move Vertical");
+            speedX = inputManager.GetAxis("Move Horizontal");
+            speedY = inputManager.GetAxis("Move Vertical");
         }
         
         if (Mathf.Abs(speedX) + Mathf.Abs(speedY) == 0)

@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        return;
         Debug.Log("Ball collided " + collision.gameObject.name);
 
         var tagName = collision.gameObject.tag;
