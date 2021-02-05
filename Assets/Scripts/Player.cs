@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     public float currentEnergy;
     public bool isReplenishing = false;
     public IEnumerator replenishRoutine;
+    public bool moveEnabled = true;
 
     [Header("Timers")]
     public float dashTimer = 0f;
@@ -146,6 +147,16 @@ public class Player : MonoBehaviour
             newBallBody.velocity = (-velocity - otherVelocity) / 2;
             DisableBallCollision(newBall);
         }
+    }
+
+    public void DisableMove()
+    {
+        this.moveEnabled = false;
+    }
+
+    public void EnableMove()
+    {
+        this.moveEnabled = true;
     }
 
     // Update is called once per frame
@@ -253,7 +264,7 @@ public class Player : MonoBehaviour
                 Debug.Log(newBallBody.velocity);
 
             } else if (!IsGrabbing() && inputManager.GetButtonUp("Shoot")) {
-                Debug.Log("enabling");
+                this.DisableMove();
                 this.shotHitbox.enabled = true;
                 StartCoroutine("EnableShotHitbox");
             }
@@ -272,7 +283,7 @@ public class Player : MonoBehaviour
         var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
         float computedSpeed = speed;
 
-        if (IsTackling() || IsDashing())
+        if (IsTackling() || IsDashing() || !moveEnabled)
         {
             return;
         }
