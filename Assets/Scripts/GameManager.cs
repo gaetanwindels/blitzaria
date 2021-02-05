@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreTeam1Text;
     [SerializeField] TextMeshProUGUI scoreTeam2Text;
     [SerializeField] TextMeshProUGUI countDownText;
+    [SerializeField] Slider sliderEnergyBar1;
+    [SerializeField] Slider sliderEnergyBar2;
 
     // State variable
     public static GameManager instance = null;
@@ -65,6 +68,7 @@ public class GameManager : MonoBehaviour
         countDownTimer = countdownDuration;
         scoreTeam1 = 0;
         scoreTeam2 = 0;
+        players = FindObjectsOfType<Player>();
 
         foreach (Player player in players)
         {
@@ -83,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         ManageTimer();
         ManageCountDown();
-        
+        UpdateEnergy();
 
         if (scoreTeam1Text != null)
         {
@@ -155,5 +159,19 @@ public class GameManager : MonoBehaviour
         {
             scoreTeam1++;
         }
+    }
+
+    public void UpdateEnergy() 
+    {
+        foreach (Player player in players)
+        {
+            if (player.playerNumber == 0)
+            {
+                sliderEnergyBar1.value = (player.currentEnergy / GameSettings.energyAmount);
+            } else if (player.playerNumber == 1)
+            {
+                sliderEnergyBar2.value = (player.currentEnergy / GameSettings.energyAmount);
+            }
+        }  
     }
 }

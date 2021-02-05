@@ -12,7 +12,7 @@ public static class GameSettings {
 
     public static int turboEnergyCostPerSecond = 10;
 
-    public static int replenishAfter = 2;
-    public static int replenishEnergyPerSecond = 2;
+    public static int replenishAfter = 1;
+    public static int replenishEnergyPerSecond = 5;
 
 }
