@@ -21,7 +21,7 @@ public class MoveAndGrabBrain : Brain
     {
         inputManager = (SimulatedInputManager) player.inputManager;
 
-        // var ball = FindObjectOfType<Ball>();
+        var ball = FindObjectOfType<Ball>();
 
         if (inputManager == null)
         {
@@ -29,7 +29,13 @@ public class MoveAndGrabBrain : Brain
         }
 
         inputManager.SimulateButton("Grab");
+
+        //ball.transform.position
+        var playPos = player.transform.position;
+        var vect = Vector2.MoveTowards(playPos, ball.transform.position, Time.deltaTime);
         // inputManager.SimulateAxis("Move Horizontal", 1);
+        //inputManager.SimulateAxis("Move Horizontal", 1);
+        //inputManager.SimulateAxis("Move Vertital", 1);
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using System;
 
 public class Ball : MonoBehaviour
 {
@@ -9,39 +10,17 @@ public class Ball : MonoBehaviour
     [SerializeField] public Player player;
     [SerializeField] public float impulseSpeedFactor = 0.5f;
 
+    [SerializeField] public float minScaleY = 0.5f;
+    [SerializeField] public float minVelocityTransform = 5f;
+    [SerializeField] public float maxVelocityTransform = 10f;
+
     private bool hasJustSpawned = true;
 
     public bool HasJustSpawned { get => hasJustSpawned; set => hasJustSpawned = value; }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        return;
-        Debug.Log("Ball collided " + collision.gameObject.name);
-
-        var tagName = collision.gameObject.tag;
-        Player player = collision.gameObject.GetComponent<Player>();
         
-        if (this.player == null && player != null && tagName == "Player")
-        {
-            var rwPlayer = ReInput.players.GetPlayer(player.playerNumber);
-            if (rwPlayer.GetButton("Grab")) {
-                Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-                Debug.Log("Velocity collided " + tagName);
-                Collider2D collider = GetComponent<Collider2D>();
-                WaterPushback waterPushback = GetComponent<WaterPushback>();
-                player.Grab(this);
-                Destroy(rigidbody);
-                Destroy(collider);
-                Destroy(waterPushback);
-            } else
-            {
-                var rigidBodyPlayer = player.GetComponent<Rigidbody2D>();
-                var rigidBodyBall = GetComponent<Rigidbody2D>();
-                rigidBodyBall.velocity = rigidBodyPlayer.velocity * impulseSpeedFactor;
-
-            }
-            
-        }        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,17 +53,44 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
         if (rigidbody != null)
         {
             rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : 0.8f;
             rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 1f : 0.25f;
+            ManageScale();
+            ManageRotation();
         }
 
         if (this.player != null)
         {
             this.transform.position = player.BallPoint.position;
         }
+    }
+
+    private void ManageRotation()
+    {
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        float angle = Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
+    }
+
+    private void ManageScale()
+    {
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        var speed = rigidbody.velocity.magnitude;
+
+        if (speed < minVelocityTransform)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        } else
+        {
+            var adjustedSpeed = Mathf.Min(speed, maxVelocityTransform);
+            var scaleY = Mathf.Max(1, minScaleY + (speed / maxVelocityTransform));
+            transform.localScale = new Vector3(1, scaleY, 1);
+        }
+        
     }
 }

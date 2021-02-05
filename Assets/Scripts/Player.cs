@@ -23,12 +23,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float minShotPower = 5f;
     [SerializeField] private float releasePower = 2f;
     [SerializeField] private float timeToBuildUp = 1f;
+    [SerializeField] private float shootSpeedFactor = 0.3f;
     [SerializeField] private Collider2D shotHitbox;
     [SerializeField] private float shotHitboxTime = 0.3f;
+    [SerializeField] private BarSlider barSlider;
 
     [Header("Move")]
     [SerializeField] float speed = 7f;
     [SerializeField] float airSpeed = 0.02f;
+    [SerializeField] float airThrust = 0.02f;
     [SerializeField] float boostSpeed = 10f;
     [SerializeField] float dashSpeed = 20f;
     [SerializeField] float grabSpeedFactor = 0.8f;
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
     [SerializeField] public bool isAI = false;
+    [SerializeField] public bool isActive = false;
 
     private Rewired.Player rwPlayer;
     public Brain brain;
@@ -56,6 +60,9 @@ public class Player : MonoBehaviour
     public Ball ballGrabbed = null;
     public Vector2 tackleStartPoint;
     public bool IsReturnFromTackle = false;
+    public float currentEnergy;
+    public bool isReplenishing = false;
+    public IEnumerator replenishRoutine;
 
     [Header("Timers")]
     public float dashTimer = 0f;
@@ -71,8 +78,11 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("IsShooting", false);
         bodyCollider = GetComponent<Collider2D>();
+
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
         inputManager = new RewiredInputManager(playerNumber);
+
+        currentEnergy = GameSettings.energyAmount;
 
         if (isAI)
         {
@@ -101,7 +111,7 @@ public class Player : MonoBehaviour
         // BALL GRAB COLLISION
         Ball ball = collision.gameObject.GetComponent<Ball>();
 
-        if (this.ballGrabbed == null)
+        if (this.ballGrabbed == null && ball != null)
         {
             if (inputManager.GetButton("Grab"))
             {
@@ -125,11 +135,16 @@ public class Player : MonoBehaviour
     {
         if (IsGrabbing())
         {
+            var otherRigidBody = player.GetComponent<Rigidbody2D>();
             this.ballGrabbed.player = null;
             Destroy(FindObjectOfType<Ball>().gameObject);
             var newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-            newBallBody.velocity = (-1 * newBallBody.velocity);
+
+            var otherVelocity = otherRigidBody.velocity;
+            var velocity = rigidBody.velocity;
+            newBallBody.velocity = (-velocity - otherVelocity) / 2;
+            DisableBallCollision(newBall);
         }
     }
 
@@ -143,6 +158,13 @@ public class Player : MonoBehaviour
         ManageDash();
         ManageRotation();
         ManageAnimation();
+
+        barSlider.SetValue(builtupPower);
+
+        if (isReplenishing)
+        {
+            AddEnergy(Time.deltaTime * GameSettings.replenishEnergyPerSecond);
+        }
     }
 
     private void ManageGravity()
@@ -175,8 +197,9 @@ public class Player : MonoBehaviour
         }
 
         var hasPressedDash = inputManager.GetButtonDown("Dash");
-        if (hasPressedDash)
+        if (hasPressedDash && currentEnergy >= GameSettings.dashEnergyCost)
         {
+            RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
             this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);
         }
@@ -188,6 +211,7 @@ public class Player : MonoBehaviour
         {
             builtupPower += Time.deltaTime;
             builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
+
         }
 
         if (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Grab"))
@@ -253,14 +277,20 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (inputManager.GetButton("Turbo"))
+        var currentAirThrust = 0f; 
+        if (inputManager.GetButton("Turbo") && currentEnergy > 0)
         {
+            RemoveEnergy(Time.deltaTime * GameSettings.turboEnergyCostPerSecond);
+            currentAirThrust = airThrust;
             computedSpeed = boostSpeed;
         }
 
         if (IsGrabbing())
         {
             computedSpeed *= grabSpeedFactor;
+        } else if (inputManager.GetButton("Shoot"))
+        {
+            computedSpeed *= shootSpeedFactor;
         }
 
         float speedX = inputManager.GetAxis("Move Horizontal") * computedSpeed;
@@ -274,8 +304,31 @@ public class Player : MonoBehaviour
         else if (!isTouchingWater)
         {
             var counterForce = this.airSpeed * inputManager.GetAxis("Move Horizontal");
-            this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y);
+            this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y + currentAirThrust);
         }
+    }
+
+    private void RemoveEnergy(float energy)
+    {
+        currentEnergy = Mathf.Max(0, currentEnergy - energy);
+        if (replenishRoutine != null)
+        {
+            StopCoroutine(replenishRoutine);
+        }
+        replenishRoutine = DisableEnergyReplenish();
+        StartCoroutine(replenishRoutine);
+    }
+
+    public void AddEnergy(float energy)
+    {
+        currentEnergy = Mathf.Min(currentEnergy + energy, GameSettings.energyAmount);
+    }
+
+    IEnumerator DisableEnergyReplenish()
+    {
+        isReplenishing = false;
+        yield return new WaitForSeconds(GameSettings.replenishAfter);
+        isReplenishing = true;
     }
 
     private void ManageAnimation()
@@ -301,18 +354,18 @@ public class Player : MonoBehaviour
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
-        var scaleX = this.rigidBody.velocity.x < 0 ? -1 : 1;
+        var scaleX = this.rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
         if (!isMoving || (!isTouchingWater && !IsDashing()))
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            transform.localScale = new Vector3(scaleX, 1, 1);
+            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
         else if (speedX != 0 || speedY != 0)
         {
             // Manage rotation
             float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
-            transform.localScale = new Vector3(scaleX, 1, 1);
+            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
     }
 
@@ -361,6 +414,11 @@ public class Player : MonoBehaviour
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
         StartCoroutine("DisableBody");
         Debug.Log(rigidBodyBall.velocity);
+    }
+
+    public void DisableBallCollision(GameObject newBall)
+    {
+        StartCoroutine(DisableBody(newBall));
     }
 
     IEnumerator EnableShotHitbox()
