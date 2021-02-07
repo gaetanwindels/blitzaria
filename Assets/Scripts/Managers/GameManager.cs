@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreTeam1Text;
     [SerializeField] TextMeshProUGUI scoreTeam2Text;
     [SerializeField] TextMeshProUGUI countDownText;
+    [SerializeField] TextMeshProUGUI winText;
+    [SerializeField] GameObject restartButton;
     [SerializeField] Slider sliderEnergyBar1;
     [SerializeField] Slider sliderEnergyBar2;
 
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
+        players = FindObjectsOfType<Player>();
     }
 
     void Awake()
@@ -68,6 +71,8 @@ public class GameManager : MonoBehaviour
         countDownTimer = countdownDuration;
         scoreTeam1 = 0;
         scoreTeam2 = 0;
+        winText.enabled = false;
+        restartButton.SetActive(false);
         players = FindObjectsOfType<Player>();
 
         foreach (Player player in players)
@@ -89,6 +94,9 @@ public class GameManager : MonoBehaviour
         ManageCountDown();
         UpdateEnergy();
 
+        winText.enabled = IsGameOver();
+        restartButton.SetActive(IsGameOver());
+
         if (scoreTeam1Text != null)
         {
             scoreTeam1Text.text = scoreTeam1.ToString();
@@ -97,6 +105,25 @@ public class GameManager : MonoBehaviour
         if (scoreTeam2Text != null)
         {
             scoreTeam2Text.text = scoreTeam2.ToString();
+        }
+
+        Time.timeScale = IsGameOver() ? 0 : 1;
+
+        if (IsGameOver())
+        {
+            var score1 = int.Parse(scoreTeam1Text.text);
+            var score2 = int.Parse(scoreTeam2Text.text);
+
+            if (score1 == score2)
+            {
+                winText.text = "Draw";
+            } else
+            {
+                winText.text = int.Parse(scoreTeam1Text.text) > int.Parse(scoreTeam2Text.text) ? "Team 1" : "Team 2";
+                winText.text += " win";
+            }
+            
+            Time.timeScale = 0;
         }
     }
 
@@ -173,5 +200,10 @@ public class GameManager : MonoBehaviour
                 sliderEnergyBar2.value = (player.currentEnergy / GameSettings.energyAmount);
             }
         }  
+    }
+
+    public bool IsGameOver()
+    {
+        return timer <= 0;
     }
 }

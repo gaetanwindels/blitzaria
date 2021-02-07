@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
     private Collider2D bodyCollider;
+    private GameManager gameManager;
 
     // State variable
     [Header("State")]
@@ -79,6 +80,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("IsShooting", false);
         bodyCollider = GetComponent<Collider2D>();
+        gameManager = FindObjectOfType<GameManager>();
 
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
         inputManager = new RewiredInputManager(playerNumber);
@@ -162,6 +164,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
+
+        if (gameManager.IsGameOver())
+        {
+            return;
+        }
+
         ManageGravity();
         ManageShoot();
         ManageMove();
@@ -170,12 +178,18 @@ public class Player : MonoBehaviour
         ManageRotation();
         ManageAnimation();
 
-        barSlider.SetValue(builtupPower);
+        barSlider.SetValue(builtupPower / timeToBuildUp);
 
         if (isReplenishing)
         {
             AddEnergy(Time.deltaTime * GameSettings.replenishEnergyPerSecond);
         }
+    }
+
+    public void NotifyShootingFinish()
+    {
+        animator.SetBool("IsShooting", false);
+        this.EnableMove();
     }
 
     private void ManageGravity()
@@ -227,11 +241,12 @@ public class Player : MonoBehaviour
 
         if (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Grab"))
         {
+            animator.SetBool("IsShooting", true);
             GameObject newBall = null;
             if (IsGrabbing())
             {
                 Debug.Log("SHOOT");
-                animator.SetBool("IsShooting", true);
+                
                 Destroy(FindObjectOfType<Ball>().gameObject);
                 newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
                 Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
@@ -273,8 +288,7 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(DisableBody(newBall));
             }
-            
-            animator.SetBool("IsShooting", false);
+     
         }
     }
 
@@ -355,7 +369,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
         animator.SetBool("IsLoadingShoot", inputManager.GetButton("Shoot"));
-        animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
+        //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
     private void ManageRotation()
@@ -369,14 +383,21 @@ public class Player : MonoBehaviour
         if (!isMoving || (!isTouchingWater && !IsDashing()))
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+            if (this.rigidBody.velocity.x != 0)
+            {
+                transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+            }
         }
         else if (speedX != 0 || speedY != 0)
         {
             // Manage rotation
             float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
-            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+            if (this.rigidBody.velocity.x != 0)
+            {
+                transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+            }
+            
         }
     }
 
