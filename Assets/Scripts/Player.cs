@@ -400,6 +400,7 @@ public class Player : MonoBehaviour
             // Manage rotation
             float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
+            Debug.Log("LAST INPUTS" + speedX);
             if (this.rigidBody.velocity.x != 0)
             {
                 transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
