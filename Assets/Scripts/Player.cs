@@ -84,6 +84,7 @@ public class Player : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
 
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
+
         inputManager = new RewiredInputManager(playerNumber);
 
         currentEnergy = GameSettings.energyAmount;
