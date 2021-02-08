@@ -23,7 +23,6 @@ public class RewiredInputManager : InputManager
 
     public float GetAxis(string actionName)
     {
-        Debug.Log("HOOOO" + registeredInputEvents);
         return registeredInputEvents ? rwPlayer.GetAxis(actionName) : 0f;
     }
 

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593422434637689305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 3.2, z: 0}
+  m_LocalPosition: {x: 0.376, y: 0.342, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 8668985616526701916}
@@ -74,9 +74,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10559976, y: -0.19161016}
+  m_Offset: {x: -0.14847457, y: -0.680196}
   serializedVersion: 2
-  m_Radius: 0.33083916
+  m_Radius: 0.047684003
 --- !u!1 &1593422436185489843
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593422436185489843}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 1.7, z: 0}
+  m_LocalPosition: {x: 0.05, y: 0.07, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 8668985616526701916}
@@ -132,8 +132,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635714658644379601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.99, y: -6.39, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0.32, y: -0.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4743683120441919432}
   m_Father: {fileID: 8668985616526701916}
@@ -313,9 +313,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6696335799491091476}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: -2.2578914, z: 13.041489}
-  m_LocalScale: {x: -0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1593422435886075005}
   - {fileID: 1593422436185489840}
@@ -377,8 +377,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.64269304, y: 1.3489637}
-  m_Size: {x: 3.5015726, y: 7.9417915}
+  m_Offset: {x: 0.031040907, y: -0.028978467}
+  m_Size: {x: 0.30133677, y: 1.1856124}
   m_Direction: 0
 --- !u!114 &6696335799491091474
 MonoBehaviour:
@@ -404,7 +404,7 @@ MonoBehaviour:
   minShotPower: 6
   releasePower: 2
   timeToBuildUp: 0.6
-  shootSpeedFactor: 0.3
+  shootSpeedFactor: 0.5
   shotHitbox: {fileID: 1593422435886075004}
   shotHitboxTime: 0.15
   barSlider: {fileID: 247287903034256356}
@@ -412,9 +412,9 @@ MonoBehaviour:
   airSpeed: 0.02
   airThrust: 0.02
   boostSpeed: 7
-  dashSpeed: 9
+  dashSpeed: 7
   grabSpeedFactor: 0.5
-  dashDuration: 0.2
+  dashDuration: 0.3
   lockedTime: 0.2
   playerNumber: 0
   isAI: 0
@@ -426,6 +426,7 @@ MonoBehaviour:
   IsReturnFromTackle: 0
   currentEnergy: 0
   isReplenishing: 0
+  moveEnabled: 1
   dashTimer: 0
   tackleTimer: 0
   tackleWindupTimer: 0
@@ -469,7 +470,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 846c9d9dc62a1ec43a3302c3e14881af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d510afa5686d9f41a8c82fa60fe6d4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

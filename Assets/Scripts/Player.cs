@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     [SerializeField] public int playerNumber = 0;
     [SerializeField] public bool isAI = false;
     [SerializeField] public bool isActive = false;
+    [SerializeField] public bool disableOnStart = true;
 
     private Rewired.Player rwPlayer;
     public Brain brain;
@@ -92,7 +93,11 @@ public class Player : MonoBehaviour
             inputManager = new SimulatedInputManager(playerNumber);
         }
 
-        DisableInputs();
+        if (disableOnStart)
+        {
+            DisableInputs();
+        }
+        
 
         if (this.shotHitbox != null)
         {
@@ -167,7 +172,7 @@ public class Player : MonoBehaviour
     void Update()
     {        
 
-        if (gameManager.IsGameOver())
+        if (gameManager != null && gameManager.IsGameOver())
         {
             return;
         }
