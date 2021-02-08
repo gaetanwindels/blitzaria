@@ -92,6 +92,8 @@ public class Player : MonoBehaviour
             inputManager = new SimulatedInputManager(playerNumber);
         }
 
+        DisableInputs();
+
         if (this.shotHitbox != null)
         {
             this.shotHitbox.enabled = false;
@@ -546,5 +548,24 @@ public class Player : MonoBehaviour
     private float GetSpeed()
     {
         return rigidBody.velocity.magnitude;
+    }
+
+    public void DisableInputs()
+    {
+        Debug.Log("everyday I'm disabling");
+        if (this.inputManager != null)
+        {
+            Debug.Log("everyday I'm disabling");
+            this.inputManager.UnregisterInputEvents();
+        }
+        
+    }
+
+    public void EnableInputs()
+    {
+        if (this.inputManager != null)
+        {
+            this.inputManager.RegisterInputEvents();
+        }
     }
 }

@@ -56,11 +56,13 @@ public class Ball : MonoBehaviour
 
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
+        ManageScale();
+
         if (rigidbody != null)
         {
             rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : 0.8f;
             rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 1f : 0.25f;
-            ManageScale();
+            
             ManageRotation();
         }
 
@@ -80,6 +82,13 @@ public class Ball : MonoBehaviour
     private void ManageScale()
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+
+        if (rigidbody == null)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            return;
+        }
+        
         var speed = rigidbody.velocity.magnitude;
 
         if (speed < minVelocityTransform)
@@ -88,9 +97,8 @@ public class Ball : MonoBehaviour
         } else
         {
             var adjustedSpeed = Mathf.Min(speed, maxVelocityTransform);
-            var scaleY = Mathf.Max(1, minScaleY + (speed / maxVelocityTransform));
+            var scaleY = Mathf.Min(1, minScaleY + (speed / maxVelocityTransform));
             transform.localScale = new Vector3(1, scaleY, 1);
         }
-        
     }
 }

@@ -8,6 +8,7 @@ public class RewiredInputManager : InputManager
 
     private int playerNumber;
     private Rewired.Player rwPlayer;
+    private bool registeredInputEvents = true;
 
     public RewiredInputManager(int playerNumber)
     {
@@ -22,21 +23,32 @@ public class RewiredInputManager : InputManager
 
     public float GetAxis(string actionName)
     {
-        return rwPlayer.GetAxis(actionName);
+        Debug.Log("HOOOO" + registeredInputEvents);
+        return registeredInputEvents ? rwPlayer.GetAxis(actionName) : 0f;
     }
 
     public bool GetButton(string actionName)
     {
-        return rwPlayer.GetButton(actionName);
+        return registeredInputEvents && rwPlayer.GetButton(actionName);
     }
 
     public bool GetButtonUp(string actionName)
     {
-        return rwPlayer.GetButtonUp(actionName);
+        return registeredInputEvents && rwPlayer.GetButtonUp(actionName);
     }
 
     public bool GetButtonDown(string actionName)
     {
-        return rwPlayer.GetButtonDown(actionName);
+        return registeredInputEvents && rwPlayer.GetButtonDown(actionName);
+    }
+
+    public void UnregisterInputEvents()
+    {
+        registeredInputEvents = false;
+    }
+
+    public void RegisterInputEvents()
+    {
+        registeredInputEvents = true;
     }
 }

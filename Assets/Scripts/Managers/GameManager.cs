@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject restartButton;
     [SerializeField] Slider sliderEnergyBar1;
     [SerializeField] Slider sliderEnergyBar2;
+    [SerializeField] Slider sliderEnergyBar3;
+    [SerializeField] Slider sliderEnergyBar4;
 
     // State variable
     public static GameManager instance = null;
@@ -45,8 +47,16 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
+        Debug.Log("OnSceneLoaded:" + countDownTimer);
         players = FindObjectsOfType<Player>();
+
+        foreach (Player player in players)
+        {
+            player.DisableInputs();
+        }
+
+        isCountDown = true;
+        countDownTimer = countdownDuration;
     }
 
     void Awake()
@@ -74,7 +84,6 @@ public class GameManager : MonoBehaviour
         winText.enabled = false;
         restartButton.SetActive(false);
         players = FindObjectsOfType<Player>();
-
         foreach (Player player in players)
         {
             player.isActive = false;
@@ -169,9 +178,17 @@ public class GameManager : MonoBehaviour
         {
             isCountDown = false;
             countDownText.text = "";
+            var positionLockers = FindObjectsOfType<PositionLocker>();
+            var playersFound = FindObjectsOfType<Player>();
+
+            foreach (PositionLocker positionLocker in positionLockers)
+            {
+                positionLocker.UnlockObject();
+            }
+
             foreach (Player player in players)
             {
-                player.isActive = true;
+                player.EnableInputs();
             }
         }
 
@@ -198,6 +215,14 @@ public class GameManager : MonoBehaviour
             } else if (player.playerNumber == 1)
             {
                 sliderEnergyBar2.value = (player.currentEnergy / GameSettings.energyAmount);
+            }
+            else if (player.playerNumber == 2)
+            {
+                sliderEnergyBar3.value = (player.currentEnergy / GameSettings.energyAmount);
+            }
+            else if (player.playerNumber == 3)
+            {
+                sliderEnergyBar4.value = (player.currentEnergy / GameSettings.energyAmount);
             }
         }  
     }

@@ -14,4 +14,8 @@ public interface InputManager
 
     float GetAxis(string actionName);
 
+    void UnregisterInputEvents();
+
+    void RegisterInputEvents();
+
 }

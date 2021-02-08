@@ -9,6 +9,7 @@ public class SimulatedInputManager : InputManager
 
     private Dictionary<string, float> simulatedAxis = new Dictionary<string, float>();
     private Dictionary<string, Buttonpress> simulatedButtons = new Dictionary<string, Buttonpress>();
+    private bool registeredInputEvents = true;
 
     public SimulatedInputManager(int playerNumber)
     {
@@ -22,31 +23,22 @@ public class SimulatedInputManager : InputManager
 
     public float GetAxis(string actionName)
     {
-        return simulatedAxis.ContainsKey(actionName) ? simulatedAxis[actionName] : 0f;
+        return registeredInputEvents && simulatedAxis.ContainsKey(actionName) ? simulatedAxis[actionName] : 0f;
     }
 
     public bool GetButton(string actionName)
     {
-        if (actionName == "Grab")
-        {
-
-            Debug.Log("IT IS CALLED " + actionName);
-        }
-        if (simulatedButtons.ContainsKey(actionName))
-        {
-            Debug.Log(simulatedButtons[actionName]);
-        }
-        return simulatedButtons.ContainsKey(actionName) && simulatedButtons[actionName] == Buttonpress.Pressing;
+        return registeredInputEvents && simulatedButtons.ContainsKey(actionName) && simulatedButtons[actionName] == Buttonpress.Pressing;
     }
 
     public bool GetButtonUp(string actionName)
     {
-        return simulatedButtons.ContainsKey(actionName) && simulatedButtons[actionName] == Buttonpress.Up;
+        return registeredInputEvents && simulatedButtons.ContainsKey(actionName) && simulatedButtons[actionName] == Buttonpress.Up;
     }
 
     public bool GetButtonDown(string actionName)
     {
-        return simulatedButtons.ContainsKey(actionName) && simulatedButtons[actionName] == Buttonpress.Down;
+        return registeredInputEvents && simulatedButtons.ContainsKey(actionName) && simulatedButtons[actionName] == Buttonpress.Down;
     }
 
     public void SimulateAxis(string actionName, float value)
@@ -64,4 +56,13 @@ public class SimulatedInputManager : InputManager
         simulatedButtons[actionName] = Buttonpress.Pressing;
     }
 
+    public void UnregisterInputEvents()
+    {
+        registeredInputEvents = false;
+    }
+
+    public void RegisterInputEvents()
+    {
+        registeredInputEvents = true;
+    }
 }

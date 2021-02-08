@@ -6,24 +6,6 @@ using UnityEngine.SceneManagement;
 public class CustomSceneManager : MonoBehaviour
 {
 
-    // State variable
-    public static CustomSceneManager instance = null;
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-
-        //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
