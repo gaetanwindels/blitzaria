@@ -40,6 +40,6 @@ public class Goal : MonoBehaviour
     {
         isReloading = true;
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

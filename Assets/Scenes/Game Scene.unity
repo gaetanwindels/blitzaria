@@ -358,6 +358,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jean-Guy 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6696335799491091476, guid: 4ef97768ee0789741b6537fb5d104c13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6696335799491091478, guid: 4ef97768ee0789741b6537fb5d104c13,
         type: 3}
       propertyPath: m_Sprite
@@ -2034,6 +2039,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Jean-Guy 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696335799491091476, guid: 4ef97768ee0789741b6537fb5d104c13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6696335799491091478, guid: 4ef97768ee0789741b6537fb5d104c13,
         type: 3}
@@ -4245,6 +4255,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6696335799491091474, guid: 4ef97768ee0789741b6537fb5d104c13,
         type: 3}
+      propertyPath: playerNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696335799491091474, guid: 4ef97768ee0789741b6537fb5d104c13,
+        type: 3}
       propertyPath: shootSpeedFactor
       value: 0.5
       objectReference: {fileID: 0}
@@ -4287,7 +4302,7 @@ PrefabInstance:
     - target: {fileID: 8668985616526701916, guid: 4ef97768ee0789741b6537fb5d104c13,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8668985616526701916, guid: 4ef97768ee0789741b6537fb5d104c13,
         type: 3}
@@ -4481,7 +4496,7 @@ PrefabInstance:
     - target: {fileID: 1629076326695193576, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
       propertyPath: gameDuration
-      value: 10000
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1629076326695193576, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
@@ -4511,7 +4526,7 @@ PrefabInstance:
     - target: {fileID: 1629076326695193576, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
       propertyPath: countdownDuration
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1629076326695193577, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
