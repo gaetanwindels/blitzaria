@@ -411,7 +411,7 @@ MonoBehaviour:
   speed: 4
   airSpeed: 0.02
   airThrust: 0.02
-  boostSpeed: 7
+  boostSpeed: 5
   dashSpeed: 7
   grabSpeedFactor: 0.5
   dashDuration: 0.3
@@ -419,6 +419,7 @@ MonoBehaviour:
   playerNumber: 0
   isAI: 0
   isActive: 0
+  disableOnStart: 1
   brain: {fileID: 0}
   builtupPower: 0
   ballGrabbed: {fileID: 0}
