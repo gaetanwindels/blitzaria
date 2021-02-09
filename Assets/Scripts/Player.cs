@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
 {
     // Parameters
     [Header("Stuff")]
-    [SerializeField] private Transform ballPoint;
+    [SerializeField] private Transform ballPointNormal;
+    [SerializeField] private Transform ballPointLoading;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private GameObject ballPrefab;
 
@@ -73,7 +74,10 @@ public class Player : MonoBehaviour
     public float tackleTimer = 0f;
     public float tackleWindupTimer = 0f;
 
-    public Transform BallPoint { get => ballPoint; set => ballPoint = value; }
+    public Transform GetBallPoint()
+    {
+        return inputManager.GetButton("Shoot") ? ballPointLoading : ballPointNormal;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -324,6 +328,10 @@ public class Player : MonoBehaviour
             RemoveEnergy(Time.deltaTime * GameSettings.turboEnergyCostPerSecond);
             currentAirThrust = airThrust;
             computedSpeed = boostSpeed;
+            animator.SetFloat("Speed Multiplier", 1.5f);
+        } else
+        {
+            animator.SetFloat("Speed Multiplier", 1f);
         }
 
         if (IsGrabbing())
@@ -426,6 +434,13 @@ public class Player : MonoBehaviour
         {
             // Manage rotation
             float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
+            
+            
+            if (IsLoadingShot() && isTouchingWater)
+            {
+                angle = scaleX > 0 ? angle + 90 : angle - 90;
+            }
+
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
             Debug.Log("LAST INPUTS" + speedX);
             if (this.rigidBody.velocity.x != 0)
@@ -434,6 +449,11 @@ public class Player : MonoBehaviour
             }
             
         }
+    }
+
+    private bool IsLoadingShot()
+    {
+        return inputManager.GetButton("Shoot");
     }
 
     public void Grab(Ball ball)

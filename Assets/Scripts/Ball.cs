@@ -68,7 +68,7 @@ public class Ball : MonoBehaviour
 
         if (this.player != null)
         {
-            this.transform.position = player.BallPoint.position;
+            this.transform.position = player.GetBallPoint().position;
         }
     }
 
