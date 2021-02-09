@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float tackleReturnSpeed = 8f;
     [SerializeField] private float tackleDuration = 0.1f;
     [SerializeField] private float tackleWindUp = 0.1f;
+    [SerializeField] private float tackleStunDuration = 0.2f;
 
     [Header("Shoot")]
     [SerializeField] private float maxShotPower = 10f;
@@ -112,7 +113,7 @@ public class Player : MonoBehaviour
         var go = collision.gameObject;
         var player = go.GetComponent<Player>();
 
-        if (player != null && IsTackling())
+        if (player != null && (IsDashing() || IsTackling()))
         {
             player.ReceiveTackle(this);
         }
@@ -144,7 +145,7 @@ public class Player : MonoBehaviour
 
     public void ReceiveTackle(Player player)
     {
-        if (IsGrabbing())
+        if (!IsDashing())
         {
             var otherRigidBody = player.GetComponent<Rigidbody2D>();
             this.ballGrabbed.player = null;
@@ -156,6 +157,9 @@ public class Player : MonoBehaviour
             var velocity = rigidBody.velocity;
             newBallBody.velocity = (-velocity - otherVelocity) / 2;
             rigidBody.velocity = Vector2.zero;
+
+            StartCoroutine(FinishBeingTackled());
+            
             DisableBallCollision(newBall);
         }
     }
@@ -363,6 +367,15 @@ public class Player : MonoBehaviour
         isReplenishing = false;
         yield return new WaitForSeconds(GameSettings.replenishAfter);
         isReplenishing = true;
+    }
+
+    IEnumerator FinishBeingTackled()
+    {
+        animator.SetBool("IsTackled", true);
+        DisableInputs();
+        yield return new WaitForSeconds(tackleStunDuration);
+        animator.SetBool("IsTackled", false);
+        EnableInputs();
     }
 
     private void ManageAnimation()

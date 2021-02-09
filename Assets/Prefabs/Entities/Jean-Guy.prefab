@@ -400,6 +400,7 @@ MonoBehaviour:
   tackleReturnSpeed: 8
   tackleDuration: 0.1
   tackleWindUp: 0.1
+  tackleStunDuration: 1
   maxShotPower: 12
   minShotPower: 6
   releasePower: 2
