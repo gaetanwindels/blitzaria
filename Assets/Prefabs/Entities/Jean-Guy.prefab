@@ -377,8 +377,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.031040907, y: -0.028978467}
-  m_Size: {x: 0.30133677, y: 1.1856124}
+  m_Offset: {x: 0.00048971176, y: 0.26270038}
+  m_Size: {x: 0.24023438, y: 0.392892}
   m_Direction: 0
 --- !u!114 &6696335799491091474
 MonoBehaviour:
@@ -396,11 +396,11 @@ MonoBehaviour:
   throwPoint: {fileID: 1593422434637689302}
   ballPrefab: {fileID: 8240922884218118336, guid: 77fede7b478df2546b2283c4d6d52fb2,
     type: 3}
-  tackleSpeed: 8
+  tackleSpeed: 2
   tackleReturnSpeed: 8
-  tackleDuration: 0.1
+  tackleDuration: 0.25
   tackleWindUp: 0.1
-  tackleStunDuration: 1
+  tackleStunDuration: 0.6
   maxShotPower: 12
   minShotPower: 6
   releasePower: 2
