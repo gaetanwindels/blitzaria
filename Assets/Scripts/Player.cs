@@ -155,6 +155,7 @@ public class Player : MonoBehaviour
             var otherVelocity = otherRigidBody.velocity;
             var velocity = rigidBody.velocity;
             newBallBody.velocity = (-velocity - otherVelocity) / 2;
+            rigidBody.velocity = Vector2.zero;
             DisableBallCollision(newBall);
         }
     }
