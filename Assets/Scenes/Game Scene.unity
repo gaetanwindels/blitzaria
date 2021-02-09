@@ -5103,6 +5103,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1474399618}
     m_Modifications:
+    - target: {fileID: 6696335799491091474, guid: 4ef97768ee0789741b6537fb5d104c13,
+        type: 3}
+      propertyPath: tackleSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696335799491091474, guid: 4ef97768ee0789741b6537fb5d104c13,
+        type: 3}
+      propertyPath: tackleDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696335799491091474, guid: 4ef97768ee0789741b6537fb5d104c13,
+        type: 3}
+      propertyPath: tackleStunDuration
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 6696335799491091476, guid: 4ef97768ee0789741b6537fb5d104c13,
         type: 3}
       propertyPath: m_Name

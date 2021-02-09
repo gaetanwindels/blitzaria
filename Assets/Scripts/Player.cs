@@ -148,19 +148,22 @@ public class Player : MonoBehaviour
         if (!IsDashing())
         {
             var otherRigidBody = player.GetComponent<Rigidbody2D>();
-            this.ballGrabbed.player = null;
-            Destroy(FindObjectOfType<Ball>().gameObject);
-            var newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
-            Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
+            if (this.ballGrabbed != null)
+            {
+                this.ballGrabbed.player = null;
+                Destroy(FindObjectOfType<Ball>().gameObject);
+                var newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
+                Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
 
-            var otherVelocity = otherRigidBody.velocity;
-            var velocity = rigidBody.velocity;
-            newBallBody.velocity = (-velocity - otherVelocity) / 2;
-            rigidBody.velocity = Vector2.zero;
+                var otherVelocity = otherRigidBody.velocity;
+                var velocity = rigidBody.velocity;
+                newBallBody.velocity = (-velocity - otherVelocity) / 2;
+                DisableBallCollision(newBall);
+            }
 
-            StartCoroutine(FinishBeingTackled());
-            
-            DisableBallCollision(newBall);
+            //rigidBody.velocity = Vector2.zero;
+
+            StartCoroutine(FinishBeingTackled()); 
         }
     }
 
@@ -331,13 +334,22 @@ public class Player : MonoBehaviour
             computedSpeed *= shootSpeedFactor;
         }
 
-        float speedX = inputManager.GetAxis("Move Horizontal") * computedSpeed;
-        float speedY = inputManager.GetAxis("Move Vertical") * computedSpeed;
-        var speedVector = new Vector2(inputManager.GetAxis("Move Horizontal"), inputManager.GetAxis("Move Vertical"));
+        //float speedX = inputManager.GetAxis("Move Horizontal") * computedSpeed;
+        //float speedY = inputManager.GetAxis("Move Vertical") * computedSpeed;
+
+        float speedX = inputManager.GetAxis("Move Horizontal");
+        float speedY = inputManager.GetAxis("Move Vertical");
+        var speedVector = new Vector2(speedX, speedY);
+        if (speedVector.magnitude > 1)
+        {
+            speedVector.Normalize();
+        }
+        speedVector = speedVector * computedSpeed;
+        //var speedVector = new Vector2(inputManager.GetAxis("Move Horizontal"), inputManager.GetAxis("Move Vertical"));
 
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
-            this.rigidBody.velocity = ComputeMoveSpeed(speedVector.magnitude * computedSpeed);
+            this.rigidBody.velocity = speedVector;
         }
         else if (!isTouchingWater)
         {
