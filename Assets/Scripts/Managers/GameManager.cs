@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         }
 
         isCountDown = true;
+        winText.text = "";
         countDownTimer = countdownDuration;
     }
 
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
         countDownTimer = countdownDuration;
         scoreTeam1 = 0;
         scoreTeam2 = 0;
-        winText.enabled = false;
+        winText.text = "";
         restartButton.SetActive(false);
         players = FindObjectsOfType<Player>();
         foreach (Player player in players)
@@ -103,7 +104,6 @@ public class GameManager : MonoBehaviour
         ManageCountDown();
         UpdateEnergy();
 
-        winText.enabled = IsGameOver();
         restartButton.SetActive(IsGameOver());
 
         if (scoreTeam1Text != null)
@@ -198,10 +198,14 @@ public class GameManager : MonoBehaviour
     {
         if (team == TeamEnum.Team1)
         {
+            winText.text = "RED TEAM SCORE";
+            winText.color = new Color32(255, 55, 55, 255);
             scoreTeam2++;
         } else
         {
             scoreTeam1++;
+            winText.text = "BLUE TEAM SCORE";
+            winText.color = new Color32(57, 105, 255, 255);
         }
     }
 
