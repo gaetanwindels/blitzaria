@@ -50,8 +50,27 @@ public class GameManager : MonoBehaviour
         Debug.Log("OnSceneLoaded:" + countDownTimer);
         players = FindObjectsOfType<Player>();
 
+        sliderEnergyBar1.gameObject.SetActive(false);
+        sliderEnergyBar2.gameObject.SetActive(false);
+        sliderEnergyBar3.gameObject.SetActive(false);
+        sliderEnergyBar4.gameObject.SetActive(false);
+
         foreach (Player player in players)
         {
+            if (player.playerNumber == 0)
+            {
+                sliderEnergyBar1.gameObject.SetActive(true);
+            } else if (player.playerNumber == 1)
+            {
+                sliderEnergyBar2.gameObject.SetActive(true);
+            } else if (player.playerNumber == 2)
+            {
+                sliderEnergyBar3.gameObject.SetActive(true);
+            } else if (player.playerNumber == 3)
+            {
+                sliderEnergyBar4.gameObject.SetActive(true);
+            }
+
             player.DisableInputs();
         }
 

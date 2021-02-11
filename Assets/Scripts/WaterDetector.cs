@@ -8,6 +8,17 @@ public class WaterDetector : MonoBehaviour
     [SerializeField] float maxMass = 0.2f;
     [SerializeField] float minVelocityExit = 7f;
 
+
+    [SerializeField] AudioClip exitSound;
+    [SerializeField] AudioClip enterSound;
+
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = FindObjectOfType<AudioSource>();    
+    }
+
     void OnTriggerEnter2D(Collider2D hit)
     {
         var ball = hit.GetComponent<Ball>();
@@ -20,10 +31,14 @@ public class WaterDetector : MonoBehaviour
             player.EnterWater();
         }
 
-        if (rigidBody != null && (ball == null || !ball.HasJustSpawned))
+        if (rigidBody != null && rigidBody.velocity.magnitude > 0.4f && (ball == null || !ball.HasJustSpawned))
         {
+            Debug.Log("magnitude" + rigidBody.velocity.magnitude);
             var mass = Mathf.Min(maxMass, rigidBody.mass);
             GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody.velocity.y * mass / massMitigator);
+            audioSource.volume = 0.3f;
+            audioSource.clip = enterSound;
+            audioSource.Play();
         }
 
         if (ball != null)
@@ -50,10 +65,13 @@ public class WaterDetector : MonoBehaviour
         }
 
         Debug.Log(ball == null || !ball.HasJustSpawned);
-        if (rigidBody != null && (ball == null || !ball.HasJustSpawned))
+        if (rigidBody != null && rigidBody.velocity.magnitude > 0.4f && (ball == null || !ball.HasJustSpawned))
         {
             var mass = Mathf.Min(maxMass, rigidBody.mass);
             GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody.velocity.y * mass / massMitigator);
+            audioSource.volume = 0.3f;
+            audioSource.clip = exitSound;
+            audioSource.Play();
         }
 
         if (ball != null)

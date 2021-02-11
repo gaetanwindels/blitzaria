@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float shotHitboxTime = 0.3f;
     [SerializeField] private float shootCoolDown = 0.8f;
     [SerializeField] private BarSlider barSlider;
+    [SerializeField] private float accelerationBall = 3f;
 
     [Header("Move")]
     [SerializeField] float speed = 7f;
@@ -527,6 +528,8 @@ public class Player : MonoBehaviour
         var combinedVelocity = Mathf.Abs(rigidBody.velocity.x) + Mathf.Abs(rigidBody.velocity.y);
 
         var computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
+        Debug.Log("acc" + rigidBodyBall.velocity.magnitude + "computed" + computedShotPower);
+        computedShotPower = Math.Max(accelerationBall * rigidBodyBall.velocity.magnitude, computedShotPower);
 
         float velocityX;
         float velocityY;

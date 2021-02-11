@@ -39,8 +39,6 @@ public class Ball : MonoBehaviour
 
         if (player != null && tagName == "ShotHitbox")
         {
-            Debug.Log(player);
-            Debug.Log(player);
             player.Shoot();
         }
     }

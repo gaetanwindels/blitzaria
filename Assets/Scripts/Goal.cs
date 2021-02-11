@@ -9,6 +9,7 @@ public class Goal : MonoBehaviour
     [SerializeField] private TeamEnum team = TeamEnum.Team1;
     [SerializeField] private int explosionForce = 1300;
     [SerializeField] private GameObject goalparticleSystem;
+    [SerializeField] private AudioClip goalSound;
 
     // Cached variable
     GameManager gameManager;
@@ -25,6 +26,14 @@ public class Goal : MonoBehaviour
             gameManager.AddScore(team);
             Destroy(collision.gameObject);
             StartCoroutine(ReloadScene());
+
+            var audioSource = FindObjectOfType<AudioSource>();
+            if (audioSource != null && goalSound != null)
+            {
+                audioSource.volume = 1f;
+                audioSource.clip = goalSound;
+                audioSource.Play();
+            }
             
         }
     }
