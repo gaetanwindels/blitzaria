@@ -242,7 +242,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.17135444, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -253,7 +253,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3427088, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &145321631 stripped
 Transform:
@@ -800,8 +800,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022888, y: 110}
-  m_SizeDelta: {x: 501.5648, y: 116.3822}
+  m_AnchoredPosition: {x: 0.000015259, y: 78.796}
+  m_SizeDelta: {x: 879.754, y: 204.1365}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &586819210
 MonoBehaviour:
@@ -832,8 +832,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4292570177
+  m_fontColor: {r: 0.25511748, g: 0.4249488, b: 0.8584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -850,15 +850,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2184,7 +2184,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.48924327, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2195,7 +2195,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.9784863, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &930886293 stripped
 GameObject:
@@ -3650,7 +3650,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.1578114, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3661,7 +3661,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3156228, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1723389597
 GameObject:
@@ -4004,6 +4004,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal Post (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6748938452626074378, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6748938452626074486, guid: ad7aa694e127b19499488f6b3c45e158,
         type: 3}
       propertyPath: team
@@ -4013,6 +4018,16 @@ PrefabInstance:
         type: 3}
       propertyPath: explosionForce
       value: 1300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748938452626074487, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.56542206
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748938452626074487, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.19223309
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad7aa694e127b19499488f6b3c45e158, type: 3}
@@ -4578,6 +4593,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1629076326695193577, guid: 0d193806909760f4ebbf5ca006b74d1e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1629076327323250717, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
       propertyPath: m_fontSize
@@ -4971,6 +4991,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6463833840362472504, guid: b8c3ed1c57ee09c49b0033ea8c90aef3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8c3ed1c57ee09c49b0033ea8c90aef3, type: 3}
 --- !u!1001 &6748938451459671734
@@ -5290,7 +5315,7 @@ PrefabInstance:
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.05
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
