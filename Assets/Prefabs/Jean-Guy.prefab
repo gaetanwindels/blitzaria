@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 4310778910272737148}
   - component: {fileID: 4310778910272737149}
   - component: {fileID: 4310778910272737145}
+  - component: {fileID: 7933784884223682556}
   m_Layer: 0
   m_Name: Jean-Guy
   m_TagString: Untagged
@@ -154,8 +155,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.023780465, y: 0.14624658}
-  m_Size: {x: 0.72933984, y: 0.752631}
+  m_Offset: {x: -0.028798342, y: 0.035830975}
+  m_Size: {x: 0.37180376, y: 1.0575881}
   m_Direction: 0
 --- !u!114 &4310778910272737149
 MonoBehaviour:
@@ -179,17 +180,17 @@ MonoBehaviour:
   tackleDuration: 0.25
   tackleWindUp: 0.1
   tackleStunDuration: 0.6
-  maxShotPower: 12
-  minShotPower: 6
+  maxShotPower: 11
+  minShotPower: 8
   releasePower: 2
   timeToBuildUp: 0.6
   shootSpeedFactor: 0.5
-  shotHitbox: {fileID: 8151557353293487891}
-  shotHitboxTime: 0.15
+  shotHitbox: {fileID: 114362531}
+  shotHitboxTime: 0.3
   barSlider: {fileID: 7228933207548442763}
   speed: 4
-  airSpeed: 0.02
-  airThrust: 0.02
+  airSpeed: 0.5
+  airThrust: 0
   boostSpeed: 5
   dashSpeed: 7
   grabSpeedFactor: 0.5
@@ -250,17 +251,33 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8d510afa5686d9f41a8c82fa60fe6d4e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d8c4495b3654ca64ab891bbdff036dd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 11.84, y: 16.48}
+  m_Size: {x: 1.15, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &7933784884223682556
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310778910272737147}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.026289374, y: 0.22608913}
+  serializedVersion: 2
+  m_Radius: 0.13750647
 --- !u!1 &6248653154005727077
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8151557353293487890}
-  - component: {fileID: 8151557353293487891}
+  - component: {fileID: 114362531}
   m_Layer: 0
   m_Name: Shot Hitbox
   m_TagString: ShotHitbox
@@ -417,8 +434,8 @@ Transform:
   m_Father: {fileID: 2266070404787594803}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &8151557353293487891
-CircleCollider2D:
+--- !u!70 &114362531
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -430,9 +447,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14847457, y: -0.680196}
-  serializedVersion: 2
-  m_Radius: 0.047684003
+  m_Offset: {x: -0.17815287, y: -0.65514773}
+  m_Size: {x: 0.14379479, y: 0.04017468}
+  m_Direction: 1
 --- !u!1 &8151557353549976284
 GameObject:
   m_ObjectHideFlags: 0

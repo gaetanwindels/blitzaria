@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
 
     [SerializeField] public Player player;
     [SerializeField] public float impulseSpeedFactor = 0.5f;
+    [SerializeField] public float gravityScale = 0.6f;
 
     [SerializeField] public float minScaleY = 0.5f;
     [SerializeField] public float minVelocityTransform = 5f;
@@ -60,7 +61,7 @@ public class Ball : MonoBehaviour
 
         if (rigidbody != null)
         {
-            rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : 0.8f;
+            rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : gravityScale;
             rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 1f : 0.25f;
             
             ManageRotation();

@@ -193,7 +193,7 @@ public class Player : MonoBehaviour
         ManageGravity();
         ManageShoot();
         ManageMove();
-        ManageTackle();
+        //ManageTackle();
         ManageDash();
         ManageRotation();
         ManageAnimation();
@@ -214,7 +214,7 @@ public class Player : MonoBehaviour
 
     private void ManageGravity()
     {
-        rigidBody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : 1;
+        rigidBody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : 0.6f;
     }
 
     private void ManageTackle()
@@ -259,7 +259,7 @@ public class Player : MonoBehaviour
 
         }
 
-        if (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Grab"))
+        if (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Grab"))
         {
             animator.SetBool("IsShooting", true);
             GameObject newBall = null;
@@ -298,8 +298,7 @@ public class Player : MonoBehaviour
                 builtupPower = 0;
                 Debug.Log(newBallBody.velocity);
 
-            } else if (!IsGrabbing() && inputManager.GetButtonUp("Shoot")) {
-                this.DisableMove();
+            } else if (!IsGrabbing() && (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Tackle"))) {
                 this.shotHitbox.enabled = true;
                 StartCoroutine("EnableShotHitbox");
             }
@@ -442,7 +441,6 @@ public class Player : MonoBehaviour
             }
 
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
-            Debug.Log("LAST INPUTS" + speedX);
             if (this.rigidBody.velocity.x != 0)
             {
                 transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
@@ -465,7 +463,7 @@ public class Player : MonoBehaviour
 
     public bool IsTackling()
     {
-        return tackleTimer > 0;
+        return inputManager.GetButton("Tackle");
     }
 
     public bool IsGrabbing()
@@ -499,7 +497,7 @@ public class Player : MonoBehaviour
         }
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
-        StartCoroutine("DisableBody");
+        StartCoroutine(DisableBody(null));
         Debug.Log(rigidBodyBall.velocity);
     }
 
@@ -517,10 +515,12 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableBody(GameObject newBall)
     {
-
-        Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
-        yield return new WaitForSeconds(0.15f);
-        Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+        if (newBall != null)
+        {
+            Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+            yield return new WaitForSeconds(0.5f);
+            Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+        }
     }
 
     private Vector2 ComputeMoveSpeed(float speedWanted)
