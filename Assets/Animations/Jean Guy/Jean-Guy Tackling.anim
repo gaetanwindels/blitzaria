@@ -29,6 +29,17 @@ AnimationClip:
     path: 
     classID: 212
     script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 065b3f242b5e4424ca2711e564d1ee5b, type: 3}
+    - time: 0.15
+      value: {fileID: 21300000, guid: 86be5ec64e8504143a0fbca669eb5da4, type: 3}
+    - time: 0.3
+      value: {fileID: 21300000, guid: 86be5ec64e8504143a0fbca669eb5da4, type: 3}
+    attribute: m_Sprite
+    path: Clothes
+    classID: 212
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -43,10 +54,20 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 4291071248
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 21300000, guid: f7836325e6b97644d9b1bd1046d31502, type: 3}
     - {fileID: 21300000, guid: 36495508c85787041ab1c696d15183b8, type: 3}
     - {fileID: 21300000, guid: 36495508c85787041ab1c696d15183b8, type: 3}
+    - {fileID: 21300000, guid: 065b3f242b5e4424ca2711e564d1ee5b, type: 3}
+    - {fileID: 21300000, guid: 86be5ec64e8504143a0fbca669eb5da4, type: 3}
+    - {fileID: 21300000, guid: 86be5ec64e8504143a0fbca669eb5da4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
