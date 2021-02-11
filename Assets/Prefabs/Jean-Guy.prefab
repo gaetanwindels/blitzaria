@@ -70,13 +70,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.36570486, g: 1, b: 0.36320752, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.15, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -173,7 +173,7 @@ Transform:
   m_GameObject: {fileID: 4310778910272737147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2941897, y: -1.8239174, z: 13.507944}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 8151557353293487890}
   - {fileID: 8151557353549976287}
@@ -279,7 +279,7 @@ MonoBehaviour:
   grabSpeedFactor: 0.5
   dashDuration: 0.3
   lockedTime: 0.2
-  playerNumber: 0
+  playerNumber: 1
   isAI: 0
   isActive: 0
   disableOnStart: 1

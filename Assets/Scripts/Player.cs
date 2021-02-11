@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float shootSpeedFactor = 0.3f;
     [SerializeField] private Collider2D shotHitbox;
     [SerializeField] private float shotHitboxTime = 0.3f;
+    [SerializeField] private float shootCoolDown = 0.8f;
     [SerializeField] private BarSlider barSlider;
 
     [Header("Move")]
@@ -68,6 +69,8 @@ public class Player : MonoBehaviour
     public bool isReplenishing = false;
     public IEnumerator replenishRoutine;
     public bool moveEnabled = true;
+    public bool isShootCoolDown = false;
+    public bool isTackling = false;
 
     [Header("Timers")]
     public float dashTimer = 0f;
@@ -252,6 +255,11 @@ public class Player : MonoBehaviour
 
     private void ManageShoot()
     {
+        if (this.isShootCoolDown)
+        {
+            return;
+        }
+
         if (inputManager.GetButton("Shoot"))
         {
             builtupPower += Time.deltaTime;
@@ -259,8 +267,10 @@ public class Player : MonoBehaviour
 
         }
 
-        if (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Grab"))
+        if (inputManager.GetButtonDown("Tackle") || inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Grab"))
         {
+            StartCoroutine(CooldownShooting());
+            StartCoroutine(StartTackleAnimation());
             animator.SetBool("IsShooting", true);
             GameObject newBall = null;
             if (IsGrabbing())
@@ -298,7 +308,7 @@ public class Player : MonoBehaviour
                 builtupPower = 0;
                 Debug.Log(newBallBody.velocity);
 
-            } else if (!IsGrabbing() && (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Tackle"))) {
+            } else if (!IsGrabbing() && (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonDown("Tackle"))) {
                 this.shotHitbox.enabled = true;
                 StartCoroutine("EnableShotHitbox");
             }
@@ -316,7 +326,7 @@ public class Player : MonoBehaviour
         var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
         float computedSpeed = speed;
 
-        if (IsTackling() || IsDashing() || !moveEnabled)
+        if (this.isTackling || IsDashing() || !moveEnabled)
         {
             return;
         }
@@ -380,6 +390,19 @@ public class Player : MonoBehaviour
     {
         currentEnergy = Mathf.Min(currentEnergy + energy, GameSettings.energyAmount);
     }
+    IEnumerator CooldownShooting()
+    {
+        isShootCoolDown = true;
+        yield return new WaitForSeconds(shootCoolDown);
+        isShootCoolDown = false;
+    }
+
+    IEnumerator StartTackleAnimation()
+    {
+        isTackling = true;
+        yield return new WaitForSeconds(shotHitboxTime);
+        isTackling = false;
+    }
 
     IEnumerator DisableEnergyReplenish()
     {
@@ -406,7 +429,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsIdle", isInWater && isImmobile);
         animator.SetBool("IsInAir", !isInWater);
         animator.SetBool("IsDashing", IsDashing());
-        animator.SetBool("IsTackling", IsTackling());
+        animator.SetBool("IsTackling", this.isTackling);
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
         animator.SetBool("IsLoadingShoot", inputManager.GetButton("Shoot"));
@@ -463,7 +486,7 @@ public class Player : MonoBehaviour
 
     public bool IsTackling()
     {
-        return inputManager.GetButton("Tackle");
+        return this.isShootCoolDown;
     }
 
     public bool IsGrabbing()
