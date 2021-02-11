@@ -561,7 +561,7 @@ MonoBehaviour:
   airSpeed: 0.5
   airThrust: 0
   boostSpeed: 5
-  dashSpeed: 12
+  dashSpeed: 8
   grabSpeedFactor: 0.4
   dashDuration: 0.3
   lockedTime: 0.2
@@ -579,6 +579,7 @@ MonoBehaviour:
   moveEnabled: 1
   isShootCoolDown: 0
   isTackling: 0
+  hasJustEnteredWater: 0
   dashTimer: 0
   tackleTimer: 0
   tackleWindupTimer: 0

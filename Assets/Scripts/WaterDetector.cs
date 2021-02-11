@@ -13,9 +13,14 @@ public class WaterDetector : MonoBehaviour
         var ball = hit.GetComponent<Ball>();
 
         var rigidBody = hit.GetComponent<Rigidbody2D>();
-        
+        var player = hit.GetComponent<Player>();
 
-        if (rigidBody  != null && (ball == null || !ball.HasJustSpawned))
+        if (player != null)
+        {
+            player.EnterWater();
+        }
+
+        if (rigidBody != null && (ball == null || !ball.HasJustSpawned))
         {
             var mass = Mathf.Min(maxMass, rigidBody.mass);
             GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody.velocity.y * mass / massMitigator);

@@ -71,6 +71,8 @@ public class Player : MonoBehaviour
     public bool moveEnabled = true;
     public bool isShootCoolDown = false;
     public bool isTackling = false;
+    public bool hasJustEnteredWater = false;
+    public IEnumerator enteredWaterRoutine;
 
     [Header("Timers")]
     public float dashTimer = 0f;
@@ -217,7 +219,7 @@ public class Player : MonoBehaviour
 
     private void ManageGravity()
     {
-        rigidBody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : 0.6f;
+        rigidBody.gravityScale = IsTouchingWater() ? 0 : 0.6f; 
     }
 
     private void ManageTackle()
@@ -260,18 +262,14 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (inputManager.GetButton("Shoot"))
+        if (IsGrabbing() && inputManager.GetButton("Shoot"))
         {
             builtupPower += Time.deltaTime;
             builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
-
         }
 
-        if (inputManager.GetButtonDown("Tackle") || inputManager.GetButtonUp("Shoot") || inputManager.GetButtonUp("Grab"))
+        if (inputManager.GetButtonDown("Tackle") || inputManager.GetButtonUp("Shoot") || inputManager.GetButtonDown("Grab"))
         {
-            StartCoroutine(CooldownShooting());
-            StartCoroutine(StartTackleAnimation());
-            animator.SetBool("IsShooting", true);
             GameObject newBall = null;
             if (IsGrabbing())
             {
@@ -287,6 +285,7 @@ public class Player : MonoBehaviour
 
                 if (inputManager.GetButtonUp("Shoot"))
                 {
+                    animator.SetBool("IsShooting", true);
                     computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
                 }
                 
@@ -311,6 +310,9 @@ public class Player : MonoBehaviour
             } else if (!IsGrabbing() && (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonDown("Tackle"))) {
                 this.shotHitbox.enabled = true;
                 StartCoroutine("EnableShotHitbox");
+                StartCoroutine(CooldownShooting());
+                StartCoroutine(StartTackleAnimation());
+                animator.SetBool("IsShooting", true);
             }
 
             if (newBall != null)
@@ -321,9 +323,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool IsLoadingShoot()
+    {
+        return IsGrabbing() && inputManager.GetButton("shoot");
+    }
+
     private void ManageMove()
     {
-        var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
+        bool isTouchingWater = IsTouchingWater() && !hasJustEnteredWater;
         float computedSpeed = speed;
 
         if (this.isTackling || IsDashing() || !moveEnabled)
@@ -331,14 +338,15 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var currentAirThrust = 0f; 
+        var currentAirThrust = 0f;
         if (inputManager.GetButton("Turbo") && currentEnergy > 0)
         {
             RemoveEnergy(Time.deltaTime * GameSettings.turboEnergyCostPerSecond);
             currentAirThrust = airThrust;
             computedSpeed = boostSpeed;
             animator.SetFloat("Speed Multiplier", 1.5f);
-        } else
+        }
+        else
         {
             animator.SetFloat("Speed Multiplier", 1f);
         }
@@ -346,7 +354,8 @@ public class Player : MonoBehaviour
         if (IsGrabbing())
         {
             computedSpeed *= grabSpeedFactor;
-        } else if (inputManager.GetButton("Shoot"))
+        }
+        else if (IsLoadingShoot())
         {
             computedSpeed *= shootSpeedFactor;
         }
@@ -373,6 +382,26 @@ public class Player : MonoBehaviour
             var counterForce = this.airSpeed * inputManager.GetAxis("Move Horizontal");
             this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y + currentAirThrust);
         }
+    }
+
+    public void EnterWater()
+    {
+        if (enteredWaterRoutine != null)
+            StopCoroutine(enteredWaterRoutine);
+        enteredWaterRoutine = EnterWaterRoutine();
+        StartCoroutine(enteredWaterRoutine);
+    }
+
+    IEnumerator EnterWaterRoutine()
+    {
+        hasJustEnteredWater = true;
+        yield return new WaitForSeconds(0.3f);
+        hasJustEnteredWater = false;
+    }
+
+    private bool IsTouchingWater()
+    {
+        return bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
     }
 
     private void RemoveEnergy(float energy)
@@ -423,7 +452,7 @@ public class Player : MonoBehaviour
     private void ManageAnimation()
     {
         var isImmobile = inputManager.GetAxis("Move Horizontal") == 0 && inputManager.GetAxis("Move Vertical") == 0;
-        var isInWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
+        var isInWater = IsTouchingWater();
         var isUp = rigidBody.velocity.y >= 0;
         animator.SetBool("IsSwimming", isInWater && !isImmobile);
         animator.SetBool("IsIdle", isInWater && isImmobile);
@@ -432,13 +461,13 @@ public class Player : MonoBehaviour
         animator.SetBool("IsTackling", this.isTackling);
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
-        animator.SetBool("IsLoadingShoot", inputManager.GetButton("Shoot"));
+        animator.SetBool("IsLoadingShoot", inputManager.GetButton("Shoot") && IsGrabbing());
         //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
     private void ManageRotation()
     {
-        var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
+        var isTouchingWater = IsTouchingWater();
         var isMoving = (Math.Abs(this.rigidBody.velocity.x) > 0 || Math.Abs(this.rigidBody.velocity.y) > 0);
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
@@ -458,7 +487,7 @@ public class Player : MonoBehaviour
             float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
             
             
-            if (IsLoadingShot() && isTouchingWater)
+            if (IsLoadingShoot() && isTouchingWater)
             {
                 angle = scaleX > 0 ? angle + 90 : angle - 90;
             }
@@ -470,11 +499,6 @@ public class Player : MonoBehaviour
             }
             
         }
-    }
-
-    private bool IsLoadingShot()
-    {
-        return inputManager.GetButton("Shoot");
     }
 
     public void Grab(Ball ball)
