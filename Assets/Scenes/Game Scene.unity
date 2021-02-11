@@ -2260,7 +2260,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -100
-  m_Sprite: {fileID: 21300000, guid: 092672f3439af584480334aff226cd1f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af793c5eabfab25498d813266989e740, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3080,6 +3080,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Jean-Guy 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4310778910272737149, guid: c0155a6dea42acc44960b94b5d4c2bca,
+        type: 3}
+      propertyPath: dashSpeed
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0155a6dea42acc44960b94b5d4c2bca, type: 3}
@@ -4432,7 +4437,7 @@ PrefabInstance:
     - target: {fileID: 1629076326695193576, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
       propertyPath: gameDuration
-      value: 12000
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1629076326695193576, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
@@ -4462,7 +4467,7 @@ PrefabInstance:
     - target: {fileID: 1629076326695193576, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
       propertyPath: countdownDuration
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1629076326695193577, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
@@ -4876,6 +4881,11 @@ PrefabInstance:
       propertyPath: splash
       value: 
       objectReference: {fileID: 1793549708}
+    - target: {fileID: 6463833840362472500, guid: b8c3ed1c57ee09c49b0033ea8c90aef3,
+        type: 3}
+      propertyPath: edgeCountMultiplier
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6463833840362472502, guid: b8c3ed1c57ee09c49b0033ea8c90aef3,
         type: 3}
       propertyPath: m_RootOrder
@@ -5235,7 +5245,7 @@ PrefabInstance:
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
       propertyPath: lengthInSec
-      value: 0.3
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
@@ -5260,12 +5270,12 @@ PrefabInstance:
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
@@ -5279,8 +5289,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
+        type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
         type: 3}
