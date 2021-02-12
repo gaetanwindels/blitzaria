@@ -50,25 +50,41 @@ public class GameManager : MonoBehaviour
         Debug.Log("OnSceneLoaded:" + countDownTimer);
         players = FindObjectsOfType<Player>();
 
-        sliderEnergyBar1.gameObject.SetActive(false);
-        sliderEnergyBar2.gameObject.SetActive(false);
-        sliderEnergyBar3.gameObject.SetActive(false);
-        sliderEnergyBar4.gameObject.SetActive(false);
+        if (sliderEnergyBar1 != null)
+        {
+            sliderEnergyBar1.gameObject.SetActive(false);
+        }
+        if (sliderEnergyBar2 != null)
+        {
+            sliderEnergyBar2.gameObject.SetActive(false);
+        }
+        if (sliderEnergyBar3 != null)
+        {
+            sliderEnergyBar3.gameObject.SetActive(false);
+        }
+        if (sliderEnergyBar4 != null)
+        {
+            sliderEnergyBar4.gameObject.SetActive(false);
+        }
 
         foreach (Player player in players)
         {
-            if (player.playerNumber == 0)
+            if (player.playerNumber == 0 && sliderEnergyBar1 != null)
             {
                 sliderEnergyBar1.gameObject.SetActive(true);
-            } else if (player.playerNumber == 1)
+                sliderEnergyBar1.value = 1;
+            } else if (player.playerNumber == 1 && sliderEnergyBar1 != null)
             {
                 sliderEnergyBar2.gameObject.SetActive(true);
-            } else if (player.playerNumber == 2)
+                sliderEnergyBar2.value = 1;
+            } else if (player.playerNumber == 2 && sliderEnergyBar1 != null)
             {
                 sliderEnergyBar3.gameObject.SetActive(true);
-            } else if (player.playerNumber == 3)
+                sliderEnergyBar3.value = 1;
+            } else if (player.playerNumber == 3 && sliderEnergyBar1 != null)
             {
                 sliderEnergyBar4.gameObject.SetActive(true);
+                sliderEnergyBar4.value = 1;
             }
 
             player.DisableInputs();

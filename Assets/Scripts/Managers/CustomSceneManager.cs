@@ -21,7 +21,9 @@ public class CustomSceneManager : MonoBehaviour
     public void GoToMenu()
     {
         var manager = GameObject.Find("GameManager");
+        var soundManager = GameObject.Find("SoundManager");
         Destroy(manager);
+        Destroy(soundManager);
         SceneManager.LoadScene(0);
     }
 
@@ -29,5 +31,10 @@ public class CustomSceneManager : MonoBehaviour
     {
         Debug.Log("hey");
         SceneManager.LoadScene("Game Scene");
+    }
+
+    public void GoToPlay1vs1()
+    {
+        SceneManager.LoadScene("Game Scene 1vs1");
     }
 }
