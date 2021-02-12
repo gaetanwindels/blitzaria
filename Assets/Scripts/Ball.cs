@@ -15,6 +15,10 @@ public class Ball : MonoBehaviour
     [SerializeField] public float minVelocityTransform = 5f;
     [SerializeField] public float maxVelocityTransform = 10f;
 
+    [SerializeField] AudioClip hitSound;
+
+    private AudioSource audioSource;
+
     private bool hasJustSpawned = true;
 
     public bool HasJustSpawned { get => hasJustSpawned; set => hasJustSpawned = value; }
@@ -39,6 +43,9 @@ public class Ball : MonoBehaviour
 
         if (player != null && tagName == "ShotHitbox")
         {
+            Debug.Log("BALL HIT SHOT");
+            audioSource.clip = hitSound;
+            audioSource.Play();
             player.Shoot();
         }
     }
@@ -46,7 +53,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

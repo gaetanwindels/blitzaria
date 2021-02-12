@@ -16,7 +16,7 @@ public class WaterDetector : MonoBehaviour
 
     private void Start()
     {
-        audioSource = FindObjectOfType<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();    
     }
 
     void OnTriggerEnter2D(Collider2D hit)

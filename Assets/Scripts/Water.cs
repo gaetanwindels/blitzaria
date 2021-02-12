@@ -16,7 +16,8 @@ public class Water : MonoBehaviour
     [SerializeField] BuoyancyEffector2D effector;
 
     // Cached variables
-    SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
 
     // State variables
     float z = -2f;
@@ -39,6 +40,7 @@ public class Water : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         Sprite sprite = spriteRenderer.sprite;
         Vector4 border = sprite.border;
         Debug.Log(spriteRenderer.bounds.size);
@@ -62,7 +64,6 @@ public class Water : MonoBehaviour
 
     public void SpawnWater(float left, float width, float top, float bottom)
     {
-        Debug.Log(left + "-" + width + "-" + top + "-" + "-" + bottom);
         int edgecount = Mathf.RoundToInt(width) * edgeCountMultiplier;
         int nodecount = edgecount + 1;
 

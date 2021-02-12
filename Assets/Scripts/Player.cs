@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float shotHitboxTime = 0.3f;
     [SerializeField] private float shootCoolDown = 0.8f;
     [SerializeField] private BarSlider barSlider;
-    [SerializeField] private float accelerationBall = 3f;
+    [SerializeField] private float accelerationBall = 1.4f;
 
     [Header("Move")]
     [SerializeField] float speed = 7f;
@@ -42,20 +42,25 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDuration = 0.2f;
     [SerializeField] private float lockedTime = 0.2f;
 
-
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
+    [SerializeField] public TeamEnum team = TeamEnum.Team1;
     [SerializeField] public bool isAI = false;
     [SerializeField] public bool isActive = false;
     [SerializeField] public bool disableOnStart = true;
 
-    private Rewired.Player rwPlayer;
-    public Brain brain;
+    [Header("Sounds")]
+    [SerializeField] public AudioClip hitPlayerSound;
+    [SerializeField] public AudioClip launchBallSound;
 
+
+    public Brain brain;
     public InputManager inputManager;
 
     // Cached variables
     private Rigidbody2D rigidBody;
+    private AudioSource audioSource;
+    private Rewired.Player rwPlayer;
     private Animator animator;
     private Collider2D bodyCollider;
     private GameManager gameManager;
@@ -82,7 +87,7 @@ public class Player : MonoBehaviour
 
     public Transform GetBallPoint()
     {
-        return inputManager.GetButton("Shoot") ? ballPointLoading : ballPointNormal;
+        return IsLoadingShoot() ? ballPointLoading : ballPointNormal;
     }
 
     // Start is called before the first frame update
@@ -93,6 +98,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsShooting", false);
         bodyCollider = GetComponent<Collider2D>();
         gameManager = FindObjectOfType<GameManager>();
+        audioSource = GetComponent<AudioSource>();
 
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
 
@@ -118,14 +124,33 @@ public class Player : MonoBehaviour
        
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var tagName = collision.gameObject.tag;
+        var parentGO = collision.gameObject.transform.parent;
+        Player playerParent = null;
+        if (parentGO != null)
+        {
+            playerParent = parentGO.gameObject.GetComponent<Player>();
+        }
+
+        if (playerParent != null && tagName == "ShotHitbox" && playerParent.team != team)
+        {
+            audioSource.clip = hitPlayerSound;
+            audioSource.Play();
+            ReceiveTackle(this);
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var go = collision.gameObject;
         var player = go.GetComponent<Player>();
 
-        if (player != null && (IsDashing() || IsTackling()))
+        if (player != null && player.team != team && player.IsDashing())
         {
-            player.ReceiveTackle(this);
+            audioSource.clip = hitPlayerSound;
+            audioSource.Play();
+            ReceiveTackle(this);
         }
 
         Debug.Log("Ball collided " + collision.gameObject.name);
@@ -248,7 +273,7 @@ public class Player : MonoBehaviour
         }
 
         var hasPressedDash = inputManager.GetButtonDown("Dash");
-        if (hasPressedDash && currentEnergy >= GameSettings.dashEnergyCost)
+        if (hasPressedDash && currentEnergy >= GameSettings.dashEnergyCost && !IsLoadingShoot())
         {
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
@@ -263,70 +288,68 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (IsGrabbing() && inputManager.GetButton("Shoot"))
+        if (IsLoadingShoot())
         {
             builtupPower += Time.deltaTime;
             builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
         }
 
-        if (inputManager.GetButtonDown("Tackle") || inputManager.GetButtonUp("Shoot") || inputManager.GetButtonDown("Grab"))
+        //Debug.Log(inputManager.GetButtonDown("Tackle"));
+        if (!IsGrabbing() && inputManager.GetButtonDown("Tackle"))
         {
+            this.shotHitbox.enabled = true;
+            StartCoroutine(EnableShotHitbox());
+            StartCoroutine(CooldownShooting());
+            StartCoroutine(StartTackleAnimation());
+            //animator.SetBool("IsShooting", true);
+        } else if (IsGrabbing() && (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonDown("Grab")))
+        {
+            Debug.Log("OPT2");
             GameObject newBall = null;
-            if (IsGrabbing())
+            Destroy(FindObjectOfType<Ball>().gameObject);
+            newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
+            Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
+
+            var combinedVelocity = Mathf.Abs(rigidBody.velocity.x) + Mathf.Abs(rigidBody.velocity.y);
+
+            var computedShotPower = GetSpeed() + releasePower;
+
+            if (inputManager.GetButtonUp("Tackle"))
             {
-                Debug.Log("SHOOT");
-                
-                Destroy(FindObjectOfType<Ball>().gameObject);
-                newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
-                Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-
-                var combinedVelocity = Mathf.Abs(rigidBody.velocity.x) + Mathf.Abs(rigidBody.velocity.y);
-
-                var computedShotPower = GetSpeed() + releasePower;
-
-                if (inputManager.GetButtonUp("Shoot"))
-                {
-                    animator.SetBool("IsShooting", true);
-                    computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
-                }
-                
-                float velocityX;
-                float velocityY;
-                if (combinedVelocity == 0)
-                {
-                    velocityX = this.transform.localScale.x * computedShotPower;
-                    velocityY = 0f;
-                    Debug.Log(velocityX);
-                } else
-                {
-                    var speed = ComputeShotSpeed(computedShotPower);
-                    velocityX = speed.x;
-                    velocityY = speed.y;
-                }
-
-                newBallBody.velocity = new Vector2(velocityX, velocityY);
-                builtupPower = 0;
-                Debug.Log(newBallBody.velocity);
-
-            } else if (!IsGrabbing() && (inputManager.GetButtonUp("Shoot") || inputManager.GetButtonDown("Tackle"))) {
-                this.shotHitbox.enabled = true;
-                StartCoroutine("EnableShotHitbox");
-                StartCoroutine(CooldownShooting());
-                StartCoroutine(StartTackleAnimation());
-                animator.SetBool("IsShooting", true);
+                StartCoroutine(ManageShootingAnimation());
+                computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
             }
+
+            float velocityX;
+            float velocityY;
+            if (combinedVelocity == 0)
+            {
+                velocityX = this.transform.localScale.x * computedShotPower;
+                velocityY = 0f;
+            }
+            else
+            {
+                var speed = ComputeShotSpeed(computedShotPower);
+                velocityX = speed.x;
+                velocityY = speed.y;
+            }
+
+            newBallBody.velocity = new Vector2(velocityX, velocityY);
+            builtupPower = 0;
+
+            audioSource.clip = launchBallSound;
+            audioSource.Play();
 
             if (newBall != null)
             {
                 StartCoroutine(DisableBody(newBall));
             }
-     
         }
     }
 
     public bool IsLoadingShoot()
     {
-        return IsGrabbing() && inputManager.GetButton("shoot");
+        return IsGrabbing() && inputManager.GetButton("Tackle");
     }
 
     private void ManageMove()
@@ -434,6 +457,13 @@ public class Player : MonoBehaviour
         isTackling = false;
     }
 
+    IEnumerator ManageShootingAnimation()
+    {
+        animator.SetBool("IsShooting", true);
+        yield return new WaitForSeconds(shotHitboxTime);
+        animator.SetBool("IsShooting", false);
+    }
+
     IEnumerator DisableEnergyReplenish()
     {
         isReplenishing = false;
@@ -462,7 +492,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsTackling", this.isTackling);
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
-        animator.SetBool("IsLoadingShoot", inputManager.GetButton("Shoot") && IsGrabbing());
+        animator.SetBool("IsLoadingShoot", IsLoadingShoot());
         //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
@@ -655,10 +685,8 @@ public class Player : MonoBehaviour
 
     public void DisableInputs()
     {
-        Debug.Log("everyday I'm disabling");
         if (this.inputManager != null)
         {
-            Debug.Log("everyday I'm disabling");
             this.inputManager.UnregisterInputEvents();
         }
         

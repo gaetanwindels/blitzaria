@@ -9,10 +9,11 @@ public class Goal : MonoBehaviour
     [SerializeField] private TeamEnum team = TeamEnum.Team1;
     [SerializeField] private int explosionForce = 1300;
     [SerializeField] private GameObject goalparticleSystem;
-    [SerializeField] private AudioClip goalSound;
+
 
     // Cached variable
-    GameManager gameManager;
+    private GameManager gameManager;
+    private AudioSource audioSource;
 
     private bool isReloading = false;
 
@@ -22,19 +23,18 @@ public class Goal : MonoBehaviour
         
         if (ball != null && !isReloading)
         {
+            if (audioSource != null)
+            {
+                audioSource.volume = 1f;
+                audioSource.Play();
+            }
+
             ExplodePlayers();
+            var gameManager = FindObjectOfType<GameManager>();
             gameManager.AddScore(team);
             Destroy(collision.gameObject);
             StartCoroutine(ReloadScene());
 
-            var audioSource = FindObjectOfType<AudioSource>();
-            if (audioSource != null && goalSound != null)
-            {
-                audioSource.volume = 1f;
-                audioSource.clip = goalSound;
-                audioSource.Play();
-            }
-            
         }
     }
 
@@ -65,7 +65,8 @@ public class Goal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GetComponent<GameManager>();
+        audioSource = GetComponent<AudioSource>();
         ParticleSystem ps = goalparticleSystem.GetComponent<ParticleSystem>();
 
         if (ps != null)
