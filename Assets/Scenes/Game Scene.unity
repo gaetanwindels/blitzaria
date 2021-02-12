@@ -1233,7 +1233,10 @@ MonoBehaviour:
       _name: Player2
       _descriptiveName: Player2
       _startPlaying: 1
-      _defaultJoystickMaps: []
+      _defaultJoystickMaps:
+      - _enabled: 1
+        _categoryId: 0
+        _layoutId: 0
       _defaultMouseMaps: []
       _defaultKeyboardMaps: []
       _defaultCustomControllerMaps: []
@@ -1252,7 +1255,10 @@ MonoBehaviour:
       _name: Player3
       _descriptiveName: Player3
       _startPlaying: 1
-      _defaultJoystickMaps: []
+      _defaultJoystickMaps:
+      - _enabled: 1
+        _categoryId: 0
+        _layoutId: 0
       _defaultMouseMaps: []
       _defaultKeyboardMaps: []
       _defaultCustomControllerMaps: []
@@ -3205,12 +3211,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e155655cda0e9745ac750ae81272423, type: 3}
---- !u!1 &1793549708 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8795129347975165809, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-    type: 3}
-  m_PrefabInstance: {fileID: 8795129349411656445}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1800941293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4613,8 +4613,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988621117747625792, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
+      propertyPath: shootCoolDown
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625792, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
       propertyPath: shotHitboxTime
       value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625792, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: grabSpeedFactor
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625792, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: shootSpeedFactor
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625792, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: tackleStunDuration
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6988621117747625798, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
@@ -4646,7 +4666,7 @@ PrefabInstance:
         type: 3}
       propertyPath: splash
       value: 
-      objectReference: {fileID: 1793549708}
+      objectReference: {fileID: 0}
     - target: {fileID: 6463833840362472500, guid: b8c3ed1c57ee09c49b0033ea8c90aef3,
         type: 3}
       propertyPath: edgeCountMultiplier

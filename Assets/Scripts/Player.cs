@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [Header("Tackle")]
     [SerializeField] private float tackleSpeed = 8f;
+    [SerializeField] private float invicibilityFrames = 1.5f;
     [SerializeField] private float tackleReturnSpeed = 8f;
     [SerializeField] private float tackleDuration = 0.1f;
     [SerializeField] private float tackleWindUp = 0.1f;
@@ -79,6 +80,7 @@ public class Player : MonoBehaviour
     public bool isTackling = false;
     public bool hasJustEnteredWater = false;
     public IEnumerator enteredWaterRoutine;
+    private bool isInvicible = false;
 
     [Header("Timers")]
     public float dashTimer = 0f;
@@ -134,22 +136,32 @@ public class Player : MonoBehaviour
             playerParent = parentGO.gameObject.GetComponent<Player>();
         }
 
-        if (playerParent != null && tagName == "ShotHitbox" && playerParent.team != team)
+        if (!isInvicible && playerParent != null && tagName == "ShotHitbox" && playerParent.team != team)
         {
             audioSource.clip = hitPlayerSound;
             audioSource.Play();
+            StartCoroutine(TriggerInvicibility());
             ReceiveTackle(this);
         }
     }
+
+    private IEnumerator TriggerInvicibility()
+    {
+        isInvicible = true;
+        yield return new WaitForSeconds(invicibilityFrames);
+        isInvicible = false; 
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var go = collision.gameObject;
         var player = go.GetComponent<Player>();
 
-        if (player != null && player.team != team && player.IsDashing())
+        if (!isInvicible && player != null && player.team != team && player.IsDashing())
         {
             audioSource.clip = hitPlayerSound;
             audioSource.Play();
+            StartCoroutine(TriggerInvicibility());
             ReceiveTackle(this);
         }
 

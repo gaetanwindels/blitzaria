@@ -171,6 +171,9 @@ public class Water : MonoBehaviour
             float lifetime = 0.93f + Mathf.Abs(velocity) * 0.07f;
 
             //Set the splash to be between two values in Shuriken by setting it twice.
+
+            if (splash == null) return; 
+
             var main = splash.GetComponent<ParticleSystem>().main;
             //main.startSpeed = 8 + 2 * Mathf.Pow(Mathf.Abs(velocity), 0.5f);
             //main.startSpeed = 9 + 2 * Mathf.Pow(Mathf.Abs(velocity), 0.5f);
