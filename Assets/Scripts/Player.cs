@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float accelerationBall = 1.4f;
 
     [Header("Move")]
+    [SerializeField] float rotationSpeed = 900f;
     [SerializeField] float speed = 7f;
     [SerializeField] float airSpeed = 0.02f;
     [SerializeField] float airThrust = 0.02f;
@@ -53,6 +54,9 @@ public class Player : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] public AudioClip hitPlayerSound;
     [SerializeField] public AudioClip launchBallSound;
+
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem turboParticles;
 
 
     public Brain brain;
@@ -107,6 +111,11 @@ public class Player : MonoBehaviour
         inputManager = new RewiredInputManager(playerNumber);
 
         currentEnergy = GameSettings.energyAmount;
+
+        if (turboParticles != null)
+        {
+            turboParticles.Stop();
+        }
 
         if (isAI)
         {
@@ -182,8 +191,10 @@ public class Player : MonoBehaviour
             }
             else
             {
+                var impulseSpeed = IsDashing() ? ball.impulseSpeedFactor * 1.5f : ball.impulseSpeedFactor;
+
                 var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
-                rigidBodyBall.velocity = rigidBody.velocity * ball.impulseSpeedFactor;
+                rigidBodyBall.velocity = rigidBody.velocity * impulseSpeed;
 
             }
 
@@ -381,9 +392,15 @@ public class Player : MonoBehaviour
             currentAirThrust = airThrust;
             computedSpeed = boostSpeed;
             animator.SetFloat("Speed Multiplier", 1.5f);
+
+            if (!this.turboParticles.isPlaying)
+            {
+                this.turboParticles.Play();
+            }
         }
         else
         {
+            this.turboParticles.Stop();
             animator.SetFloat("Speed Multiplier", 1f);
         }
 
@@ -516,32 +533,42 @@ public class Player : MonoBehaviour
         float speedY = inputManager.GetAxis("Move Vertical");
 
         var scaleX = this.rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
-        if (!isMoving || (!isTouchingWater && !IsDashing()))
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            if (this.rigidBody.velocity.x != 0)
-            {
-                transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
-            }
-        }
-        else if (speedX != 0 || speedY != 0)
-        {
-            // Manage rotation
-            float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
-            
-            
-            if (IsLoadingShoot() && isTouchingWater)
-            {
-                angle = scaleX > 0 ? angle + 90 : angle - 90;
-            }
+        var adjustedRotationSpeed = isTackling ? 2000 : rotationSpeed;
 
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
-            if (this.rigidBody.velocity.x != 0)
-            {
-                transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
-            }
-            
+        Quaternion currentAngle = transform.rotation;
+        float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
+
+        if (!isTouchingWater)
+        {
+            angle = 0f;
+            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
+        } else
+        {
+            //transform.rotation = ;
+            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
         }
+
+        // Manage rotation
+        if (isTackling || IsLoadingShoot())
+        {
+            
+            angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
+            Debug.Log("IM TACKLING FFS " + angle);
+            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
+        }
+
+        if (IsLoadingShoot())
+        {
+            angle = scaleX > 0 ? angle + 90 : angle - 90;
+            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
+        }
+
+
+        if (this.rigidBody.velocity.x != 0)
+        {
+            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+        }
+
     }
 
     public void Grab(Ball ball)
@@ -590,7 +617,7 @@ public class Player : MonoBehaviour
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
         StartCoroutine(DisableBody(null));
-        Debug.Log(rigidBodyBall.velocity);
+        this.shotHitbox.enabled = false;
     }
 
     public void DisableBallCollision(GameObject newBall)
@@ -610,8 +637,11 @@ public class Player : MonoBehaviour
         if (newBall != null)
         {
             Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
-            yield return new WaitForSeconds(0.5f);
-            Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+            yield return new WaitForSeconds(1f);
+            if (newBall != null)
+            {
+                Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+            }   
         }
     }
 
@@ -645,8 +675,6 @@ public class Player : MonoBehaviour
 
     private Vector2 ComputeShotSpeed(float speedWanted)
     {
-        var isTouchingWater = bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
-
         float speedX = inputManager.GetAxis("Move Horizontal 2");
         float speedY = inputManager.GetAxis("Move Vertical 2");
 
@@ -665,24 +693,11 @@ public class Player : MonoBehaviour
             speedY = rigidBody.velocity.y;
         }
 
-        float totalFactor = Mathf.Abs(speedX) + Mathf.Abs(speedY);
-        float speedSquare = speedWanted * speedWanted;
+        var newSpeed = new Vector2(speedX, speedY);
+        newSpeed.Normalize();
+        newSpeed *= speedWanted;
 
-        Debug.Log("TitalFactor" + totalFactor);
-        var newSpeedX = Mathf.Sqrt((speedSquare * Mathf.Abs(speedX)) / totalFactor);
-        var newSpeedY = Mathf.Sqrt((speedSquare * Mathf.Abs(speedY)) / totalFactor);
-
-        if (speedX < 0)
-        {
-            newSpeedX *= -1;
-        }
-
-        if (speedY < 0)
-        {
-            newSpeedY *= -1;
-        }
-
-        return new Vector2(newSpeedX, newSpeedY);
+        return newSpeed;
     }
 
     private bool IsDashing()

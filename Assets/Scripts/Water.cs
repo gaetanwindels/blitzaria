@@ -71,7 +71,7 @@ public class Water : MonoBehaviour
         body.material = mat;
         body.material.renderQueue = 1000;
         body.positionCount = nodecount;
-        body.startWidth = 0.05f;
+        body.startWidth = 0.025f;
         //body.sortingLayerName = "Water";
         //body.sortingOrder = 3;
 
