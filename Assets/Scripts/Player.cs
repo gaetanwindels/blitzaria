@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
 
     public Transform GetThrowPoint()
     {
-        return IsLoadingShoot() ? throwPointLoading : throwPoint;
+        return IsGrabbing() ? throwPointLoading : throwPoint;
     }
 
     // Start is called before the first frame update
