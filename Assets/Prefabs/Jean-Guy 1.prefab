@@ -598,8 +598,8 @@ MonoBehaviour:
   tackleDuration: 0.25
   tackleWindUp: 0.1
   tackleStunDuration: 0.8
-  maxShotPower: 17
-  minShotPower: 12
+  maxShotPower: 14
+  minShotPower: 10
   releasePower: 1.3
   timeToBuildUp: 1.2
   shootSpeedFactor: 0.4

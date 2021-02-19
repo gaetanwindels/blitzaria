@@ -533,12 +533,12 @@ public class Player : MonoBehaviour
         float speedY = inputManager.GetAxis("Move Vertical");
 
         var scaleX = this.rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
-        var adjustedRotationSpeed = isTackling ? 2000 : rotationSpeed;
+        var adjustedRotationSpeed = isTackling || IsDashing() ? 10000 : rotationSpeed;
 
         Quaternion currentAngle = transform.rotation;
         float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
 
-        if (!isTouchingWater)
+        if (!isTouchingWater && !IsDashing())
         {
             angle = 0f;
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
@@ -560,7 +560,7 @@ public class Player : MonoBehaviour
         if (IsLoadingShoot())
         {
             angle = scaleX > 0 ? angle + 90 : angle - 90;
-            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
         }
 
 

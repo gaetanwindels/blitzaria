@@ -3536,11 +3536,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6988621117747625792, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
-        type: 3}
-      propertyPath: shotHitboxTime
-      value: 0.18
-      objectReference: {fileID: 0}
     - target: {fileID: 6988621117747625798, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: m_Name
@@ -3557,7 +3552,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1124535272, guid: b8c3ed1c57ee09c49b0033ea8c90aef3, type: 3}
       propertyPath: m_SurfaceLevel
-      value: 0.41
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1124535276, guid: b8c3ed1c57ee09c49b0033ea8c90aef3, type: 3}
       propertyPath: exitSound
