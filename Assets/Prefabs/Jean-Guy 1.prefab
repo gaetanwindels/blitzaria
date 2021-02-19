@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980038258833229656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.001, y: -0.0014, z: 0}
+  m_LocalScale: {x: 1, y: 1.5899, z: 1}
   m_Children: []
   m_Father: {fileID: 3071879217871578254}
   m_RootOrder: 0
@@ -95,6 +95,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+--- !u!1 &1251009573412244992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7095943508888501459}
+  m_Layer: 0
+  m_Name: Throw Point Loading
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7095943508888501459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251009573412244992}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.45, y: 0.1, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4926045685579339278}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3030431394282516269
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3030431395449246347}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38999996, y: 0.89, z: 0}
+  m_LocalPosition: {x: 0.48, y: 0.43, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 4926045685579339278}
@@ -227,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3071879217871578243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32, y: -0.84, z: 0}
+  m_LocalPosition: {x: 0.33, y: -0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9063013374550549658}
@@ -404,7 +434,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.3723074, g: 0.31510323, b: 0.9150943, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.062675476, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -438,7 +468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5930026757788296443}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.39, y: 0.47, z: 0}
+  m_LocalPosition: {x: -0.482, y: -0.354, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 4926045685579339278}
@@ -475,7 +505,7 @@ Transform:
   m_GameObject: {fileID: 6988621117747625798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2941897, y: -1.8239174, z: 13.507944}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4838759561130362368}
   - {fileID: 3030431394282516271}
@@ -485,6 +515,7 @@ Transform:
   - {fileID: 3071879217871578254}
   - {fileID: 5930026756302562657}
   - {fileID: 6233667960963421039}
+  - {fileID: 7095943508888501459}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -559,6 +590,7 @@ MonoBehaviour:
   ballPointNormal: {fileID: 3030431394573542114}
   ballPointLoading: {fileID: 5930026757788296440}
   throwPoint: {fileID: 3030431395449246340}
+  throwPointLoading: {fileID: 7095943508888501459}
   ballPrefab: {fileID: 8240922884218118336, guid: 77fede7b478df2546b2283c4d6d52fb2,
     type: 3}
   tackleSpeed: 2
@@ -581,13 +613,14 @@ MonoBehaviour:
   speed: 4
   airSpeed: 0.5
   airThrust: 0
+  downAirThrust: 10
   boostSpeed: 5.5
   dashSpeed: 8
   grabSpeedFactor: 0.8
   dashDuration: 0.3
   lockedTime: 0.2
-  playerNumber: 0
-  team: 0
+  playerNumber: 1
+  team: 1
   isAI: 0
   isActive: 0
   disableOnStart: 1
