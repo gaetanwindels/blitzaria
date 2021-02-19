@@ -559,8 +559,8 @@ public class Player : MonoBehaviour
 
         if (IsLoadingShoot())
         {
-            angle = scaleX > 0 ? angle + 90 : angle - 90;
-            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
+            //angle = scaleX > 0 ? angle + 90 : angle - 90;
+            //transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
         }
 
 
