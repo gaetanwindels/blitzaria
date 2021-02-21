@@ -4965,7 +4965,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6748938452626074378}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f66b7397e9e53124cb8c1fc20bcd29a4, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -4997,6 +4997,8 @@ MonoBehaviour:
   team: 0
   explosionForce: 1300
   goalparticleSystem: {fileID: 1719341398}
+  explosionSound: {fileID: 8300000, guid: 389f97a70ffbcb54393c8903d6ac28f5, type: 3}
+  hitSound: {fileID: 8300000, guid: 87de3445c86e3654193c0c18fde953a4, type: 3}
 --- !u!82 &2375131868831385443
 AudioSource:
   m_ObjectHideFlags: 0

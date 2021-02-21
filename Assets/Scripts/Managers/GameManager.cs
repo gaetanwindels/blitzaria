@@ -286,6 +286,7 @@ public class GameManager : MonoBehaviour
 
     private void Pause()
     {
+        Debug.Log("pausing" + pauseCanvas);
         if (pauseCanvas !=  null && !pauseCanvas.activeSelf)
         {
             pauseCanvas.SetActive(true);

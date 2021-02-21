@@ -32,9 +32,4 @@ public class CustomSceneManager : MonoBehaviour
         Debug.Log("hey");
         SceneManager.LoadScene("Game Scene");
     }
-
-    public void GoToPlay1vs1()
-    {
-        SceneManager.LoadScene("Game Scene 1vs1");
-    }
 }

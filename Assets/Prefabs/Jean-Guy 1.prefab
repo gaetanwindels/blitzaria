@@ -169,8 +169,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.17815287, y: -0.65514773}
-  m_Size: {x: 0.14379479, y: 0.04017468}
+  m_Offset: {x: -0.17903219, y: -0.65954417}
+  m_Size: {x: 0.1086237, y: 0.031381898}
   m_Direction: 1
 --- !u!1 &3030431394573542113
 GameObject:
@@ -572,8 +572,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.029037952, y: 0.017231584}
-  m_Size: {x: 0.3160057, y: 0.84192777}
+  m_Offset: {x: -0.03951788, y: 0.053637743}
+  m_Size: {x: 0.37579823, y: 0.9147401}
   m_Direction: 0
 --- !u!114 &6988621117747625792
 MonoBehaviour:
@@ -619,13 +619,13 @@ MonoBehaviour:
   grabSpeedFactor: 0.8
   dashDuration: 0.3
   lockedTime: 0.2
-  playerNumber: 1
+  playerNumber: 0
   team: 1
   isAI: 0
   isActive: 0
   disableOnStart: 1
   hitPlayerSound: {fileID: 8300000, guid: 748138b1ef041a84781fd783e4003352, type: 3}
-  launchBallSound: {fileID: 8300000, guid: 8a34fceb69b4873448a8c34ef4d6264b, type: 3}
+  launchBallSound: {fileID: 8300000, guid: c4984e0932c438c419969bb2aeeca63d, type: 3}
   turboParticles: {fileID: 7157193096785850357}
   brain: {fileID: 0}
   builtupPower: 0

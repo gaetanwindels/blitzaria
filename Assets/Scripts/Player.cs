@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform throwPoint;
     [SerializeField] private Transform throwPointLoading;
     [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private Collider2D waterRayCast;
 
     [Header("Tackle")]
     [SerializeField] private float tackleSpeed = 8f;
@@ -87,6 +88,9 @@ public class Player : MonoBehaviour
     public bool hasJustEnteredWater = false;
     public IEnumerator enteredWaterRoutine;
     private bool isInvicible = false;
+
+    // Water management
+    public bool canGoUp = true;
 
     [Header("Timers")]
     public float dashTimer = 0f;
@@ -250,8 +254,6 @@ public class Player : MonoBehaviour
         {
             return;
         }
-
-        Debug.Log(Time.timeScale);
 
         if (inputManager.GetButtonDown("Start"))
         {
@@ -546,17 +548,22 @@ public class Player : MonoBehaviour
     private void ManageRotation()
     {
         var isTouchingWater = IsTouchingWater();
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.8f);
+        Debug.DrawRay(transform.position, Vector2.down * 0.8f);
+
+        var fullyOutOfWater = !(hit != null && hit.collider && hit.collider.gameObject.tag == "Water");
+
         var isMoving = (Math.Abs(this.rigidBody.velocity.x) > 0 || Math.Abs(this.rigidBody.velocity.y) > 0);
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
         var scaleX = this.rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
-        var adjustedRotationSpeed = isTackling || IsDashing() ? 10000 : rotationSpeed;
+        var adjustedRotationSpeed = isTackling || IsDashing() ? 3000 : rotationSpeed;
 
         Quaternion currentAngle = transform.rotation;
         float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
 
-        if (!isTouchingWater && !IsDashing())
+        if (!isTouchingWater && !IsDashing() && fullyOutOfWater)
         {
             angle = 0f;
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
@@ -571,7 +578,6 @@ public class Player : MonoBehaviour
         {
             
             angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
-            Debug.Log("IM TACKLING FFS " + angle);
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
         }
 

@@ -16,7 +16,7 @@ public class EnergyBallSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        energyBallInstance = Instantiate(energyBallPrefab, transform.position, Quaternion.identity);
+        energyBallInstance = Instantiate(energyBallPrefab, transform.position, Quaternion.identity, this.transform);
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class EnergyBallSpawner : MonoBehaviour
     {
         isRunning = true;
         yield return new WaitForSeconds(timeToGenerate);
-        energyBallInstance = Instantiate(energyBallPrefab, transform.position, Quaternion.identity);
+        energyBallInstance = Instantiate(energyBallPrefab, transform.position, Quaternion.identity, this.transform);
         isRunning = false;
     }
 }

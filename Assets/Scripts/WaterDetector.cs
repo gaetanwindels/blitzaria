@@ -12,23 +12,31 @@ public class WaterDetector : MonoBehaviour
     [SerializeField] AudioClip exitSound;
     [SerializeField] AudioClip enterSound;
 
+    private bool gameJustStarted = true;
     private AudioSource audioSource;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();
+        StartCoroutine(EnterWaterRoutine());
     }
 
     void OnTriggerEnter2D(Collider2D hit)
     {
+        if (gameJustStarted)
+        {
+            return;
+        }
+
         var ball = hit.GetComponent<Ball>();
 
         var rigidBody = hit.GetComponent<Rigidbody2D>();
         var player = hit.GetComponent<Player>();
-
+        
         if (player != null)
         {
             player.EnterWater();
+            player.canGoUp = false;
         }
 
         if (rigidBody != null && rigidBody.velocity.magnitude > 0.4f && (ball == null || !ball.HasJustSpawned))
@@ -50,6 +58,11 @@ public class WaterDetector : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D hit)
     {
+        if (gameJustStarted)
+        {
+            return;
+        }
+
         var ball = hit.GetComponent<Ball>();
 
         var rigidBody = hit.GetComponent<Rigidbody2D>();
@@ -78,6 +91,13 @@ public class WaterDetector : MonoBehaviour
         {
             ball.HasJustSpawned = false;
         }
+    }
+
+    IEnumerator EnterWaterRoutine()
+    {
+        gameJustStarted = true;
+        yield return new WaitForSeconds(0.1f);
+        gameJustStarted = false;
     }
 
     /*void OnTriggerStay2D(Collider2D Hit)

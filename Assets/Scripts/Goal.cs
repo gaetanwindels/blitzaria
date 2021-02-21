@@ -10,6 +10,8 @@ public class Goal : MonoBehaviour
     [SerializeField] private int explosionForce = 1300;
     [SerializeField] private GameObject goalparticleSystem;
 
+    [SerializeField] private AudioClip explosionSound;
+    [SerializeField] private AudioClip hitSound;
 
     // Cached variable
     private GameManager gameManager;
@@ -23,9 +25,10 @@ public class Goal : MonoBehaviour
         
         if (ball != null && !isReloading)
         {
-            if (audioSource != null)
+            if (audioSource != null && explosionSound != null)
             {
                 audioSource.volume = 1f;
+                audioSource.clip = explosionSound;
                 audioSource.Play();
             }
 
@@ -35,6 +38,21 @@ public class Goal : MonoBehaviour
             Destroy(collision.gameObject);
             StartCoroutine(ReloadScene());
 
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Ball ball = collision.gameObject.GetComponent<Ball>();
+
+        if (ball != null)
+        {
+            if (audioSource != null && hitSound != null)
+            {
+                audioSource.volume = 1f;
+                audioSource.clip = hitSound;
+                audioSource.Play();
+            }
         }
     }
 

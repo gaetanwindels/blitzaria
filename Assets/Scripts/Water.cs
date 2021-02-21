@@ -168,7 +168,7 @@ public class Water : MonoBehaviour
             velocities[index] += velocity;
 
             //Set the lifetime of the particle system.
-            float lifetime = 0.93f + Mathf.Abs(velocity) * 0.07f;
+            //float lifetime = 0.93f + Mathf.Abs(velocity) * 0.07f;
 
             //Set the splash to be between two values in Shuriken by setting it twice.
 
@@ -177,7 +177,7 @@ public class Water : MonoBehaviour
             var main = splash.GetComponent<ParticleSystem>().main;
             //main.startSpeed = 8 + 2 * Mathf.Pow(Mathf.Abs(velocity), 0.5f);
             //main.startSpeed = 9 + 2 * Mathf.Pow(Mathf.Abs(velocity), 0.5f);
-            main.startLifetime = lifetime;
+            // main.startLifetime = lifetime;
 
             //Set the correct position of the particle system.
             Vector3 position = new Vector3(xpositions[index], ypositions[index], -3);
@@ -186,8 +186,9 @@ public class Water : MonoBehaviour
             //Quaternion rotation = Quaternion.LookRotation(new Vector3(xpositions[Mathf.FloorToInt(xpositions.Length / 2)], baseheight + 8, 5) - position);
 
             //Create the splash and tell it to destroy itself.
-            GameObject splish = Instantiate(splash, position, Quaternion.identity) as GameObject;
-            Destroy(splish, lifetime + 0.3f);
+            var angle = Quaternion.Euler(-90, 0, 0);
+            GameObject splish = Instantiate(splash, position, angle) as GameObject;
+            Destroy(splish, 1f);
         }
     }
 
