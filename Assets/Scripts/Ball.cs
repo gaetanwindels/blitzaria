@@ -69,7 +69,7 @@ public class Ball : MonoBehaviour
         if (rigidbody != null)
         {
             rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : gravityScale;
-            rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? mass : mass;
+            rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0.5f : mass;
             
             ManageRotation();
         }

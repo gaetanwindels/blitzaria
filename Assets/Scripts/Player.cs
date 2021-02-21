@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform ballPointNormal;
     [SerializeField] private Transform ballPointLoading;
     [SerializeField] private Transform throwPoint;
+    [SerializeField] private Transform throwPointLoading;
     [SerializeField] private GameObject ballPrefab;
 
     [Header("Tackle")]
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 7f;
     [SerializeField] float airSpeed = 0.02f;
     [SerializeField] float airThrust = 0.02f;
+    [SerializeField] private float downAirThrust = 10f;
     [SerializeField] float boostSpeed = 10f;
     [SerializeField] float dashSpeed = 20f;
     [SerializeField] float grabSpeedFactor = 0.8f;
@@ -94,6 +96,11 @@ public class Player : MonoBehaviour
     public Transform GetBallPoint()
     {
         return IsLoadingShoot() ? ballPointLoading : ballPointNormal;
+    }
+
+    public Transform GetThrowPoint()
+    {
+        return IsGrabbing() ? throwPointLoading : throwPoint;
     }
 
     // Start is called before the first frame update
@@ -210,7 +217,7 @@ public class Player : MonoBehaviour
             {
                 this.ballGrabbed.player = null;
                 Destroy(FindObjectOfType<Ball>().gameObject);
-                var newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
+                var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
                 Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
 
                 var otherVelocity = otherRigidBody.velocity;
@@ -337,7 +344,7 @@ public class Player : MonoBehaviour
             Debug.Log("OPT2");
             GameObject newBall = null;
             Destroy(FindObjectOfType<Ball>().gameObject);
-            newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
+            newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
 
             var combinedVelocity = Mathf.Abs(rigidBody.velocity.x) + Mathf.Abs(rigidBody.velocity.y);
@@ -387,7 +394,7 @@ public class Player : MonoBehaviour
         bool isTouchingWater = IsTouchingWater() && !hasJustEnteredWater;
         float computedSpeed = speed;
 
-        if (this.isTackling || IsDashing() || !moveEnabled)
+        if (this.isTackling || IsDashing())
         {
             return;
         }
@@ -440,7 +447,11 @@ public class Player : MonoBehaviour
         else if (!isTouchingWater)
         {
             var counterForce = this.airSpeed * inputManager.GetAxis("Move Horizontal");
-            this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y + currentAirThrust);
+            var downAirForce = 0f;
+            if (!IsLoadingShoot() && inputManager.GetAxis("Move Vertical") < 0) {
+                downAirForce = Time.deltaTime * this.downAirThrust * inputManager.GetAxis("Move Vertical");
+            }
+            this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y + downAirForce);
         }
     }
 
@@ -540,12 +551,12 @@ public class Player : MonoBehaviour
         float speedY = inputManager.GetAxis("Move Vertical");
 
         var scaleX = this.rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
-        var adjustedRotationSpeed = isTackling ? 10000 : rotationSpeed;
+        var adjustedRotationSpeed = isTackling || IsDashing() ? 10000 : rotationSpeed;
 
         Quaternion currentAngle = transform.rotation;
         float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
 
-        if (!isTouchingWater)
+        if (!isTouchingWater && !IsDashing())
         {
             angle = 0f;
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
@@ -566,8 +577,8 @@ public class Player : MonoBehaviour
 
         if (IsLoadingShoot())
         {
-            angle = scaleX > 0 ? angle + 90 : angle - 90;
-            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
+            //angle = scaleX > 0 ? angle + 90 : angle - 90;
+            //transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
         }
 
 
@@ -644,7 +655,7 @@ public class Player : MonoBehaviour
         if (newBall != null)
         {
             Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.6f);
             if (newBall != null)
             {
                 Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
