@@ -159,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000022888, y: -26.718}
-  m_SizeDelta: {x: 284.9885, y: 53.4353}
+  m_AnchoredPosition: {x: -9, y: -54.213696}
+  m_SizeDelta: {x: 542.9224, y: 108.4267}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &104417485
 MonoBehaviour:
@@ -184,9 +184,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.17528482, g: 0.24008021, b: 0.9528302, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -202,7 +202,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 104417486}
+  m_TargetGraphic: {fileID: 1886058971}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -741,8 +741,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -123}
-  m_SizeDelta: {x: 322.3018, y: 193.3812}
+  m_AnchoredPosition: {x: -8, y: 0.0000076293945}
+  m_SizeDelta: {x: 273.8126, y: -10.8276}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1416846001
 MonoBehaviour:
@@ -769,8 +769,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3297e16c99464d40aa9f4183c0df27f, type: 2}
-  m_sharedMaterial: {fileID: -919569013403832536, guid: c3297e16c99464d40aa9f4183c0df27f,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4d7fbcce20cdf59439130d377c4c12a8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -937,7 +936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1574592775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -955,8 +954,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000022888, y: -133}
-  m_SizeDelta: {x: 284.9885, y: 53.4353}
+  m_AnchoredPosition: {x: 32, y: -201.04343}
+  m_SizeDelta: {x: 284.9885, y: 93.0555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1574592776
 MonoBehaviour:
@@ -980,9 +979,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0, g: 0.1634264, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -993,12 +992,12 @@ MonoBehaviour:
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
+    m_HighlightedTrigger: Button Animation
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1574592777}
+  m_TargetGraphic: {fileID: 1416846001}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1101,7 +1100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 104417483}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1595816074
@@ -1152,8 +1151,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -123}
-  m_SizeDelta: {x: 322.3018, y: 193.3812}
+  m_AnchoredPosition: {x: 7.700012, y: 0.00016784668}
+  m_SizeDelta: {x: 15.4, y: -0.0003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1886058971
 MonoBehaviour:
@@ -1175,13 +1174,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PLAY 2 vs 2
+  m_text: 'PLAY
 
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3297e16c99464d40aa9f4183c0df27f, type: 2}
-  m_sharedMaterial: {fileID: -919569013403832536, guid: c3297e16c99464d40aa9f4183c0df27f,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4d7fbcce20cdf59439130d377c4c12a8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1241,7 +1239,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 15.98938, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

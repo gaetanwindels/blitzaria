@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("GUI FIELDS")]
+    [SerializeField] GameObject pauseCanvas;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] TextMeshProUGUI scoreTeam1Text;
     [SerializeField] TextMeshProUGUI scoreTeam2Text;
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
         isCountDown = true;
         winText.text = "";
         countDownTimer = countdownDuration;
+        Time.timeScale = 1;
     }
 
     void Awake()
@@ -125,6 +127,8 @@ public class GameManager : MonoBehaviour
             player.isActive = false;
         }
 
+        Time.timeScale = 1;
+
     }
 
     void StartGame()
@@ -151,8 +155,6 @@ public class GameManager : MonoBehaviour
             scoreTeam2Text.text = scoreTeam2.ToString();
         }
 
-        Time.timeScale = IsGameOver() ? 0 : 1;
-
         if (IsGameOver())
         {
             var score1 = int.Parse(scoreTeam1Text.text);
@@ -168,6 +170,17 @@ public class GameManager : MonoBehaviour
             }
             
             Time.timeScale = 0;
+        }
+    }
+
+    public void ManagePause()
+    {
+        if (!this.pauseCanvas.activeSelf)
+        {
+            Pause();
+        } else
+        {
+            Resume();
         }
     }
 
@@ -269,5 +282,25 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver()
     {
         return timer <= 0;
+    }
+
+    private void Pause()
+    {
+        if (pauseCanvas !=  null && !pauseCanvas.activeSelf)
+        {
+            pauseCanvas.SetActive(true);
+        }
+        
+        Time.timeScale = 0;
+    }
+
+    private void Resume()
+    {
+        if (pauseCanvas != null && pauseCanvas.activeSelf)
+        {
+            pauseCanvas.SetActive(false);
+        }
+
+        Time.timeScale = 1;
     }
 }

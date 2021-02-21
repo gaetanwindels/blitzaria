@@ -244,6 +244,13 @@ public class Player : MonoBehaviour
             return;
         }
 
+        Debug.Log(Time.timeScale);
+
+        if (inputManager.GetButtonDown("Start"))
+        {
+            gameManager.ManagePause();
+        }
+
         ManageGravity();
         ManageShoot();
         ManageMove();
@@ -533,7 +540,7 @@ public class Player : MonoBehaviour
         float speedY = inputManager.GetAxis("Move Vertical");
 
         var scaleX = this.rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
-        var adjustedRotationSpeed = isTackling ? 2000 : rotationSpeed;
+        var adjustedRotationSpeed = isTackling ? 10000 : rotationSpeed;
 
         Quaternion currentAngle = transform.rotation;
         float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
