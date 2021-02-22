@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float shootCoolDown = 0.8f;
     [SerializeField] private BarSlider barSlider;
     [SerializeField] private float accelerationBall = 1.4f;
+    [SerializeField] private float curlPower = 20000f;
 
     [Header("Move")]
     [SerializeField] float rotationSpeed = 900f;
@@ -72,6 +73,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     private Collider2D bodyCollider;
     private GameManager gameManager;
+    private AudioLowPassFilter audioFilter;
 
     // State variable
     [Header("State")]
@@ -116,11 +118,12 @@ public class Player : MonoBehaviour
         bodyCollider = GetComponent<Collider2D>();
         gameManager = FindObjectOfType<GameManager>();
         audioSource = GetComponent<AudioSource>();
+        audioFilter = GetComponent<AudioLowPassFilter>();
 
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
 
         inputManager = new RewiredInputManager(playerNumber);
-
+        
         currentEnergy = GameSettings.energyAmount;
 
         if (turboParticles != null)
@@ -137,13 +140,11 @@ public class Player : MonoBehaviour
         {
             DisableInputs();
         }
-        
 
         if (this.shotHitbox != null)
         {
             this.shotHitbox.enabled = false;
         }
-       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -159,7 +160,7 @@ public class Player : MonoBehaviour
         if (!isInvicible && playerParent != null && tagName == "ShotHitbox" && playerParent.team != team)
         {
             audioSource.clip = hitPlayerSound;
-            audioSource.Play();
+            AudioUtils.PlaySound(gameObject);
             StartCoroutine(TriggerInvicibility());
             ReceiveTackle(this);
         }
@@ -333,7 +334,7 @@ public class Player : MonoBehaviour
             builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
         }
 
-        //Debug.Log(inputManager.GetButtonDown("Tackle"));
+        // Generate Shot Hitbox
         if (!IsGrabbing() && inputManager.GetButtonDown("Tackle"))
         {
             this.shotHitbox.enabled = true;
@@ -341,6 +342,7 @@ public class Player : MonoBehaviour
             StartCoroutine(CooldownShooting());
             StartCoroutine(StartTackleAnimation());
             //animator.SetBool("IsShooting", true);
+        // Either release or shoot the ball
         } else if (IsGrabbing() && (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonDown("Grab")))
         {
             Debug.Log("OPT2");
@@ -376,8 +378,19 @@ public class Player : MonoBehaviour
             newBallBody.velocity = new Vector2(velocityX, velocityY);
             builtupPower = 0;
 
+            if (inputManager.GetAxis("Curled Right") > 0)
+            {
+                Debug.Log("Curl right" + inputManager.GetAxis("Curled right"));
+                newBallBody.angularVelocity = 5000;
+            } else if (inputManager.GetAxis("Curled Left") > 0)
+            {
+                Debug.Log("Curl left" + inputManager.GetAxis("Curled Left"));
+                newBallBody.angularVelocity = -5000;
+            }
+
             audioSource.clip = launchBallSound;
-            audioSource.Play();
+            AudioUtils.PlaySound(gameObject);
+            //audioSource.Play();
 
             if (newBall != null)
             {
@@ -550,9 +563,8 @@ public class Player : MonoBehaviour
         var isTouchingWater = IsTouchingWater();
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.8f);
         Debug.DrawRay(transform.position, Vector2.down * 0.8f);
-
-        var fullyOutOfWater = !(hit != null && hit.collider && hit.collider.gameObject.tag == "Water");
-
+        bool fullyOutOfWater = !(hit != null && hit.collider != null && hit.collider.gameObject.tag == "Water");
+        
         var isMoving = (Math.Abs(this.rigidBody.velocity.x) > 0 || Math.Abs(this.rigidBody.velocity.y) > 0);
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");

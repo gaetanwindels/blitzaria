@@ -119,7 +119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251009573412244992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.45, y: 0.1, z: 0}
+  m_LocalPosition: {x: -0.38, y: 0.34, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 4926045685579339278}
@@ -169,8 +169,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.17903219, y: -0.65954417}
-  m_Size: {x: 0.1086237, y: 0.031381898}
+  m_Offset: {x: -0.1812032, y: -0.6742029}
+  m_Size: {x: 0.1129682, y: 0.060697753}
   m_Direction: 1
 --- !u!1 &3030431394573542113
 GameObject:
@@ -434,7 +434,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.062675476, a: 1}
+  m_Color: {r: 0.3723074, g: 0.31510323, b: 0.9150943, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 6988621117747625792}
   - component: {fileID: 6988621117747625796}
   - component: {fileID: 3654457843532587025}
+  - component: {fileID: 2505538946015334283}
   m_Layer: 7
   m_Name: Jean-Guy 1
   m_TagString: Untagged
@@ -593,6 +594,7 @@ MonoBehaviour:
   throwPointLoading: {fileID: 7095943508888501459}
   ballPrefab: {fileID: 8240922884218118336, guid: 77fede7b478df2546b2283c4d6d52fb2,
     type: 3}
+  waterRayCast: {fileID: 0}
   tackleSpeed: 2
   invicibilityFrames: 1.5
   tackleReturnSpeed: 8
@@ -620,7 +622,7 @@ MonoBehaviour:
   dashDuration: 0.3
   lockedTime: 0.2
   playerNumber: 0
-  team: 1
+  team: 0
   isAI: 0
   isActive: 0
   disableOnStart: 1
@@ -638,6 +640,7 @@ MonoBehaviour:
   isShootCoolDown: 0
   isTackling: 0
   hasJustEnteredWater: 0
+  canGoUp: 1
   dashTimer: 0
   tackleTimer: 0
   tackleWindupTimer: 0
@@ -779,6 +782,31 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!169 &2505538946015334283
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6988621117747625798}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.13578899
       inSlope: 0
       outSlope: 0
       tangentMode: 0

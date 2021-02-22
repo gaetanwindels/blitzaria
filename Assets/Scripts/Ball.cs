@@ -17,6 +17,10 @@ public class Ball : MonoBehaviour
 
     [SerializeField] public float mass = 1f;
 
+    [Header("Curl")]
+    [SerializeField] public float velocityDragFactor = 0.5f;
+    [SerializeField] public float minAngularVelocityCurl = 10f;
+
     [SerializeField] AudioClip hitSound;
 
     private AudioSource audioSource;
@@ -27,7 +31,6 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,7 +38,7 @@ public class Ball : MonoBehaviour
         Debug.Log("Ball collided " + collision.gameObject.name);
         var tagName = collision.gameObject.tag;
         var parentGO = collision.gameObject.transform.parent;
-
+    
         if (parentGO == null)
         {
             return;
@@ -47,7 +50,7 @@ public class Ball : MonoBehaviour
         {
             Debug.Log("BALL HIT SHOT");
             audioSource.clip = hitSound;
-            audioSource.Play();
+            AudioUtils.PlaySound(gameObject);
             player.Shoot();
         }
     }
@@ -64,20 +67,37 @@ public class Ball : MonoBehaviour
 
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
-        ManageScale();
-
         if (rigidbody != null)
         {
             rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : gravityScale;
             rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0.5f : mass;
+
+            if (Mathf.Abs(rigidbody.angularVelocity) > minAngularVelocityCurl) 
+            {
+                ManageCurl();
+            } else
+            {
+                ManageRotation();
+                ManageScale();
+            }
             
-            ManageRotation();
+           
         }
 
         if (this.player != null)
         {
             this.transform.position = player.GetBallPoint().position;
         }
+    }
+
+    private void ManageCurl()
+    {
+        transform.localScale = new Vector3(1, 1, 1);
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        var angVelocity = rigidbody.angularVelocity;
+        var adjusted = Vector2.Perpendicular(rigidbody.velocity);
+        adjusted *= (angVelocity * velocityDragFactor * Time.deltaTime);
+        rigidbody.AddForce(adjusted);
     }
 
     private void ManageRotation()
