@@ -452,7 +452,7 @@ public class Player : MonoBehaviour
         }
         speedVector = speedVector * computedSpeed;
         //var speedVector = new Vector2(inputManager.GetAxis("Move Horizontal"), inputManager.GetAxis("Move Vertical"));
-
+        animator.SetBool("IsDiving", false);
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
             this.rigidBody.velocity = speedVector;
@@ -463,6 +463,7 @@ public class Player : MonoBehaviour
             var downAirForce = 0f;
             if (!IsLoadingShoot() && inputManager.GetAxis("Move Vertical") < 0) {
                 downAirForce = Time.deltaTime * this.downAirThrust * inputManager.GetAxis("Move Vertical");
+                animator.SetBool("IsDiving", true);
             }
             this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y + downAirForce);
         }
