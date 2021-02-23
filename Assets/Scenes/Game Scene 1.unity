@@ -1777,46 +1777,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-        type: 3}
-      propertyPath: SizeModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-        type: 3}
-      propertyPath: SizeModule.curve.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-        type: 3}
-      propertyPath: SizeModule.curve.minScalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-        type: 3}
-      propertyPath: ShapeModule.randomDirectionAmount
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-        type: 3}
-      propertyPath: InitialModule.startColor.minColor.b
-      value: 0.7169812
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-        type: 3}
-      propertyPath: InitialModule.startColor.minColor.g
-      value: 0.6408865
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795129347975165811, guid: 63dc1c5a48b00d740893c77c6ef28d33,
-        type: 3}
-      propertyPath: InitialModule.startColor.minColor.r
-      value: 0.5647918
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63dc1c5a48b00d740893c77c6ef28d33, type: 3}
 --- !u!4 &1165893077 stripped
