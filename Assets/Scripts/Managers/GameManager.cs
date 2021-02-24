@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -185,6 +186,8 @@ public class GameManager : MonoBehaviour
                 winText.text = int.Parse(scoreTeam1Text.text) > int.Parse(scoreTeam2Text.text) ? "Team 1" : "Team 2";
                 winText.text += " win";
             }
+
+            EventSystem.current.SetSelectedGameObject(restartButton);
             
             Time.timeScale = 0;
         }

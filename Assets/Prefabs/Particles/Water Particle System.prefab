@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8795129347975165811}
   - component: {fileID: 8795129347975165808}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Water Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +222,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 2
       minColor: {r: 0.7877358, g: 0.89318997, b: 1, a: 0.6313726}
-      maxColor: {r: 0.27144888, g: 0.7885274, b: 0.9433962, a: 0.40392157}
+      maxColor: {r: 0.4206568, g: 0.59738845, b: 0.6509434, a: 0.40392157}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

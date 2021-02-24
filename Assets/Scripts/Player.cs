@@ -215,26 +215,23 @@ public class Player : MonoBehaviour
 
     public void ReceiveTackle(Player player)
     {
-        if (!IsDashing())
+        var otherRigidBody = player.GetComponent<Rigidbody2D>();
+        if (this.ballGrabbed != null)
         {
-            var otherRigidBody = player.GetComponent<Rigidbody2D>();
-            if (this.ballGrabbed != null)
-            {
-                this.ballGrabbed.player = null;
-                Destroy(FindObjectOfType<Ball>().gameObject);
-                var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
-                Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
+            this.ballGrabbed.player = null;
+            Destroy(FindObjectOfType<Ball>().gameObject);
+            var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
+            Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
 
-                var otherVelocity = otherRigidBody.velocity;
-                var velocity = rigidBody.velocity;
-                newBallBody.velocity = (-velocity - otherVelocity) / 2;
-                DisableBallCollision(newBall);
-            }
-
-            //rigidBody.velocity = Vector2.zero;
-
-            StartCoroutine(FinishBeingTackled()); 
+            var otherVelocity = otherRigidBody.velocity;
+            var velocity = rigidBody.velocity;
+            newBallBody.velocity = (-velocity - otherVelocity) / 2;
+            DisableBallCollision(newBall);
         }
+
+        //rigidBody.velocity = Vector2.zero;
+
+        StartCoroutine(FinishBeingTackled());
     }
 
     public void DisableMove()
@@ -348,7 +345,8 @@ public class Player : MonoBehaviour
             Debug.Log("OPT2");
             GameObject newBall = null;
             Destroy(FindObjectOfType<Ball>().gameObject);
-            newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
+            var trueThrowPoint = inputManager.GetButtonUp("Tackle") ? throwPointLoading : throwPoint;
+            newBall = Instantiate(ballPrefab, trueThrowPoint.position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
 
             var combinedVelocity = Mathf.Abs(rigidBody.velocity.x) + Mathf.Abs(rigidBody.velocity.y);
@@ -454,7 +452,7 @@ public class Player : MonoBehaviour
         }
         speedVector = speedVector * computedSpeed;
         //var speedVector = new Vector2(inputManager.GetAxis("Move Horizontal"), inputManager.GetAxis("Move Vertical"));
-
+        animator.SetBool("IsDiving", false);
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
             this.rigidBody.velocity = speedVector;
@@ -465,6 +463,7 @@ public class Player : MonoBehaviour
             var downAirForce = 0f;
             if (!IsLoadingShoot() && inputManager.GetAxis("Move Vertical") < 0) {
                 downAirForce = Time.deltaTime * this.downAirThrust * inputManager.GetAxis("Move Vertical");
+                animator.SetBool("IsDiving", true);
             }
             this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y + downAirForce);
         }
