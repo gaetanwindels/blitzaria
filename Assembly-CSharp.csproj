@@ -186,6 +186,7 @@
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerSelectScreenManager.cs" />
     <Compile Include="Assets\Scripts\GameSessionConfiguration.cs" />
+    <Compile Include="Assets\Scripts\Managers\StartingPositionsManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

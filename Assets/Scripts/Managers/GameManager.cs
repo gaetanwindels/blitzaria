@@ -49,9 +49,6 @@ public class GameManager : MonoBehaviour
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log("OnSceneLoaded:" + countDownTimer);
-
         gameSession = FindObjectOfType<GameSessionConfiguration>();
         playerGameObjects = gameSession.players;
 
@@ -124,12 +121,14 @@ public class GameManager : MonoBehaviour
         players = FindObjectsOfType<Player>();
 
         var positionLocker = FindObjectOfType<PositionLocker>();
+        StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
         Debug.Log("player" + playerGameObjects);
         foreach (GameObject playerToGenerate in playerGameObjects)
         {
-            var go = Instantiate(playerToGenerate, positionLocker.transform.position, Quaternion.identity);
-            positionLocker.SetObjectToLock(go);
+            Instantiate(playerToGenerate, positionLocker.transform.position, Quaternion.identity);
         }
+
+        positionManager.PositionPlayers();
     }
 
     // Start is called before the first frame update

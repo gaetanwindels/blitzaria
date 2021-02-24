@@ -376,13 +376,13 @@ public class Player : MonoBehaviour
             newBallBody.velocity = new Vector2(velocityX, velocityY);
             builtupPower = 0;
 
-            if (inputManager.GetAxis("Curled Right") > 0)
+            if (inputManager.GetAxis("Curl Right") > 0)
             {
-                Debug.Log("Curl right" + inputManager.GetAxis("Curled right"));
+                Debug.Log("Curl right" + inputManager.GetAxis("Curl right"));
                 newBallBody.angularVelocity = 5000;
-            } else if (inputManager.GetAxis("Curled Left") > 0)
+            } else if (inputManager.GetAxis("Curl Left") > 0)
             {
-                Debug.Log("Curl left" + inputManager.GetAxis("Curled Left"));
+                Debug.Log("Curl left" + inputManager.GetAxis("Curl Left"));
                 newBallBody.angularVelocity = -5000;
             }
 

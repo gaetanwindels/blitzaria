@@ -62,9 +62,7 @@ public class PlayerSelectScreenManager : MonoBehaviour
                 gameSession.players.Add(playerSelect.GetPlayer());
             }
             
-        }
-
-        
+        }        
     }
 
     void ResetCountDown()

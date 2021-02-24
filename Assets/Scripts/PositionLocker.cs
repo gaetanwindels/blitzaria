@@ -7,13 +7,16 @@ public class PositionLocker : MonoBehaviour
 
     [SerializeField] GameObject objectToLock;
     [SerializeField] Rigidbody2D rigidBody;
-    [SerializeField] TeamEnum team;
+    [SerializeField] public TeamEnum team;
     [SerializeField] float slotNumber = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = objectToLock.GetComponent<Rigidbody2D>();
+        if (objectToLock != null)
+        {
+            rigidBody = objectToLock.GetComponent<Rigidbody2D>();
+        }
     }
 
     // Update is called once per frame
@@ -34,6 +37,12 @@ public class PositionLocker : MonoBehaviour
     {
         this.objectToLock = objectToLock;
     }
+
+    public GameObject GetObjectTolock()
+    {
+        return this.objectToLock;
+    }
+
 
     public void UnlockObject()
     {
