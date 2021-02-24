@@ -8,6 +8,7 @@ public class PositionLocker : MonoBehaviour
     [SerializeField] GameObject objectToLock;
     [SerializeField] Rigidbody2D rigidBody;
     [SerializeField] TeamEnum team;
+    [SerializeField] float slotNumber = 0;
 
     // Start is called before the first frame update
     void Start()

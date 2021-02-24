@@ -27,9 +27,13 @@ public class CustomSceneManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void GoToSelect()
+    {
+        SceneManager.LoadScene("Select Scene");
+    }
+
     public void GoToPlay()
     {
-        Debug.Log("hey");
         SceneManager.LoadScene("Game Scene");
     }
 }

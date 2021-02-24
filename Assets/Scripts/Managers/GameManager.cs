@@ -11,12 +11,12 @@ public class GameManager : MonoBehaviour
 
     // Config parameters
     [Header("Players")]
+    [SerializeField] List<GameObject> playerGameObjects = new List<GameObject>();
     [SerializeField] Player[] players;
 
 
     [SerializeField] int gameDuration = 120;
     [SerializeField] int countdownDuration = 5;
-
 
     [Header("GUI FIELDS")]
     [SerializeField] GameObject pauseCanvas;
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     private int scoreTeam1;
     private int scoreTeam2;
     private bool isCountDown = true;
+    private GameSessionConfiguration gameSession;
 
     void OnEnable()
     {
@@ -49,7 +50,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log("OnSceneLoaded:" + countDownTimer);
-        players = FindObjectsOfType<Player>();
+
+        gameSession = FindObjectOfType<GameSessionConfiguration>();
+        playerGameObjects = gameSession.players;
+
+        InitPlayers();
 
         if (sliderEnergyBar1 != null)
         {
@@ -112,6 +117,20 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void InitPlayers()
+    {
+        playerGameObjects = gameSession.players;
+        players = FindObjectsOfType<Player>();
+
+        var positionLocker = FindObjectOfType<PositionLocker>();
+        Debug.Log("player" + playerGameObjects);
+        foreach (GameObject playerToGenerate in playerGameObjects)
+        {
+            var go = Instantiate(playerToGenerate, positionLocker.transform.position, Quaternion.identity);
+            positionLocker.SetObjectToLock(go);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,11 +140,9 @@ public class GameManager : MonoBehaviour
         scoreTeam2 = 0;
         winText.text = "";
         restartButton.SetActive(false);
+        gameSession = FindObjectOfType<GameSessionConfiguration>();
+        playerGameObjects = gameSession.players;
         players = FindObjectsOfType<Player>();
-        foreach (Player player in players)
-        {
-            player.isActive = false;
-        }
 
         Time.timeScale = 1;
 
