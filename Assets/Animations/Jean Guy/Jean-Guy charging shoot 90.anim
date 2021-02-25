@@ -27,7 +27,7 @@ AnimationClip:
     script: {fileID: 0}
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 0990ded53974a1d479467b2ad44467ee, type: 3}
+      value: {fileID: 21300000, guid: 7cc678462314533418cfe51b5153524e, type: 3}
     attribute: m_Sprite
     path: Clothes
     classID: 212
@@ -55,7 +55,7 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 21300000, guid: 8cb96715f54ad9943ae863158fdeb652, type: 3}
-    - {fileID: 21300000, guid: 0990ded53974a1d479467b2ad44467ee, type: 3}
+    - {fileID: 21300000, guid: 7cc678462314533418cfe51b5153524e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

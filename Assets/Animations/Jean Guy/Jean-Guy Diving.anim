@@ -33,13 +33,13 @@ AnimationClip:
     script: {fileID: 0}
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 7ff6f337073ccb24188aac824f7f781d, type: 3}
+      value: {fileID: 21300000, guid: 920487092f062ba47be29a43eefc99c2, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 67aa1811e80ae75469f17759b017e2e4, type: 3}
+      value: {fileID: 21300000, guid: f144336c6fd6d82478be4fef3d8892f9, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 8bfee9d8abad07e40b0a0891bb4e8c83, type: 3}
+      value: {fileID: 21300000, guid: 897c91b0330f5e946b07423fe2a03046, type: 3}
     - time: 4.6
-      value: {fileID: 21300000, guid: 8bfee9d8abad07e40b0a0891bb4e8c83, type: 3}
+      value: {fileID: 21300000, guid: 897c91b0330f5e946b07423fe2a03046, type: 3}
     attribute: m_Sprite
     path: Clothes
     classID: 212
@@ -70,10 +70,10 @@ AnimationClip:
     - {fileID: 21300000, guid: 556061dacef139549ba30049cfb1365f, type: 3}
     - {fileID: 21300000, guid: a290e53f1a47deb4485d0ab4caf8fbb7, type: 3}
     - {fileID: 21300000, guid: a290e53f1a47deb4485d0ab4caf8fbb7, type: 3}
-    - {fileID: 21300000, guid: 7ff6f337073ccb24188aac824f7f781d, type: 3}
-    - {fileID: 21300000, guid: 67aa1811e80ae75469f17759b017e2e4, type: 3}
-    - {fileID: 21300000, guid: 8bfee9d8abad07e40b0a0891bb4e8c83, type: 3}
-    - {fileID: 21300000, guid: 8bfee9d8abad07e40b0a0891bb4e8c83, type: 3}
+    - {fileID: 21300000, guid: 920487092f062ba47be29a43eefc99c2, type: 3}
+    - {fileID: 21300000, guid: f144336c6fd6d82478be4fef3d8892f9, type: 3}
+    - {fileID: 21300000, guid: 897c91b0330f5e946b07423fe2a03046, type: 3}
+    - {fileID: 21300000, guid: 897c91b0330f5e946b07423fe2a03046, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
