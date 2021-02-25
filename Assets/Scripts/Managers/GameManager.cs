@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     // Config parameters
     [Header("Players")]
-    [SerializeField] List<GameObject> playerGameObjects = new List<GameObject>();
+    [SerializeField] List<PlayerSelectConfiguration> playerConfigurations = new List<PlayerSelectConfiguration>();
     [SerializeField] Player[] players;
 
 
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         gameSession = FindObjectOfType<GameSessionConfiguration>();
-        playerGameObjects = gameSession.players;
+        playerConfigurations = gameSession.players;
 
         InitPlayers();
 
@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
         {
             sliderEnergyBar4.gameObject.SetActive(false);
         }
+
+        players = FindObjectsOfType<Player>();
 
         foreach (Player player in players)
         {
@@ -117,15 +119,19 @@ public class GameManager : MonoBehaviour
 
     private void InitPlayers()
     {
-        playerGameObjects = gameSession.players;
-        players = FindObjectsOfType<Player>();
-
+        playerConfigurations = gameSession.players;
         var positionLocker = FindObjectOfType<PositionLocker>();
         StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
-        Debug.Log("player" + playerGameObjects);
-        foreach (GameObject playerToGenerate in playerGameObjects)
+
+        foreach (PlayerSelectConfiguration playerConf in playerConfigurations)
         {
-            Instantiate(playerToGenerate, positionLocker.transform.position, Quaternion.identity);
+            var go = Instantiate(playerConf.player, positionLocker.transform.position, Quaternion.identity);
+            var player = go.GetComponent<Player>();
+            player.playerNumber = playerConf.playerNumber;
+            player.team = playerConf.team;
+            var clothes = go.GetComponentsInChildren<SpriteRenderer>();
+            clothes[clothes.Length - 1].color = playerConf.color;
+
         }
 
         positionManager.PositionPlayers();
@@ -141,7 +147,7 @@ public class GameManager : MonoBehaviour
         winText.text = "";
         restartButton.SetActive(false);
         gameSession = FindObjectOfType<GameSessionConfiguration>();
-        playerGameObjects = gameSession.players;
+        playerConfigurations = gameSession.players;
         players = FindObjectsOfType<Player>();
 
         Time.timeScale = 1;
@@ -255,6 +261,7 @@ public class GameManager : MonoBehaviour
 
             foreach (Player player in players)
             {
+                Debug.Log("enabled");
                 player.EnableInputs();
             }
         }
@@ -267,10 +274,10 @@ public class GameManager : MonoBehaviour
         {
             winText.text = "RED TEAM SCORE";
             winText.color = new Color32(255, 55, 55, 255);
-            scoreTeam2++;
+            scoreTeam1++;
         } else
         {
-            scoreTeam1++;
+            scoreTeam2++;
             winText.text = "BLUE TEAM SCORE";
             winText.color = new Color32(57, 105, 255, 255);
         }

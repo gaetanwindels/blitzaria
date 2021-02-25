@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using Rewired;
+using TMPro;
 
 public class PlayerSelect : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerSelect : MonoBehaviour
 
     private Rewired.Player rwPlayer;
 
+
+    [SerializeField] public Button teamButton;
     [SerializeField] public GameObject backgroundText;
     [SerializeField] public int playerNumber = -1;
     [SerializeField] public TeamEnum team = TeamEnum.Team1;
@@ -19,16 +22,26 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] GameObject player;
 
     private bool isReady = false;    
+    private TextMeshProUGUI teamText;
 
     // Start is called before the first frame update
     void Start()
     {
         image = GetComponentInChildren<RawImage>();
+        teamText = teamButton.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        teamButton.gameObject.SetActive(playerNumber != -1);
+
+        if (teamButton.gameObject.activeSelf)
+        {
+            teamText.text = team == TeamEnum.Team1 ? "Red Team" : "Blue Team";
+            teamText.color = team == TeamEnum.Team1 ? new Color(1, 0, 0, 1) : new Color(0, 0, 1, 1);
+        }
+
         if (rwPlayer == null)
         {
             return;
@@ -40,7 +53,7 @@ public class PlayerSelect : MonoBehaviour
             image.color = new Color(1, 1, 1, 0.5f);
         }
 
-        if (rwPlayer.GetButtonDown("B"))
+        if (rwPlayer.GetButtonDown("UICancel"))
         {
             if (isReady)
             {
@@ -68,12 +81,21 @@ public class PlayerSelect : MonoBehaviour
         return playerNumber != -1 && isReady;
     }
 
-    public GameObject GetPlayer()
+    public void ToggleTeam()
     {
-        Player player = this.player.GetComponent<Player>();
-        player.team = team;
-        player.playerNumber = this.playerNumber;
+        Debug.Log("BUTTON" + rwPlayer.GetButtonDown("UISubmit"));
+        Debug.Log("toggling");
+        team = team == TeamEnum.Team1 ? TeamEnum.Team2 : TeamEnum.Team1;
+    }
 
-        return this.player;
+    public PlayerSelectConfiguration GetPlayer()
+    {
+        var playerSelect = new PlayerSelectConfiguration();
+        playerSelect.player = this.player;
+        playerSelect.color = team == TeamEnum.Team1 ? new Color(1, 0, 0, 1) : new Color(0, 0, 1, 1);
+        playerSelect.team = team;
+        playerSelect.playerNumber = this.playerNumber;
+
+        return playerSelect;
     }
 }

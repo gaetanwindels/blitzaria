@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\InputManager\SimulatedInputManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ControlMapper.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerSelectScreenManager.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerSelect.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\TeamEnum.cs" />
+    <Compile Include="Assets\Scripts\GameSessionConfiguration.cs" />
     <Compile Include="Assets\Scripts\WaterDetector.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Rewired\Internal\Scripts\Platforms\Ouya\OuyaInputSource.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Assets\Rewired\Examples\PressStartToJoin\Scripts\PressStartToJoinExample_GamePlayer.cs" />
     <Compile Include="Assets\Rewired\Examples\GamepadTemplateUI\Scripts\ControllerUIElement.cs" />
     <Compile Include="Assets\Rewired\Examples\CustomControllersTilt\Scripts\CustomControllersTiltDemo.cs" />
+    <Compile Include="Assets\Scripts\Managers\StartingPositionsManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Rewired\Examples\PressAnyButtonToJoin\Scripts\PressAnyButtonToJoinExample_GamePlayer.cs" />
     <Compile Include="Assets\Rewired\Integration\UnityUI\RewiredEventSystem.cs" />
@@ -184,9 +187,7 @@
     <Compile Include="Assets\Rewired\Examples\GamepadTemplateUI\Scripts\GamepadTemplateUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
-    <Compile Include="Assets\Scripts\UI\PlayerSelectScreenManager.cs" />
-    <Compile Include="Assets\Scripts\GameSessionConfiguration.cs" />
-    <Compile Include="Assets\Scripts\Managers\StartingPositionsManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerSelectConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

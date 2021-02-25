@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1989607137}
         m_TargetAssemblyTypeName: CustomSceneManager, Assembly-CSharp
-        m_MethodName: GoToPlay
+        m_MethodName: GoToSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

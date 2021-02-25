@@ -189,7 +189,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627631833}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -255,7 +255,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1627631836}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5694611826919825662}
+        m_TargetAssemblyTypeName: PlayerSelect, Assembly-CSharp
+        m_MethodName: ToggleTeam
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5694611826919825660
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5694611826919825661}
   - component: {fileID: 5694611826919825662}
+  - component: {fileID: 980124809}
   m_Layer: 5
   m_Name: Player Select 1
   m_TagString: Untagged
@@ -308,10 +321,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe90a418e2e7274ca7508a6d7ed8ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamButton: {fileID: 1627631835}
   backgroundText: {fileID: 5694611828616433826}
   playerNumber: -1
   team: 0
   player: {fileID: 6988621117747625798, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c, type: 3}
+--- !u!225 &980124809
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694611826919825660}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5694611827005012761
 GameObject:
   m_ObjectHideFlags: 0

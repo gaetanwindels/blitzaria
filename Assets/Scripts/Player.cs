@@ -379,11 +379,11 @@ public class Player : MonoBehaviour
             if (inputManager.GetAxis("Curl Right") > 0)
             {
                 Debug.Log("Curl right" + inputManager.GetAxis("Curl right"));
-                newBallBody.angularVelocity = 5000;
+                newBallBody.angularVelocity = curlPower;
             } else if (inputManager.GetAxis("Curl Left") > 0)
             {
                 Debug.Log("Curl left" + inputManager.GetAxis("Curl Left"));
-                newBallBody.angularVelocity = -5000;
+                newBallBody.angularVelocity = -curlPower;
             }
 
             audioSource.clip = launchBallSound;

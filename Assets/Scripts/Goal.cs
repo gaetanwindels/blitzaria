@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Goal : MonoBehaviour
 {
 
-    [SerializeField] private TeamEnum team = TeamEnum.Team1;
+    [SerializeField] private TeamEnum teamScoring = TeamEnum.Team1;
     [SerializeField] private int explosionForce = 1300;
     [SerializeField] private GameObject goalparticleSystem;
 
@@ -34,7 +34,7 @@ public class Goal : MonoBehaviour
 
             ExplodePlayers();
             var gameManager = FindObjectOfType<GameManager>();
-            gameManager.AddScore(team);
+            gameManager.AddScore(teamScoring);
             Destroy(collision.gameObject);
             StartCoroutine(ReloadScene());
 
@@ -65,7 +65,7 @@ public class Goal : MonoBehaviour
             var rb = player.GetComponent<Rigidbody2D>();
             player.DisableInputs();
             rb.freezeRotation = false;
-            var explosion = team == TeamEnum.Team1 ? explosionForce : -explosionForce;
+            var explosion = teamScoring == TeamEnum.Team1 ? explosionForce : -explosionForce;
             rb.angularVelocity = 1000;
             var explosionY = Random.Range(-explosion / 2, explosion / 2);
             rb.AddForce(new Vector2(explosion, explosionY));

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameSessionConfiguration : MonoBehaviour
 {
 
-    public List<GameObject> players = new List<GameObject>();
+    public List<PlayerSelectConfiguration> players = new List<PlayerSelectConfiguration>();
 
     public static GameSessionConfiguration instance = null;
 

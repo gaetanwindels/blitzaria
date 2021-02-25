@@ -96,7 +96,7 @@ public class PlayerSelectScreenManager : MonoBehaviour
 
         foreach (Rewired.Player playerToPoll in playersToPoll)
         {
-            if (playerToPoll.GetButtonDown("A") && !HasPlayerAlreadyJoined(playerToPoll.id))
+            if (playerToPoll.GetButtonDown("UISubmit") && !HasPlayerAlreadyJoined(playerToPoll.id))
             {
                 PlayerSelect playerSelect = GetFirstPlayerSelectFree();
                 playerSelect.WakeUp(playerToPoll.id);
