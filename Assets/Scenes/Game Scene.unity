@@ -3494,6 +3494,11 @@ PrefabInstance:
       propertyPath: team
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6748938452626074486, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: teamScoring
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad7aa694e127b19499488f6b3c45e158, type: 3}
 --- !u!1001 &7005225186782958701
