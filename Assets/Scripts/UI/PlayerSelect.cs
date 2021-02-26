@@ -34,7 +34,7 @@ public class PlayerSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        teamButton.gameObject.SetActive(playerNumber != -1);
+        //teamButton.gameObject.SetActive(playerNumber != -1);
 
         if (teamButton.gameObject.activeSelf)
         {
@@ -92,7 +92,8 @@ public class PlayerSelect : MonoBehaviour
     {
         var playerSelect = new PlayerSelectConfiguration();
         playerSelect.player = this.player;
-        playerSelect.color = team == TeamEnum.Team1 ? new Color(1, 0, 0, 1) : new Color(0, 0, 1, 1);
+        var greenComponent = 0.25f * playerNumber;
+        playerSelect.color = team == TeamEnum.Team1 ? new Color(1, greenComponent, 0, 1) : new Color(0, greenComponent, 1, 1);
         playerSelect.team = team;
         playerSelect.playerNumber = this.playerNumber;
 

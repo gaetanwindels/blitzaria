@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI countDownText;
     [SerializeField] TextMeshProUGUI winText;
     [SerializeField] GameObject restartButton;
+    [SerializeField] GameObject mainMenuButton;
     [SerializeField] Slider sliderEnergyBar1;
     [SerializeField] Slider sliderEnergyBar2;
     [SerializeField] Slider sliderEnergyBar3;
@@ -140,23 +141,24 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Init();
+
+    }
+
+    void Init()
+    {
         timer = gameDuration;
         countDownTimer = countdownDuration;
         scoreTeam1 = 0;
         scoreTeam2 = 0;
         winText.text = "";
         restartButton.SetActive(false);
+        mainMenuButton.SetActive(false);
         gameSession = FindObjectOfType<GameSessionConfiguration>();
         playerConfigurations = gameSession.players;
         players = FindObjectsOfType<Player>();
-
+        pauseCanvas.SetActive(false);
         Time.timeScale = 1;
-
-    }
-
-    void StartGame()
-    {
-
     }
 
     // Update is called once per frame
@@ -167,6 +169,7 @@ public class GameManager : MonoBehaviour
         UpdateEnergy();
 
         restartButton.SetActive(IsGameOver());
+        mainMenuButton.SetActive(IsGameOver());
 
         if (scoreTeam1Text != null)
         {
@@ -192,10 +195,16 @@ public class GameManager : MonoBehaviour
                 winText.text += " win";
             }
 
-            EventSystem.current.SetSelectedGameObject(restartButton);
+            EventSystem.current.SetSelectedGameObject(mainMenuButton);
             
             Time.timeScale = 0;
         }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Init();
     }
 
     public void ManagePause()

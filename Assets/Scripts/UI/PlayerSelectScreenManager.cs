@@ -99,7 +99,11 @@ public class PlayerSelectScreenManager : MonoBehaviour
             if (playerToPoll.GetButtonDown("UISubmit") && !HasPlayerAlreadyJoined(playerToPoll.id))
             {
                 PlayerSelect playerSelect = GetFirstPlayerSelectFree();
-                playerSelect.WakeUp(playerToPoll.id);
+
+                if (playerSelect != null)
+                {
+                    playerSelect.WakeUp(playerToPoll.id);
+                }
             }
         }
     }
@@ -119,9 +123,27 @@ public class PlayerSelectScreenManager : MonoBehaviour
 
     private PlayerSelect GetFirstPlayerSelectFree()
     {
+        int countTeam1 = 0;
+        int countTeam2 = 0;
+
         foreach (PlayerSelect playerSelect in playerSelects)
         {
-            if (playerSelect.playerNumber == -1)
+            if (playerSelect.playerNumber != -1)
+            {
+                if (playerSelect.team == TeamEnum.Team1)
+                {
+                    countTeam1++;
+                } else
+                {
+                    countTeam2++;
+                }
+            }
+        }
+
+        var teamToChoose = countTeam1 > countTeam2 ? TeamEnum.Team2 : TeamEnum.Team1;
+        foreach (PlayerSelect playerSelect in playerSelects)
+        {
+            if (playerSelect.playerNumber == -1 && playerSelect.team == teamToChoose)
             {
                 return playerSelect;
             }

@@ -585,11 +585,17 @@ public class Player : MonoBehaviour
         }
 
         // Manage rotation
-        if (isTackling || IsLoadingShoot())
+        if (IsLoadingShoot())
         {
             
             angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
+        }
+
+        if (isTackling)
+        {
+            angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
         }
 
         if (IsLoadingShoot())
