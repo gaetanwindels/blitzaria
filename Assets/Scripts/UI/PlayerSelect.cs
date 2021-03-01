@@ -17,18 +17,21 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] public Button teamButton;
     [SerializeField] public GameObject backgroundText;
     [SerializeField] public int playerNumber = -1;
+    [SerializeField] public GameObject playerName;
     [SerializeField] public TeamEnum team = TeamEnum.Team1;
 
     [SerializeField] GameObject player;
 
     private bool isReady = false;    
     private TextMeshProUGUI teamText;
+    private TextMeshProUGUI playerNameText;
 
     // Start is called before the first frame update
     void Start()
     {
         image = GetComponentInChildren<RawImage>();
         teamText = teamButton.GetComponentInChildren<TextMeshProUGUI>();
+        playerNameText = playerName.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -40,6 +43,15 @@ public class PlayerSelect : MonoBehaviour
         {
             teamText.text = team == TeamEnum.Team1 ? "Red Team" : "Blue Team";
             teamText.color = team == TeamEnum.Team1 ? new Color(1, 0, 0, 1) : new Color(0, 0, 1, 1);
+        }
+
+        if (playerName != null && playerNameText != null && playerNumber != -1)
+        {
+            playerNameText.text = "Player " + (playerNumber + 1);
+            playerName.SetActive(true);
+        } else if (playerName != null)
+        {
+            playerName.SetActive(false);
         }
 
         if (rwPlayer == null)
@@ -75,6 +87,11 @@ public class PlayerSelect : MonoBehaviour
         backgroundText.SetActive(false);
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
     }
+    public bool IsAwake()
+    {
+        return playerNumber != -1;
+    }
+
 
     public bool IsReady()
     {

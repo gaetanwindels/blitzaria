@@ -21,14 +21,18 @@ public class CustomSceneManager : MonoBehaviour
     public void GoToMenu()
     {
         var manager = GameObject.Find("GameManager");
+        var gameSession = GameObject.Find("GameSessionConfiguration");
         var soundManager = GameObject.Find("SoundManager");
         Destroy(manager);
         Destroy(soundManager);
+        Destroy(gameSession);
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
     public void GoToSelect()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Select Scene");
     }
 

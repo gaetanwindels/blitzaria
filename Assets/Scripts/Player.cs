@@ -8,12 +8,17 @@ public class Player : MonoBehaviour
 {
     // Parameters
     [Header("Stuff")]
+    [SerializeField] private GameObject ballPrefab;
+
+    [Header("Reference Points")]
     [SerializeField] private Transform ballPointNormal;
     [SerializeField] private Transform ballPointLoading;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private Transform throwPointLoading;
-    [SerializeField] private GameObject ballPrefab;
-    [SerializeField] private Collider2D waterRayCast;
+
+    [Header("Hitboxes")]
+    [SerializeField] private Collider2D shotHitbox;
+    [SerializeField] private Collider2D dashHitbox;
 
     [Header("Tackle")]
     [SerializeField] private float tackleSpeed = 8f;
@@ -29,7 +34,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float releasePower = 2f;
     [SerializeField] private float timeToBuildUp = 1f;
     [SerializeField] private float shootSpeedFactor = 0.3f;
-    [SerializeField] private Collider2D shotHitbox;
     [SerializeField] private float shotHitboxTime = 0.3f;
     [SerializeField] private float shootCoolDown = 0.8f;
     [SerializeField] private BarSlider barSlider;
@@ -145,6 +149,11 @@ public class Player : MonoBehaviour
         {
             this.shotHitbox.enabled = false;
         }
+
+        if (this.dashHitbox != null)
+        {
+            this.dashHitbox.enabled = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -154,10 +163,12 @@ public class Player : MonoBehaviour
         Player playerParent = null;
         if (parentGO != null)
         {
-            playerParent = parentGO.gameObject.GetComponent<Player>();
+            playerParent = collision.gameObject.GetComponentInParent<Player>();
         }
 
-        if (!isInvicible && playerParent != null && tagName == "ShotHitbox" && playerParent.team != team)
+        if (!isInvicible && playerParent != null && 
+            (tagName == "DashHitbox" || tagName == "ShotHitbox") 
+            && playerParent.team != team)
         {
             audioSource.clip = hitPlayerSound;
             AudioUtils.PlaySound(gameObject);
@@ -166,25 +177,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator TriggerInvicibility()
-    {
-        isInvicible = true;
-        yield return new WaitForSeconds(invicibilityFrames);
-        isInvicible = false; 
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var go = collision.gameObject;
         var player = go.GetComponent<Player>();
 
-        if (!isInvicible && player != null && player.team != team && player.IsDashing())
+        /*if (!isInvicible && player != null && player.team != team && player.IsDashing())
         {
             audioSource.clip = hitPlayerSound;
             audioSource.Play();
             StartCoroutine(TriggerInvicibility());
             ReceiveTackle(this);
-        }
+        }*/
 
         Debug.Log("Ball collided " + collision.gameObject.name);
 
@@ -211,6 +215,12 @@ public class Player : MonoBehaviour
             }
 
         }
+    }
+    private IEnumerator TriggerInvicibility()
+    {
+        isInvicible = true;
+        yield return new WaitForSeconds(invicibilityFrames);
+        isInvicible = false;
     }
 
     public void ReceiveTackle(Player player)
@@ -317,6 +327,15 @@ public class Player : MonoBehaviour
             this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);
         }
     }
+    public void EnableIsTackling()
+    {
+        this.isTackling = true;
+    }
+
+    public void DisableIsTackling()
+    {
+        this.isTackling = false;
+    }
 
     private void ManageShoot()
     {
@@ -334,15 +353,12 @@ public class Player : MonoBehaviour
         // Generate Shot Hitbox
         if (!IsGrabbing() && inputManager.GetButtonDown("Tackle"))
         {
-            this.shotHitbox.enabled = true;
-            StartCoroutine(EnableShotHitbox());
             StartCoroutine(CooldownShooting());
-            StartCoroutine(StartTackleAnimation());
+            this.isTackling = true;
             //animator.SetBool("IsShooting", true);
-        // Either release or shoot the ball
+            // Either release or shoot the ball
         } else if (IsGrabbing() && (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonDown("Grab")))
         {
-            Debug.Log("OPT2");
             GameObject newBall = null;
             Destroy(FindObjectOfType<Ball>().gameObject);
             var trueThrowPoint = inputManager.GetButtonUp("Tackle") ? throwPointLoading : throwPoint;
@@ -355,7 +371,7 @@ public class Player : MonoBehaviour
 
             if (inputManager.GetButtonUp("Tackle"))
             {
-                StartCoroutine(ManageShootingAnimation());
+                //StartCoroutine(ManageShootingAnimation());
                 computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
             }
 
@@ -511,20 +527,6 @@ public class Player : MonoBehaviour
         isShootCoolDown = false;
     }
 
-    IEnumerator StartTackleAnimation()
-    {
-        isTackling = true;
-        yield return new WaitForSeconds(shotHitboxTime);
-        isTackling = false;
-    }
-
-    IEnumerator ManageShootingAnimation()
-    {
-        animator.SetBool("IsShooting", true);
-        yield return new WaitForSeconds(shotHitboxTime);
-        animator.SetBool("IsShooting", false);
-    }
-
     IEnumerator DisableEnergyReplenish()
     {
         isReplenishing = false;
@@ -621,7 +623,7 @@ public class Player : MonoBehaviour
 
     public bool IsTackling()
     {
-        return this.isShootCoolDown;
+        return this.isTackling;
     }
 
     public bool IsGrabbing()
@@ -666,11 +668,27 @@ public class Player : MonoBehaviour
         StartCoroutine(DisableBody(newBall));
     }
 
-    IEnumerator EnableShotHitbox()
+    public void EnableShotHitbox()
     {
-        yield return new WaitForSeconds(this.shotHitboxTime);
+        this.shotHitbox.enabled = true;
+        builtupPower = 0;
+    }
+
+    public void DisableShotHitbox()
+    {
         this.shotHitbox.enabled = false;
         builtupPower = 0;
+    }
+
+    public void EnableDashHitbox()
+    {
+        Debug.Log("Enabling");
+        this.dashHitbox.enabled = true;
+    }
+
+    public void DisableDashHitbox()
+    {
+        this.dashHitbox.enabled = false;
     }
 
     IEnumerator DisableBody(GameObject newBall)

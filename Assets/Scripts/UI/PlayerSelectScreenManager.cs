@@ -33,6 +33,7 @@ public class PlayerSelectScreenManager : MonoBehaviour
     void Update()
     {
         Poll();
+        Debug.Log("Match starting in " + Mathf.Ceil(currentCountDown).ToString());
         readyText.text = EveryOneIsReady()  ? "Match starting in " + Mathf.Ceil(currentCountDown).ToString() : "";
 
         if (EveryOneIsReady())

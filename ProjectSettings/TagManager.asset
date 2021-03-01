@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ShotHitbox
   - Water
+  - DashHitbox
   layers:
   - Default
   - TransparentFX

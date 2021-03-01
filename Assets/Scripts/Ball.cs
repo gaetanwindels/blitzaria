@@ -44,15 +44,23 @@ public class Ball : MonoBehaviour
             return;
         }
 
-        Player player = parentGO.gameObject.GetComponent<Player>();
+        Player player = collision.gameObject.GetComponentInParent<Player>();
 
         if (player != null && tagName == "ShotHitbox")
         {
             Debug.Log("BALL HIT SHOT");
+            StartCoroutine(Freeze(0.2f));
             audioSource.clip = hitSound;
             AudioUtils.PlaySound(gameObject);
             player.Shoot();
         }
+    }
+
+    IEnumerator Freeze(float freezeTime)
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(freezeTime);
+        Time.timeScale = 1;
     }
 
     // Start is called before the first frame update
