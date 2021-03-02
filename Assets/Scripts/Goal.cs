@@ -33,7 +33,9 @@ public class Goal : MonoBehaviour
             }
 
             ExplodePlayers();
+            var shaker = FindObjectOfType<CameraShaker>();
             var gameManager = FindObjectOfType<GameManager>();
+            shaker.ShakeFor(0.5f, 0.3f);
             gameManager.AddScore(teamScoring);
             Destroy(collision.gameObject);
             StartCoroutine(ReloadScene());

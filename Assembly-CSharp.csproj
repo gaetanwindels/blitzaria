@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\InputManager\SimulatedAction.cs" />
     <Compile Include="Assets\Scripts\EnergyBallSpawner.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Behaviours\DashingBehaviour.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIControlSet.cs" />
     <Compile Include="Assets\Rewired\Internal\Scripts\DataStorage\UserDataStore_PlayerPrefs.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Assets\Rewired\Integration\UnityUI\RewiredEventSystem.cs" />
     <Compile Include="Assets\Scripts\PositionLocker.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CalibrationWindow.cs" />
+    <Compile Include="Assets\Scripts\Behaviours\TacklingBehaviour.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ThemedElement.cs" />
     <Compile Include="Assets\Rewired\Examples\DualShock4SpecialFeatures\Scripts\DualShock4SpecialFeaturesExample.cs" />
     <Compile Include="Assets\Scripts\Managers\PauseManager.cs" />
@@ -188,8 +190,7 @@
     <Compile Include="Assets\Rewired\Examples\GamepadTemplateUI\Scripts\GamepadTemplateUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\TacklingBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\DashingBehaviour.cs" />
+    <Compile Include="Assets\Scripts\CameraShaker.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem turboParticles;
-
+    [SerializeField] private GameObject dashParticles;
 
     public Brain brain;
     public InputManager inputManager;
@@ -322,6 +322,9 @@ public class Player : MonoBehaviour
         var hasPressedDash = inputManager.GetButtonDown("Dash");
         if (hasPressedDash && currentEnergy >= GameSettings.dashEnergyCost && !IsLoadingShoot())
         {
+            var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
+            go.transform.localEulerAngles = new Vector3(0, 0, 0);
+            Destroy(go, this.dashDuration);
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
             this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);

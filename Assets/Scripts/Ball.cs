@@ -49,7 +49,7 @@ public class Ball : MonoBehaviour
         if (player != null && tagName == "ShotHitbox")
         {
             Debug.Log("BALL HIT SHOT");
-            StartCoroutine(Freeze(0.2f));
+            FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
             audioSource.clip = hitSound;
             AudioUtils.PlaySound(gameObject);
             player.Shoot();
