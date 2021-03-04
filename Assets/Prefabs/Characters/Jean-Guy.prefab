@@ -472,6 +472,7 @@ Transform:
   m_Children:
   - {fileID: 3030431394282516271}
   - {fileID: 578324290}
+  - {fileID: 3369844353986879261}
   m_Father: {fileID: 4926045685579339278}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -587,6 +588,53 @@ Transform:
   m_Father: {fileID: 6880211434180998369}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6555290508705513892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3369844353986879261}
+  - component: {fileID: 8711122042717401639}
+  m_Layer: 0
+  m_Name: Grab Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3369844353986879261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6555290508705513892}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.26, y: -0.88, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6799266050881583199}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &8711122042717401639
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6555290508705513892}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02791248, y: 0.41467953}
+  m_Size: {x: 0.58932203, y: 0.45534247}
+  m_Direction: 1
 --- !u!1 &6988621117747625798
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,6 +779,7 @@ MonoBehaviour:
   dashSpeed: 8
   grabSpeedFactor: 0.8
   dashDuration: 0.4
+  grabWithoutBallSpeedFactor: 0.2
   lockedTime: 0.2
   playerNumber: 0
   team: 0
@@ -753,6 +802,7 @@ MonoBehaviour:
   isShootCoolDown: 0
   isTackling: 0
   hasJustEnteredWater: 0
+  isMotionGrabbing: 0
   canGoUp: 1
   dashTimer: 0
   tackleTimer: 0

@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashSpeed = 20f;
     [SerializeField] float grabSpeedFactor = 0.8f;
     [SerializeField] float dashDuration = 0.2f;
+    [SerializeField] float grabWithoutBallSpeedFactor = 0.2f;
     [SerializeField] private float lockedTime = 0.2f;
 
     [Header("Player Config")]
@@ -94,6 +95,7 @@ public class Player : MonoBehaviour
     public bool hasJustEnteredWater = false;
     public IEnumerator enteredWaterRoutine;
     private bool isInvicible = false;
+    public bool isMotionGrabbing = false;
 
     // Water management
     public bool canGoUp = true;
@@ -111,6 +113,16 @@ public class Player : MonoBehaviour
     public Transform GetThrowPoint()
     {
         return IsGrabbing() ? throwPointLoading : throwPoint;
+    }
+
+    public void EnableGrabbingMotion()
+    {
+        this.isMotionGrabbing = true;
+    }
+
+    public void DisableGrabbingMotion()
+    {
+        this.isMotionGrabbing = false;
     }
 
     // Start is called before the first frame update
@@ -181,14 +193,6 @@ public class Player : MonoBehaviour
     {
         var go = collision.gameObject;
         var player = go.GetComponent<Player>();
-
-        /*if (!isInvicible && player != null && player.team != team && player.IsDashing())
-        {
-            audioSource.clip = hitPlayerSound;
-            audioSource.Play();
-            StartCoroutine(TriggerInvicibility());
-            ReceiveTackle(this);
-        }*/
 
         Debug.Log("Ball collided " + collision.gameObject.name);
 
@@ -275,6 +279,7 @@ public class Player : MonoBehaviour
         ManageDash();
         ManageRotation();
         ManageAnimation();
+        ManageGrab();
 
         barSlider.SetValue(builtupPower / timeToBuildUp);
 
@@ -284,15 +289,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void NotifyShootingFinish()
-    {
-        animator.SetBool("IsShooting", false);
-        this.EnableMove();
-    }
-
     private void ManageGravity()
     {
-        rigidBody.gravityScale = IsTouchingWater() ? 0 : 0.6f; 
+        rigidBody.gravityScale = IsTouchingWater() ? 0 : 0.6f;
     }
 
     private void ManageTackle()
@@ -330,14 +329,15 @@ public class Player : MonoBehaviour
             this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);
         }
     }
-    public void EnableIsTackling()
-    {
-        this.isTackling = true;
-    }
 
-    public void DisableIsTackling()
+    private void ManageGrab()
     {
-        this.isTackling = false;
+        var hasPressedGrab = inputManager.GetButtonDown("Grab");
+
+        if (hasPressedGrab)
+        {
+            EnableGrabbingMotion();
+        }
     }
 
     private void ManageShoot()
@@ -358,6 +358,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(CooldownShooting());
             this.isTackling = true;
+            this.CancelDash();
             //animator.SetBool("IsShooting", true);
             // Either release or shoot the ball
         } else if (IsGrabbing() && (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonDown("Grab")))
@@ -398,11 +399,11 @@ public class Player : MonoBehaviour
             if (inputManager.GetAxis("Curl Right") > 0)
             {
                 Debug.Log("Curl right" + inputManager.GetAxis("Curl right"));
-                newBallBody.angularVelocity = curlPower;
+                newBallBody.angularVelocity = (curlPower * inputManager.GetAxis("Curl Right"));
             } else if (inputManager.GetAxis("Curl Left") > 0)
             {
                 Debug.Log("Curl left" + inputManager.GetAxis("Curl Left"));
-                newBallBody.angularVelocity = -curlPower;
+                newBallBody.angularVelocity = (-curlPower * inputManager.GetAxis("Curl Left"));
             }
 
             audioSource.clip = launchBallSound;
@@ -414,11 +415,6 @@ public class Player : MonoBehaviour
                 StartCoroutine(DisableBody(newBall));
             }
         }
-    }
-
-    public bool IsLoadingShoot()
-    {
-        return IsGrabbing() && inputManager.GetButton("Tackle");
     }
 
     private void ManageMove()
@@ -457,11 +453,11 @@ public class Player : MonoBehaviour
         else if (IsLoadingShoot())
         {
             computedSpeed *= shootSpeedFactor;
+        } else if (inputManager.GetButton("Grab"))
+        {
+            computedSpeed *= grabWithoutBallSpeedFactor;
         }
-
-        //float speedX = inputManager.GetAxis("Move Horizontal") * computedSpeed;
-        //float speedY = inputManager.GetAxis("Move Vertical") * computedSpeed;
-
+        
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
         var speedVector = new Vector2(speedX, speedY);
@@ -470,7 +466,6 @@ public class Player : MonoBehaviour
             speedVector.Normalize();
         }
         speedVector = speedVector * computedSpeed;
-        //var speedVector = new Vector2(inputManager.GetAxis("Move Horizontal"), inputManager.GetAxis("Move Vertical"));
         animator.SetBool("IsDiving", false);
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
@@ -487,20 +482,24 @@ public class Player : MonoBehaviour
             this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y + downAirForce);
         }
     }
-
-    public void EnterWater()
+    public bool IsLoadingShoot()
     {
-        if (enteredWaterRoutine != null)
-            StopCoroutine(enteredWaterRoutine);
-        enteredWaterRoutine = EnterWaterRoutine();
-        StartCoroutine(enteredWaterRoutine);
+        return IsGrabbing() && inputManager.GetButton("Tackle");
     }
 
-    IEnumerator EnterWaterRoutine()
+    private void CancelDash()
     {
-        hasJustEnteredWater = true;
-        yield return new WaitForSeconds(0.3f);
-        hasJustEnteredWater = false;
+        dashTimer = 0f;
+    }
+
+    public void EnableIsTackling()
+    {
+        this.isTackling = true;
+    }
+
+    public void DisableIsTackling()
+    {
+        this.isTackling = false;
     }
 
     private bool IsTouchingWater()
@@ -559,6 +558,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsUp", isUp);
         animator.SetBool("IsDown", !isUp);
         animator.SetBool("IsLoadingShoot", IsLoadingShoot());
+        animator.SetBool("IsGrabbing", isMotionGrabbing);
         //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 

@@ -35,7 +35,6 @@ public class WaterDetector : MonoBehaviour
         
         if (player != null)
         {
-            player.EnterWater();
             player.canGoUp = false;
         }
 

@@ -460,6 +460,24 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 1
+    - _id: 17
+      _name: Curled Left
+      _type: 0
+      _descriptiveName: Curled Left
+      _positiveDescriptiveName: Curled Left
+      _negativeDescriptiveName: Curled Left
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 18
+      _name: Curled Right
+      _type: 0
+      _descriptiveName: Curled Right
+      _positiveDescriptiveName: Curled Right
+      _negativeDescriptiveName: Curled Right
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Default
@@ -474,7 +492,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 010000000200000000000000030000000400000005000000070000000800000009000000
+        actionIds: 0100000002000000000000000300000004000000050000000700000008000000090000001100000012000000
       - categoryId: 1
         actionIds: 0a0000000b0000000c0000000d0000000e0000000f00000010000000
     inputBehaviors:
@@ -661,6 +679,28 @@ MonoBehaviour:
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 17
+        _elementType: 1
+        _elementIdentifierId: 11
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 0
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 18
+        _elementType: 1
+        _elementIdentifierId: 13
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 0
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
     - id: 1
       categoryId: 1
       layoutId: 0
@@ -781,7 +821,7 @@ MonoBehaviour:
       - _actionCategoryId: 0
         _actionId: 16
         _elementType: 1
-        _elementIdentifierId: 14
+        _elementIdentifierId: 15
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
@@ -916,7 +956,7 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 5
-    actionIdCounter: 17
+    actionIdCounter: 19
     actionCategoryIdCounter: 2
     inputBehaviorIdCounter: 2
     mapCategoryIdCounter: 2
