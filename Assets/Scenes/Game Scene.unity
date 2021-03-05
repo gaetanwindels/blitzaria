@@ -2086,6 +2086,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6748938451459671734}
   m_PrefabAsset: {fileID: 0}
+--- !u!70 &1714507473 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8711122042717401639, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2094436888}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1796796285 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 580955223468991326, guid: 0d193806909760f4ebbf5ca006b74d1e,
@@ -2558,8 +2564,18 @@ PrefabInstance:
     - target: {fileID: 5930026756302562670, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6555290508705513892, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_TagString
+      value: GrabHitbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625792, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: grabHitbox
+      value: 
+      objectReference: {fileID: 1714507473}
     - target: {fileID: 6988621117747625798, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: m_Name
@@ -2568,6 +2584,36 @@ PrefabInstance:
     - target: {fileID: 6988621117747625798, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711122042717401639, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.0333824
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711122042717401639, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.0056986
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711122042717401639, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711122042717401639, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.027912356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711122042717401639, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.22243465
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711122042717401639, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

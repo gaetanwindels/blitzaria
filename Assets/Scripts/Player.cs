@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [Header("Hitboxes")]
     [SerializeField] private Collider2D shotHitbox;
     [SerializeField] private Collider2D dashHitbox;
+    [SerializeField] private Collider2D grabHitbox;
 
     [Header("Tackle")]
     [SerializeField] private float tackleSpeed = 8f;
@@ -118,11 +119,13 @@ public class Player : MonoBehaviour
     public void EnableGrabbingMotion()
     {
         this.isMotionGrabbing = true;
+        this.grabHitbox.enabled = true;
     }
 
     public void DisableGrabbingMotion()
     {
         this.isMotionGrabbing = false;
+        this.grabHitbox.enabled = false;
     }
 
     // Start is called before the first frame update
@@ -203,11 +206,11 @@ public class Player : MonoBehaviour
         {
             if (inputManager.GetButton("Grab"))
             {
-                var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
+                /*var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
                 Collider2D collider = ball.GetComponent<Collider2D>();
                 Grab(ball);
                 Destroy(rigidBodyBall);
-                Destroy(collider);
+                Destroy(collider);*/
             }
             else
             {
@@ -334,7 +337,7 @@ public class Player : MonoBehaviour
     {
         var hasPressedGrab = inputManager.GetButtonDown("Grab");
 
-        if (hasPressedGrab)
+        if (hasPressedGrab && !IsGrabbing())
         {
             EnableGrabbingMotion();
         }
@@ -619,6 +622,12 @@ public class Player : MonoBehaviour
 
     public void Grab(Ball ball)
     {
+        var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
+        Collider2D collider = ball.GetComponent<Collider2D>();
+        Destroy(rigidBodyBall);
+        Destroy(collider);
+        DisableGrabbingMotion();
+
         ball.player = this;
         ball.HasJustSpawned = true;
         ballGrabbed = ball;
