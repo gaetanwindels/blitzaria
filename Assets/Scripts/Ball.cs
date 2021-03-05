@@ -46,13 +46,20 @@ public class Ball : MonoBehaviour
 
         Player player = collision.gameObject.GetComponentInParent<Player>();
 
-        if (player != null && tagName == "ShotHitbox")
+        if (player != null)
         {
-            Debug.Log("BALL HIT SHOT");
-            FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
-            audioSource.clip = hitSound;
-            AudioUtils.PlaySound(gameObject);
-            player.Shoot();
+            if (tagName == "ShotHitbox")
+            {
+                Debug.Log("BALL HIT SHOT");
+                FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
+                audioSource.clip = hitSound;
+                AudioUtils.PlaySound(gameObject);
+                player.Shoot();
+            } else if (tagName == "GrabHitbox")
+            {
+                player.Grab(this);
+            }
+            
         }
     }
 
