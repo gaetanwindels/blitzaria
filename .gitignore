@@ -73,3 +73,4 @@ ProjectSettings/UnityConnectSettings.asset
 obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
 *.cache
 *.cache
+Assembly-CSharp.csproj
