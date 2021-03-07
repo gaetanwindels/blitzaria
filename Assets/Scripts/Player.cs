@@ -189,6 +189,8 @@ public class Player : MonoBehaviour
             AudioUtils.PlaySound(gameObject);
             StartCoroutine(TriggerInvicibility());
             ReceiveTackle(this);
+            DisableShotHitbox();
+            DisableDashHitbox();
         }
     }
 
@@ -672,6 +674,7 @@ public class Player : MonoBehaviour
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
         StartCoroutine(DisableBody(null));
+        DisableShotHitbox();
         this.shotHitbox.enabled = false;
     }
 
