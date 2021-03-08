@@ -1021,6 +1021,12 @@ PrefabInstance:
       propertyPath: team
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5694611826919825662, guid: 1419e7801f23fe744a2d4a78186fd5a5,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 9175291563296617404, guid: 143609a249ab56a4a99a4fc1e3911b96,
+        type: 3}
     - target: {fileID: 5694611828732093673, guid: 1419e7801f23fe744a2d4a78186fd5a5,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1373,6 +1379,12 @@ PrefabInstance:
       propertyPath: team
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5694611826919825662, guid: 1419e7801f23fe744a2d4a78186fd5a5,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 9175291563296617404, guid: 143609a249ab56a4a99a4fc1e3911b96,
+        type: 3}
     - target: {fileID: 5694611828732093673, guid: 1419e7801f23fe744a2d4a78186fd5a5,
         type: 3}
       propertyPath: m_AnchorMax.y

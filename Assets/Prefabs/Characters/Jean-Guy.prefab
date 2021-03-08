@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 578324290}
-  - component: {fileID: 578324291}
+  - component: {fileID: 3152545139475641360}
   m_Layer: 0
   m_Name: Dash Hitbox
   m_TagString: DashHitbox
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 6799266050881583199}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &578324291
+--- !u!58 &3152545139475641360
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,9 +44,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.2764384, y: -0.5521102}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.16062987
+  m_Radius: 0.5
 --- !u!1 &980038258833229656
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +74,7 @@ Transform:
   m_GameObject: {fileID: 980038258833229656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.001, y: -0.0014, z: 0}
-  m_LocalScale: {x: 1, y: 1.5899, z: 1}
+  m_LocalScale: {x: 1.1486, y: 1.5899, z: 1}
   m_Children: []
   m_Father: {fileID: 3071879217871578254}
   m_RootOrder: 0
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 8711122042717401639}
   m_Layer: 0
   m_Name: Grab Hitbox
-  m_TagString: Untagged
+  m_TagString: GrabHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -629,7 +629,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.02791248, y: 0.41467953}
@@ -753,7 +753,8 @@ MonoBehaviour:
   throwPoint: {fileID: 3030431395449246340}
   throwPointLoading: {fileID: 7095943508888501459}
   shotHitbox: {fileID: 6570302659864017054}
-  dashHitbox: {fileID: 578324291}
+  dashHitbox: {fileID: 3152545139475641360}
+  grabHitbox: {fileID: 8711122042717401639}
   tackleSpeed: 2
   invicibilityFrames: 1.5
   tackleReturnSpeed: 8
@@ -779,7 +780,7 @@ MonoBehaviour:
   dashSpeed: 8
   grabSpeedFactor: 0.8
   dashDuration: 0.4
-  grabWithoutBallSpeedFactor: 0.2
+  grabWithoutBallSpeedFactor: 0.5
   lockedTime: 0.2
   playerNumber: 0
   team: 0

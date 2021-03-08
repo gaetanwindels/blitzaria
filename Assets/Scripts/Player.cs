@@ -169,6 +169,11 @@ public class Player : MonoBehaviour
         {
             this.dashHitbox.enabled = false;
         }
+
+        if (this.grabHitbox != null)
+        {
+            this.grabHitbox.enabled = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -183,12 +188,16 @@ public class Player : MonoBehaviour
 
         if (!isInvicible && playerParent != null && 
             (tagName == "DashHitbox" || tagName == "ShotHitbox") 
-            && playerParent.team != team)
+            &&!playerParent.IsGrabbing() && playerParent.team != team)
         {
             audioSource.clip = hitPlayerSound;
             AudioUtils.PlaySound(gameObject);
             StartCoroutine(TriggerInvicibility());
             ReceiveTackle(this);
+            DisableShotHitbox();
+            DisableDashHitbox();
+            playerParent.DisableShotHitbox();
+            playerParent.DisableDashHitbox();
         }
     }
 
@@ -672,6 +681,7 @@ public class Player : MonoBehaviour
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
         StartCoroutine(DisableBody(null));
+        DisableShotHitbox();
         this.shotHitbox.enabled = false;
     }
 
