@@ -7,8 +7,8 @@ TagManager:
   - ShotHitbox
   - Water
   - DashHitbox
-  - Grab Hitbox
   - GrabHitbox
+  - PerfectShotHitbox
   layers:
   - Default
   - TransparentFX

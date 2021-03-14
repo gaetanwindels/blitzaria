@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
@@ -114,18 +113,6 @@ public class Player : MonoBehaviour
     public Transform GetThrowPoint()
     {
         return IsGrabbing() ? throwPointLoading : throwPoint;
-    }
-
-    public void EnableGrabbingMotion()
-    {
-        this.isMotionGrabbing = true;
-        this.grabHitbox.enabled = true;
-    }
-
-    public void DisableGrabbingMotion()
-    {
-        this.isMotionGrabbing = false;
-        this.grabHitbox.enabled = false;
     }
 
     // Start is called before the first frame update
@@ -249,10 +236,12 @@ public class Player : MonoBehaviour
             var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
 
-            var otherVelocity = otherRigidBody.velocity;
-            var velocity = rigidBody.velocity;
-            newBallBody.velocity = (-velocity - otherVelocity) / 2;
+            // var otherVelocity = otherRigidBody.velocity;
+            // var velocity = rigidBody.velocity;
+            var velX = Random.Range(-0.5f, 0.5f);
+            newBallBody.velocity = new Vector2(velX, 4f);
             DisableBallCollision(newBall);
+            player.DisableBallCollision(newBall);
         }
 
         //rigidBody.velocity = Vector2.zero;
@@ -581,7 +570,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.down * 0.8f);
         bool fullyOutOfWater = !(hit != null && hit.collider != null && hit.collider.gameObject.tag == "Water");
         
-        var isMoving = (Math.Abs(this.rigidBody.velocity.x) > 0 || Math.Abs(this.rigidBody.velocity.y) > 0);
+        var isMoving = (Mathf.Abs(this.rigidBody.velocity.x) > 0 || Mathf.Abs(this.rigidBody.velocity.y) > 0);
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
@@ -662,7 +651,7 @@ public class Player : MonoBehaviour
 
         var computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
         Debug.Log("acc" + rigidBodyBall.velocity.magnitude + "computed" + computedShotPower);
-        computedShotPower = Math.Max(accelerationBall * rigidBodyBall.velocity.magnitude, computedShotPower);
+        computedShotPower = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, computedShotPower);
 
         float velocityX;
         float velocityY;
@@ -682,7 +671,6 @@ public class Player : MonoBehaviour
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
         StartCoroutine(DisableBody(null));
         DisableShotHitbox();
-        this.shotHitbox.enabled = false;
     }
 
     public void DisableBallCollision(GameObject newBall)
@@ -713,6 +701,18 @@ public class Player : MonoBehaviour
         this.dashHitbox.enabled = false;
     }
 
+    public void EnableGrabbingMotion()
+    {
+        this.isMotionGrabbing = true;
+        this.grabHitbox.enabled = true;
+    }
+
+    public void DisableGrabbingMotion()
+    {
+        this.isMotionGrabbing = false;
+        this.grabHitbox.enabled = false;
+    }
+
     IEnumerator DisableBody(GameObject newBall)
     {
         if (newBall != null)
@@ -730,7 +730,7 @@ public class Player : MonoBehaviour
     {
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
-        float totalFactor = Math.Abs(speedX) + Math.Abs(speedY);
+        float totalFactor = Mathf.Abs(speedX) + Mathf.Abs(speedY);
         float speedSquare = speedWanted * speedWanted;
 
         if (totalFactor == 0)
@@ -738,8 +738,8 @@ public class Player : MonoBehaviour
             return new Vector2(0, 0);
         }
 
-        var newSpeedX = Mathf.Sqrt((speedSquare * Math.Abs(speedX)) / totalFactor);
-        var newSpeedY = Mathf.Sqrt((speedSquare * Math.Abs(speedY)) / totalFactor);
+        var newSpeedX = Mathf.Sqrt((speedSquare * Mathf.Abs(speedX)) / totalFactor);
+        var newSpeedY = Mathf.Sqrt((speedSquare * Mathf.Abs(speedY)) / totalFactor);
 
         if (speedX < 0)
         {

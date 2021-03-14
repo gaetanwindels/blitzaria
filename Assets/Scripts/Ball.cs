@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using Rewired;
 using System;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Ball : MonoBehaviour
 {
@@ -23,7 +24,10 @@ public class Ball : MonoBehaviour
 
     [SerializeField] AudioClip hitSound;
 
+    // Cached variables
     private AudioSource audioSource;
+    private SpriteRenderer spriteRenderer;
+    private GameObject perfectShotLight;
 
     private bool hasJustSpawned = true;
 
@@ -37,12 +41,6 @@ public class Ball : MonoBehaviour
     {
         Debug.Log("Ball collided " + collision.gameObject.name);
         var tagName = collision.gameObject.tag;
-        var parentGO = collision.gameObject.transform.parent;
-    
-        if (parentGO == null)
-        {
-            return;
-        }
 
         Player player = collision.gameObject.GetComponentInParent<Player>();
 
@@ -58,10 +56,22 @@ public class Ball : MonoBehaviour
             } else if (tagName == "GrabHitbox")
             {
                 player.Grab(this);
+            } else if (tagName == "PerfectShotHitbox")
+            {
+                Debug.Log("Blink");
+                StartCoroutine(Blink());
             }
             
         }
     }
+
+    IEnumerator Blink()
+    {
+        perfectShotLight.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.15f);
+        perfectShotLight.SetActive(false);
+    }
+
 
     IEnumerator Freeze(float freezeTime)
     {
@@ -74,6 +84,10 @@ public class Ball : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        var light = GetComponentInChildren<Light2D>();
+        perfectShotLight = light.gameObject;
     }
 
     // Update is called once per frame
@@ -95,8 +109,6 @@ public class Ball : MonoBehaviour
                 ManageRotation();
                 ManageScale();
             }
-            
-           
         }
 
         if (this.player != null)

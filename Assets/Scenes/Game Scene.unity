@@ -509,11 +509,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
-    - target: {fileID: 8240922884218118338, guid: 77fede7b478df2546b2283c4d6d52fb2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 8240922884218118339, guid: 77fede7b478df2546b2283c4d6d52fb2,
         type: 3}
       propertyPath: m_RootOrder
@@ -3198,6 +3193,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1629076326695193576, guid: 0d193806909760f4ebbf5ca006b74d1e,
         type: 3}
+      propertyPath: defaultPlayer
+      value: 
+      objectReference: {fileID: 6988621117747625798, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+    - target: {fileID: 1629076326695193576, guid: 0d193806909760f4ebbf5ca006b74d1e,
+        type: 3}
       propertyPath: restartButton
       value: 
       objectReference: {fileID: 12651422}
@@ -3577,6 +3578,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175291563296617402, guid: 143609a249ab56a4a99a4fc1e3911b96,
+        type: 3}
+      propertyPath: team
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175291563296617402, guid: 143609a249ab56a4a99a4fc1e3911b96,
+        type: 3}
+      propertyPath: playerNumber
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9175291563296617404, guid: 143609a249ab56a4a99a4fc1e3911b96,
         type: 3}

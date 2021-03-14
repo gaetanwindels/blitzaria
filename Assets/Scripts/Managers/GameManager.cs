@@ -15,7 +15,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<PlayerSelectConfiguration> playerConfigurations = new List<PlayerSelectConfiguration>();
     [SerializeField] Player[] players;
 
+    [Header("Default player")]
+    [SerializeField] GameObject defaultPlayer;
 
+    [Header("Time")]
     [SerializeField] int gameDuration = 120;
     [SerializeField] int countdownDuration = 5;
 
@@ -50,8 +53,8 @@ public class GameManager : MonoBehaviour
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        gameSession = FindObjectOfType<GameSessionConfiguration>();
-        playerConfigurations = gameSession.players;
+        // gameSession = FindObjectOfType<GameSessionConfiguration>();
+        // playerConfigurations = gameSession.players;
 
         InitPlayers();
 
@@ -120,19 +123,32 @@ public class GameManager : MonoBehaviour
 
     private void InitPlayers()
     {
-        playerConfigurations = gameSession.players;
-        var positionLocker = FindObjectOfType<PositionLocker>();
         StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
 
-        foreach (PlayerSelectConfiguration playerConf in playerConfigurations)
+        if (gameSession == null || gameSession.players.Count > 0)
         {
-            var go = Instantiate(playerConf.player, positionLocker.transform.position, Quaternion.identity);
-            var player = go.GetComponent<Player>();
-            player.playerNumber = playerConf.playerNumber;
-            player.team = playerConf.team;
-            var clothes = go.GetComponentsInChildren<SpriteRenderer>();
-            clothes[clothes.Length - 1].color = playerConf.color;
+            Instantiate(defaultPlayer, transform.position, Quaternion.identity);
+            var player2 = Instantiate(defaultPlayer, transform.position, Quaternion.identity).GetComponent<Player>();
+            player2.team = TeamEnum.Team2;
+            player2.playerNumber = 1;
+            var clothes = player2.GetComponentsInChildren<SpriteRenderer>();
+            clothes[clothes.Length - 1].color = new Color(1, 0, 0, 1);
+        } else
+        {
+            playerConfigurations = gameSession.players;
+            var positionLocker = FindObjectOfType<PositionLocker>();
+            
 
+            foreach (PlayerSelectConfiguration playerConf in playerConfigurations)
+            {
+                var go = Instantiate(playerConf.player, positionLocker.transform.position, Quaternion.identity);
+                var player = go.GetComponent<Player>();
+                player.playerNumber = playerConf.playerNumber;
+                player.team = playerConf.team;
+                var clothes = go.GetComponentsInChildren<SpriteRenderer>();
+                clothes[clothes.Length - 1].color = playerConf.color;
+
+            }
         }
 
         positionManager.PositionPlayers();
@@ -155,7 +171,12 @@ public class GameManager : MonoBehaviour
         restartButton.SetActive(false);
         mainMenuButton.SetActive(false);
         gameSession = FindObjectOfType<GameSessionConfiguration>();
-        playerConfigurations = gameSession.players;
+
+        if (gameSession != null)
+        {
+            playerConfigurations = gameSession.players;
+        }
+        
         players = FindObjectsOfType<Player>();
         pauseCanvas.SetActive(false);
         Time.timeScale = 1;
