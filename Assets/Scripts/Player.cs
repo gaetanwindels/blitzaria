@@ -333,11 +333,14 @@ public class Player : MonoBehaviour
 
     private void ManageGrab()
     {
-        var hasPressedGrab = inputManager.GetButtonDown("Grab");
+        var hasPressedGrab = inputManager.GetButton("Grab");
 
         if (hasPressedGrab && !IsGrabbing())
         {
             EnableGrabbingMotion();
+        } else
+        {
+            DisableGrabbingMotion();
         }
     }
 
@@ -366,6 +369,7 @@ public class Player : MonoBehaviour
         {
             GameObject newBall = null;
             Destroy(FindObjectOfType<Ball>().gameObject);
+            DisableGrabbingMotion();
             var trueThrowPoint = inputManager.GetButtonUp("Tackle") ? throwPointLoading : throwPoint;
             newBall = Instantiate(ballPrefab, trueThrowPoint.position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
@@ -669,7 +673,7 @@ public class Player : MonoBehaviour
         }
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
-        StartCoroutine(DisableBody(null));
+        StartCoroutine(DisableBody(ball.gameObject));
         DisableShotHitbox();
     }
 
