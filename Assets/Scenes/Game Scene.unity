@@ -2934,19 +2934,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1054123246704943667, guid: fc3c8a6548764624a88789657ad0100b,
         type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054123246704943667, guid: fc3c8a6548764624a88789657ad0100b,
+        type: 3}
       propertyPath: m_Volume
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1054123246704943667, guid: fc3c8a6548764624a88789657ad0100b,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1054123246704944076, guid: fc3c8a6548764624a88789657ad0100b,
         type: 3}
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1054123246704944077, guid: fc3c8a6548764624a88789657ad0100b,
+        type: 3}
+      propertyPath: music
+      value: 
+      objectReference: {fileID: 8300000, guid: abbadba1438d9064bbbd2913a6d34233, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc3c8a6548764624a88789657ad0100b, type: 3}
 --- !u!4 &1591876891819166040 stripped

@@ -8,7 +8,7 @@ public static class GameSettings {
 
     public static int energyAmount = 100;
 
-    public static int dashEnergyCost = 0;
+    public static int dashEnergyCost = 33;
 
     public static int turboEnergyCostPerSecond = 20;
 
