@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -136,11 +140,10 @@ public class GameManager : MonoBehaviour
             clothes[clothes.Length - 1].color = new Color(1, 0, 0, 1);
         } else
         {
-            Debug.Log("heyo");
+            Debug.Log("heyo" + gameSession.players.Count);
             playerConfigurations = gameSession.players;
             var positionLocker = FindObjectOfType<PositionLocker>();
             
-
             foreach (PlayerSelectConfiguration playerConf in playerConfigurations)
             {
                 var go = Instantiate(playerConf.player, positionLocker.transform.position, Quaternion.identity);
@@ -149,7 +152,6 @@ public class GameManager : MonoBehaviour
                 player.team = playerConf.team;
                 var clothes = go.GetComponentsInChildren<SpriteRenderer>();
                 clothes[clothes.Length - 1].color = playerConf.color;
-
             }
         }
 

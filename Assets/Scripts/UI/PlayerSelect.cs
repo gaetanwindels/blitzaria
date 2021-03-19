@@ -13,7 +13,6 @@ public class PlayerSelect : MonoBehaviour
 
     private Rewired.Player rwPlayer;
 
-
     [SerializeField] public Button teamButton;
     [SerializeField] public GameObject backgroundText;
     [SerializeField] public int playerNumber = -1;

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6faf3956a7f0af945bd13d306f1ba997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxOrbs: 3
+  maxOrbs: 2
   timeToGenerateOrb: 2
   orb: {fileID: 4640310705837415765, guid: f680e1c53f5732e4cb5e661827397953, type: 3}
 --- !u!1 &6771758523065930970

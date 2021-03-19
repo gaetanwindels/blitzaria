@@ -59,7 +59,7 @@ public class Ball : MonoBehaviour
             } else if (tagName == "PerfectShotHitbox")
             {
                 Debug.Log("Blink");
-                StartCoroutine(Blink());
+                //StartCoroutine(Blink());
             }
             
         }

@@ -696,6 +696,8 @@ public class Player : MonoBehaviour
         }
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
+        Debug.Log("SHOOT");
+        Debug.Log(rigidBodyBall.velocity);
         StartCoroutine(DisableBody(ball.gameObject));
         DisableShotHitbox();
     }
