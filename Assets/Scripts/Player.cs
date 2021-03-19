@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] private BarSlider barSlider;
     [SerializeField] private float accelerationBall = 1.4f;
     [SerializeField] private float curlPower = 20000f;
+    [SerializeField] private float shotSpeedCurlFactor = 0.8f;
 
     [Header("Move")]
     [SerializeField] float rotationSpeed = 900f;
@@ -79,6 +80,7 @@ public class Player : MonoBehaviour
     private Collider2D bodyCollider;
     private GameManager gameManager;
     private AudioLowPassFilter audioFilter;
+    private OrbsManager orbManager;
 
     // State variable
     [Header("State")]
@@ -125,6 +127,7 @@ public class Player : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         audioSource = GetComponent<AudioSource>();
         audioFilter = GetComponent<AudioLowPassFilter>();
+        orbManager = GetComponentInChildren<OrbsManager>();
 
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
 
@@ -320,7 +323,17 @@ public class Player : MonoBehaviour
         }
 
         var hasPressedDash = inputManager.GetButtonDown("Dash");
-        if (hasPressedDash && currentEnergy >= GameSettings.dashEnergyCost && !IsLoadingShoot())
+        /*if (hasPressedDash && currentEnergy >= GameSettings.dashEnergyCost && !IsLoadingShoot())
+        {
+            var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
+            go.transform.localEulerAngles = new Vector3(0, 0, 0);
+            Destroy(go, this.dashDuration);
+            RemoveEnergy(GameSettings.dashEnergyCost);
+            dashTimer = dashDuration;
+            this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);
+        }*/
+
+        if (hasPressedDash && orbManager.ConsumeOrbs(1) && !IsLoadingShoot())
         {
             var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -384,8 +397,17 @@ public class Player : MonoBehaviour
                 computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
             }
 
+            var curlingLeft = inputManager.GetAxis("Curl Left") > 0;
+            var curlingRight = inputManager.GetAxis("Curl Right") > 0;
+
             float velocityX;
             float velocityY;
+
+            if (curlingLeft || curlingRight)
+            {
+                computedShotPower *= shotSpeedCurlFactor;
+            }
+
             if (combinedVelocity == 0)
             {
                 velocityX = this.transform.localScale.x * computedShotPower;
@@ -401,14 +423,15 @@ public class Player : MonoBehaviour
             newBallBody.velocity = new Vector2(velocityX, velocityY);
             builtupPower = 0;
 
-            if (inputManager.GetAxis("Curl Right") > 0)
+            float computedCurlPower;
+            if (curlingRight)
             {
-                Debug.Log("Curl right" + inputManager.GetAxis("Curl right"));
-                newBallBody.angularVelocity = (curlPower * inputManager.GetAxis("Curl Right"));
-            } else if (inputManager.GetAxis("Curl Left") > 0)
+                computedCurlPower = this.transform.localScale.x < 0 ? -curlPower : curlPower;
+                newBallBody.angularVelocity = (computedCurlPower * inputManager.GetAxis("Curl Right"));
+            } else if (curlingLeft)
             {
-                Debug.Log("Curl left" + inputManager.GetAxis("Curl Left"));
-                newBallBody.angularVelocity = (-curlPower * inputManager.GetAxis("Curl Left"));
+                computedCurlPower = this.transform.localScale.x < 0 ? -curlPower : curlPower;
+                newBallBody.angularVelocity = (-computedCurlPower * inputManager.GetAxis("Curl Left"));
             }
 
             audioSource.clip = launchBallSound;

@@ -1,0 +1,74 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class OrbsManager : MonoBehaviour
+{
+
+    [SerializeField] int maxOrbs = 3;
+    [SerializeField] float timeToGenerateOrb = 2f;
+    [SerializeField] GameObject orb;
+
+    private int orbsPending = 0;
+    private Coroutine orbRoutine;
+    private bool isGenerating = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        GenerateOrbs();
+    }
+
+    private void GenerateOrbs()
+    {
+        for (var i = 0; i < maxOrbs;  i++)
+        {
+            Instantiate(orb, transform.position, Quaternion.identity, transform.GetChild(i));
+        }
+    }
+
+    public bool ConsumeOrbs(int number)
+    {
+        var orbs = GetComponentsInChildren<Orb>();
+        if (number > orbs.Length)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < number; i++)
+        {
+            Destroy(orbs[i].gameObject);
+        }
+
+        orbsPending++;
+
+        if (!isGenerating)
+        {
+            StartCoroutine(GenerateOrb());
+        }
+        
+        return true;
+    }
+
+    IEnumerator GenerateOrb()
+    {
+        isGenerating = true;
+        yield return new WaitForSeconds(timeToGenerateOrb);
+        isGenerating = false;
+        orbsPending--;
+
+        Instantiate(orb, transform.position, Quaternion.identity, transform.GetChild(maxOrbs - orbsPending - 1));
+
+        if (orbsPending > 0)
+        {
+            StartCoroutine(GenerateOrb());
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

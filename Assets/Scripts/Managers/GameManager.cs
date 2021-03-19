@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // gameSession = FindObjectOfType<GameSessionConfiguration>();
+        gameSession = FindObjectOfType<GameSessionConfiguration>();
         // playerConfigurations = gameSession.players;
 
         InitPlayers();
@@ -125,8 +125,9 @@ public class GameManager : MonoBehaviour
     {
         StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
 
-        if (gameSession == null || gameSession.players.Count > 0)
+        if (gameSession == null)
         {
+            Debug.Log(gameSession.players.Count);
             Instantiate(defaultPlayer, transform.position, Quaternion.identity);
             var player2 = Instantiate(defaultPlayer, transform.position, Quaternion.identity).GetComponent<Player>();
             player2.team = TeamEnum.Team2;
@@ -135,6 +136,7 @@ public class GameManager : MonoBehaviour
             clothes[clothes.Length - 1].color = new Color(1, 0, 0, 1);
         } else
         {
+            Debug.Log("heyo");
             playerConfigurations = gameSession.players;
             var positionLocker = FindObjectOfType<PositionLocker>();
             
