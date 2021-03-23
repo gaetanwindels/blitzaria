@@ -398,18 +398,18 @@ MonoBehaviour:
       _userAssignable: 1
       _categoryId: 0
     - _id: 10
-      _name: A
+      _name: UISubmit
       _type: 1
-      _descriptiveName: A
+      _descriptiveName: UISubmit
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 1
     - _id: 11
-      _name: B
+      _name: UICancel
       _type: 1
-      _descriptiveName: B
+      _descriptiveName: UICancel
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
@@ -434,16 +434,16 @@ MonoBehaviour:
       _userAssignable: 1
       _categoryId: 1
     - _id: 14
-      _name: UpDown
+      _name: UIHorizontal
       _type: 0
-      _descriptiveName: Arrow
+      _descriptiveName: UIHorizontal
       _positiveDescriptiveName: Up
       _negativeDescriptiveName: Down
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 1
     - _id: 15
-      _name: LeftRight
+      _name: UIVertical
       _type: 0
       _descriptiveName: Down
       _positiveDescriptiveName: Right
@@ -461,18 +461,18 @@ MonoBehaviour:
       _userAssignable: 1
       _categoryId: 1
     - _id: 17
-      _name: Curled Left
-      _type: 0
-      _descriptiveName: Curled Left
+      _name: Curl Left
+      _type: 1
+      _descriptiveName: Curl Left
       _positiveDescriptiveName: Curled Left
       _negativeDescriptiveName: Curled Left
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
     - _id: 18
-      _name: Curled Right
-      _type: 0
-      _descriptiveName: Curled Right
+      _name: Curl Right
+      _type: 1
+      _descriptiveName: Curl Right
       _positiveDescriptiveName: Curled Right
       _negativeDescriptiveName: Curled Right
       _behaviorId: 0
@@ -797,7 +797,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 15
+        _actionId: 14
         _elementType: 0
         _elementIdentifierId: 0
         _axisRange: 0
