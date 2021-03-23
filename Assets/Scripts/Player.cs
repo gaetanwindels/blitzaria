@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float accelerationBall = 1.4f;
     [SerializeField] private float curlPower = 20000f;
     [SerializeField] private float shotSpeedCurlFactor = 0.8f;
+    [SerializeField] private float timeToMaxCurl = 1f;
 
     [Header("Move")]
     [SerializeField] float rotationSpeed = 900f;
@@ -85,6 +86,7 @@ public class Player : MonoBehaviour
     // State variable
     [Header("State")]
     public float builtupPower = 0;
+    public float builtUpCurl = 0f;
     public Ball ballGrabbed = null;
     public Vector2 tackleStartPoint;
     public bool IsReturnFromTackle = false;
@@ -196,7 +198,7 @@ public class Player : MonoBehaviour
         var go = collision.gameObject;
         var player = go.GetComponent<Player>();
 
-        Debug.Log("Ball collided " + collision.gameObject.name);
+        Debug.Log("Body collided " + collision.gameObject.name);
 
         // BALL GRAB COLLISION
         Ball ball = collision.gameObject.GetComponent<Ball>();
@@ -279,7 +281,7 @@ public class Player : MonoBehaviour
         ManageGravity();
         ManageShoot();
         ManageMove();
-        //ManageTackle();
+        ManageCurl();
         ManageDash();
         ManageRotation();
         ManageAnimation();
@@ -293,9 +295,35 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void ManageCurl()
+    {
+        var curlingLeft = inputManager.GetAxis("Curl Left") > 0;
+        var curlingRight = inputManager.GetAxis("Curl Right") > 0;
+        if (IsLoadingShoot() && (curlingLeft || curlingRight))
+        {
+            builtUpCurl = Mathf.Min(1f, builtUpCurl + (Time.deltaTime / timeToMaxCurl));
+
+            float direction;
+
+            if (curlingLeft)
+            {
+                direction = transform.localScale.x < 0 ? 1 : -1;
+            } else
+            {
+                direction = transform.localScale.x < 0 ? -1 : 1;
+            }
+
+            this.ballGrabbed.ApplyRotation(direction * builtUpCurl);
+        } else if (IsLoadingShoot())
+        {
+            builtUpCurl = 0f;
+            this.ballGrabbed.ApplyRotation(builtUpCurl);
+        }
+    }
+
     private void ManageGravity()
     {
-        rigidBody.gravityScale = IsTouchingWater() ? 0 : 0.6f;
+        rigidBody.gravityScale = IsTouchingWater() ? 0 : 0.8f;
     }
 
     private void ManageTackle()
@@ -348,7 +376,7 @@ public class Player : MonoBehaviour
     {
         var hasPressedGrab = inputManager.GetButton("Grab");
 
-        if (hasPressedGrab && !IsGrabbing())
+        if (hasPressedGrab && !IsGrabbing() && !IsLoadingShoot() && !IsDashing())
         {
             EnableGrabbingMotion();
         } else
@@ -427,16 +455,17 @@ public class Player : MonoBehaviour
             if (curlingRight)
             {
                 computedCurlPower = this.transform.localScale.x < 0 ? -curlPower : curlPower;
+                computedCurlPower *= builtUpCurl;
                 newBallBody.angularVelocity = (computedCurlPower * inputManager.GetAxis("Curl Right"));
             } else if (curlingLeft)
             {
                 computedCurlPower = this.transform.localScale.x < 0 ? -curlPower : curlPower;
+                computedCurlPower *= builtUpCurl;
                 newBallBody.angularVelocity = (-computedCurlPower * inputManager.GetAxis("Curl Left"));
             }
 
             audioSource.clip = launchBallSound;
             AudioUtils.PlaySound(gameObject);
-            //audioSource.Play();
 
             if (newBall != null)
             {
@@ -670,11 +699,10 @@ public class Player : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("SHOOT");
+        Debug.Log("SHOOT 1");
         var ball = FindObjectOfType<Ball>();
 
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
-        var combinedVelocity = Mathf.Abs(rigidBody.velocity.x) + Mathf.Abs(rigidBody.velocity.y);
 
         var computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
         Debug.Log("acc" + rigidBodyBall.velocity.magnitude + "computed" + computedShotPower);
@@ -682,24 +710,17 @@ public class Player : MonoBehaviour
 
         float velocityX;
         float velocityY;
-        if (combinedVelocity == 0)
-        {
-            velocityX = this.transform.localScale.x * computedShotPower;
-            velocityY = 0f;
-            Debug.Log(velocityX);
-        }
-        else
-        {
-            var speed = ComputeShotSpeed(computedShotPower);
-            velocityX = speed.x;
-            velocityY = speed.y;
-        }
+
+        var speed = ComputeShotSpeed(computedShotPower);
+        velocityX = speed.x;
+        velocityY = speed.y;
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
-        Debug.Log("SHOOT");
+        Debug.Log("SHOOT METHOD");
         Debug.Log(rigidBodyBall.velocity);
         StartCoroutine(DisableBody(ball.gameObject));
         DisableShotHitbox();
+        CancelDash();
     }
 
     public void DisableBallCollision(GameObject newBall)

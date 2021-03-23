@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
 
     [SerializeField] public Player player;
     [SerializeField] public float impulseSpeedFactor = 0.5f;
-    [SerializeField] public float gravityScale = 0.6f;
+    [SerializeField] public float gravityScale = 0.8f;
 
     [SerializeField] public float minScaleY = 0.5f;
     [SerializeField] public float minVelocityTransform = 5f;
@@ -21,6 +21,7 @@ public class Ball : MonoBehaviour
     [Header("Curl")]
     [SerializeField] public float velocityDragFactor = 0.5f;
     [SerializeField] public float minAngularVelocityCurl = 10f;
+    [SerializeField] public float baseCurlRotation = 3000;
 
     [SerializeField] AudioClip hitSound;
 
@@ -30,6 +31,7 @@ public class Ball : MonoBehaviour
     private GameObject perfectShotLight;
 
     private bool hasJustSpawned = true;
+    private float curlRotation = 0f;
 
     public bool HasJustSpawned { get => hasJustSpawned; set => hasJustSpawned = value; }
 
@@ -46,7 +48,7 @@ public class Ball : MonoBehaviour
 
         if (player != null)
         {
-            if (tagName == "ShotHitbox")
+            if (tagName == "ShotHitbox" || tagName == "DashHitbox")
             {
                 Debug.Log("BALL HIT SHOT");
                 FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
@@ -106,15 +108,21 @@ public class Ball : MonoBehaviour
                 ManageCurl();
             } else
             {
-                ManageRotation();
                 ManageScale();
+                ManageRotation();
             }
         }
-
+    
         if (this.player != null)
         {
             this.transform.position = player.GetBallPoint().position;
+            ManageRotation();
         }
+    }
+
+    public void ApplyRotation(float percentage)
+    {
+        curlRotation = this.baseCurlRotation * percentage;
     }
 
     private void ManageCurl()
@@ -130,8 +138,20 @@ public class Ball : MonoBehaviour
     private void ManageRotation()
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-        float angle = Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        if (this.player != null)
+        {
+            Debug.Log("rotatoes");
+            transform.Rotate(Vector3.forward * curlRotation * Time.deltaTime);
+        } else if (rigidbody != null)
+        {
+            rigidbody = GetComponent<Rigidbody2D>();
+            float angle = Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        } else
+        {
+            curlRotation = 0;
+        }
     }
 
     private void ManageScale()

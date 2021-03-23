@@ -38,7 +38,7 @@ public class OrbsManager : MonoBehaviour
 
         for (var i = 0; i < number; i++)
         {
-            Destroy(orbs[i].gameObject);
+            Destroy(orbs[orbs.Length - 1 - i].gameObject);
         }
 
         orbsPending++;
@@ -58,7 +58,8 @@ public class OrbsManager : MonoBehaviour
         isGenerating = false;
         orbsPending--;
 
-        Instantiate(orb, transform.position, Quaternion.identity, transform.GetChild(maxOrbs - orbsPending - 1));
+        var orbs = GetComponentsInChildren<Orb>();
+        Instantiate(orb, transform.position, Quaternion.identity, transform.GetChild(orbs.Length));
 
         if (orbsPending > 0)
         {

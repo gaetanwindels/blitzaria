@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     // State variable
     public static GameManager instance = null;
     public float timer;
+    public bool isTimerStopped;
     public float countDownTimer;
     private int scoreTeam1;
     private int scoreTeam2;
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
             player.DisableInputs();
         }
 
+        isTimerStopped = false;
         isCountDown = true;
         winText.text = "";
         countDownTimer = countdownDuration;
@@ -245,7 +247,7 @@ public class GameManager : MonoBehaviour
 
     private void ManageTimer()
     {
-        if (!isCountDown)
+        if (!isCountDown && !this.isTimerStopped)
         {
             timer -= Time.deltaTime;
             timer = Mathf.Max(0, timer);
@@ -315,6 +317,8 @@ public class GameManager : MonoBehaviour
             winText.text = "BLUE TEAM SCORE";
             winText.color = new Color32(57, 105, 255, 255);
         }
+
+        this.StopTimer();
     }
 
     public void UpdateEnergy() 
@@ -342,6 +346,11 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver()
     {
         return timer <= 0;
+    }
+
+    private void StopTimer()
+    {
+        this.isTimerStopped = true;
     }
 
     private void Pause()

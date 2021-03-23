@@ -13,6 +13,12 @@ public class Wall : MonoBehaviour
         if (ball != null && audioSource != null)
         {
             audioSource.Play();
+            var body = ball.GetComponent<Rigidbody2D>();
+
+            if (body != null)
+            {
+                body.angularVelocity *= 0.5f;
+            }
         }
     }
 

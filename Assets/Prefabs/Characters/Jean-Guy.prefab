@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 578324290}
-  - component: {fileID: 3152545139475641360}
+  - component: {fileID: 4868546763010638193}
   m_Layer: 0
   m_Name: Dash Hitbox
   m_TagString: DashHitbox
@@ -31,8 +31,8 @@ Transform:
   m_Father: {fileID: 6799266050881583199}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3152545139475641360
-CircleCollider2D:
+--- !u!70 &4868546763010638193
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -44,9 +44,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.29438937}
-  serializedVersion: 2
-  m_Radius: 0.20561063
+  m_Offset: {x: 0.0134824505, y: -0.27504018}
+  m_Size: {x: 0.7573212, y: 0.28813496}
+  m_Direction: 1
 --- !u!1 &980038258833229656
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,9 +680,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02791248, y: 0.41467953}
-  m_Size: {x: 0.58932203, y: 0.45534247}
-  m_Direction: 1
+  m_Offset: {x: -0.0306094, y: 0.22053134}
+  m_Size: {x: 0.5146666, y: 0.7034193}
+  m_Direction: 0
 --- !u!1 &6988621117747625798
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,8 +780,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.044564605, y: 0.021715283}
-  m_Size: {x: 0.41953588, y: 0.95839834}
+  m_Offset: {x: -0.044564605, y: -0.007953286}
+  m_Size: {x: 0.41953588, y: 0.8990612}
   m_Direction: 0
 --- !u!114 &6988621117747625792
 MonoBehaviour:
@@ -802,7 +802,7 @@ MonoBehaviour:
   throwPoint: {fileID: 3030431395449246340}
   throwPointLoading: {fileID: 7095943508888501459}
   shotHitbox: {fileID: 6570302659864017054}
-  dashHitbox: {fileID: 3152545139475641360}
+  dashHitbox: {fileID: 4868546763010638193}
   grabHitbox: {fileID: 8711122042717401639}
   tackleSpeed: 2
   invicibilityFrames: 1.5
@@ -818,9 +818,10 @@ MonoBehaviour:
   shotHitboxTime: 0.18
   shootCoolDown: 0.8
   barSlider: {fileID: 4574587426288011446}
-  accelerationBall: 1.5
+  accelerationBall: 1.7
   curlPower: 3000
   shotSpeedCurlFactor: 0.8
+  timeToMaxCurl: 1.5
   rotationSpeed: 10000
   speed: 5.5
   airSpeed: 0.5
@@ -844,6 +845,7 @@ MonoBehaviour:
     type: 3}
   brain: {fileID: 0}
   builtupPower: 0
+  builtUpCurl: 0
   ballGrabbed: {fileID: 0}
   tackleStartPoint: {x: 0, y: 0}
   IsReturnFromTackle: 0
