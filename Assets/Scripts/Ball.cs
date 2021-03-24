@@ -54,7 +54,13 @@ public class Ball : MonoBehaviour
                 FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
                 audioSource.clip = hitSound;
                 AudioUtils.PlaySound(gameObject);
-                player.Shoot();
+                if (tagName == "ShotHitbox")
+                {
+                    player.Shoot();
+                } else
+                {
+                    player.DashShoot();
+                }
             } else if (tagName == "GrabHitbox")
             {
                 player.Grab(this);

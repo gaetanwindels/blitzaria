@@ -353,6 +353,11 @@ public class GameManager : MonoBehaviour
         this.isTimerStopped = true;
     }
 
+    public bool IsPaused()
+    {
+        return pauseCanvas.activeSelf;
+    }
+
     private void Pause()
     {
         Debug.Log("pausing" + pauseCanvas);
