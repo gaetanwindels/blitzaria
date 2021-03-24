@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
     [Header("Rollover")]
     [SerializeField] float rollOverSpeed = 5f;
     [SerializeField] float rollOverDuration = 1f;
+    [SerializeField] float rollOverCountdown = 1f;
 
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
@@ -104,6 +105,7 @@ public class Player : MonoBehaviour
     private bool isInvicible = false;
     public bool isMotionGrabbing = false;
     public bool isRollingOver = false;
+    public bool isRollingCountDown = false;
 
     // Routines
     public IEnumerator enteredWaterRoutine;
@@ -312,23 +314,45 @@ public class Player : MonoBehaviour
         Debug.Log("ROLLINGOVEsffsdown" + isDown);
         Debug.Log("ROLLING" + (isRollingOver || (!isUp && !isDown)));
         
-        if (!IsTouchingWater() || isRollingOver || (!isUp && !isDown))
+        if (!IsTouchingWater() || (!isUp && !isDown))
         {
-            isRollingOver = false;
+            return;
+        }
+
+        if (isRollingOver || isRollingCountDown)
+        {
             return;
         }
 
         var adjusted = Vector2.Perpendicular(rigidBody.velocity);
         adjusted.Normalize();
-        adjusted *= (isUp ? -rollOverSpeed : rollOverSpeed);
+
+        var computedSpeed = isUp ? -rollOverSpeed : rollOverSpeed;
+        if (transform.localScale.x > 0 && isUp)
+        {
+            computedSpeed *= -1;
+        } else if (transform.localScale.x < 0 && isDown)
+        {
+            computedSpeed *= -1;
+        }
+        adjusted *= computedSpeed;
 
         this.rigidBody.AddForce(adjusted);
         //this.rigidBody.velocity = adjusted;
         Debug.DrawRay(this.transform.position, new Vector3(adjusted.x, adjusted.y, 0));
         isRollingOver = true;
-        //rollingOverRoutine = StartRollingOver();
-        // StartCoroutine(StartRollingOver());
+        rollingOverRoutine = StartRollingOver();
+        StartCoroutine(StartRollingOver());
+        StartCoroutine(StartRollingCountDown());
     }
+
+    IEnumerator StartRollingCountDown()
+    {
+        isRollingCountDown = true;
+        yield return new WaitForSeconds(rollOverCountdown);
+        isRollingCountDown = false;
+    }
+
     IEnumerator StartRollingOver()
     {
         isRollingOver = true;
@@ -595,6 +619,10 @@ public class Player : MonoBehaviour
     private void CancelDash()
     {
         dashTimer = 0f;
+        if (this.dashParticles != null)
+        {
+            Destroy(this.dashParticles);
+        }
     }
 
     public void EnableIsTackling()
@@ -664,6 +692,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsDown", !isUp);
         animator.SetBool("IsLoadingShoot", IsLoadingShoot());
         animator.SetBool("IsGrabbing", isMotionGrabbing);
+        animator.SetBool("IsRolling", isRollingOver);
         //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
