@@ -834,8 +834,9 @@ MonoBehaviour:
   dashDuration: 0.4
   grabWithoutBallSpeedFactor: 0.5
   lockedTime: 0.2
-  rollOverSpeed: 5
-  rollOverDuration: 1
+  rollOverSpeed: 200
+  rollOverDuration: 0.4
+  rollOverCountdown: 1
   playerNumber: 0
   team: 0
   isAI: 0
@@ -860,6 +861,7 @@ MonoBehaviour:
   hasJustEnteredWater: 0
   isMotionGrabbing: 0
   isRollingOver: 0
+  isRollingCountDown: 0
   canGoUp: 1
   dashTimer: 0
   tackleTimer: 0

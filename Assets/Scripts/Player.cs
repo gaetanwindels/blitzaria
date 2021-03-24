@@ -307,8 +307,20 @@ public class Player : MonoBehaviour
     }
     private void ManageRollOver()
     {
-        var isUp = inputManager.GetAxis("Move Horizontal 2") > 0 || inputManager.GetAxis("Move Vertical 2") > 0;
-        var isDown = inputManager.GetAxis("Move Horizontal 2") < 0 || inputManager.GetAxis("Move Vertical 2") < 0;
+        var xAxis = inputManager.GetAxis("Move Horizontal 2");
+        var yAxis = inputManager.GetAxis("Move Vertical 2");
+        float axis;
+
+        if (Mathf.Abs(xAxis) > Mathf.Abs(yAxis))
+        {
+            axis = xAxis;
+        } else
+        {
+            axis = yAxis;
+        }
+
+        var isUp = axis > 0;
+        var isDown = axis < 0;
 
         Debug.Log("ROLLINGOVEsffsfR" + isUp);
         Debug.Log("ROLLINGOVEsffsdown" + isDown);
@@ -330,10 +342,10 @@ public class Player : MonoBehaviour
         var computedSpeed = isUp ? -rollOverSpeed : rollOverSpeed;
         if (transform.localScale.x > 0 && isUp)
         {
-            computedSpeed *= -1;
+           // computedSpeed *= -1;
         } else if (transform.localScale.x < 0 && isDown)
         {
-            computedSpeed *= -1;
+            //computedSpeed *= -1;
         }
         adjusted *= computedSpeed;
 
@@ -426,7 +438,7 @@ public class Player : MonoBehaviour
             this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);
         }*/
 
-        if (hasPressedDash && orbManager.ConsumeOrbs(1) && !IsLoadingShoot())
+        if (hasPressedDash && !IsLoadingShoot() && orbManager.ConsumeOrbs(1))
         {
             var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -619,10 +631,10 @@ public class Player : MonoBehaviour
     private void CancelDash()
     {
         dashTimer = 0f;
-        if (this.dashParticles != null)
+        /*if (this.dashParticles != null)
         {
             Destroy(this.dashParticles);
-        }
+        }*/
     }
 
     public void EnableIsTackling()
