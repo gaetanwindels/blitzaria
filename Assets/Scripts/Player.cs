@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     [Header("Shoot")]
     [SerializeField] private float maxShotPower = 10f;
     [SerializeField] private float minShotPower = 5f;
+    [SerializeField] private float dashShotPower = 5f;
     [SerializeField] private float releasePower = 2f;
     [SerializeField] private float timeToBuildUp = 1f;
     [SerializeField] private float shootSpeedFactor = 0.3f;
@@ -54,6 +55,10 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDuration = 0.2f;
     [SerializeField] float grabWithoutBallSpeedFactor = 0.2f;
     [SerializeField] private float lockedTime = 0.2f;
+
+    [Header("Rollover")]
+    [SerializeField] float rollOverSpeed = 5f;
+    [SerializeField] float rollOverDuration = 1f;
 
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
@@ -92,14 +97,19 @@ public class Player : MonoBehaviour
     public bool IsReturnFromTackle = false;
     public float currentEnergy;
     public bool isReplenishing = false;
-    public IEnumerator replenishRoutine;
     public bool moveEnabled = true;
     public bool isShootCoolDown = false;
     public bool isTackling = false;
     public bool hasJustEnteredWater = false;
-    public IEnumerator enteredWaterRoutine;
     private bool isInvicible = false;
     public bool isMotionGrabbing = false;
+    public bool isRollingOver = false;
+
+    // Routines
+    public IEnumerator enteredWaterRoutine;
+    public IEnumerator disableBodyRoutine;
+    public IEnumerator replenishRoutine;
+    public IEnumerator rollingOverRoutine;
 
     // Water management
     public bool canGoUp = true;
@@ -268,7 +278,7 @@ public class Player : MonoBehaviour
     void Update()
     {        
 
-        if (gameManager != null && gameManager.IsGameOver())
+        if (gameManager != null && (gameManager.IsGameOver() || gameManager.IsPaused()))
         {
             return;
         }
@@ -281,18 +291,49 @@ public class Player : MonoBehaviour
         ManageGravity();
         ManageShoot();
         ManageMove();
+        ManageRollOver();
         ManageCurl();
         ManageDash();
         ManageRotation();
         ManageAnimation();
         ManageGrab();
 
-        barSlider.SetValue(builtupPower / timeToBuildUp);
-
         if (isReplenishing)
         {
             AddEnergy(Time.deltaTime * GameSettings.replenishEnergyPerSecond);
         }
+    }
+    private void ManageRollOver()
+    {
+        var isUp = inputManager.GetAxis("Move Horizontal 2") > 0 || inputManager.GetAxis("Move Vertical 2") > 0;
+        var isDown = inputManager.GetAxis("Move Horizontal 2") < 0 || inputManager.GetAxis("Move Vertical 2") < 0;
+
+        Debug.Log("ROLLINGOVEsffsfR" + isUp);
+        Debug.Log("ROLLINGOVEsffsdown" + isDown);
+        Debug.Log("ROLLING" + (isRollingOver || (!isUp && !isDown)));
+        
+        if (!IsTouchingWater() || isRollingOver || (!isUp && !isDown))
+        {
+            isRollingOver = false;
+            return;
+        }
+
+        var adjusted = Vector2.Perpendicular(rigidBody.velocity);
+        adjusted.Normalize();
+        adjusted *= (isUp ? -rollOverSpeed : rollOverSpeed);
+
+        this.rigidBody.AddForce(adjusted);
+        //this.rigidBody.velocity = adjusted;
+        Debug.DrawRay(this.transform.position, new Vector3(adjusted.x, adjusted.y, 0));
+        isRollingOver = true;
+        //rollingOverRoutine = StartRollingOver();
+        // StartCoroutine(StartRollingOver());
+    }
+    IEnumerator StartRollingOver()
+    {
+        isRollingOver = true;
+        yield return new WaitForSeconds(rollOverDuration);
+        isRollingOver = false;
     }
 
     private void ManageCurl()
@@ -464,12 +505,19 @@ public class Player : MonoBehaviour
                 newBallBody.angularVelocity = (-computedCurlPower * inputManager.GetAxis("Curl Left"));
             }
 
+            builtUpCurl = 0;
+
             audioSource.clip = launchBallSound;
             AudioUtils.PlaySound(gameObject);
 
             if (newBall != null)
             {
-                StartCoroutine(DisableBody(newBall));
+                if (disableBodyRoutine != null)
+                {
+                    StopCoroutine(disableBodyRoutine);
+                }
+                disableBodyRoutine = DisableBody(newBall);
+                StartCoroutine(disableBodyRoutine);
             }
         }
     }
@@ -478,8 +526,8 @@ public class Player : MonoBehaviour
     {
         bool isTouchingWater = IsTouchingWater() && !hasJustEnteredWater;
         float computedSpeed = speed;
-
-        if (this.isTackling || IsDashing())
+        Debug.Log("ROLLINGOVER" + isRollingOver);
+        if (this.isTackling || IsDashing() || isRollingOver)
         {
             return;
         }
@@ -621,6 +669,11 @@ public class Player : MonoBehaviour
 
     private void ManageRotation()
     {
+        if (isRollingOver)
+        {
+            return;
+        }
+
         var isTouchingWater = IsTouchingWater();
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.8f);
         Debug.DrawRay(transform.position, Vector2.down * 0.8f);
@@ -697,30 +750,48 @@ public class Player : MonoBehaviour
         return ballGrabbed != null;
     }
 
-    public void Shoot()
+    public void Shoot(float shotSpeed)
     {
         Debug.Log("SHOOT 1");
         var ball = FindObjectOfType<Ball>();
 
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
 
-        var computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
-        Debug.Log("acc" + rigidBodyBall.velocity.magnitude + "computed" + computedShotPower);
-        computedShotPower = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, computedShotPower);
+        Debug.Log("acc" + rigidBodyBall.velocity.magnitude + "computed" + shotSpeed);
+        shotSpeed = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, shotSpeed);
 
         float velocityX;
         float velocityY;
 
-        var speed = ComputeShotSpeed(computedShotPower);
+        var speed = ComputeShotSpeed(shotSpeed);
         velocityX = speed.x;
         velocityY = speed.y;
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
         Debug.Log("SHOOT METHOD");
         Debug.Log(rigidBodyBall.velocity);
-        StartCoroutine(DisableBody(ball.gameObject));
+        Debug.DrawRay(transform.position, Vector2.down * 0.8f);
+        Vector3 endLine = new Vector3(rigidBodyBall.velocity.x, rigidBodyBall.velocity.y, 0);
+        Debug.DrawLine(rigidBodyBall.transform.position, rigidBodyBall.transform.position + endLine);
+
+        if (disableBodyRoutine != null)
+        {
+            StopCoroutine(disableBodyRoutine);
+        }
+
+        disableBodyRoutine = DisableBody(rigidBodyBall.gameObject);
+        StartCoroutine(disableBodyRoutine);
         DisableShotHitbox();
         CancelDash();
+    }
+
+    public void Shoot()
+    {
+        Shoot(minShotPower);
+    }
+    public void DashShoot()
+    {
+        Shoot(dashShotPower);
     }
 
     public void DisableBallCollision(GameObject newBall)
@@ -849,8 +920,7 @@ public class Player : MonoBehaviour
         }
         
     }
-
-    public void EnableInputs()
+        public void EnableInputs()
     {
         if (this.inputManager != null)
         {
