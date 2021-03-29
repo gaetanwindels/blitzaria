@@ -25,7 +25,7 @@ AnimationClip:
       value: {fileID: 21300000, guid: acc5a8defb15e864d95f5ccdf41d93dd, type: 3}
     - time: 0.16666667
       value: {fileID: 21300000, guid: 27179249a2a1e89419339f5086b19f2c, type: 3}
-    - time: 0.6666667
+    - time: 1
       value: {fileID: 21300000, guid: 27179249a2a1e89419339f5086b19f2c, type: 3}
     attribute: m_Sprite
     path: 
@@ -38,7 +38,7 @@ AnimationClip:
       value: {fileID: 21300000, guid: f5c405d40ee66304fb1cff5d66ed189e, type: 3}
     - time: 0.16666667
       value: {fileID: 21300000, guid: 5ebc9bcb94cc4db49856a8955cbf0ab2, type: 3}
-    - time: 0.6666667
+    - time: 1
       value: {fileID: 21300000, guid: 5ebc9bcb94cc4db49856a8955cbf0ab2, type: 3}
     attribute: m_Sprite
     path: Clothes
@@ -79,7 +79,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 1.0166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -106,7 +106,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 1
     functionName: DisableDashHitbox
     data: 
     objectReferenceParameter: {fileID: 0}

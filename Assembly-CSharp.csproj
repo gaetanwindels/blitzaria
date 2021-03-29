@@ -76,6 +76,7 @@
     <Compile Include="Assets\Rewired\Examples\PressStartToJoin\Scripts\PressStartToJoinExample_Assigner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\InputFieldInfo.cs" />
+    <Compile Include="Assets\Scripts\CursorController.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ControlMapper_Enums.cs" />
     <Compile Include="Assets\Scripts\InputManager\SimulatedAction.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
@@ -194,6 +195,8 @@
     <Compile Include="Assets\Scripts\EnergyBar.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerBoardsManager.cs" />
+    <Compile Include="Assets\Prefabs\UI\TeamButtonEventHandler.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -95,6 +95,7 @@ public class Player : MonoBehaviour
     public float builtUpCurl = 0f;
     public Ball ballGrabbed = null;
     public Vector2 tackleStartPoint;
+    public Vector2 currentDashVelocity;
     public bool IsReturnFromTackle = false;
     public float currentEnergy;
     public bool isReplenishing = false;
@@ -106,6 +107,7 @@ public class Player : MonoBehaviour
     public bool isMotionGrabbing = false;
     public bool isRollingOver = false;
     public bool isRollingCountDown = false;
+    public GameObject dashParticlesObject;
 
     // Routines
     public IEnumerator enteredWaterRoutine;
@@ -280,7 +282,7 @@ public class Player : MonoBehaviour
     void Update()
     {        
 
-        if (gameManager != null && (gameManager.IsGameOver() || gameManager.IsPaused()))
+        if (gameManager != null && (!gameManager.CanPlayersMove()))
         {
             return;
         }
@@ -314,17 +316,21 @@ public class Player : MonoBehaviour
         if (Mathf.Abs(xAxis) > Mathf.Abs(yAxis))
         {
             axis = xAxis;
+            if (transform.localScale.x < 0)
+            {
+                axis = -xAxis;
+            }
         } else
         {
             axis = yAxis;
+            if (transform.localScale.x > 0)
+            {
+                axis = -yAxis;
+            }
         }
 
         var isUp = axis > 0;
         var isDown = axis < 0;
-
-        Debug.Log("ROLLINGOVEsffsfR" + isUp);
-        Debug.Log("ROLLINGOVEsffsdown" + isDown);
-        Debug.Log("ROLLING" + (isRollingOver || (!isUp && !isDown)));
         
         if (!IsTouchingWater() || (!isUp && !isDown))
         {
@@ -423,6 +429,7 @@ public class Player : MonoBehaviour
     {
         if (IsDashing())
         {
+            this.rigidBody.velocity = currentDashVelocity;
             dashTimer -= Time.deltaTime;
             return;
         }
@@ -442,10 +449,12 @@ public class Player : MonoBehaviour
         {
             var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
+            dashParticlesObject = go;
             Destroy(go, this.dashDuration);
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
             this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);
+            currentDashVelocity = this.rigidBody.velocity;
         }
     }
 
@@ -478,6 +487,7 @@ public class Player : MonoBehaviour
         // Generate Shot Hitbox
         if (!IsGrabbing() && inputManager.GetButtonDown("Tackle"))
         {
+            var ball = FindObjectOfType<Ball>();
             StartCoroutine(CooldownShooting());
             this.isTackling = true;
             this.CancelDash();
@@ -553,6 +563,7 @@ public class Player : MonoBehaviour
                     StopCoroutine(disableBodyRoutine);
                 }
                 disableBodyRoutine = DisableBody(newBall);
+
                 StartCoroutine(disableBodyRoutine);
             }
         }
@@ -562,7 +573,6 @@ public class Player : MonoBehaviour
     {
         bool isTouchingWater = IsTouchingWater() && !hasJustEnteredWater;
         float computedSpeed = speed;
-        Debug.Log("ROLLINGOVER" + isRollingOver);
         if (this.isTackling || IsDashing() || isRollingOver)
         {
             return;
@@ -631,19 +641,23 @@ public class Player : MonoBehaviour
     private void CancelDash()
     {
         dashTimer = 0f;
-        /*if (this.dashParticles != null)
+        if (dashParticlesObject != null)
         {
-            Destroy(this.dashParticles);
-        }*/
+            Destroy(dashParticlesObject);
+        }
     }
 
     public void EnableIsTackling()
     {
+        var ball = FindObjectOfType<Ball>();
+        Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
         this.isTackling = true;
     }
 
     public void DisableIsTackling()
     {
+        var ball = FindObjectOfType<Ball>();
+        Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
         this.isTackling = false;
     }
 
@@ -795,6 +809,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("SHOOT 1");
         var ball = FindObjectOfType<Ball>();
+        Debug.Log(FindObjectsOfType<Ball>().Length);
 
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
 
@@ -879,10 +894,12 @@ public class Player : MonoBehaviour
     {
         if (newBall != null)
         {
+            Debug.Log("Disable body" + GetComponent<Collider2D>());
             Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
             yield return new WaitForSeconds(0.6f);
             if (newBall != null)
             {
+                Debug.Log("Enable body");
                 Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
             }   
         }
@@ -918,17 +935,8 @@ public class Player : MonoBehaviour
 
     private Vector2 ComputeShotSpeed(float speedWanted)
     {
-        float speedX = inputManager.GetAxis("Move Horizontal 2");
-        float speedY = inputManager.GetAxis("Move Vertical 2");
-
-        Debug.Log("SPEEDX" + speedX);
-        Debug.Log("SPEEDY" + speedY);
-
-        if (speedX == 0 && speedY == 0)
-        {
-            speedX = inputManager.GetAxis("Move Horizontal");
-            speedY = inputManager.GetAxis("Move Vertical");
-        }
+        float speedX = inputManager.GetAxis("Move Horizontal");
+        float speedY = inputManager.GetAxis("Move Vertical");
         
         if (Mathf.Abs(speedX) + Mathf.Abs(speedY) == 0)
         {

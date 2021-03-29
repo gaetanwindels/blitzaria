@@ -216,8 +216,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.18246876, y: -0.66451734}
-  m_Size: {x: 0.06690624, y: 0.03908797}
+  m_Offset: {x: -0.18188126, y: -0.6559991}
+  m_Size: {x: 0.06808134, y: 0.022048382}
   m_Direction: 1
 --- !u!1 &3030431394573542113
 GameObject:
@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 2505538946015334283}
   m_Layer: 7
   m_Name: Jean-Guy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -780,8 +780,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.044564605, y: -0.007953286}
-  m_Size: {x: 0.41953588, y: 0.8990612}
+  m_Offset: {x: -0.044564605, y: -0.019703627}
+  m_Size: {x: 0.41953588, y: 0.8755605}
   m_Direction: 0
 --- !u!114 &6988621117747625792
 MonoBehaviour:
@@ -822,7 +822,7 @@ MonoBehaviour:
   accelerationBall: 1.7
   curlPower: 3000
   shotSpeedCurlFactor: 0.8
-  timeToMaxCurl: 1.5
+  timeToMaxCurl: 0.7
   rotationSpeed: 10000
   speed: 5.5
   airSpeed: 0.5
@@ -852,6 +852,7 @@ MonoBehaviour:
   builtUpCurl: 0
   ballGrabbed: {fileID: 0}
   tackleStartPoint: {x: 0, y: 0}
+  currentDashVelocity: {x: 0, y: 0}
   IsReturnFromTackle: 0
   currentEnergy: 0
   isReplenishing: 0
@@ -862,6 +863,7 @@ MonoBehaviour:
   isMotionGrabbing: 0
   isRollingOver: 0
   isRollingCountDown: 0
+  dashParticlesObject: {fileID: 0}
   canGoUp: 1
   dashTimer: 0
   tackleTimer: 0

@@ -24,24 +24,26 @@ public class PlayerSelect : MonoBehaviour
     private bool isReady = false;    
     private TextMeshProUGUI teamText;
     private TextMeshProUGUI playerNameText;
+    private Image teamImageButton;
 
     // Start is called before the first frame update
     void Start()
     {
         image = GetComponentInChildren<RawImage>();
         teamText = teamButton.GetComponentInChildren<TextMeshProUGUI>();
+        teamImageButton = teamButton.GetComponentInChildren<Image>();
         playerNameText = playerName.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //teamButton.gameObject.SetActive(playerNumber != -1);
+        teamButton.gameObject.SetActive(playerNumber != -1);
 
         if (teamButton.gameObject.activeSelf)
         {
             teamText.text = team == TeamEnum.Team1 ? "Red Team" : "Blue Team";
-            teamText.color = team == TeamEnum.Team1 ? new Color(1, 0, 0, 1) : new Color(0, 0, 1, 1);
+            teamImageButton.color = team == TeamEnum.Team1 ? new Color(1, 0, 0, 1) : new Color(0, 0, 1, 1);
         }
 
         if (playerName != null && playerNameText != null && playerNumber != -1)
@@ -61,14 +63,14 @@ public class PlayerSelect : MonoBehaviour
         if (rwPlayer.GetButtonDown("Start"))
         {
             isReady = true;
-            image.color = new Color(1, 1, 1, 0.5f);
+            //image.color = new Color(1, 1, 1, 0.5f);
         }
 
         if (rwPlayer.GetButtonDown("UICancel"))
         {
             if (isReady)
             {
-                image.color = new Color(1, 1, 1, 1);
+                //image.color = new Color(1, 1, 1, 1);
                 isReady = false;
             }
             else
@@ -77,6 +79,26 @@ public class PlayerSelect : MonoBehaviour
                 backgroundText.SetActive(true);
                 rwPlayer = null;
             }
+        }
+
+        var canvasGroup = GetComponent<CanvasGroup>();
+        if (isReady)
+        {
+            canvasGroup.alpha = .7f;
+        } else
+        {
+            canvasGroup.alpha = 1f;
+        }
+    }
+
+    public void SwitchTeam()
+    {
+        if (team == TeamEnum.Team1)
+        {
+            team = TeamEnum.Team2;
+        } else
+        {
+            team = TeamEnum.Team1;
         }
     }
 
@@ -90,7 +112,6 @@ public class PlayerSelect : MonoBehaviour
     {
         return playerNumber != -1;
     }
-
 
     public bool IsReady()
     {

@@ -1,0 +1,207 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4489331355846651237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4489331355846651236}
+  - component: {fileID: 4489331355846651232}
+  - component: {fileID: 4489331355846651233}
+  - component: {fileID: 4489331355846651234}
+  - component: {fileID: 4489331355846651235}
+  m_Layer: 5
+  m_Name: Virtual Cursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4489331355846651236
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489331355846651237}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4489331355846651232
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489331355846651237}
+  m_CullTransparentMesh: 1
+--- !u!114 &4489331355846651233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489331355846651237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 4dd4c1c17405f7c4eadac3ec6cfe8983, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!114 &4489331355846651234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489331355846651237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1202160222, guid: 09c9b883b79ef864a99683bb36c5776d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rewiredInputManager: {fileID: 0}
+  _playerId: 0
+  _elements:
+  - _name: Movement
+    _elementType: 101
+    _enabled: 1
+    _elements:
+    - _name: 
+      _elementType: 2
+      _enabled: 1
+      _actionId: 1
+      _coordinateMode: 1
+      _absoluteToRelativeSensitivity: 600
+      _repeatRate: 0
+    - _name: 
+      _elementType: 2
+      _enabled: 1
+      _actionId: 2
+      _coordinateMode: 1
+      _absoluteToRelativeSensitivity: 600
+      _repeatRate: 0
+  - _name: Wheel
+    _elementType: 102
+    _enabled: 1
+    _elements:
+    - _name: Wheel Horizontal
+      _elementType: 3
+      _enabled: 1
+      _actionId: -1
+      _coordinateMode: 1
+      _absoluteToRelativeSensitivity: 1
+      _repeatRate: 4
+    - _name: Wheel Vertical
+      _elementType: 3
+      _enabled: 1
+      _actionId: -1
+      _coordinateMode: 1
+      _absoluteToRelativeSensitivity: 1
+      _repeatRate: 4
+  - _name: 
+    _elementType: 0
+    _enabled: 1
+    _elements:
+    - _name: Left Button
+      _elementType: 0
+      _enabled: 1
+      _actionId: 10
+      _coordinateMode: 0
+      _absoluteToRelativeSensitivity: 1
+      _repeatRate: 4
+  - _name: 
+    _elementType: 0
+    _enabled: 1
+    _elements:
+    - _name: Right Button
+      _elementType: 0
+      _enabled: 1
+      _actionId: -1
+      _coordinateMode: 0
+      _absoluteToRelativeSensitivity: 1
+      _repeatRate: 4
+  - _name: 
+    _elementType: 0
+    _enabled: 1
+    _elements:
+    - _name: Middle Button
+      _elementType: 0
+      _enabled: 1
+      _actionId: -1
+      _coordinateMode: 0
+      _absoluteToRelativeSensitivity: 1
+      _repeatRate: 4
+  _onButtonStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onAxisValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onEnabledStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _defaultToCenter: 1
+  _pointerSpeed: 1
+  _useHardwarePointerPosition: 0
+  _clampToMovementArea: 1
+  _movementArea:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  _movementAreaUnit: 0
+  _onScreenPositionChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4489331355846651235}
+        m_TargetAssemblyTypeName: CursorController, Assembly-CSharp
+        m_MethodName: OnScreenPositionChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4489331355846651235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489331355846651237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7afe0e97e4cf3245a1b9950f39ebfc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -48,7 +48,7 @@ public class Ball : MonoBehaviour
 
         if (player != null)
         {
-            if (tagName == "ShotHitbox" || tagName == "DashHitbox")
+            if (tagName == "ShotHitbox")
             {
                 Debug.Log("BALL HIT SHOT");
                 FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
@@ -59,7 +59,7 @@ public class Ball : MonoBehaviour
                     player.Shoot();
                 } else
                 {
-                    player.DashShoot();
+                    //player.DashShoot();
                 }
             } else if (tagName == "GrabHitbox")
             {

@@ -347,6 +347,10 @@ public class GameManager : MonoBehaviour
     {
         return timer <= 0;
     }
+    public bool CanPlayersMove()
+    {
+        return !IsGameOver() && !isCountDown && !IsPaused();
+    }
 
     private void StopTimer()
     {

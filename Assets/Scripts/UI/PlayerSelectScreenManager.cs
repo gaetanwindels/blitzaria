@@ -13,6 +13,7 @@ public class PlayerSelectScreenManager : MonoBehaviour
     
     [SerializeField] TextMeshProUGUI readyText;
     [SerializeField] float countDownDuration = 3f;
+    [SerializeField] GameObject startBackdrop;
 
     private float currentCountDown = -1f;
     private CustomSceneManager sceneManager;
@@ -32,8 +33,11 @@ public class PlayerSelectScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerSelects = FindObjectsOfType<PlayerSelect>();
         Poll();
-        readyText.text = EveryOneIsReady()  ? "Match starting in " + Mathf.Ceil(currentCountDown).ToString() : "";
+        //readyText.text = EveryOneIsReady()  ? "Match starting in " + Mathf.Ceil(currentCountDown).ToString() : "";
+
+        startBackdrop.SetActive(EveryOneIsReady());
 
         if (EveryOneIsReady())
         {
@@ -43,13 +47,13 @@ public class PlayerSelectScreenManager : MonoBehaviour
             ResetCountDown();
         }
 
-        if (currentCountDown < 0)
+        /*if (currentCountDown < 0)
         {
             readyText.text = "Starting...";
             SetAllPlayers();
             isStarting = true;
             sceneManager.GoToPlay();
-        }
+        }*/
 
     }
 
@@ -96,12 +100,20 @@ public class PlayerSelectScreenManager : MonoBehaviour
 
         foreach (Rewired.Player playerToPoll in playersToPoll)
         {
+            if (playerToPoll.GetButtonDown("Start") && EveryOneIsReady())
+            {
+                SetAllPlayers();
+                sceneManager.GoToPlay();
+            }
+
             if (playerToPoll.GetButtonDown("UISubmit") && !HasPlayerAlreadyJoined(playerToPoll.id))
             {
+                Debug.Log("ye1");
                 PlayerSelect playerSelect = GetFirstPlayerSelectFree();
 
                 if (playerSelect != null)
                 {
+                    Debug.Log("ye2");
                     playerSelect.WakeUp(playerToPoll.id);
                 }
             }
@@ -141,10 +153,14 @@ public class PlayerSelectScreenManager : MonoBehaviour
         }
 
         var teamToChoose = countTeam1 > countTeam2 ? TeamEnum.Team2 : TeamEnum.Team1;
+        Debug.Log("hoy");
         foreach (PlayerSelect playerSelect in playerSelects)
         {
-            if (playerSelect.playerNumber == -1 && playerSelect.team == teamToChoose)
+            Debug.Log("hoy1");
+            if (playerSelect.playerNumber == -1)
             {
+                Debug.Log("hoy2");
+                playerSelect.team = teamToChoose;
                 return playerSelect;
             }
         }
