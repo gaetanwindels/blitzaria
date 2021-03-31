@@ -86,9 +86,11 @@
     <Compile Include="Assets\Rewired\Integration\UnityUI\PlayerPointerEventData.cs" />
     <Compile Include="Assets\Rewired\Examples\PressAnyButtonToJoin\Scripts\PressAnyButtonToJoinExample_Assigner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+    <Compile Include="Assets\Prefabs\UI\TeamButtonEventHandler.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UISelectionUtility.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\TeamEnum.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerBoardsManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Rewired\Examples\SimpleCombinedKeyboardMouseRemapping\Scripts\SimpleCombinedKeyboardMouseRemapping.cs" />
@@ -195,8 +197,7 @@
     <Compile Include="Assets\Scripts\EnergyBar.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
-    <Compile Include="Assets\Scripts\UI\PlayerBoardsManager.cs" />
-    <Compile Include="Assets\Prefabs\UI\TeamButtonEventHandler.cs" />
+    <Compile Include="Assets\Scripts\UI\ClothesPIcker.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -30,6 +30,7 @@ public class PositionLocker : MonoBehaviour
             }
 
             objectToLock.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, objectToLock.transform.position.z);
+            objectToLock.transform.localScale = this.transform.localScale;
         }
     }
 

@@ -18,6 +18,9 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] public int playerNumber = -1;
     [SerializeField] public GameObject playerName;
     [SerializeField] public TeamEnum team = TeamEnum.Team1;
+    [SerializeField] private Image clothes;
+    [SerializeField] public Color[] team1Palette;
+    [SerializeField] public Color[] team2Palette;
 
     [SerializeField] GameObject player;
 
@@ -25,6 +28,7 @@ public class PlayerSelect : MonoBehaviour
     private TextMeshProUGUI teamText;
     private TextMeshProUGUI playerNameText;
     private Image teamImageButton;
+    private int colorIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,7 @@ public class PlayerSelect : MonoBehaviour
         teamText = teamButton.GetComponentInChildren<TextMeshProUGUI>();
         teamImageButton = teamButton.GetComponentInChildren<Image>();
         playerNameText = playerName.GetComponentInChildren<TextMeshProUGUI>();
+        colorIndex = 0;
     }
 
     // Update is called once per frame
@@ -100,6 +105,22 @@ public class PlayerSelect : MonoBehaviour
         {
             team = TeamEnum.Team1;
         }
+
+        colorIndex = 0;
+    }
+
+    public void PickNextColor()
+    {
+
+        var palette = team1Palette;
+        if (team == TeamEnum.Team2)
+        {
+            palette = team2Palette;
+        }
+
+        colorIndex = (colorIndex + 1) % palette.Length;
+
+        clothes.color = palette[colorIndex];
     }
 
     public void WakeUp(int playerNumber)
@@ -107,6 +128,15 @@ public class PlayerSelect : MonoBehaviour
         this.playerNumber = playerNumber;
         backgroundText.SetActive(false);
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
+
+        var cursors = FindObjectsOfType<CursorController>(true);
+
+        foreach (CursorController cursor in cursors) {
+            if (cursor.playerNumber == this.playerNumber)
+            {
+                cursor.gameObject.SetActive(true);
+            }
+        }
     }
     public bool IsAwake()
     {
@@ -130,7 +160,13 @@ public class PlayerSelect : MonoBehaviour
         var playerSelect = new PlayerSelectConfiguration();
         playerSelect.player = this.player;
         var greenComponent = 0.25f * playerNumber;
-        playerSelect.color = team == TeamEnum.Team1 ? new Color(1, greenComponent, 0, 1) : new Color(0, greenComponent, 1, 1);
+
+        var palette = team1Palette;
+        if (team == TeamEnum.Team2)
+        {
+            palette = team2Palette;
+        }
+        playerSelect.color = palette[colorIndex];
         playerSelect.team = team;
         playerSelect.playerNumber = this.playerNumber;
 

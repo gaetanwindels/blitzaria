@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CursorController : MonoBehaviour
 {
+    [SerializeField] public int playerNumber;
+
+    private TextMeshProUGUI numberText;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        numberText = GetComponentInChildren<TextMeshProUGUI>();
+        numberText.text = (playerNumber + 1).ToString();
     }
 
     // Update is called once per frame

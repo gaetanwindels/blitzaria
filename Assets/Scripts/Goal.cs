@@ -8,7 +8,7 @@ public class Goal : MonoBehaviour
 
     [SerializeField] private TeamEnum teamScoring = TeamEnum.Team1;
     [SerializeField] private int explosionForce = 1300;
-    [SerializeField] private GameObject goalparticleSystem;
+    [SerializeField] private GameObject goalParticleSystem;
 
     [SerializeField] private AudioClip explosionSound;
     [SerializeField] private AudioClip hitSound;
@@ -62,6 +62,15 @@ public class Goal : MonoBehaviour
     {
         var players = FindObjectsOfType<Player>();
 
+        ParticleSystem ps = goalParticleSystem.GetComponent<ParticleSystem>();
+
+        if (ps != null)
+        {
+            Debug.Log("GOGO");
+            ps.gameObject.SetActive(true);
+            ps.Play();
+        }
+
         foreach (Player player in players)
         {
             var rb = player.GetComponent<Rigidbody2D>();
@@ -70,15 +79,7 @@ public class Goal : MonoBehaviour
             var explosion = teamScoring == TeamEnum.Team1 ? explosionForce : -explosionForce;
             rb.angularVelocity = 1000;
             var explosionY = Random.Range(-explosion / 2, explosion / 2);
-            rb.AddForce(new Vector2(explosion, explosionY));
-
-            ParticleSystem ps = goalparticleSystem.GetComponent<ParticleSystem>();
-
-            if (ps != null)
-            {
-                ps.Play();
-            }
-            
+            rb.AddForce(new Vector2(explosion, explosionY));            
         }
     }
 
@@ -87,7 +88,8 @@ public class Goal : MonoBehaviour
     {
         gameManager = GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
-        ParticleSystem ps = goalparticleSystem.GetComponent<ParticleSystem>();
+        ParticleSystem ps = goalParticleSystem.GetComponent<ParticleSystem>();
+        ps.gameObject.SetActive(false);
 
         if (ps != null)
         {

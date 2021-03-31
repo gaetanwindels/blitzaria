@@ -2486,6 +2486,17 @@ PrefabInstance:
       propertyPath: teamScoring
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6748938452626074486, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: goalParticleSystem
+      value: 
+      objectReference: {fileID: 1839920577}
+    - target: {fileID: 6748938452626074486, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: goalparticleSystem
+      value: 
+      objectReference: {fileID: 7260056009492566684, guid: 6e9c7d08b9c6cff4398ab94f67a38ae3,
+        type: 3}
     - target: {fileID: 6748938453004305669, guid: ad7aa694e127b19499488f6b3c45e158,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2493,6 +2504,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad7aa694e127b19499488f6b3c45e158, type: 3}
+--- !u!1 &1839920577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8405158159208114225, guid: ad7aa694e127b19499488f6b3c45e158,
+    type: 3}
+  m_PrefabInstance: {fileID: 1839920576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1879730250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2629,10 +2646,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4495161295177730535, guid: 40aab2845bb245142963b20b82266195,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4495161296144527564, guid: 40aab2845bb245142963b20b82266195,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495161296243418070, guid: 40aab2845bb245142963b20b82266195,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8815444461454580163, guid: 40aab2845bb245142963b20b82266195,
         type: 3}
@@ -3663,10 +3690,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1666571874}
     m_Modifications:
-    - target: {fileID: 1719341400, guid: ad7aa694e127b19499488f6b3c45e158, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6748938451702811530, guid: ad7aa694e127b19499488f6b3c45e158,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3732,13 +3755,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal Post Left
       objectReference: {fileID: 0}
+    - target: {fileID: 6748938452626074486, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: goalParticleSystem
+      value: 
+      objectReference: {fileID: 6748938451459671735}
+    - target: {fileID: 6748938452626074486, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: goalparticleSystem
+      value: 
+      objectReference: {fileID: 7260056009492566684, guid: 6e9c7d08b9c6cff4398ab94f67a38ae3,
+        type: 3}
     - target: {fileID: 6748938453004305669, guid: ad7aa694e127b19499488f6b3c45e158,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 8405158159208114225, guid: ad7aa694e127b19499488f6b3c45e158,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad7aa694e127b19499488f6b3c45e158, type: 3}
+--- !u!1 &6748938451459671735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8405158159208114225, guid: ad7aa694e127b19499488f6b3c45e158,
+    type: 3}
+  m_PrefabInstance: {fileID: 6748938451459671734}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7005225186782958701
 PrefabInstance:
   m_ObjectHideFlags: 0

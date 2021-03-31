@@ -309,6 +309,12 @@ public class Player : MonoBehaviour
     }
     private void ManageRollOver()
     {
+        
+        if (IsDashing() || IsLoadingShoot() || IsTackling())
+        {
+            return;
+        }
+
         var xAxis = inputManager.GetAxis("Move Horizontal 2");
         var yAxis = inputManager.GetAxis("Move Vertical 2");
         float axis;
@@ -462,9 +468,14 @@ public class Player : MonoBehaviour
     {
         var hasPressedGrab = inputManager.GetButton("Grab");
 
-        if (hasPressedGrab && !IsGrabbing() && !IsLoadingShoot() && !IsDashing())
+        if (hasPressedGrab && !IsGrabbing() && !IsLoadingShoot() && !IsTackling())
         {
             EnableGrabbingMotion();
+
+            if (IsDashing())
+            {
+                CancelDash();
+            }
         } else
         {
             DisableGrabbingMotion();

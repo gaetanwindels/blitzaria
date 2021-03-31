@@ -40,4 +40,9 @@ public class CustomSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("Game Scene");
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

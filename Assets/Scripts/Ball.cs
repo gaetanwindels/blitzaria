@@ -94,8 +94,8 @@ public class Ball : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        var light = GetComponentInChildren<Light2D>();
-        perfectShotLight = light.gameObject;
+        //var light = GetComponentInChildren<Light2D>();
+        //perfectShotLight = light.gameObject;
     }
 
     // Update is called once per frame

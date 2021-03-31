@@ -834,7 +834,7 @@ MonoBehaviour:
   dashDuration: 0.4
   grabWithoutBallSpeedFactor: 0.5
   lockedTime: 0.2
-  rollOverSpeed: 200
+  rollOverSpeed: 350
   rollOverDuration: 0.4
   rollOverCountdown: 1
   playerNumber: 0
