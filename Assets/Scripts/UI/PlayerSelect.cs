@@ -107,6 +107,7 @@ public class PlayerSelect : MonoBehaviour
         }
 
         colorIndex = 0;
+        ApplyColor();
     }
 
     public void PickNextColor()
@@ -120,6 +121,19 @@ public class PlayerSelect : MonoBehaviour
 
         colorIndex = (colorIndex + 1) % palette.Length;
 
+        clothes.color = palette[colorIndex];
+    }
+
+    public void ApplyColor()
+    {
+
+        var palette = team1Palette;
+        if (team == TeamEnum.Team2)
+        {
+            palette = team2Palette;
+        }
+
+        colorIndex = 0;
         clothes.color = palette[colorIndex];
     }
 
@@ -137,6 +151,8 @@ public class PlayerSelect : MonoBehaviour
                 cursor.gameObject.SetActive(true);
             }
         }
+
+        ApplyColor();
     }
     public bool IsAwake()
     {

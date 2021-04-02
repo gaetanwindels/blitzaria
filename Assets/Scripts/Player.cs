@@ -107,11 +107,13 @@ public class Player : MonoBehaviour
     public bool isMotionGrabbing = false;
     public bool isRollingOver = false;
     public bool isRollingCountDown = false;
+    public bool isGrabbingDisabled = false;
     public GameObject dashParticlesObject;
 
     // Routines
     public IEnumerator enteredWaterRoutine;
     public IEnumerator disableBodyRoutine;
+    public IEnumerator disableGrabbingRoutine;
     public IEnumerator replenishRoutine;
     public IEnumerator rollingOverRoutine;
 
@@ -369,6 +371,12 @@ public class Player : MonoBehaviour
         StartCoroutine(StartRollingOver());
         StartCoroutine(StartRollingCountDown());
     }
+    IEnumerator DisableGrabbing(float seconds)
+    {
+        isGrabbingDisabled = true;
+        yield return new WaitForSeconds(seconds);
+        isGrabbingDisabled = false;
+    }
 
     IEnumerator StartRollingCountDown()
     {
@@ -567,6 +575,14 @@ public class Player : MonoBehaviour
             audioSource.clip = launchBallSound;
             AudioUtils.PlaySound(gameObject);
 
+            if (disableGrabbingRoutine != null)
+            {
+                StopCoroutine(disableGrabbingRoutine);
+            }
+            disableGrabbingRoutine = DisableGrabbing(0.6f);
+
+            StartCoroutine(disableGrabbingRoutine);
+
             if (newBall != null)
             {
                 if (disableBodyRoutine != null)
@@ -661,14 +677,23 @@ public class Player : MonoBehaviour
     public void EnableIsTackling()
     {
         var ball = FindObjectOfType<Ball>();
-        Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+        var collider = ball.GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+        }
+        
         this.isTackling = true;
     }
 
     public void DisableIsTackling()
     {
         var ball = FindObjectOfType<Ball>();
-        Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+        var collider = ball.GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+        }
         this.isTackling = false;
     }
 
@@ -795,6 +820,11 @@ public class Player : MonoBehaviour
 
     public void Grab(Ball ball)
     {
+        if (isGrabbingDisabled)
+        {
+            return;
+        }
+
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
         Collider2D collider = ball.GetComponent<Collider2D>();
         Destroy(rigidBodyBall);
