@@ -101,10 +101,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -113,9 +115,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -143,6 +145,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  swizzle: 50462976
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -760,9 +763,36 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      animation_de_la_mort_1: 3618046371443009682
+      animation_de_la_mort_7: -4064355911744492943
+      animation_de_la_mort_23: -550639479700664828
+      animation_de_la_mort_12: 2904740519298729624
+      animation_de_la_mort_0: -4486158816454135739
+      animation_de_la_mort_25: 8391152031994154010
+      animation_de_la_mort_2: 6676663850669769086
+      animation_de_la_mort_6: 4693597297491101802
+      animation_de_la_mort_22: 6912941162798696668
+      animation_de_la_mort_21: 5225834221103882127
+      animation_de_la_mort_10: -9133725773299067818
+      animation_de_la_mort_20: -2097762008523576802
+      animation_de_la_mort_24: 1068516999813552296
+      animation_de_la_mort_3: 6327570437830900128
+      animation_de_la_mort_5: 1907760751596478954
+      animation_de_la_mort_9: -2247540823230308630
+      animation_de_la_mort_14: 5722051933540840867
+      animation_de_la_mort_15: 788693941067138050
+      animation_de_la_mort_19: -8511537761856781358
+      animation_de_la_mort_18: -2027085096662035517
+      animation_de_la_mort_17: 8256938236714495055
+      animation_de_la_mort_8: -4854338565761141102
+      animation_de_la_mort_16: -5353451663846152793
+      animation_de_la_mort_4: 1085512033216676297
+      animation_de_la_mort_13: -3460712223041409277
+      animation_de_la_mort_26: 4574477075995432929
+      animation_de_la_mort_11: 3950450126895532597
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
