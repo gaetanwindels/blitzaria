@@ -51,7 +51,7 @@ public class Ball : MonoBehaviour
             if (tagName == "ShotHitbox")
             {
                 Debug.Log("BALL HIT SHOT");
-                FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
+                //FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
                 audioSource.clip = hitSound;
                 AudioUtils.PlaySound(gameObject);
                 if (tagName == "ShotHitbox")
