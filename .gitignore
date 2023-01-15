@@ -75,3 +75,6 @@ obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
 *.cache
 *.csproj
 *.cache
+obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+*.cache
+obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
