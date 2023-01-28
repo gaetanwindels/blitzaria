@@ -844,7 +844,7 @@ MonoBehaviour:
   shotSpeedCurlFactor: 0.8
   timeToMaxCurl: 0.7
   rotationSpeed: 10000
-  speed: 5.5
+  speed: 6.5
   airSpeed: 0.5
   airThrust: 0
   downAirThrust: 25
