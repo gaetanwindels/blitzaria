@@ -182,9 +182,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.038020834
+    x: 0
     y: 0
-    width: 0.9240742
+    width: 0.99951196
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -487,6 +487,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964443490596722120, guid: e0deeaa7c005657469d620ad35a623bd,
+        type: 3}
+      propertyPath: maxAngleLoadingShot
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6964443490596722126, guid: e0deeaa7c005657469d620ad35a623bd,
         type: 3}
@@ -1025,12 +1030,12 @@ PrefabInstance:
     - target: {fileID: 3050482418488539184, guid: e8cf381f079eaea4988d0a5e2732d2f1,
         type: 3}
       propertyPath: minVelocityExit
-      value: 2.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3050482418488539188, guid: e8cf381f079eaea4988d0a5e2732d2f1,
         type: 3}
       propertyPath: m_SurfaceLevel
-      value: 0.5
+      value: 0.46
       objectReference: {fileID: 0}
     - target: {fileID: 6343564355148137423, guid: e8cf381f079eaea4988d0a5e2732d2f1,
         type: 3}
