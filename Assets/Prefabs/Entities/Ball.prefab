@@ -4939,9 +4939,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0010412037, y: 0.0006842911}
+  m_Offset: {x: -0.0010412037, y: 0.00013792515}
   serializedVersion: 2
-  m_Radius: 0.042439193
+  m_Radius: 0.25061715
 --- !u!114 &7612233744355366894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4956,11 +4956,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   impulseSpeedFactor: 0.5
-  gravityScale: 0.3
+  gravityScale: 0.6
   minScaleY: 0.7
   minVelocityTransform: 7
   maxVelocityTransform: 12
   mass: 0.3
+  massInWater: 0.8
   velocityDragFactor: 0.005
   minAngularVelocityCurl: 10
   baseCurlRotation: 3000

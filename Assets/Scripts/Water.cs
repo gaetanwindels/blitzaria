@@ -71,7 +71,7 @@ public class Water : MonoBehaviour
         body.material = mat;
         body.material.renderQueue = 1000;
         body.positionCount = nodecount;
-        body.startWidth = 0.025f;
+        body.startWidth = 0.1f;
         body.sortingLayerName = "Water";
         //body.sortingOrder = 3;
 
@@ -122,6 +122,7 @@ public class Water : MonoBehaviour
             meshes[i].triangles = tris;
             meshobjects[i] = Instantiate(watermesh, Vector3.zero, Quaternion.identity) as GameObject;
             meshobjects[i].GetComponent<MeshFilter>().mesh = meshes[i];
+            meshobjects[i].GetComponent<MeshRenderer>().material.color = spriteRenderer.color;
             meshobjects[i].transform.parent = transform;
 
             //Create our colliders, set them be our child
