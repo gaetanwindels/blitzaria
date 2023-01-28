@@ -148,7 +148,6 @@ public class Ball : MonoBehaviour
 
         if (this.player != null)
         {
-            Debug.Log("rotatoes");
             transform.Rotate(Vector3.forward * curlRotation * Time.deltaTime);
         } else if (rigidbody != null)
         {

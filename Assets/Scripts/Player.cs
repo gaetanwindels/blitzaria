@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -42,10 +44,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float accelerationBall = 1.4f;
     [SerializeField] private float curlPower = 20000f;
     [SerializeField] private float shotSpeedCurlFactor = 0.8f;
-    [SerializeField] private float timeToMaxCurl = 1f;
-
+    [SerializeField] private float timeToMaxCurl = 0.5f;
+    
     [Header("Move")]
     [SerializeField] float rotationSpeed = 900f;
+    [SerializeField] float maxAngleLoadingShot = 45;
     [SerializeField] float speed = 7f;
     [SerializeField] float airSpeed = 0.02f;
     [SerializeField] float airThrust = 0.02f;
@@ -622,13 +625,11 @@ public class Player : MonoBehaviour
             _animator.SetFloat("Speed Multiplier", 1f);
         }
 
-        if (IsGrabbing())
-        {
-            computedSpeed *= grabSpeedFactor;
-        }
-        else if (IsLoadingShoot())
+        if (IsLoadingShoot())
         {
             computedSpeed *= shootSpeedFactor;
+        } if (IsGrabbing()) {
+             computedSpeed *= grabSpeedFactor;
         } else if (inputManager.GetButton("Grab"))
         {
             computedSpeed *= grabWithoutBallSpeedFactor;
@@ -641,7 +642,7 @@ public class Player : MonoBehaviour
         {
             speedVector.Normalize();
         }
-        speedVector = speedVector * computedSpeed;
+        speedVector *= computedSpeed;
         _animator.SetBool("IsDiving", false);
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
@@ -793,9 +794,20 @@ public class Player : MonoBehaviour
         // Manage rotation
         if (IsLoadingShoot())
         {
-            
             angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
+            
+            if (scaleX > 0)
+            {
+                angle = Mathf.Clamp(angle, -maxAngleLoadingShot, maxAngleLoadingShot);
+            }
+            else
+            {
+                angle = ((angle + 360) % 360) - 180;
+                Debug.Log(angle);
+                angle = Mathf.Clamp(angle, -maxAngleLoadingShot, maxAngleLoadingShot);
+            }
+            
+            transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
         }
 
         if (isTackling)
