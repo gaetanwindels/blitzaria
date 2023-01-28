@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578324289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.31, y: -0.25, z: 0}
+  m_LocalPosition: {x: -0.041, y: 0.433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,8 +45,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0032928616, y: -0.647139}
-  m_Size: {x: 0.17477553, y: 0.10513665}
+  m_Offset: {x: -0.0000000069049335, y: -0.057922788}
+  m_Size: {x: 0.48584765, y: 0.48584765}
   m_Direction: 1
 --- !u!1 &980038258833229656
 GameObject:
@@ -200,9 +200,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3030431394282516269}
-  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1188436, y: 6.095606, z: 17.978569}
-  m_LocalScale: {x: -10, y: 10, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6799266050881583199}
@@ -221,8 +221,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.18006456, y: -0.69584256}
-  m_Size: {x: 0.029989222, y: 0.008317662}
+  m_Offset: {x: -0.032714963, y: 0.54553574}
+  m_Size: {x: 1.1564122, y: 0.6069544}
   m_Direction: 1
 --- !u!1 &3030431394573542113
 GameObject:
@@ -477,9 +477,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5487229897981604239}
-  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3188434, y: 1.0043944, z: -17.978569}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3030431394282516271}
@@ -505,7 +505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7289296857922638131
 Transform:
   m_ObjectHideFlags: 0
@@ -514,7 +514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5686597022836882554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.06, y: -0.39, z: 0}
+  m_LocalPosition: {x: 0.248, y: 0.174, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -677,7 +677,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6555290508705513892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.26, y: -0.88, z: 0}
+  m_LocalPosition: {x: 0.302, y: 0.098, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -697,8 +697,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0306094, y: 0.22053134}
-  m_Size: {x: 0.5146666, y: 0.7034193}
+  m_Offset: {x: -0.18475038, y: 0.0073687434}
+  m_Size: {x: 1.0520107, y: 1.3638049}
   m_Direction: 0
 --- !u!1 &6988621117747625798
 GameObject:
@@ -755,7 +755,7 @@ Animator:
   m_GameObject: {fileID: 6988621117747625798}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b5981d7082226cf4aa611db557befef5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9218fc3098d08554cbe0153c272b5edb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -799,8 +799,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.020723596, y: -0.012255639}
-  m_Size: {x: 0.07394555, y: 0.20505029}
+  m_Offset: {x: -0.07347441, y: -0.062122226}
+  m_Size: {x: 0.38585925, y: 1.1937668}
   m_Direction: 0
 --- !u!114 &6988621117747625792
 MonoBehaviour:
@@ -816,6 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 8240922884218118336, guid: 77fede7b478df2546b2283c4d6d52fb2,
     type: 3}
+  gravityScale: 0.8
   ballPointNormal: {fileID: 3030431394573542114}
   ballPointLoading: {fileID: 5930026757788296440}
   throwPoint: {fileID: 3030431395449246340}
@@ -846,7 +847,7 @@ MonoBehaviour:
   speed: 5.5
   airSpeed: 0.5
   airThrust: 0
-  downAirThrust: 10
+  downAirThrust: 25
   boostSpeed: 5.5
   dashSpeed: 8
   grabSpeedFactor: 0.8
@@ -1073,6 +1074,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turbo Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500787114788309609, guid: d715d5feb32bd41429a723e3c9e7d4c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4794137413108730665, guid: d715d5feb32bd41429a723e3c9e7d4c9,
         type: 3}

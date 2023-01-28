@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     // Parameters
     [Header("Stuff")]
     [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private float gravityScale = 0.8f;
 
     [Header("Reference Points")]
     [SerializeField] private Transform ballPointNormal;
@@ -80,14 +81,14 @@ public class Player : MonoBehaviour
     public InputManager inputManager;
 
     // Cached variables
-    private Rigidbody2D rigidBody;
-    private AudioSource audioSource;
-    private Rewired.Player rwPlayer;
-    private Animator animator;
-    private Collider2D bodyCollider;
-    private GameManager gameManager;
-    private AudioLowPassFilter audioFilter;
-    private OrbsManager orbManager;
+    private Rigidbody2D _rigidBody;
+    private AudioSource _audioSource;
+    private Rewired.Player _rwPlayer;
+    private Animator _animator;
+    private Collider2D _bodyCollider;
+    private GameManager _gameManager;
+    private AudioLowPassFilter _audioFilter;
+    private OrbsManager _orbManager;
 
     // State variable
     [Header("State")]
@@ -138,16 +139,16 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        animator.SetBool("IsShooting", false);
-        bodyCollider = GetComponent<Collider2D>();
-        gameManager = FindObjectOfType<GameManager>();
-        audioSource = GetComponent<AudioSource>();
-        audioFilter = GetComponent<AudioLowPassFilter>();
-        orbManager = GetComponentInChildren<OrbsManager>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _animator.SetBool("IsShooting", false);
+        _bodyCollider = GetComponent<Collider2D>();
+        _gameManager = FindObjectOfType<GameManager>();
+        _audioSource = GetComponent<AudioSource>();
+        _audioFilter = GetComponent<AudioLowPassFilter>();
+        _orbManager = GetComponentInChildren<OrbsManager>();
 
-        rwPlayer = ReInput.players.GetPlayer(playerNumber);
+        _rwPlayer = ReInput.players.GetPlayer(playerNumber);
 
         inputManager = new RewiredInputManager(playerNumber);
         
@@ -168,19 +169,19 @@ public class Player : MonoBehaviour
             DisableInputs();
         }
 
-        if (this.shotHitbox != null)
+        if (shotHitbox != null)
         {
-            this.shotHitbox.enabled = false;
+            shotHitbox.enabled = false;
         }
 
-        if (this.dashHitbox != null)
+        if (dashHitbox != null)
         {
-            this.dashHitbox.enabled = false;
+            dashHitbox.enabled = false;
         }
 
-        if (this.grabHitbox != null)
+        if (grabHitbox != null)
         {
-            this.grabHitbox.enabled = false;
+            //grabHitbox.enabled = false;
         }
     }
 
@@ -193,14 +194,16 @@ public class Player : MonoBehaviour
         {
             playerParent = collision.gameObject.GetComponentInParent<Player>();
         }
-
+        Debug.Log("GRAB 2" + playerParent);
+        Debug.Log("GRAB 3" + tagName);
         if (!isInvicible && playerParent != null && 
             (tagName == "DashHitbox" || tagName == "ShotHitbox") 
-            &&!playerParent.IsGrabbing() && playerParent.team != team)
+            && !playerParent.IsGrabbing() && playerParent.team != team)
         {
-            audioSource.clip = hitPlayerSound;
+            _audioSource.clip = hitPlayerSound;
             AudioUtils.PlaySound(gameObject);
             StartCoroutine(TriggerInvicibility());
+            Debug.Log("GRAB LOL");
             ReceiveTackle(this);
             DisableShotHitbox();
             DisableDashHitbox();
@@ -219,7 +222,7 @@ public class Player : MonoBehaviour
         // BALL GRAB COLLISION
         Ball ball = collision.gameObject.GetComponent<Ball>();
 
-        if (this.ballGrabbed == null && ball != null)
+        if (ballGrabbed == null && ball != null)
         {
             if (inputManager.GetButton("Grab"))
             {
@@ -234,7 +237,7 @@ public class Player : MonoBehaviour
                 var impulseSpeed = IsDashing() ? ball.impulseSpeedFactor * 1.5f : ball.impulseSpeedFactor;
 
                 var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
-                rigidBodyBall.velocity = rigidBody.velocity * impulseSpeed;
+                rigidBodyBall.velocity = _rigidBody.velocity * impulseSpeed;
 
             }
 
@@ -249,49 +252,44 @@ public class Player : MonoBehaviour
 
     public void ReceiveTackle(Player player)
     {
-        var otherRigidBody = player.GetComponent<Rigidbody2D>();
-        if (this.ballGrabbed != null)
+        if (ballGrabbed != null)
         {
-            this.ballGrabbed.player = null;
+            ballGrabbed.player = null;
             Destroy(FindObjectOfType<Ball>().gameObject);
             var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-
-            // var otherVelocity = otherRigidBody.velocity;
-            // var velocity = rigidBody.velocity;
+            
             var velX = Random.Range(-0.5f, 0.5f);
             newBallBody.velocity = new Vector2(velX, 4f);
             DisableBallCollision(newBall);
             player.DisableBallCollision(newBall);
         }
 
-        //rigidBody.velocity = Vector2.zero;
-
         StartCoroutine(FinishBeingTackled());
     }
 
     public void DisableMove()
     {
-        this.moveEnabled = false;
+        moveEnabled = false;
     }
 
     public void EnableMove()
     {
-        this.moveEnabled = true;
+        moveEnabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {        
 
-        if (gameManager != null && (!gameManager.CanPlayersMove()))
+        if (_gameManager != null && (!_gameManager.CanPlayersMove()))
         {
             return;
         }
 
         if (inputManager.GetButtonDown("Start"))
         {
-            gameManager.ManagePause();
+            _gameManager.ManagePause();
         }
 
         ManageGravity();
@@ -350,7 +348,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var adjusted = Vector2.Perpendicular(rigidBody.velocity);
+        var adjusted = Vector2.Perpendicular(_rigidBody.velocity);
         adjusted.Normalize();
 
         var computedSpeed = isUp ? -rollOverSpeed : rollOverSpeed;
@@ -363,9 +361,9 @@ public class Player : MonoBehaviour
         }
         adjusted *= computedSpeed;
 
-        this.rigidBody.AddForce(adjusted);
-        //this.rigidBody.velocity = adjusted;
-        Debug.DrawRay(this.transform.position, new Vector3(adjusted.x, adjusted.y, 0));
+        _rigidBody.AddForce(adjusted);
+        //rigidBody.velocity = adjusted;
+        Debug.DrawRay(transform.position, new Vector3(adjusted.x, adjusted.y, 0));
         isRollingOver = true;
         rollingOverRoutine = StartRollingOver();
         StartCoroutine(StartRollingOver());
@@ -410,17 +408,17 @@ public class Player : MonoBehaviour
                 direction = transform.localScale.x < 0 ? -1 : 1;
             }
 
-            this.ballGrabbed.ApplyRotation(direction * builtUpCurl);
+            ballGrabbed.ApplyRotation(direction * builtUpCurl);
         } else if (IsLoadingShoot())
         {
             builtUpCurl = 0f;
-            this.ballGrabbed.ApplyRotation(builtUpCurl);
+            ballGrabbed.ApplyRotation(builtUpCurl);
         }
     }
 
     private void ManageGravity()
     {
-        rigidBody.gravityScale = IsTouchingWater() ? 0 : 0.8f;
+        _rigidBody.gravityScale = IsTouchingWater() ? 0 : this.gravityScale;
     }
 
     private void ManageTackle()
@@ -435,7 +433,7 @@ public class Player : MonoBehaviour
         if (hasPressedTackle)
         {
             tackleTimer = tackleDuration;
-            this.rigidBody.velocity = ComputeMoveSpeed(this.tackleSpeed);
+            _rigidBody.velocity = ComputeMoveSpeed(tackleSpeed);
         }
     }
 
@@ -443,7 +441,7 @@ public class Player : MonoBehaviour
     {
         if (IsDashing())
         {
-            this.rigidBody.velocity = currentDashVelocity;
+            _rigidBody.velocity = currentDashVelocity;
             dashTimer -= Time.deltaTime;
             return;
         }
@@ -453,22 +451,22 @@ public class Player : MonoBehaviour
         {
             var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
-            Destroy(go, this.dashDuration);
+            Destroy(go, dashDuration);
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
-            this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);
+            rigidBody.velocity = ComputeMoveSpeed(dashSpeed);
         }*/
 
-        if (hasPressedDash && !IsLoadingShoot() && orbManager.ConsumeOrbs(1))
+        if (hasPressedDash && !IsLoadingShoot() && _orbManager.ConsumeOrbs(1))
         {
             var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
             dashParticlesObject = go;
-            Destroy(go, this.dashDuration);
+            Destroy(go, dashDuration);
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
-            this.rigidBody.velocity = ComputeMoveSpeed(this.dashSpeed);
-            currentDashVelocity = this.rigidBody.velocity;
+            _rigidBody.velocity = ComputeMoveSpeed(dashSpeed);
+            currentDashVelocity = _rigidBody.velocity;
         }
     }
 
@@ -492,7 +490,7 @@ public class Player : MonoBehaviour
 
     private void ManageShoot()
     {
-        if (this.isShootCoolDown)
+        if (isShootCoolDown)
         {
             return;
         }
@@ -508,8 +506,8 @@ public class Player : MonoBehaviour
         {
             var ball = FindObjectOfType<Ball>();
             StartCoroutine(CooldownShooting());
-            this.isTackling = true;
-            this.CancelDash();
+            isTackling = true;
+            CancelDash();
             //animator.SetBool("IsShooting", true);
             // Either release or shoot the ball
         } else if (IsGrabbing() && (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonDown("Grab")))
@@ -521,7 +519,7 @@ public class Player : MonoBehaviour
             newBall = Instantiate(ballPrefab, trueThrowPoint.position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
 
-            var combinedVelocity = Mathf.Abs(rigidBody.velocity.x) + Mathf.Abs(rigidBody.velocity.y);
+            var combinedVelocity = Mathf.Abs(_rigidBody.velocity.x) + Mathf.Abs(_rigidBody.velocity.y);
 
             var computedShotPower = GetSpeed() + releasePower;
 
@@ -544,7 +542,7 @@ public class Player : MonoBehaviour
 
             if (combinedVelocity == 0)
             {
-                velocityX = this.transform.localScale.x * computedShotPower;
+                velocityX = transform.localScale.x * computedShotPower;
                 velocityY = 0f;
             }
             else
@@ -560,19 +558,19 @@ public class Player : MonoBehaviour
             float computedCurlPower;
             if (curlingRight)
             {
-                computedCurlPower = this.transform.localScale.x < 0 ? -curlPower : curlPower;
+                computedCurlPower = transform.localScale.x < 0 ? -curlPower : curlPower;
                 computedCurlPower *= builtUpCurl;
                 newBallBody.angularVelocity = (computedCurlPower * inputManager.GetAxis("Curl Right"));
             } else if (curlingLeft)
             {
-                computedCurlPower = this.transform.localScale.x < 0 ? -curlPower : curlPower;
+                computedCurlPower = transform.localScale.x < 0 ? -curlPower : curlPower;
                 computedCurlPower *= builtUpCurl;
                 newBallBody.angularVelocity = (-computedCurlPower * inputManager.GetAxis("Curl Left"));
             }
 
             builtUpCurl = 0;
 
-            audioSource.clip = launchBallSound;
+            _audioSource.clip = launchBallSound;
             AudioUtils.PlaySound(gameObject);
 
             if (disableGrabbingRoutine != null)
@@ -600,7 +598,7 @@ public class Player : MonoBehaviour
     {
         bool isTouchingWater = IsTouchingWater() && !hasJustEnteredWater;
         float computedSpeed = speed;
-        if (this.isTackling || IsDashing() || isRollingOver)
+        if (isTackling || IsDashing() || isRollingOver)
         {
             return;
         }
@@ -611,17 +609,17 @@ public class Player : MonoBehaviour
             RemoveEnergy(Time.deltaTime * GameSettings.turboEnergyCostPerSecond);
             currentAirThrust = airThrust;
             computedSpeed = boostSpeed;
-            animator.SetFloat("Speed Multiplier", 1.5f);
+            _animator.SetFloat("Speed Multiplier", 1.5f);
 
-            if (!this.turboParticles.isPlaying)
+            if (!turboParticles.isPlaying)
             {
-                this.turboParticles.Play();
+                turboParticles.Play();
             }
         }
         else
         {
-            this.turboParticles.Stop();
-            animator.SetFloat("Speed Multiplier", 1f);
+            turboParticles.Stop();
+            _animator.SetFloat("Speed Multiplier", 1f);
         }
 
         if (IsGrabbing())
@@ -644,20 +642,20 @@ public class Player : MonoBehaviour
             speedVector.Normalize();
         }
         speedVector = speedVector * computedSpeed;
-        animator.SetBool("IsDiving", false);
+        _animator.SetBool("IsDiving", false);
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
-            this.rigidBody.velocity = speedVector;
+            _rigidBody.velocity = speedVector;
         }
         else if (!isTouchingWater)
         {
-            var counterForce = this.airSpeed * inputManager.GetAxis("Move Horizontal");
+            var counterForce = airSpeed * inputManager.GetAxis("Move Horizontal");
             var downAirForce = 0f;
             if (!IsLoadingShoot() && inputManager.GetAxis("Move Vertical") < 0) {
-                downAirForce = Time.deltaTime * this.downAirThrust * inputManager.GetAxis("Move Vertical");
-                animator.SetBool("IsDiving", true);
+                downAirForce = Time.deltaTime * downAirThrust * inputManager.GetAxis("Move Vertical");
+                _animator.SetBool("IsDiving", true);
             }
-            this.rigidBody.velocity = new Vector2(Mathf.Clamp(this.rigidBody.velocity.x + counterForce, -this.speed, this.speed), this.rigidBody.velocity.y + downAirForce);
+            _rigidBody.velocity = new Vector2(Mathf.Clamp(_rigidBody.velocity.x + counterForce, -speed, speed), _rigidBody.velocity.y + downAirForce);
         }
     }
     public bool IsLoadingShoot()
@@ -678,28 +676,30 @@ public class Player : MonoBehaviour
     {
         var ball = FindObjectOfType<Ball>();
         var collider = ball.GetComponent<Collider2D>();
+        grabHitbox.enabled = false;
         if (collider != null)
         {
             Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
         }
         
-        this.isTackling = true;
+        isTackling = true;
     }
 
     public void DisableIsTackling()
     {
         var ball = FindObjectOfType<Ball>();
         var collider = ball.GetComponent<Collider2D>();
+        grabHitbox.enabled = true;
         if (collider != null)
         {
             Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
         }
-        this.isTackling = false;
+        isTackling = false;
     }
 
     private bool IsTouchingWater()
     {
-        return bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
+        return _bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
     }
 
     private void RemoveEnergy(float energy)
@@ -733,10 +733,10 @@ public class Player : MonoBehaviour
 
     IEnumerator FinishBeingTackled()
     {
-        animator.SetBool("IsTackled", true);
+        _animator.SetBool("IsTackled", true);
         DisableInputs();
         yield return new WaitForSeconds(tackleStunDuration);
-        animator.SetBool("IsTackled", false);
+        _animator.SetBool("IsTackled", false);
         EnableInputs();
     }
 
@@ -744,17 +744,17 @@ public class Player : MonoBehaviour
     {
         var isImmobile = inputManager.GetAxis("Move Horizontal") == 0 && inputManager.GetAxis("Move Vertical") == 0;
         var isInWater = IsTouchingWater();
-        var isUp = rigidBody.velocity.y >= 0;
-        animator.SetBool("IsSwimming", isInWater && !isImmobile);
-        animator.SetBool("IsIdle", isInWater && isImmobile);
-        animator.SetBool("IsInAir", !isInWater);
-        animator.SetBool("IsDashing", IsDashing());
-        animator.SetBool("IsTackling", this.isTackling);
-        animator.SetBool("IsUp", isUp);
-        animator.SetBool("IsDown", !isUp);
-        animator.SetBool("IsLoadingShoot", IsLoadingShoot());
-        animator.SetBool("IsGrabbing", isMotionGrabbing);
-        animator.SetBool("IsRolling", isRollingOver);
+        var isUp = _rigidBody.velocity.y >= 0;
+        _animator.SetBool("IsSwimming", isInWater && !isImmobile);
+        _animator.SetBool("IsIdle", isInWater && isImmobile);
+        _animator.SetBool("IsInAir", !isInWater);
+        _animator.SetBool("IsDashing", IsDashing());
+        _animator.SetBool("IsTackling", isTackling);
+        _animator.SetBool("IsUp", isUp);
+        _animator.SetBool("IsDown", !isUp);
+        _animator.SetBool("IsLoadingShoot", IsLoadingShoot());
+        _animator.SetBool("IsGrabbing", isMotionGrabbing);
+        _animator.SetBool("IsRolling", isRollingOver);
         //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
@@ -770,15 +770,15 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.down * 0.8f);
         bool fullyOutOfWater = !(hit != null && hit.collider != null && hit.collider.gameObject.tag == "Water");
         
-        var isMoving = (Mathf.Abs(this.rigidBody.velocity.x) > 0 || Mathf.Abs(this.rigidBody.velocity.y) > 0);
+        var isMoving = (Mathf.Abs(_rigidBody.velocity.x) > 0 || Mathf.Abs(_rigidBody.velocity.y) > 0);
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
-        var scaleX = this.rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
+        var scaleX = _rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
         var adjustedRotationSpeed = isTackling || IsDashing() ? 3000 : rotationSpeed;
 
         Quaternion currentAngle = transform.rotation;
-        float angle = Mathf.Atan2(this.rigidBody.velocity.y, this.rigidBody.velocity.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(_rigidBody.velocity.y, _rigidBody.velocity.x) * Mathf.Rad2Deg;
 
         if (!isTouchingWater && !IsDashing() && fullyOutOfWater)
         {
@@ -811,7 +811,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if (this.rigidBody.velocity.x != 0)
+        if (_rigidBody.velocity.x != 0)
         {
             transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
@@ -838,7 +838,7 @@ public class Player : MonoBehaviour
 
     public bool IsTackling()
     {
-        return this.isTackling;
+        return isTackling;
     }
 
     public bool IsGrabbing()
@@ -898,37 +898,37 @@ public class Player : MonoBehaviour
 
     public void EnableShotHitbox()
     {
-        this.shotHitbox.enabled = true;
+        shotHitbox.enabled = true;
         builtupPower = 0;
     }
 
     public void DisableShotHitbox()
     {
-        this.shotHitbox.enabled = false;
+        shotHitbox.enabled = false;
         builtupPower = 0;
     }
 
     public void EnableDashHitbox()
     {
         Debug.Log("Enabling");
-        this.dashHitbox.enabled = true;
+        dashHitbox.enabled = true;
     }
 
     public void DisableDashHitbox()
     {
-        this.dashHitbox.enabled = false;
+        dashHitbox.enabled = false;
     }
 
     public void EnableGrabbingMotion()
     {
-        this.isMotionGrabbing = true;
-        this.grabHitbox.enabled = true;
+        isMotionGrabbing = true;
+        //grabHitbox.enabled = true;
     }
 
     public void DisableGrabbingMotion()
     {
-        this.isMotionGrabbing = false;
-        this.grabHitbox.enabled = false;
+        isMotionGrabbing = false;
+        //grabHitbox.enabled = false;
     }
 
     IEnumerator DisableBody(GameObject newBall)
@@ -981,8 +981,8 @@ public class Player : MonoBehaviour
         
         if (Mathf.Abs(speedX) + Mathf.Abs(speedY) == 0)
         {
-            speedX = rigidBody.velocity.x;
-            speedY = rigidBody.velocity.y;
+            speedX = _rigidBody.velocity.x;
+            speedY = _rigidBody.velocity.y;
         }
 
         var newSpeed = new Vector2(speedX, speedY);
@@ -999,22 +999,22 @@ public class Player : MonoBehaviour
 
     private float GetSpeed()
     {
-        return rigidBody.velocity.magnitude;
+        return _rigidBody.velocity.magnitude;
     }
 
     public void DisableInputs()
     {
-        if (this.inputManager != null)
+        if (inputManager != null)
         {
-            this.inputManager.UnregisterInputEvents();
+            inputManager.UnregisterInputEvents();
         }
         
     }
         public void EnableInputs()
     {
-        if (this.inputManager != null)
+        if (inputManager != null)
         {
-            this.inputManager.RegisterInputEvents();
+            inputManager.RegisterInputEvents();
         }
     }
 }
