@@ -113,6 +113,8 @@ public class Player : MonoBehaviour
     public bool isRollingCountDown = false;
     public bool isGrabbingDisabled = false;
     public GameObject dashParticlesObject;
+    public bool isInWater = true;
+    public bool isTouchingWater = true;
 
     // Routines
     public IEnumerator enteredWaterRoutine;
@@ -295,6 +297,7 @@ public class Player : MonoBehaviour
             _gameManager.ManagePause();
         }
 
+        ManageWater();
         ManageGravity();
         ManageShoot();
         ManageMove();
@@ -310,6 +313,25 @@ public class Player : MonoBehaviour
             AddEnergy(Time.deltaTime * GameSettings.replenishEnergyPerSecond);
         }
     }
+
+    private void ManageWater()
+    {
+        var previousTouchingWater = isTouchingWater;
+        isTouchingWater = IsTouchingWater();
+        isInWater = IsInWater();
+
+        if (!previousTouchingWater && isTouchingWater)
+        {
+            hasJustEnteredWater = true;
+        }
+
+        if (isInWater)
+        {
+            hasJustEnteredWater = false;
+        }
+
+    }
+    
     private void ManageRollOver()
     {
         
@@ -341,7 +363,7 @@ public class Player : MonoBehaviour
         var isUp = axis > 0;
         var isDown = axis < 0;
         
-        if (!IsTouchingWater() || (!isUp && !isDown))
+        if (!IsInWater() || (!isUp && !isDown))
         {
             return;
         }
@@ -421,7 +443,7 @@ public class Player : MonoBehaviour
 
     private void ManageGravity()
     {
-        _rigidBody.gravityScale = IsTouchingWater() ? 0 : this.gravityScale;
+        _rigidBody.gravityScale = IsInWater() ? 0 : gravityScale;
     }
 
     private void ManageTackle()
@@ -599,7 +621,6 @@ public class Player : MonoBehaviour
 
     private void ManageMove()
     {
-        bool isTouchingWater = IsTouchingWater() && !hasJustEnteredWater;
         float computedSpeed = speed;
         if (isTackling || IsDashing() || isRollingOver)
         {
@@ -637,6 +658,12 @@ public class Player : MonoBehaviour
         
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
+
+        if (hasJustEnteredWater)
+        {
+            speedY = Mathf.Clamp(speedY, -1, 0);
+        }
+        
         var speedVector = new Vector2(speedX, speedY);
         if (speedVector.magnitude > 1)
         {
@@ -697,6 +724,13 @@ public class Player : MonoBehaviour
         }
         isTackling = false;
     }
+    
+    private bool IsInWater()
+    {
+        var bounds = _bodyCollider.bounds;
+        var waterBounds = FindObjectOfType<Water>().GetComponent<Collider2D>().bounds;
+        return waterBounds.Contains(bounds.min) && waterBounds.Contains(bounds.max);
+    }
 
     private bool IsTouchingWater()
     {
@@ -744,11 +778,10 @@ public class Player : MonoBehaviour
     private void ManageAnimation()
     {
         var isImmobile = inputManager.GetAxis("Move Horizontal") == 0 && inputManager.GetAxis("Move Vertical") == 0;
-        var isInWater = IsTouchingWater();
         var isUp = _rigidBody.velocity.y >= 0;
-        _animator.SetBool("IsSwimming", isInWater && !isImmobile);
-        _animator.SetBool("IsIdle", isInWater && isImmobile);
-        _animator.SetBool("IsInAir", !isInWater);
+        _animator.SetBool("IsSwimming", isTouchingWater && !isImmobile);
+        _animator.SetBool("IsIdle", isTouchingWater && isImmobile);
+        _animator.SetBool("IsInAir", !isTouchingWater);
         _animator.SetBool("IsDashing", IsDashing());
         _animator.SetBool("IsTackling", isTackling);
         _animator.SetBool("IsUp", isUp);
@@ -766,12 +799,6 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var isTouchingWater = IsTouchingWater();
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.8f);
-        Debug.DrawRay(transform.position, Vector2.down * 0.8f);
-        bool fullyOutOfWater = !(hit != null && hit.collider != null && hit.collider.gameObject.tag == "Water");
-        
-        var isMoving = (Mathf.Abs(_rigidBody.velocity.x) > 0 || Mathf.Abs(_rigidBody.velocity.y) > 0);
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
@@ -781,13 +808,12 @@ public class Player : MonoBehaviour
         Quaternion currentAngle = transform.rotation;
         float angle = Mathf.Atan2(_rigidBody.velocity.y, _rigidBody.velocity.x) * Mathf.Rad2Deg;
 
-        if (!isTouchingWater && !IsDashing() && fullyOutOfWater)
+        if (!isInWater && !IsDashing())
         {
             angle = 0f;
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
         } else
         {
-            //transform.rotation = ;
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
         }
 
