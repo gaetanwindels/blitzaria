@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using enums;
 using UnityEngine;
 using Rewired;
 using Random = UnityEngine.Random;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform ballPointLoading;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private Transform throwPointLoading;
+    [SerializeField] private Transform feetPoint;
 
     [Header("Hitboxes")]
     [SerializeField] private Collider2D shotHitbox;
@@ -45,25 +47,31 @@ public class Player : MonoBehaviour
     [SerializeField] private float curlPower = 20000f;
     [SerializeField] private float shotSpeedCurlFactor = 0.8f;
     [SerializeField] private float timeToMaxCurl = 0.5f;
+    [SerializeField] private float shootTolerance = 0.1f;
+    [SerializeField] private float minShootFreezeTime = 0.2f;
+    [SerializeField] private float maxShootFreezeTime = 0.5f;
+    [SerializeField] private float anticipationShotTime = 0.4f;
+    [SerializeField] private float minFreezePower = 6f;
+    [SerializeField] private float maxFreezePower = 20f;
     
     [Header("Move")]
-    [SerializeField] float rotationSpeed = 900f;
-    [SerializeField] float maxAngleLoadingShot = 45;
-    [SerializeField] float speed = 7f;
-    [SerializeField] float airSpeed = 0.02f;
-    [SerializeField] float airThrust = 0.02f;
+    [SerializeField] private float rotationSpeed = 900f;
+    [SerializeField] private float maxAngleLoadingShot = 45;
+    [SerializeField] private float speed = 7f;
+    [SerializeField] private float airSpeed = 0.02f;
+    [SerializeField] private float airThrust = 0.02f;
     [SerializeField] private float downAirThrust = 10f;
-    [SerializeField] float boostSpeed = 10f;
-    [SerializeField] float dashSpeed = 20f;
-    [SerializeField] float grabSpeedFactor = 0.8f;
-    [SerializeField] float dashDuration = 0.2f;
-    [SerializeField] float grabWithoutBallSpeedFactor = 0.2f;
+    [SerializeField] private float boostSpeed = 10f;
+    [SerializeField] private float dashSpeed = 20f;
+    [SerializeField] private float grabSpeedFactor = 0.8f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float grabWithoutBallSpeedFactor = 0.2f;
     [SerializeField] private float lockedTime = 0.2f;
 
     [Header("Rollover")]
-    [SerializeField] float rollOverSpeed = 5f;
-    [SerializeField] float rollOverDuration = 1f;
-    [SerializeField] float rollOverCountdown = 1f;
+    [SerializeField] private float rollOverSpeed = 5f;
+    [SerializeField] private float rollOverDuration = 1f;
+    [SerializeField] private float rollOverCountdown = 1f;
 
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
@@ -75,10 +83,12 @@ public class Player : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] public AudioClip hitPlayerSound;
     [SerializeField] public AudioClip launchBallSound;
+    [SerializeField] public AudioClip hitBallSound;
 
-    [Header("Particles")]
+    [Header("VFX")]
     [SerializeField] private ParticleSystem turboParticles;
     [SerializeField] private GameObject dashParticles;
+    [SerializeField] private GameObject ballImpact;
 
     public Brain brain;
     public InputManager inputManager;
@@ -92,42 +102,50 @@ public class Player : MonoBehaviour
     private GameManager _gameManager;
     private AudioLowPassFilter _audioFilter;
     private OrbsManager _orbManager;
+    private InputBuffer _inputBuffer;
 
     // State variable
     [Header("State")]
-    public float builtupPower = 0;
-    public float builtUpCurl = 0f;
-    public Ball ballGrabbed = null;
+    public float builtupPower;
+    public float builtUpCurl;
+    public Ball ballGrabbed;
     public Vector2 tackleStartPoint;
     public Vector2 currentDashVelocity;
-    public bool IsReturnFromTackle = false;
+    public bool IsReturnFromTackle;
     public float currentEnergy;
-    public bool isReplenishing = false;
+    public bool isReplenishing;
     public bool moveEnabled = true;
-    public bool isShootCoolDown = false;
-    public bool isTackling = false;
-    public bool hasJustEnteredWater = false;
-    private bool isInvicible = false;
-    public bool isMotionGrabbing = false;
-    public bool isRollingOver = false;
-    public bool isRollingCountDown = false;
-    public bool isGrabbingDisabled = false;
+    public bool isShootCoolDown;
+    public bool isTackling;
+    public bool isShooting;
+    public bool hasJustEnteredWater;
+    private bool isInvicible;
+    public bool isMotionGrabbing;
+    public bool isRollingOver;
+    public bool isRollingCountDown;
+    public bool isGrabbingDisabled;
     public GameObject dashParticlesObject;
     public bool isInWater = true;
     public bool isTouchingWater = true;
+    public bool isAutoShootDisabled;
+    public bool isLoadingAutoShoot;
+    public List<PlayerState> playerStates = new();
 
     // Routines
-    public IEnumerator enteredWaterRoutine;
-    public IEnumerator disableBodyRoutine;
-    public IEnumerator disableGrabbingRoutine;
-    public IEnumerator replenishRoutine;
-    public IEnumerator rollingOverRoutine;
+    private IEnumerator _enteredWaterRoutine;
+    private IEnumerator _disableBodyRoutine;
+    private IEnumerator _disableGrabbingRoutine;
+    private IEnumerator _replenishRoutine;
+    private IEnumerator _rollingOverRoutine;
 
     // Water management
     public bool canGoUp = true;
 
     [Header("Timers")]
     public float dashTimer = 0f;
+    public float loadingAutoShootTimer;
+    public float windupAutoShootTimer;
+    public float freezeAutoShootTimer;
     public float tackleTimer = 0f;
     public float tackleWindupTimer = 0f;
 
@@ -140,57 +158,8 @@ public class Player : MonoBehaviour
     {
         return IsGrabbing() ? throwPointLoading : throwPoint;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _rigidBody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-        _animator.SetBool("IsShooting", false);
-        _bodyCollider = GetComponent<Collider2D>();
-        _gameManager = FindObjectOfType<GameManager>();
-        _audioSource = GetComponent<AudioSource>();
-        _audioFilter = GetComponent<AudioLowPassFilter>();
-        _orbManager = GetComponentInChildren<OrbsManager>();
-
-        _rwPlayer = ReInput.players.GetPlayer(playerNumber);
-
-        inputManager = new RewiredInputManager(playerNumber);
-        
-        currentEnergy = GameSettings.energyAmount;
-
-        if (turboParticles != null)
-        {
-            turboParticles.Stop();
-        }
-
-        if (isAI)
-        {
-            inputManager = new SimulatedInputManager(playerNumber);
-        }
-
-        if (disableOnStart)
-        {
-            DisableInputs();
-        }
-
-        if (shotHitbox != null)
-        {
-            shotHitbox.enabled = false;
-        }
-
-        if (dashHitbox != null)
-        {
-            dashHitbox.enabled = false;
-        }
-
-        if (grabHitbox != null)
-        {
-            //grabHitbox.enabled = false;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+     private void OnTriggerEnter2D(Collider2D collision)
     {
         var tagName = collision.gameObject.tag;
         var parentGO = collision.gameObject.transform.parent;
@@ -248,6 +217,103 @@ public class Player : MonoBehaviour
 
         }
     }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _animator.SetBool(AnimatorParameters.IsShooting, false);
+        _bodyCollider = GetComponent<Collider2D>();
+        _gameManager = FindObjectOfType<GameManager>();
+        _audioSource = GetComponent<AudioSource>();
+        _audioFilter = GetComponent<AudioLowPassFilter>();
+        _orbManager = GetComponentInChildren<OrbsManager>();
+        _rwPlayer = ReInput.players.GetPlayer(playerNumber);
+        _inputBuffer = GetComponent<InputBuffer>();
+        inputManager = new RewiredInputManager(playerNumber);
+        
+        currentEnergy = GameSettings.energyAmount;
+
+        if (turboParticles != null)
+        {
+            turboParticles.Stop();
+        }
+
+        if (isAI)
+        {
+            inputManager = new SimulatedInputManager(playerNumber);
+        }
+
+        if (disableOnStart)
+        {
+            DisableInputs();
+        }
+
+        if (shotHitbox != null)
+        {
+            shotHitbox.enabled = false;
+        }
+
+        if (dashHitbox != null)
+        {
+            dashHitbox.enabled = false;
+        }
+
+        if (grabHitbox != null)
+        {
+            //grabHitbox.enabled = false;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {        
+
+        if (_gameManager != null && (!_gameManager.CanPlayersMove()))
+        {
+            return;
+        }
+
+        if (inputManager.GetButtonDown("Start"))
+        {
+            _gameManager.ManagePause();
+        }
+
+        ManageState();
+        ManageWater();
+        ManageGravity();
+        //ManageShoot();
+        ManageAutoShoot();
+        ManageThrow();
+        ManageMove();
+        ManageRollOver();
+        ManageCurl();
+        ManageDash();
+        ManageRotation();
+        ManageAnimation();
+        ManageGrab();
+
+        if (isReplenishing)
+        {
+            AddEnergy(Time.deltaTime * GameSettings.replenishEnergyPerSecond);
+        }
+    }
+
+    private void ManageState()
+    {
+        playerStates = new();
+
+        // var isInWater = IsInWater();
+        // var isImmobile = inputManager.GetAxis("Move Horizontal") == 0 && inputManager.GetAxis("Move Vertical") == 0;
+        //
+        // if (isInWater && !isImmobile) playerStates.Add(PlayerState.Swimming);
+        // if (isImmobile) playerStates.Add(PlayerState.Idle);
+        // if (!isInWater) playerStates.Add(PlayerState.InAir);
+        // if (isLoadingAutoShoot) playerStates.Add(PlayerState.LoadingShoot);
+        // if (IsLoadingShoot()) playerStates.Add(PlayerState.LoadingThrow);
+    }
+
     private IEnumerator TriggerInvicibility()
     {
         isInvicible = true;
@@ -281,37 +347,6 @@ public class Player : MonoBehaviour
     public void EnableMove()
     {
         moveEnabled = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {        
-
-        if (_gameManager != null && (!_gameManager.CanPlayersMove()))
-        {
-            return;
-        }
-
-        if (inputManager.GetButtonDown("Start"))
-        {
-            _gameManager.ManagePause();
-        }
-
-        ManageWater();
-        ManageGravity();
-        ManageShoot();
-        ManageMove();
-        ManageRollOver();
-        ManageCurl();
-        ManageDash();
-        ManageRotation();
-        ManageAnimation();
-        ManageGrab();
-
-        if (isReplenishing)
-        {
-            AddEnergy(Time.deltaTime * GameSettings.replenishEnergyPerSecond);
-        }
     }
 
     private void ManageWater()
@@ -390,7 +425,7 @@ public class Player : MonoBehaviour
         //rigidBody.velocity = adjusted;
         Debug.DrawRay(transform.position, new Vector3(adjusted.x, adjusted.y, 0));
         isRollingOver = true;
-        rollingOverRoutine = StartRollingOver();
+        _rollingOverRoutine = StartRollingOver();
         StartCoroutine(StartRollingOver());
         StartCoroutine(StartRollingCountDown());
     }
@@ -486,8 +521,11 @@ public class Player : MonoBehaviour
         {
             var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
+            var ps = go.GetComponent<ParticleSystem>();
+            var main = ps.main;
+            main.duration = dashDuration;
             dashParticlesObject = go;
-            Destroy(go, dashDuration);
+            Destroy(go, 5f);
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
             _rigidBody.velocity = ComputeMoveSpeed(dashSpeed);
@@ -510,6 +548,181 @@ public class Player : MonoBehaviour
         } else
         {
             DisableGrabbingMotion();
+        }
+    }
+    
+    private void ManageAutoShoot()
+    {
+        if (windupAutoShootTimer != 0 && windupAutoShootTimer < anticipationShotTime)
+        {
+            windupAutoShootTimer += Time.deltaTime;
+            return;
+        }
+        
+        if (IsGrabbing() || isShootCoolDown || isAutoShootDisabled)
+        {
+            isLoadingAutoShoot = false;
+            return;
+        }
+
+        if (inputManager.GetButtonDown("tackle"))
+        {
+            isLoadingAutoShoot = true;
+            return;
+        }
+
+        if (inputManager.GetButton("tackle"))
+        {
+            loadingAutoShootTimer += Time.deltaTime;
+            loadingAutoShootTimer = Mathf.Min(maxShotPower, loadingAutoShootTimer);
+        }
+
+        if (_inputBuffer.GetButtonUp("tackle"))
+        {
+            windupAutoShootTimer += Time.deltaTime;
+            isShooting = true;
+            return;
+        }
+
+        if (!isShooting)
+        {
+            return;
+        }
+
+        // Is ball from reachable distance?
+        var ballPosition = FindObjectOfType<Ball>().gameObject.transform.position;
+
+        var feetBodyDistance = Vector2.Distance(feetPoint.position, transform.position);
+        var bodyBallDistance = Vector2.Distance(ballPosition, transform.position);
+
+        if (bodyBallDistance < feetBodyDistance + shootTolerance)
+        {
+            var ballPosition2 = new Vector3(ballPosition.x, ballPosition.y);
+            var position2 = new Vector3(transform.position.x, transform.position.y);
+            var direction = -(ballPosition2 - position2).normalized;
+            
+            var truc = ballPosition2 - position2;
+            float angle = Mathf.Atan2(truc.y, truc.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
+
+            var impactVfx = Instantiate(ballImpact, feetPoint.position, Quaternion.identity);
+            Destroy(impactVfx, 0.5f);
+            
+            var shotPower = minShotPower + ((maxShotPower - minShotPower) * (loadingAutoShootTimer / timeToBuildUp));
+            StartCoroutine(ShootingRoutine(shotPower));
+            StartCoroutine(DisableAutoShoot());
+            StartCoroutine(DisableGrabbing(0.3f));
+        }
+        else
+        {
+            float speedX = inputManager.GetAxis("Move Horizontal");
+            float speedY = inputManager.GetAxis("Move Vertical");
+            float angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg + 90;
+            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, angle));
+        }
+        
+        StartCoroutine(CooldownShooting());
+        loadingAutoShootTimer = 0;
+        isLoadingAutoShoot = false;
+        windupAutoShootTimer = 0;
+    }
+
+    private void ManageThrow()
+    {
+        if (isShooting)
+        {
+            return;
+        }
+        
+        if (IsLoadingShoot())
+        {
+            builtupPower += Time.deltaTime;
+            builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
+        }
+        
+        if (IsGrabbing() && (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonDown("Grab")))
+        {
+            GameObject newBall = null;
+            Destroy(FindObjectOfType<Ball>().gameObject);
+            DisableGrabbingMotion();
+            var trueThrowPoint = inputManager.GetButtonUp("Tackle") ? throwPointLoading : throwPoint;
+            newBall = Instantiate(ballPrefab, trueThrowPoint.position, Quaternion.identity);
+            Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
+
+            var combinedVelocity = Mathf.Abs(_rigidBody.velocity.x) + Mathf.Abs(_rigidBody.velocity.y);
+
+            var computedShotPower = GetSpeed() + releasePower;
+
+            if (inputManager.GetButtonUp("Tackle"))
+            {
+                //StartCoroutine(ManageShootingAnimation());
+                computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
+            }
+
+            var curlingLeft = inputManager.GetAxis("Curl Left") > 0;
+            var curlingRight = inputManager.GetAxis("Curl Right") > 0;
+
+            float velocityX;
+            float velocityY;
+
+            if (curlingLeft || curlingRight)
+            {
+                computedShotPower *= shotSpeedCurlFactor;
+            }
+
+            if (combinedVelocity == 0)
+            {
+                velocityX = transform.localScale.x * computedShotPower;
+                velocityY = 0f;
+            }
+            else
+            {
+                var speed = ComputeShotSpeed(computedShotPower);
+                velocityX = speed.x;
+                velocityY = speed.y;
+            }
+
+            newBallBody.velocity = new Vector2(velocityX, velocityY);
+            builtupPower = 0;
+
+            float computedCurlPower;
+            if (curlingRight)
+            {
+                computedCurlPower = transform.localScale.x < 0 ? -curlPower : curlPower;
+                computedCurlPower *= builtUpCurl;
+                newBallBody.angularVelocity = (computedCurlPower * inputManager.GetAxis("Curl Right"));
+            } else if (curlingLeft)
+            {
+                computedCurlPower = transform.localScale.x < 0 ? -curlPower : curlPower;
+                computedCurlPower *= builtUpCurl;
+                newBallBody.angularVelocity = (-computedCurlPower * inputManager.GetAxis("Curl Left"));
+            }
+
+            builtUpCurl = 0;
+
+            _audioSource.clip = launchBallSound;
+            AudioUtils.PlaySound(gameObject);
+
+            if (_disableGrabbingRoutine != null)
+            {
+                StopCoroutine(_disableGrabbingRoutine);
+            }
+            _disableGrabbingRoutine = DisableGrabbing(0.6f);
+
+            StartCoroutine(_disableGrabbingRoutine);
+
+            if (newBall != null)
+            {
+                if (_disableBodyRoutine != null)
+                {
+                    StopCoroutine(_disableBodyRoutine);
+                }
+                _disableBodyRoutine = DisableBody(newBall);
+
+                StartCoroutine(_disableBodyRoutine);
+            }
+
+            StartCoroutine(DisableAutoShoot());
         }
     }
 
@@ -598,23 +811,23 @@ public class Player : MonoBehaviour
             _audioSource.clip = launchBallSound;
             AudioUtils.PlaySound(gameObject);
 
-            if (disableGrabbingRoutine != null)
+            if (_disableGrabbingRoutine != null)
             {
-                StopCoroutine(disableGrabbingRoutine);
+                StopCoroutine(_disableGrabbingRoutine);
             }
-            disableGrabbingRoutine = DisableGrabbing(0.6f);
+            _disableGrabbingRoutine = DisableGrabbing(0.6f);
 
-            StartCoroutine(disableGrabbingRoutine);
+            StartCoroutine(_disableGrabbingRoutine);
 
             if (newBall != null)
             {
-                if (disableBodyRoutine != null)
+                if (_disableBodyRoutine != null)
                 {
-                    StopCoroutine(disableBodyRoutine);
+                    StopCoroutine(_disableBodyRoutine);
                 }
-                disableBodyRoutine = DisableBody(newBall);
+                _disableBodyRoutine = DisableBody(newBall);
 
-                StartCoroutine(disableBodyRoutine);
+                StartCoroutine(_disableBodyRoutine);
             }
         }
     }
@@ -622,7 +835,7 @@ public class Player : MonoBehaviour
     private void ManageMove()
     {
         float computedSpeed = speed;
-        if (isTackling || IsDashing() || isRollingOver)
+        if (isShooting || isTackling || IsDashing() || isRollingOver || isLoadingAutoShoot)
         {
             return;
         }
@@ -740,23 +953,53 @@ public class Player : MonoBehaviour
     private void RemoveEnergy(float energy)
     {
         currentEnergy = Mathf.Max(0, currentEnergy - energy);
-        if (replenishRoutine != null)
+        if (_replenishRoutine != null)
         {
-            StopCoroutine(replenishRoutine);
+            StopCoroutine(_replenishRoutine);
         }
-        replenishRoutine = DisableEnergyReplenish();
-        StartCoroutine(replenishRoutine);
+        _replenishRoutine = DisableEnergyReplenish();
+        StartCoroutine(_replenishRoutine);
     }
 
     public void AddEnergy(float energy)
     {
         currentEnergy = Mathf.Min(currentEnergy + energy, GameSettings.energyAmount);
     }
+    
+    IEnumerator DisableAutoShoot()
+    {
+        isAutoShootDisabled = true;
+        yield return new WaitForSeconds(shootCoolDown);
+        isAutoShootDisabled = false;
+    }
+    
     IEnumerator CooldownShooting()
     {
-        isShootCoolDown = true;
+        isShooting = true;
+        isAutoShootDisabled = true;
         yield return new WaitForSeconds(shootCoolDown);
-        isShootCoolDown = false;
+        isShooting = false;
+        isAutoShootDisabled = false;
+    }
+
+    IEnumerator ShootingRoutine(float power)
+    {
+        var ball = FindObjectOfType<Ball>();
+        var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
+        var adjustedPower = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, power);
+        
+        Time.timeScale = 0;
+        _audioSource.clip = hitBallSound;
+        AudioUtils.PlaySound(gameObject);
+        isShooting = true;
+        var percentPower = Math.Min(1f, (adjustedPower - minShotPower) / (maxShotPower - minShotPower));
+        var shootFreezeTime = minShootFreezeTime + (maxShootFreezeTime - minShootFreezeTime) * percentPower;
+        yield return new WaitForSecondsRealtime(shootFreezeTime);
+        
+        FindObjectOfType<CameraShaker>().ShakeFor(0.1f, 0.2f * percentPower);
+        Time.timeScale = 1;
+
+        Shoot(power);
     }
 
     IEnumerator DisableEnergyReplenish()
@@ -768,10 +1011,10 @@ public class Player : MonoBehaviour
 
     IEnumerator FinishBeingTackled()
     {
-        _animator.SetBool("IsTackled", true);
+        _animator.SetBool(AnimatorParameters.IsTackled, true);
         DisableInputs();
         yield return new WaitForSeconds(tackleStunDuration);
-        _animator.SetBool("IsTackled", false);
+        _animator.SetBool(AnimatorParameters.IsTackled, false);
         EnableInputs();
     }
 
@@ -779,22 +1022,22 @@ public class Player : MonoBehaviour
     {
         var isImmobile = inputManager.GetAxis("Move Horizontal") == 0 && inputManager.GetAxis("Move Vertical") == 0;
         var isUp = _rigidBody.velocity.y >= 0;
-        _animator.SetBool("IsSwimming", isTouchingWater && !isImmobile);
-        _animator.SetBool("IsIdle", isTouchingWater && isImmobile);
-        _animator.SetBool("IsInAir", !isTouchingWater);
-        _animator.SetBool("IsDashing", IsDashing());
-        _animator.SetBool("IsTackling", isTackling);
-        _animator.SetBool("IsUp", isUp);
-        _animator.SetBool("IsDown", !isUp);
-        _animator.SetBool("IsLoadingShoot", IsLoadingShoot());
-        _animator.SetBool("IsGrabbing", isMotionGrabbing);
-        _animator.SetBool("IsRolling", isRollingOver);
+        _animator.SetBool(AnimatorParameters.IsSwimming, isTouchingWater && !isImmobile);
+        _animator.SetBool(AnimatorParameters.IsIdle, isTouchingWater && isImmobile);
+        _animator.SetBool(AnimatorParameters.IsInAir, !isTouchingWater);
+        _animator.SetBool(AnimatorParameters.IsDashing, IsDashing());
+        _animator.SetBool(AnimatorParameters.IsTackling, isShooting);
+        _animator.SetBool(AnimatorParameters.IsUp, isUp);
+        _animator.SetBool(AnimatorParameters.IsDown, !isUp);
+        _animator.SetBool(AnimatorParameters.IsLoadingShoot, IsLoadingShoot());
+        _animator.SetBool(AnimatorParameters.IsGrabbing, isMotionGrabbing);
+        _animator.SetBool(AnimatorParameters.IsRolling, isRollingOver);
         //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
     private void ManageRotation()
     {
-        if (isRollingOver)
+        if (isRollingOver || isShooting)
         {
             return;
         }
@@ -858,7 +1101,7 @@ public class Player : MonoBehaviour
 
     public void Grab(Ball ball)
     {
-        if (isGrabbingDisabled)
+        if (isGrabbingDisabled || isShooting || isLoadingAutoShoot)
         {
             return;
         }
@@ -886,13 +1129,9 @@ public class Player : MonoBehaviour
 
     public void Shoot(float shotSpeed)
     {
-        Debug.Log("SHOOT 1");
         var ball = FindObjectOfType<Ball>();
-        Debug.Log(FindObjectsOfType<Ball>().Length);
-
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
 
-        Debug.Log("acc" + rigidBodyBall.velocity.magnitude + "computed" + shotSpeed);
         shotSpeed = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, shotSpeed);
 
         float velocityX;
@@ -903,19 +1142,17 @@ public class Player : MonoBehaviour
         velocityY = speed.y;
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
-        Debug.Log("SHOOT METHOD");
-        Debug.Log(rigidBodyBall.velocity);
         Debug.DrawRay(transform.position, Vector2.down * 0.8f);
         Vector3 endLine = new Vector3(rigidBodyBall.velocity.x, rigidBodyBall.velocity.y, 0);
         Debug.DrawLine(rigidBodyBall.transform.position, rigidBodyBall.transform.position + endLine);
 
-        if (disableBodyRoutine != null)
+        if (_disableBodyRoutine != null)
         {
-            StopCoroutine(disableBodyRoutine);
+            StopCoroutine(_disableBodyRoutine);
         }
 
-        disableBodyRoutine = DisableBody(rigidBodyBall.gameObject);
-        StartCoroutine(disableBodyRoutine);
+        _disableBodyRoutine = DisableBody(rigidBodyBall.gameObject);
+        StartCoroutine(_disableBodyRoutine);
         DisableShotHitbox();
         CancelDash();
     }

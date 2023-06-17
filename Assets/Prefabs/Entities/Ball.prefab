@@ -4851,7 +4851,7 @@ Transform:
   - {fileID: 100088718}
   - {fileID: 7835735580129175911}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8240922884218118338
 SpriteRenderer:
@@ -4903,7 +4903,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!50 &8240922884218118337
 Rigidbody2D:

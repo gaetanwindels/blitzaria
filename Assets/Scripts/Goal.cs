@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Goal : MonoBehaviour
 {
@@ -12,12 +15,15 @@ public class Goal : MonoBehaviour
 
     [SerializeField] private AudioClip explosionSound;
     [SerializeField] private AudioClip hitSound;
+    
+    [SerializeField] private EventChannel eventChannel;
 
     // Cached variable
     private GameManager gameManager;
     private AudioSource audioSource;
 
     private bool isReloading = false;
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,13 +38,15 @@ public class Goal : MonoBehaviour
                 audioSource.Play();
             }
 
-            ExplodePlayers();
-            var shaker = FindObjectOfType<CameraShaker>();
-            var gameManager = FindObjectOfType<GameManager>();
-            shaker.ShakeFor(0.5f, 0.3f);
-            gameManager.AddScore(teamScoring);
-            Destroy(collision.gameObject);
-            StartCoroutine(ReloadScene());
+            //ExplodePlayers();
+            //var shaker = FindObjectOfType<CameraShaker>();
+            //var gameManager = FindObjectOfType<GameManager>();
+            //shaker.ShakeFor(0.5f, 0.3f);
+            //gameManager.AddScore(teamScoring);
+            //Destroy(collision.gameObject);
+            //StartCoroutine(ReloadScene());
+            
+            eventChannel.RaiseGoalScored(teamScoring);
 
         }
     }
@@ -89,10 +97,10 @@ public class Goal : MonoBehaviour
         gameManager = GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
         ParticleSystem ps = goalParticleSystem.GetComponent<ParticleSystem>();
-        ps.gameObject.SetActive(false);
 
         if (ps != null)
         {
+            ps.gameObject.SetActive(false);
             ps.Stop();
         }
     }
