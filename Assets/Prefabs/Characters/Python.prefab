@@ -13,6 +13,16 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 055f66bff8d22544d9b1d43d6c37d374, type: 2}
+    - target: {fileID: 3369844353986879261, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.338
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369844353986879261, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.289
+      objectReference: {fileID: 0}
     - target: {fileID: 4926045685579339278, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: m_RootOrder
@@ -68,6 +78,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625793, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.31993884
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625793, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.1291788
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625793, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.054963082
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988621117747625793, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.3263272
+      objectReference: {fileID: 0}
     - target: {fileID: 6988621117747625796, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: m_Sprite
@@ -78,6 +108,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Python
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035568124978874123, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.048
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035568124978874123, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.938
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

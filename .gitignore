@@ -79,3 +79,6 @@ obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
 obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
 *.cache
 obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+
+# Playground scenes
+/Assets/Not In Game/

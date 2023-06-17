@@ -26,10 +26,9 @@ public class TacklingBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var player = animator.GetComponent<Player>();
-        Debug.Log("mon cul");
+        
         if (player != null)
         {
-            Debug.Log("mes couilles");
             player.DisableShotHitbox();
             player.DisableIsTackling();
         }

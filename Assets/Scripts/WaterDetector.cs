@@ -7,8 +7,7 @@ public class WaterDetector : MonoBehaviour
     [SerializeField] float massMitigator = 40f;
     [SerializeField] float maxMass = 0.2f;
     [SerializeField] float minVelocityExit = 7f;
-
-
+    
     [SerializeField] AudioClip exitSound;
     [SerializeField] AudioClip enterSound;
 
@@ -63,6 +62,7 @@ public class WaterDetector : MonoBehaviour
         }
 
         var ball = hit.GetComponent<Ball>();
+        var player = hit.GetComponent<Player>();
 
         var rigidBody = hit.GetComponent<Rigidbody2D>();
 
@@ -70,9 +70,9 @@ public class WaterDetector : MonoBehaviour
             return;
         }
 
-        if (rigidBody.velocity.magnitude <= minVelocityExit)
+        if (player != null && rigidBody.velocity.magnitude <= minVelocityExit)
         {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
+            //rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
             return;
         }
 
