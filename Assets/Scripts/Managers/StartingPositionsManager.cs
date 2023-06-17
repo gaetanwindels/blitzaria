@@ -5,18 +5,24 @@ using UnityEngine;
 public class StartingPositionsManager : MonoBehaviour
 {
 
-    private PositionLocker[] positionLockers;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        positionLockers = GetComponentsInChildren<PositionLocker>();
-    }
+    [SerializeField] private PositionLocker[] team1Positions;
+    [SerializeField] private PositionLocker[] team2Positions;
+    [SerializeField] private PositionLocker ballPosition;
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    
+    public void PositionBall()
+    {
+        if (ballPosition == null)
+        {
+            return;
+        }
+
+        ballPosition.SetObjectToLock(FindObjectOfType<Ball>().gameObject);
     }
 
     public void PositionPlayers()
@@ -42,11 +48,21 @@ public class StartingPositionsManager : MonoBehaviour
 
     public PositionLocker GetFreePositionLocker(TeamEnum team)
     {
-        positionLockers = GetComponentsInChildren<PositionLocker>();
+        PositionLocker[] positionLockers = {};
+        
+        if (team == TeamEnum.Team1)
+        {
+            positionLockers = team1Positions;
+        }
 
+        if (team == TeamEnum.Team2)
+        {
+            positionLockers = team2Positions;            
+        }
+        
         foreach (PositionLocker positionLocker in positionLockers)
         {
-            if (positionLocker.team == team && positionLocker.GetObjectTolock() == null)
+            if (positionLocker.GetObjectTolock() == null)
             {
                 return positionLocker;
             }
