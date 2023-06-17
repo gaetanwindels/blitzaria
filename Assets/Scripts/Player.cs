@@ -996,7 +996,7 @@ public class Player : MonoBehaviour
         var shootFreezeTime = minShootFreezeTime + (maxShootFreezeTime - minShootFreezeTime) * percentPower;
         yield return new WaitForSecondsRealtime(shootFreezeTime);
         
-        FindObjectOfType<CameraShaker>().ShakeFor(0.1f, 0.2f * percentPower);
+        //FindObjectOfType<CameraShaker>().ShakeFor(0.1f, 0.2f * percentPower);
         Time.timeScale = 1;
 
         Shoot(power);

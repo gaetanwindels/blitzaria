@@ -1,0 +1,798 @@
+fileFormatVersion: 2
+guid: 71b28e84c9f0731478280c41f49f36e2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4486158816454135739
+    second: animation_de_la_mort_0
+  - first:
+      213: 3618046371443009682
+    second: animation_de_la_mort_1
+  - first:
+      213: 6676663850669769086
+    second: animation_de_la_mort_2
+  - first:
+      213: 6327570437830900128
+    second: animation_de_la_mort_3
+  - first:
+      213: 1085512033216676297
+    second: animation_de_la_mort_4
+  - first:
+      213: 1907760751596478954
+    second: animation_de_la_mort_5
+  - first:
+      213: 4693597297491101802
+    second: animation_de_la_mort_6
+  - first:
+      213: -4064355911744492943
+    second: animation_de_la_mort_7
+  - first:
+      213: -4854338565761141102
+    second: animation_de_la_mort_8
+  - first:
+      213: -2247540823230308630
+    second: animation_de_la_mort_9
+  - first:
+      213: -9133725773299067818
+    second: animation_de_la_mort_10
+  - first:
+      213: 3950450126895532597
+    second: animation_de_la_mort_11
+  - first:
+      213: 2904740519298729624
+    second: animation_de_la_mort_12
+  - first:
+      213: -3460712223041409277
+    second: animation_de_la_mort_13
+  - first:
+      213: 5722051933540840867
+    second: animation_de_la_mort_14
+  - first:
+      213: 788693941067138050
+    second: animation_de_la_mort_15
+  - first:
+      213: -5353451663846152793
+    second: animation_de_la_mort_16
+  - first:
+      213: 8256938236714495055
+    second: animation_de_la_mort_17
+  - first:
+      213: -2027085096662035517
+    second: animation_de_la_mort_18
+  - first:
+      213: -8511537761856781358
+    second: animation_de_la_mort_19
+  - first:
+      213: -2097762008523576802
+    second: animation_de_la_mort_20
+  - first:
+      213: 5225834221103882127
+    second: animation_de_la_mort_21
+  - first:
+      213: 6912941162798696668
+    second: animation_de_la_mort_22
+  - first:
+      213: -550639479700664828
+    second: animation_de_la_mort_23
+  - first:
+      213: 1068516999813552296
+    second: animation_de_la_mort_24
+  - first:
+      213: 8391152031994154010
+    second: animation_de_la_mort_25
+  - first:
+      213: 4574477075995432929
+    second: animation_de_la_mort_26
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: animation_de_la_mort_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3752
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42d40b1e1ee141a4cb4bb54789313439
+      internalID: -4486158816454135739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_1
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 3752
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebaae479e6d9f6d48be9fa20e97ce4bd
+      internalID: 3618046371443009682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_2
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 3752
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75e5415b872a3d7489fdf98eff2f84a2
+      internalID: 6676663850669769086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_3
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 3752
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2322309e148800344b3cf2bffe8e90c1
+      internalID: 6327570437830900128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_4
+      rect:
+        serializedVersion: 2
+        x: 3428
+        y: 3752
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b8f4fc70d84c247a84ca0f5705f973
+      internalID: 1085512033216676297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_5
+      rect:
+        serializedVersion: 2
+        x: 4275
+        y: 3752
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3b0681cf103f76438d8ce3f59c1bd07
+      internalID: 1907760751596478954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2814
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7b75b4240ef57f42adccc68baa76e86
+      internalID: 4693597297491101802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_7
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 2814
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02498865ea6e5214daf189eb9120ab0f
+      internalID: -4064355911744492943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_8
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 2814
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2166608d0c324f4d95540da965f6f14
+      internalID: -4854338565761141102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_9
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 2814
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2ea383b593280146a6127141e6dc6c7
+      internalID: -2247540823230308630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_10
+      rect:
+        serializedVersion: 2
+        x: 3420
+        y: 2814
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dfc8d524c6636341a83279f6486792b
+      internalID: -9133725773299067818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_11
+      rect:
+        serializedVersion: 2
+        x: 4267
+        y: 2822
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d91fc48ca0412524f8c0d09dd6831f4a
+      internalID: 3950450126895532597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1876
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d0a931abdfaeed4a99258e064dbaccb
+      internalID: 2904740519298729624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_13
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 1876
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfe55bdbd3fd10d4cbd57ae886f585eb
+      internalID: -3460712223041409277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_14
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 1876
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97101ac74205a7d4abc1874200accfac
+      internalID: 5722051933540840867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_15
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 1876
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74321224c2ab13c409c54af1e0d38416
+      internalID: 788693941067138050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_16
+      rect:
+        serializedVersion: 2
+        x: 3420
+        y: 1876
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60861e2a61b8fec4dbb394d295200302
+      internalID: -5353451663846152793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_17
+      rect:
+        serializedVersion: 2
+        x: 4275
+        y: 1876
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 676d04722782f1148bfe44970f88bd6a
+      internalID: 8256938236714495055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 938
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67e36123991a8ed42a46c0a0596eab8e
+      internalID: -2027085096662035517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_19
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 938
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 807131a0c9d1f9848a88bf76282759e8
+      internalID: -8511537761856781358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_20
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 938
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dca326928c8360b4ebed5a4341bd9b1c
+      internalID: -2097762008523576802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_21
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 938
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52207f6898be16047b607b6fdd6f3d63
+      internalID: 5225834221103882127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_22
+      rect:
+        serializedVersion: 2
+        x: 3420
+        y: 938
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bfdc0494bcf8b24a8b399d36e54afcc
+      internalID: 6912941162798696668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_23
+      rect:
+        serializedVersion: 2
+        x: 4275
+        y: 938
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a20e335738eee84a9b391313d352af1
+      internalID: -550639479700664828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c98ba62f6b9578b47afd75e1038d4757
+      internalID: 1068516999813552296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_25
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 0
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e664590f325ec9748bfd43d17c924549
+      internalID: 8391152031994154010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_de_la_mort_26
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 0
+        width: 855
+        height: 938
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f5cadae3162a3048a60a502b07989bf
+      internalID: 4574477075995432929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      animation_de_la_mort_1: 3618046371443009682
+      animation_de_la_mort_7: -4064355911744492943
+      animation_de_la_mort_23: -550639479700664828
+      animation_de_la_mort_12: 2904740519298729624
+      animation_de_la_mort_0: -4486158816454135739
+      animation_de_la_mort_25: 8391152031994154010
+      animation_de_la_mort_2: 6676663850669769086
+      animation_de_la_mort_6: 4693597297491101802
+      animation_de_la_mort_22: 6912941162798696668
+      animation_de_la_mort_21: 5225834221103882127
+      animation_de_la_mort_10: -9133725773299067818
+      animation_de_la_mort_20: -2097762008523576802
+      animation_de_la_mort_24: 1068516999813552296
+      animation_de_la_mort_3: 6327570437830900128
+      animation_de_la_mort_5: 1907760751596478954
+      animation_de_la_mort_9: -2247540823230308630
+      animation_de_la_mort_14: 5722051933540840867
+      animation_de_la_mort_15: 788693941067138050
+      animation_de_la_mort_19: -8511537761856781358
+      animation_de_la_mort_18: -2027085096662035517
+      animation_de_la_mort_17: 8256938236714495055
+      animation_de_la_mort_8: -4854338565761141102
+      animation_de_la_mort_16: -5353451663846152793
+      animation_de_la_mort_4: 1085512033216676297
+      animation_de_la_mort_13: -3460712223041409277
+      animation_de_la_mort_26: 4574477075995432929
+      animation_de_la_mort_11: 3950450126895532597
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
