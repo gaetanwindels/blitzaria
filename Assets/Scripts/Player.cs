@@ -606,9 +606,6 @@ public class Player : MonoBehaviour
             var truc = ballPosition2 - position2;
             float angle = Mathf.Atan2(truc.y, truc.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
-
-            var impactVfx = Instantiate(ballImpact, feetPoint.position, Quaternion.identity);
-            Destroy(impactVfx, 0.5f);
             
             var shotPower = minShotPower + ((maxShotPower - minShotPower) * (loadingAutoShootTimer / timeToBuildUp));
             StartCoroutine(ShootingRoutine(shotPower));
@@ -997,7 +994,8 @@ public class Player : MonoBehaviour
         var percentPower = Math.Min(1f, (adjustedPower - minShotPower) / (maxShotPower - minShotPower));
         var shootFreezeTime = minShootFreezeTime + (maxShootFreezeTime - minShootFreezeTime) * percentPower;
         yield return new WaitForSecondsRealtime(shootFreezeTime);
-        
+        var impactVfx = Instantiate(ballImpact, ball.transform.position, Quaternion.identity);
+        Destroy(impactVfx, 0.5f);
         //FindObjectOfType<CameraShaker>().ShakeFor(0.1f, 0.2f * percentPower);
         Time.timeScale = 1;
 

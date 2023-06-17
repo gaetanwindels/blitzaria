@@ -400,7 +400,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!1 &3906249304384110289
@@ -741,7 +741,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6555290508705513892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.302, y: -0.12, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -761,8 +761,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.36989748, y: 0.11013299}
-  m_Size: {x: 0.68171644, y: 0.68171644}
+  m_Offset: {x: 0.07403278, y: -0.01734057}
+  m_Size: {x: 0.861938, y: 0.861938}
   m_Direction: 0
 --- !u!1 &6988621117747625798
 GameObject:
@@ -796,7 +796,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6988621117747625798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.82, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -911,8 +911,11 @@ MonoBehaviour:
   shotSpeedCurlFactor: 0.8
   timeToMaxCurl: 0.7
   shootTolerance: 0.3
-  shootFreezeTime: 0.08
+  minShootFreezeTime: 0.2
+  maxShootFreezeTime: 0.5
   anticipationShotTime: 0.4
+  minFreezePower: 6
+  maxFreezePower: 20
   rotationSpeed: 10000
   maxAngleLoadingShot: 45
   speed: 6.5
@@ -939,7 +942,7 @@ MonoBehaviour:
   turboParticles: {fileID: 7157193096785850357}
   dashParticles: {fileID: 1675020046467270908, guid: 50709e653352a2f479701c074e345941,
     type: 3}
-  ballImpact: {fileID: 5466725007785120287, guid: b67785cb3e21dcd4ab0456c7434d0b25,
+  ballImpact: {fileID: 5253129891090821406, guid: 844a317ed76dade4a82d3c5de7b6977a,
     type: 3}
   brain: {fileID: 0}
   builtupPower: 0
@@ -1013,12 +1016,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: 61906907c2fd85845b58a39e94ea6064, type: 3}
+  m_Sprite: {fileID: -1304751220, guid: 266935395faea294d9f5177aebf13627, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.15, y: 1.6}
+  m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
