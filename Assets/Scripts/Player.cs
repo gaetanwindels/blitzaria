@@ -268,13 +268,7 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
-
-        if (_gameManager != null && (!_gameManager.CanPlayersMove()))
-        {
-            return;
-        }
-
+    {
         if (inputManager.GetButtonDown("Start"))
         {
             _gameManager.ManagePause();
@@ -561,12 +555,14 @@ public class Player : MonoBehaviour
         
         if (IsGrabbing() || isShootCoolDown || isAutoShootDisabled)
         {
+            _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
             isLoadingAutoShoot = false;
             return;
         }
 
         if (inputManager.GetButtonDown("tackle"))
         {
+            _animator.SetBool(AnimatorParameters.IsLoadingKick, true);
             isLoadingAutoShoot = true;
             return;
         }
@@ -590,7 +586,13 @@ public class Player : MonoBehaviour
         }
 
         // Is ball from reachable distance?
-        var ballPosition = FindObjectOfType<Ball>().gameObject.transform.position;
+        var ball = FindObjectOfType<Ball>();
+        if (ball == null)
+        {
+            return;
+        }
+        
+        var ballPosition = ball.gameObject.transform.position;
 
         var feetBodyDistance = Vector2.Distance(feetPoint.position, transform.position);
         var bodyBallDistance = Vector2.Distance(ballPosition, transform.position);
@@ -874,7 +876,7 @@ public class Player : MonoBehaviour
 
         if (hasJustEnteredWater)
         {
-            speedY = Mathf.Clamp(speedY, -1, 0);
+            //speedY = Mathf.Clamp(speedY, -1, 0);
         }
         
         var speedVector = new Vector2(speedX, speedY);
@@ -1050,8 +1052,8 @@ public class Player : MonoBehaviour
 
         Quaternion currentAngle = transform.rotation;
         float angle = Mathf.Atan2(_rigidBody.velocity.y, _rigidBody.velocity.x) * Mathf.Rad2Deg;
-
-        if (!isInWater && !IsDashing())
+        
+        if (!IsTouchingWater() && !IsDashing())
         {
             angle = 0f;
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);

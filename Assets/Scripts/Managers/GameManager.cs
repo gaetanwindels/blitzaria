@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using ScriptableObjects.Events;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour
 {
 
     // Config parameters
+    [Header("Events")] 
+    [SerializeField] private EventChannel _eventChannel;
+    
     [Header("Players")]
     [SerializeField] List<PlayerSelectConfiguration> playerConfigurations = new List<PlayerSelectConfiguration>();
     [SerializeField] Player[] players;
@@ -22,11 +26,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] int gameDuration = 120;
     [SerializeField] int countdownDuration = 5;
 
+    [Header("Managers")]
+    [SerializeField] TimerManager _timerManager;
+
     [Header("GUI FIELDS")]
     [SerializeField] GameObject pauseCanvas;
-    [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] TextMeshProUGUI scoreTeam1Text;
-    [SerializeField] TextMeshProUGUI scoreTeam2Text;
     [SerializeField] TextMeshProUGUI countDownText;
     [SerializeField] TextMeshProUGUI winText;
     [SerializeField] GameObject restartButton;
@@ -49,59 +53,39 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        _eventChannel.TimeoutEvent += HandleGameOver;
+        _eventChannel.GoalScoredEvent += HandleGoalScored;
     }
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        _eventChannel.TimeoutEvent -= HandleGameOver;
+        _eventChannel.GoalScoredEvent -= HandleGoalScored;
+    }
+
+    IEnumerator ResetScene()
+    {
+        yield return new WaitForSeconds(2f);
+        StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
+        positionManager.PositionPlayers();
+        FindObjectOfType<Ball>(true).gameObject.SetActive(true);
+        positionManager.PositionBall();
+        isCountDown = true;
+        countDownTimer = countdownDuration;
     }
 
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         gameSession = FindObjectOfType<GameSessionConfiguration>();
-        // playerConfigurations = gameSession.players;
+        playerConfigurations = gameSession.players;
 
         InitPlayers();
-
-        if (sliderEnergyBar1 != null)
-        {
-            sliderEnergyBar1.gameObject.SetActive(false);
-        }
-        if (sliderEnergyBar2 != null)
-        {
-            sliderEnergyBar2.gameObject.SetActive(false);
-        }
-        if (sliderEnergyBar3 != null)
-        {
-            sliderEnergyBar3.gameObject.SetActive(false);
-        }
-        if (sliderEnergyBar4 != null)
-        {
-            sliderEnergyBar4.gameObject.SetActive(false);
-        }
 
         players = FindObjectsOfType<Player>();
 
         foreach (Player player in players)
         {
-            if (player.playerNumber == 0 && sliderEnergyBar1 != null)
-            {
-                sliderEnergyBar1.gameObject.SetActive(true);
-                sliderEnergyBar1.value = 1;
-            } else if (player.playerNumber == 1 && sliderEnergyBar1 != null)
-            {
-                sliderEnergyBar2.gameObject.SetActive(true);
-                sliderEnergyBar2.value = 1;
-            } else if (player.playerNumber == 2 && sliderEnergyBar1 != null)
-            {
-                sliderEnergyBar3.gameObject.SetActive(true);
-                sliderEnergyBar3.value = 1;
-            } else if (player.playerNumber == 3 && sliderEnergyBar1 != null)
-            {
-                sliderEnergyBar4.gameObject.SetActive(true);
-                sliderEnergyBar4.value = 1;
-            }
-
             player.DisableInputs();
         }
 
@@ -127,6 +111,18 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void HandleGameOver()
+    {
+        Time.timeScale = 0;
+    }
+    
+    private void HandleGoalScored(TeamEnum scored)
+    {
+        FindObjectOfType<Ball>().gameObject.SetActive(false);
+        _timerManager.StopTimer();
+        StartCoroutine(ResetScene());
+    }
+    
     private void InitPlayers()
     {
         StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
@@ -153,7 +149,7 @@ public class GameManager : MonoBehaviour
                 player.playerNumber = playerConf.playerNumber;
                 player.team = playerConf.team;
                 var clothes = go.GetComponentsInChildren<SpriteRenderer>();
-                clothes[clothes.Length - 1].color = playerConf.color;
+                //clothes[clothes.Length - 1].color = playerConf.color;
             }
         }
 
@@ -164,7 +160,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Init();
-
     }
 
     void Init()
@@ -174,58 +169,53 @@ public class GameManager : MonoBehaviour
         scoreTeam1 = 0;
         scoreTeam2 = 0;
         winText.text = "";
-        restartButton.SetActive(false);
-        mainMenuButton.SetActive(false);
+        //restartButton.SetActive(false);
+        //mainMenuButton.SetActive(false);
         gameSession = FindObjectOfType<GameSessionConfiguration>();
 
         if (gameSession != null)
         {
             playerConfigurations = gameSession.players;
         }
+
+        if (_timerManager != null)
+        {
+            _timerManager.Init(300);
+        }
         
         players = FindObjectsOfType<Player>();
         pauseCanvas.SetActive(false);
         Time.timeScale = 1;
     }
+    
+    IEnumerator ReloadScene()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        ManageTimer();
         ManageCountDown();
         UpdateEnergy();
 
-        restartButton.SetActive(IsGameOver());
-        mainMenuButton.SetActive(IsGameOver());
+        //restartButton.SetActive(IsGameOver());
+        //mainMenuButton.SetActive(IsGameOver());
 
-        if (scoreTeam1Text != null)
-        {
-            scoreTeam1Text.text = scoreTeam1.ToString();
-        }
-
-        if (scoreTeam2Text != null)
-        {
-            scoreTeam2Text.text = scoreTeam2.ToString();
-        }
-
-        if (IsGameOver())
-        {
-            var score1 = int.Parse(scoreTeam1Text.text);
-            var score2 = int.Parse(scoreTeam2Text.text);
-
-            if (score1 == score2)
-            {
-                winText.text = "Draw";
-            } else
-            {
-                winText.text = int.Parse(scoreTeam1Text.text) > int.Parse(scoreTeam2Text.text) ? "Team 1" : "Team 2";
-                winText.text += " win";
-            }
+        //if (IsGameOver())
+       // {
+            // if (score1 == score2)
+            // {
+            //     winText.text = "Draw";
+            // } else
+            // {
+            //     winText.text = int.Parse(scoreTeam1Text.text) > int.Parse(scoreTeam2Text.text) ? "Team 1" : "Team 2";
+            //     winText.text += " win";
+            // }
 
             EventSystem.current.SetSelectedGameObject(mainMenuButton);
-            
-            Time.timeScale = 0;
-        }
+        //}
     }
 
     public void Restart()
@@ -236,40 +226,12 @@ public class GameManager : MonoBehaviour
 
     public void ManagePause()
     {
-        if (!this.pauseCanvas.activeSelf)
+        if (!pauseCanvas.activeSelf)
         {
             Pause();
         } else
         {
             Resume();
-        }
-    }
-
-    private void ManageTimer()
-    {
-        if (!isCountDown && !this.isTimerStopped)
-        {
-            timer -= Time.deltaTime;
-            timer = Mathf.Max(0, timer);
-        }
-        
-        if (timerText != null)
-        {
-            var minutes = Mathf.Floor(timer / 60);
-            var seconds = Mathf.Max(0, Mathf.Round(timer % 60));
-            var secondsText = seconds.ToString();
-            if (seconds < 10)
-            {
-                secondsText = "0" + seconds;
-            }
-
-            if (seconds == 60)
-            {
-                secondsText = "00";
-                minutes++;
-            }
-
-            timerText.text = minutes + ":" + secondsText;
         }
     }
 
@@ -300,6 +262,11 @@ public class GameManager : MonoBehaviour
                 Debug.Log("enabled");
                 player.EnableInputs();
             }
+            
+            if (_timerManager != null)
+            {
+                _timerManager.StartTimer();
+            }
         }
 
     }
@@ -317,8 +284,6 @@ public class GameManager : MonoBehaviour
             winText.text = "BLUE TEAM SCORE";
             winText.color = new Color32(57, 105, 255, 255);
         }
-
-        this.StopTimer();
     }
 
     public void UpdateEnergy() 
@@ -341,20 +306,6 @@ public class GameManager : MonoBehaviour
                 sliderEnergyBar4.value = (player.currentEnergy / GameSettings.energyAmount);
             }
         }  
-    }
-
-    public bool IsGameOver()
-    {
-        return timer <= 0;
-    }
-    public bool CanPlayersMove()
-    {
-        return !IsGameOver() && !isCountDown && !IsPaused();
-    }
-
-    private void StopTimer()
-    {
-        this.isTimerStopped = true;
     }
 
     public bool IsPaused()

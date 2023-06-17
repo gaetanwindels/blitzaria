@@ -20,12 +20,12 @@ namespace Managers
 
         private void OnEnable()
         {
-            eventChannel.goalScoredEvent += OnGoalScored;
+            eventChannel.GoalScoredEvent += OnGoalScored;
         }
         
         private void OnDisable()
         {
-            eventChannel.goalScoredEvent -= OnGoalScored;
+            eventChannel.GoalScoredEvent -= OnGoalScored;
         }
 
         void Start()

@@ -82,10 +82,9 @@ public class PlayerSelectScreenManager : MonoBehaviour
             if (playerSelect.playerNumber != -1 && !playerSelect.IsReady())
             {
                 return false;
-            } else if (playerSelect.IsReady())
-            {
-                atLeastOnePlayer = true;
-            }
+            } 
+            
+            atLeastOnePlayer = true;
         }
 
         return atLeastOnePlayer;

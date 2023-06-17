@@ -11,7 +11,7 @@ public class Goal : MonoBehaviour
 
     [SerializeField] private TeamEnum teamScoring = TeamEnum.Team1;
     [SerializeField] private int explosionForce = 1300;
-    [SerializeField] private GameObject goalParticleSystem;
+    [SerializeField] private ParticleSystem goalParticleSystem;
 
     [SerializeField] private AudioClip explosionSound;
     [SerializeField] private AudioClip hitSound;
@@ -37,6 +37,12 @@ public class Goal : MonoBehaviour
                 audioSource.clip = explosionSound;
                 audioSource.Play();
             }
+            
+            if (goalParticleSystem != null)
+            {
+                goalParticleSystem.gameObject.SetActive(true);
+                goalParticleSystem.Play();
+            }
 
             //ExplodePlayers();
             //var shaker = FindObjectOfType<CameraShaker>();
@@ -44,7 +50,7 @@ public class Goal : MonoBehaviour
             //shaker.ShakeFor(0.5f, 0.3f);
             //gameManager.AddScore(teamScoring);
             //Destroy(collision.gameObject);
-            //StartCoroutine(ReloadScene());
+            //StartCoroutine(ReldoaScene());
             
             eventChannel.RaiseGoalScored(teamScoring);
 
@@ -63,6 +69,7 @@ public class Goal : MonoBehaviour
                 audioSource.clip = hitSound;
                 audioSource.Play();
             }
+            
         }
     }
 
@@ -96,12 +103,11 @@ public class Goal : MonoBehaviour
     {
         gameManager = GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
-        ParticleSystem ps = goalParticleSystem.GetComponent<ParticleSystem>();
 
-        if (ps != null)
+        if (goalParticleSystem != null)
         {
-            ps.gameObject.SetActive(false);
-            ps.Stop();
+            goalParticleSystem.gameObject.SetActive(false);
+            goalParticleSystem.Stop();
         }
     }
 

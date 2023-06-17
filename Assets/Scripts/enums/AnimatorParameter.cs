@@ -15,5 +15,6 @@ public class AnimatorParameters
     public static readonly int IsTackled = Animator.StringToHash("IsTackled");
     public static readonly int IsShooting = Animator.StringToHash("IsShooting");
     public static readonly int IsHovering = Animator.StringToHash("IsHovering");
+    public static readonly int IsLoadingKick = Animator.StringToHash("IsLoadingKick");
     
 } 
