@@ -41352,6 +41352,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
         type: 3}
+      propertyPath: ForceModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
+        type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
+        type: 3}
+      propertyPath: ForceModule.y.scalar
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
+        type: 3}
+      propertyPath: ForceModule.inWorldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
+        type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
       value: 0.7277056
       objectReference: {fileID: 0}
