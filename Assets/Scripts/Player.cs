@@ -518,7 +518,7 @@ public class Player : MonoBehaviour
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
             var ps = go.GetComponent<ParticleSystem>();
             var main = ps.main;
-            main.duration = dashDuration;
+            //main.duration = dashDuration;
             dashParticlesObject = go;
             Destroy(go, 5f);
             RemoveEnergy(GameSettings.dashEnergyCost);
