@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using enums;
 using ScriptableObjects.Events;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Managers
         
         // Cached variables
         private TextMeshProUGUI _scoreText;
+        private Animator _animator;
 
         // State variables        
         private int _score;
@@ -37,6 +39,7 @@ namespace Managers
             // }
 
             _scoreText = GetComponent<TextMeshProUGUI>();
+            _animator = GetComponent<Animator>();
             UpdateScore();
         }
         
@@ -44,9 +47,9 @@ namespace Managers
         {
             if (scored != team)
             {
-                Debug.Log("SCORED BY " + scored);
                 _score++;
                 UpdateScore();
+                _animator.SetTrigger(AnimatorParameters.TriggerGoalScored);
             }
         }
 
