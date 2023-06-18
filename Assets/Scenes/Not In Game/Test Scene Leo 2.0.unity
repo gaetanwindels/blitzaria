@@ -4984,10 +4984,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.06012024
-    width: 0.33333334
-    height: 0.36072144
+    x: 0.038020834
+    y: 0
+    width: 0.9240742
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -5245,6 +5245,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 3842317981410542653, guid: e0deeaa7c005657469d620ad35a623bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4901862419130891398, guid: e0deeaa7c005657469d620ad35a623bd,
         type: 3}
       propertyPath: m_RootOrder
@@ -5315,6 +5320,12 @@ PrefabInstance:
       propertyPath: ballImpact
       value: 
       objectReference: {fileID: 1779739088}
+    - target: {fileID: 6964443490596722120, guid: e0deeaa7c005657469d620ad35a623bd,
+        type: 3}
+      propertyPath: dashParticles
+      value: 
+      objectReference: {fileID: 2131988584448966854, guid: b083fd6cc7f31d84aac785f4fb9bfc05,
+        type: 3}
     - target: {fileID: 6964443490596722120, guid: e0deeaa7c005657469d620ad35a623bd,
         type: 3}
       propertyPath: shootCoolDown
@@ -41350,70 +41361,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ForceModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: NoiseModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ForceModule.y.scalar
-      value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ForceModule.inWorldSpace
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key0.b
-      value: 0.7277056
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key0.g
-      value: 0.745283
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key0.r
-      value: 0.5238074
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.b
-      value: 0.7660408
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.g
-      value: 0.7830189
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821401, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.r
-      value: 0.5724902
-      objectReference: {fileID: 0}
     - target: {fileID: 5253129891090821406, guid: 844a317ed76dade4a82d3c5de7b6977a,
         type: 3}
       propertyPath: m_Name
       value: ParticleDropsBall
-      objectReference: {fileID: 0}
-    - target: {fileID: 5253129891090821406, guid: 844a317ed76dade4a82d3c5de7b6977a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5253129891090821407, guid: 844a317ed76dade4a82d3c5de7b6977a,
         type: 3}
