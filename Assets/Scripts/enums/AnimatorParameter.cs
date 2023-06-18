@@ -20,8 +20,11 @@ namespace enums
         public static readonly int IsHovering = Animator.StringToHash("IsHovering");
         public static readonly int IsLoadingKick = Animator.StringToHash("IsLoadingKick");
         
-        // Player
+        // Middle Text
         public static readonly int TriggerText = Animator.StringToHash("TriggerText");
+        
+        // Goal Score
+        public static readonly int TriggerGoalScored = Animator.StringToHash("TriggerGoalScored");
 
     }
 }

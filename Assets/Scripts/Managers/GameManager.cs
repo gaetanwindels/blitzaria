@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using Managers;
 using ScriptableObjects.Events;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Managers")]
     [SerializeField] TimerManager _timerManager;
+    [SerializeField] MiddleTextManager _middleTextManager;
 
     [Header("GUI FIELDS")]
     [SerializeField] GameObject pauseCanvas;
@@ -120,6 +122,7 @@ public class GameManager : MonoBehaviour
     {
         FindObjectOfType<Ball>().gameObject.SetActive(false);
         _timerManager.StopTimer();
+        _middleTextManager.DisplayText("GOAL!");
         StartCoroutine(ResetScene());
     }
     
@@ -180,7 +183,7 @@ public class GameManager : MonoBehaviour
 
         if (_timerManager != null)
         {
-            _timerManager.Init(300);
+            _timerManager.Init(180);
         }
         
         players = FindObjectsOfType<Player>();
@@ -241,9 +244,17 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-
+        
+        var isFirst = Mathf.FloorToInt(countDownTimer) == 3;
+        var previousCountDown = Mathf.CeilToInt(countDownTimer);
         countDownTimer -= Time.deltaTime;
-        countDownText.text = Mathf.Ceil(countDownTimer).ToString();
+        var roundedCountDown = Mathf.CeilToInt(countDownTimer);
+
+        if (previousCountDown != roundedCountDown || isFirst)
+        {
+            Debug.Log("YO");
+            _middleTextManager.DisplayText(roundedCountDown != 0 ? roundedCountDown.ToString() : "Go");
+        }
 
         if (countDownTimer < 0)
         {
@@ -267,6 +278,7 @@ public class GameManager : MonoBehaviour
             {
                 _timerManager.StartTimer();
             }
+            
         }
 
     }

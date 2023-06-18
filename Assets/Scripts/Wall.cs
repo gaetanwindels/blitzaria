@@ -9,16 +9,10 @@ public class Wall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var ball = collision.gameObject.GetComponent<Ball>();
-        if (ball != null && audioSource != null)
+        // var ball = collision.gameObject.GetComponent<Ball>();
+        if (audioSource != null)
         {
             audioSource.Play();
-            var body = ball.GetComponent<Rigidbody2D>();
-
-            if (body != null)
-            {
-                body.angularVelocity *= 0.5f;
-            }
         }
     }
 
