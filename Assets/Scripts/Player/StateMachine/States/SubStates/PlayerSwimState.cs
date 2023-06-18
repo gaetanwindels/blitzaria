@@ -1,3 +1,5 @@
+using enums;
+
 public class PlayerSwimState : SubState {
 
     public PlayerSwimState(PlayerStateMachine ctx, PlayerStatePool factory) : base(ctx, factory)
