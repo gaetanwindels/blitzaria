@@ -555,7 +555,6 @@ public class Player : MonoBehaviour
         
         if (IsGrabbing() || isShootCoolDown || isAutoShootDisabled)
         {
-            _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
             isLoadingAutoShoot = false;
             return;
         }
@@ -577,6 +576,8 @@ public class Player : MonoBehaviour
         {
             windupAutoShootTimer += Time.deltaTime;
             isShooting = true;
+            isLoadingAutoShoot = false;
+            _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
             return;
         }
 
@@ -624,6 +625,7 @@ public class Player : MonoBehaviour
         loadingAutoShootTimer = 0;
         isLoadingAutoShoot = false;
         windupAutoShootTimer = 0;
+        _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
     }
 
     private void ManageThrow()

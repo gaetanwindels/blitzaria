@@ -1,3 +1,4 @@
+using enums;
 using UnityEngine;
 
 public class PlayerInWaterState : RootState {

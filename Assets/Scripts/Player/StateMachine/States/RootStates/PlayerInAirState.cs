@@ -1,3 +1,5 @@
+using enums;
+
 public class PlayerInAirState : RootState {
 
     public PlayerInAirState(PlayerStateMachine ctx, PlayerStatePool factory) : base(ctx, factory)
