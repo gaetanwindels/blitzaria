@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     [Header("Players")]
     [SerializeField] List<PlayerSelectConfiguration> playerConfigurations = new List<PlayerSelectConfiguration>();
     [SerializeField] Player[] players;
+    
+    [Header("Ball")]
+    [SerializeField] GameObject ball;
 
     [Header("Default player")]
     [SerializeField] GameObject defaultPlayer;
@@ -68,10 +71,10 @@ public class GameManager : MonoBehaviour
     IEnumerator ResetScene()
     {
         yield return new WaitForSeconds(2f);
+        SpawnBall();
         StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
         positionManager.PositionPlayers();
         positionManager.PositionBall();
-        FindObjectOfType<Ball>(true).gameObject.SetActive(true);
         isCountDown = true;
         countDownTimer = countdownDuration;
     }
@@ -83,6 +86,7 @@ public class GameManager : MonoBehaviour
         playerConfigurations = gameSession.players;
 
         InitPlayers();
+        SpawnBall();
 
         players = FindObjectsOfType<Player>();
 
@@ -120,10 +124,15 @@ public class GameManager : MonoBehaviour
     
     private void HandleGoalScored(TeamEnum scored)
     {
-        FindObjectOfType<Ball>().gameObject.SetActive(false);
+        Destroy(FindObjectOfType<Ball>().gameObject);
         _timerManager.StopTimer();
         _middleTextManager.DisplayText("GOAL!");
         StartCoroutine(ResetScene());
+    }
+
+    private void SpawnBall()
+    {
+        Instantiate(ball, new Vector3(0, 0, 0), Quaternion.identity);
     }
     
     private void InitPlayers()

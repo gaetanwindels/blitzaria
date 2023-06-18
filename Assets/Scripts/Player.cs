@@ -472,7 +472,8 @@ public class Player : MonoBehaviour
 
     private void ManageGravity()
     {
-        _rigidBody.gravityScale = IsInWater() ? 0 : gravityScale;
+        _rigidBody.gravityScale = IsTouchingWater() ? 0 : gravityScale;
+        //_rigidBody.gravityScale =  gravityScale;
     }
 
     private void ManageTackle()
