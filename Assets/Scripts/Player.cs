@@ -513,7 +513,7 @@ public class Player : MonoBehaviour
 
         if (hasPressedDash && !IsLoadingShoot() && _orbManager.ConsumeOrbs(1))
         {
-            var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
+            var go = Instantiate(dashParticles, transform.position, transform.rotation, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
             var ps = go.GetComponent<ParticleSystem>();
             var main = ps.main;
