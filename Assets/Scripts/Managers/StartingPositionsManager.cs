@@ -22,7 +22,7 @@ public class StartingPositionsManager : MonoBehaviour
             return;
         }
 
-        ballPosition.SetObjectToLock(FindObjectOfType<Ball>().gameObject);
+        ballPosition.SetObjectToLock(FindObjectOfType<Ball>(true).gameObject);
     }
 
     public void PositionPlayers()

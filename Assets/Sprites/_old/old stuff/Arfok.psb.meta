@@ -27,7 +27,7 @@ ScriptedImporter:
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
-    ignoreMasterTextureLimit: 0
+    ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -49,6 +49,7 @@ ScriptedImporter:
     flipbookRows: 0
     flipbookColumns: 0
     ignorePngGamma: 0
+    cookieMode: 0
     filterMode: 1
     aniso: 1
     mipBias: 0
@@ -90,6 +91,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: Main
@@ -516,7 +518,8 @@ ScriptedImporter:
     - {x: 26, y: 25}
     - {x: 0, y: 26}
     tessellationDetail: 0
-    uvTransform: {x: 91, y: -329}
+    uvTransform: {x: 820, y: 421}
+    spritePosition: {x: 729, y: 750}
   - name: Avant bras
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -890,7 +893,8 @@ ScriptedImporter:
     - {x: 25, y: 24}
     - {x: 0, y: 25}
     tessellationDetail: 0
-    uvTransform: {x: 175, y: -565}
+    uvTransform: {x: 820, y: 234}
+    spritePosition: {x: 645, y: 799}
   - name: Bras
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1257,7 +1261,8 @@ ScriptedImporter:
     - {x: 27, y: 26}
     - {x: 0, y: 27}
     tessellationDetail: 0
-    uvTransform: {x: -90, y: -476}
+    uvTransform: {x: 414, y: 374}
+    spritePosition: {x: 504, y: 850}
   - name: Pied
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1652,7 +1657,8 @@ ScriptedImporter:
     - {x: 25, y: 24}
     - {x: 0, y: 25}
     tessellationDetail: 0
-    uvTransform: {x: 249, y: 41}
+    uvTransform: {x: 820, y: 342}
+    spritePosition: {x: 571, y: 301}
   - name: Tibia
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2046,7 +2052,8 @@ ScriptedImporter:
     - {x: 24, y: 23}
     - {x: 0, y: 24}
     tessellationDetail: 0
-    uvTransform: {x: -20, y: -333}
+    uvTransform: {x: 414, y: 4}
+    spritePosition: {x: 434, y: 337}
   - name: Jambe
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2424,7 +2431,8 @@ ScriptedImporter:
     - {x: 28, y: 27}
     - {x: 0, y: 28}
     tessellationDetail: 0
-    uvTransform: {x: 349, y: -558}
+    uvTransform: {x: 820, y: 4}
+    spritePosition: {x: 471, y: 562}
   - name: Buste
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2872,7 +2880,8 @@ ScriptedImporter:
     - {x: 28, y: 27}
     - {x: 0, y: 28}
     tessellationDetail: 0
-    uvTransform: {x: 149, y: -641}
+    uvTransform: {x: 636, y: 4}
+    spritePosition: {x: 487, y: 645}
   - name: "T\xEAte"
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -3610,7 +3619,8 @@ ScriptedImporter:
     - {x: 62, y: 63}
     - {x: 34, y: 63}
     tessellationDetail: 0
-    uvTransform: {x: -334, y: -963}
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 338, y: 967}
   - name: Pied copie
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -4006,7 +4016,8 @@ ScriptedImporter:
     - {x: 26, y: 25}
     - {x: 0, y: 26}
     tessellationDetail: 0
-    uvTransform: {x: -199, y: -44}
+    uvTransform: {x: 636, y: 388}
+    spritePosition: {x: 835, y: 432}
   - name: Tibia copie
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -4524,7 +4535,8 @@ ScriptedImporter:
     - {x: 28, y: 27}
     - {x: 0, y: 28}
     tessellationDetail: 0
-    uvTransform: {x: -653, y: 131}
+    uvTransform: {x: 4, y: 585}
+    spritePosition: {x: 657, y: 454}
   - name: Jambe copie
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -4912,7 +4924,8 @@ ScriptedImporter:
     - {x: 28, y: 29}
     - {x: 0, y: 29}
     tessellationDetail: 0
-    uvTransform: {x: -266, y: -6}
+    uvTransform: {x: 220, y: 585}
+    spritePosition: {x: 486, y: 591}
   - name: Bras_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -5341,7 +5354,8 @@ ScriptedImporter:
     - {x: 29, y: 28}
     - {x: 0, y: 29}
     tessellationDetail: 0
-    uvTransform: {x: -496, y: -15}
+    uvTransform: {x: 4, y: 850}
+    spritePosition: {x: 500, y: 865}
   - name: Avant bras_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -5728,7 +5742,8 @@ ScriptedImporter:
     - {x: 27, y: 26}
     - {x: 0, y: 27}
     tessellationDetail: 0
-    uvTransform: {x: -27, y: -351}
+    uvTransform: {x: 636, y: 488}
+    spritePosition: {x: 663, y: 839}
   - name: Main_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -6163,7 +6178,8 @@ ScriptedImporter:
     - {x: 26, y: 25}
     - {x: 0, y: 26}
     tessellationDetail: 0
-    uvTransform: {x: -307, y: -221}
+    uvTransform: {x: 446, y: 585}
+    spritePosition: {x: 753, y: 806}
   characterData:
     bones:
     - name: bone_1
@@ -6476,6 +6492,7 @@ ScriptedImporter:
   keepDupilcateSpriteName: 0
   skeletonAssetReferenceID: 
   padding: 4
+  spriteSizeExpand: 0
   spriteCategoryList:
     categories: []
   spritePackingTag: 
@@ -6685,6 +6702,8 @@ ScriptedImporter:
   sharedRigPSDLayers: []
   pSDLayerImportSetting: []
   importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: Arfok Texture
   prefabAssetName: Arfok Prefab

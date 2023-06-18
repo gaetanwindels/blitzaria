@@ -27,7 +27,7 @@ ScriptedImporter:
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
-    ignoreMasterTextureLimit: 0
+    ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -49,6 +49,7 @@ ScriptedImporter:
     flipbookRows: 0
     flipbookColumns: 0
     ignorePngGamma: 0
+    cookieMode: 0
     filterMode: 1
     aniso: 1
     mipBias: 0
@@ -90,6 +91,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: Calque 14
@@ -667,7 +669,8 @@ ScriptedImporter:
     - {x: 6, y: 50}
     - {x: 7, y: 50}
     tessellationDetail: 0
-    uvTransform: {x: -102, y: 30}
+    uvTransform: {x: 314, y: 922}
+    spritePosition: {x: 416, y: 892}
   - name: Calque 15
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1189,7 +1192,8 @@ ScriptedImporter:
     - {x: 42, y: 41}
     - {x: 0, y: 42}
     tessellationDetail: 0
-    uvTransform: {x: -17, y: -290}
+    uvTransform: {x: 564, y: 599}
+    spritePosition: {x: 581, y: 889}
   - name: Calque 13
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1703,7 +1707,8 @@ ScriptedImporter:
     - {x: 25, y: 24}
     - {x: 0, y: 25}
     tessellationDetail: 0
-    uvTransform: {x: 80, y: -603}
+    uvTransform: {x: 490, y: 342}
+    spritePosition: {x: 410, y: 945}
   - name: Calque 7
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2208,7 +2213,8 @@ ScriptedImporter:
     - {x: 26, y: 25}
     - {x: 0, y: 26}
     tessellationDetail: 0
-    uvTransform: {x: -134, y: -167}
+    uvTransform: {x: 314, y: 342}
+    spritePosition: {x: 448, y: 509}
   - name: Calque 6
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2773,7 +2779,8 @@ ScriptedImporter:
     - {x: 27, y: 26}
     - {x: 0, y: 27}
     tessellationDetail: 0
-    uvTransform: {x: -295, y: 404}
+    uvTransform: {x: 4, y: 765}
+    spritePosition: {x: 299, y: 361}
   - name: Calque 8
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -3117,7 +3124,8 @@ ScriptedImporter:
     - {x: 25, y: 24}
     - {x: 0, y: 25}
     tessellationDetail: 0
-    uvTransform: {x: 434, y: -155}
+    uvTransform: {x: 698, y: 118}
+    spritePosition: {x: 264, y: 273}
   - name: Calque 12
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -3663,7 +3671,8 @@ ScriptedImporter:
     - {x: 36, y: 35}
     - {x: 36, y: 28}
     tessellationDetail: 0
-    uvTransform: {x: -328, y: -708}
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 332, y: 712}
   - name: Calque 19
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -4412,7 +4421,8 @@ ScriptedImporter:
     - {x: 43, y: 42}
     - {x: 0, y: 43}
     tessellationDetail: 0
-    uvTransform: {x: 30, y: -1053}
+    uvTransform: {x: 314, y: 4}
+    spritePosition: {x: 284, y: 1057}
   - name: Calque 18
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -4758,7 +4768,8 @@ ScriptedImporter:
     - {x: 26, y: 25}
     - {x: 0, y: 26}
     tessellationDetail: 0
-    uvTransform: {x: -2, y: -484}
+    uvTransform: {x: 525, y: 676}
+    spritePosition: {x: 527, y: 1160}
   - name: Calque 9
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -5284,7 +5295,8 @@ ScriptedImporter:
     - {x: 27, y: 26}
     - {x: 0, y: 27}
     tessellationDetail: 0
-    uvTransform: {x: -521, y: -75}
+    uvTransform: {x: 4, y: 483}
+    spritePosition: {x: 525, y: 558}
   - name: Calque 10
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -5839,7 +5851,8 @@ ScriptedImporter:
     - {x: 0, y: 26}
     - {x: 4, y: 47}
     tessellationDetail: 0
-    uvTransform: {x: -408, y: 302}
+    uvTransform: {x: 314, y: 676}
+    spritePosition: {x: 722, y: 374}
   - name: Calque 11
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -6183,7 +6196,8 @@ ScriptedImporter:
     - {x: 25, y: 24}
     - {x: 25, y: 0}
     tessellationDetail: 0
-    uvTransform: {x: -346, y: 525}
+    uvTransform: {x: 525, y: 863}
+    spritePosition: {x: 871, y: 338}
   - name: Calque 17
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -6749,7 +6763,8 @@ ScriptedImporter:
     - {x: 0, y: 26}
     - {x: 49, y: 12}
     tessellationDetail: 0
-    uvTransform: {x: -254, y: -527}
+    uvTransform: {x: 490, y: 538}
+    spritePosition: {x: 744, y: 1065}
   - name: Calque 16
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -7245,7 +7260,8 @@ ScriptedImporter:
     - {x: 26, y: 25}
     - {x: 0, y: 26}
     tessellationDetail: 0
-    uvTransform: {x: 172, y: -1035}
+    uvTransform: {x: 698, y: 4}
+    spritePosition: {x: 526, y: 1039}
   - name: Calque 20
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -7785,7 +7801,8 @@ ScriptedImporter:
     - {x: 41, y: 40}
     - {x: 0, y: 41}
     tessellationDetail: 0
-    uvTransform: {x: -426, y: -481}
+    uvTransform: {x: 490, y: 599}
+    spritePosition: {x: 916, y: 1080}
   characterData:
     bones:
     - name: bone_1
@@ -8170,6 +8187,7 @@ ScriptedImporter:
   keepDupilcateSpriteName: 0
   skeletonAssetReferenceID: 
   padding: 4
+  spriteSizeExpand: 0
   spriteCategoryList:
     categories: []
   spritePackingTag: 
@@ -8479,6 +8497,8 @@ ScriptedImporter:
   sharedRigPSDLayers: []
   pSDLayerImportSetting: []
   importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: Jeanine Texture
   prefabAssetName: Jeanine Prefab

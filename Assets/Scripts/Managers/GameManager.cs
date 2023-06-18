@@ -70,8 +70,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
         positionManager.PositionPlayers();
-        FindObjectOfType<Ball>(true).gameObject.SetActive(true);
         positionManager.PositionBall();
+        FindObjectOfType<Ball>(true).gameObject.SetActive(true);
         isCountDown = true;
         countDownTimer = countdownDuration;
     }
