@@ -1060,7 +1060,7 @@ MonoBehaviour:
   launchBallSound: {fileID: 8300000, guid: c4984e0932c438c419969bb2aeeca63d, type: 3}
   hitBallSound: {fileID: 8300000, guid: 19b478875096c73438b2aa46e3a2df5c, type: 3}
   turboParticles: {fileID: 7157193096785850357}
-  dashParticles: {fileID: 5241768682474429242, guid: d8a111dbd8f0e7f41a5660e0ba60e236,
+  dashParticles: {fileID: 2131988584448966854, guid: b083fd6cc7f31d84aac785f4fb9bfc05,
     type: 3}
   ballImpact: {fileID: 5253129891090821406, guid: 844a317ed76dade4a82d3c5de7b6977a,
     type: 3}
