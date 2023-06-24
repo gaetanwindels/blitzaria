@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: fa81303f007e8364280320d3f9502627
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Atlantis Text
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a4e781f0b155c194d849609a9e372f59, type: 3}
+  - {fileID: 12800000, guid: ea1fbfd0e5790ba409c333d48c87a390, type: 3}
+  - {fileID: 12800000, guid: 53625c181d88b9f428877623e09184c7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

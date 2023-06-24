@@ -20,6 +20,8 @@ namespace Managers
         // State variables        
         private int _score;
 
+        public int Score => _score;
+
         private void OnEnable()
         {
             eventChannel.GoalScoredEvent += OnGoalScored;
@@ -50,6 +52,7 @@ namespace Managers
                 _score++;
                 UpdateScore();
                 _animator.SetTrigger(AnimatorParameters.TriggerGoalScored);
+                eventChannel.RaiseScoreUpdated(scored);
             }
         }
 

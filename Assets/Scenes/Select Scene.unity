@@ -1753,6 +1753,89 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1552424206}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1557544391
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1424789194600006528, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_Name
+      value: Music Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375753262592260196, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.585
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375753262592260196, guid: fcc222a532995c4458f08462a7a301c0,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a9cb547edc8138419b6ce2382131ce0, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fcc222a532995c4458f08462a7a301c0, type: 3}
 --- !u!224 &1672890532 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4493894732812789754, guid: f242a1eac85a32e46ae3f10de324c51a,
@@ -2582,6 +2665,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4493894733078388394, guid: f242a1eac85a32e46ae3f10de324c51a,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a40ebaca559115644a1def58b95ee7a4,
+        type: 2}
+    - target: {fileID: 4493894733078388394, guid: f242a1eac85a32e46ae3f10de324c51a,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8486165327903568623, guid: a40ebaca559115644a1def58b95ee7a4,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

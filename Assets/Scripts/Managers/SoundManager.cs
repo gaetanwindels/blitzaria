@@ -13,17 +13,17 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
+        // if (instance == null)
+        // {
+        //     instance = this;
+        // }
+        // else if (instance != this)
+        // {
+        //     Destroy(gameObject);
+        // }
 
         //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update

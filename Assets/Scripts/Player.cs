@@ -931,12 +931,19 @@ public class Player : MonoBehaviour
     public void DisableIsTackling()
     {
         var ball = FindObjectOfType<Ball>();
-        var collider = ball.GetComponent<Collider2D>();
+
+        Collider2D collider2D = null;
+        if (ball != null)
+        {
+            collider2D = ball.GetComponent<Collider2D>();
+        }
+        
         grabHitbox.enabled = true;
-        if (collider != null)
+        if (collider2D != null)
         {
             Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
         }
+        
         isTackling = false;
     }
     
@@ -1211,7 +1218,7 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableBody(GameObject newBall)
     {
-        if (newBall != null)
+        if (newBall != null && newBall.GetComponent<Collider2D>() != null)
         {
             Debug.Log("Disable body" + GetComponent<Collider2D>());
             Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
