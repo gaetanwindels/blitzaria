@@ -230,7 +230,7 @@ public class GameManager : MonoBehaviour
 
         if (timerManager != null)
         {
-            timerManager.Init(10);
+            timerManager.Init(180);
         }
         
         players = FindObjectsOfType<Player>();
