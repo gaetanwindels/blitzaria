@@ -33,7 +33,6 @@ public class Goal : MonoBehaviour
         {
             if (audioSource != null && explosionSound != null)
             {
-                audioSource.volume = 1f;
                 audioSource.clip = explosionSound;
                 audioSource.Play();
             }
@@ -65,7 +64,7 @@ public class Goal : MonoBehaviour
         {
             if (audioSource != null && hitSound != null)
             {
-                audioSource.volume = 1f;
+                //audioSource.volume = 1f;
                 audioSource.clip = hitSound;
                 audioSource.Play();
             }

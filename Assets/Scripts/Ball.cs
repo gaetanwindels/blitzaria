@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using Rewired;
 using System;
+using System.Security.Cryptography;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public class Ball : MonoBehaviour
@@ -47,6 +48,12 @@ public class Ball : MonoBehaviour
 
         Player player = collision.gameObject.GetComponentInParent<Player>();
 
+
+        if (collision.GetComponent<Goal>() != null)
+        {
+            Destroy(gameObject);
+        }
+        
         if (player != null)
         {
             if (tagName == "ShotHitbox")

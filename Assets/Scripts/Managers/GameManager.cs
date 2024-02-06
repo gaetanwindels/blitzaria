@@ -4,8 +4,10 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using enums;
 using Managers;
 using ScriptableObjects.Events;
+using UI;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -31,10 +33,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] int countdownDuration = 5;
 
     [Header("Managers")]
-    [SerializeField] TimerManager _timerManager;
+    [SerializeField] TimerManager timerManager;
+    [SerializeField] CountdownManager countdownManager;
+    [SerializeField] ScoreManager scoreManagerTeam1;
+    [SerializeField] ScoreManager scoreManagerTeam2;
     [SerializeField] MiddleTextManager _middleTextManager;
 
     [Header("GUI FIELDS")]
+    [SerializeField] GameObject endgameScreen;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] TextMeshProUGUI countDownText;
     [SerializeField] TextMeshProUGUI winText;
@@ -49,34 +55,37 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public float timer;
     public bool isTimerStopped;
-    public float countDownTimer;
-    private int scoreTeam1;
-    private int scoreTeam2;
-    private bool isCountDown = true;
     private GameSessionConfiguration gameSession;
+    private MatchState _matchState;
 
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         _eventChannel.TimeoutEvent += HandleGameOver;
-        _eventChannel.GoalScoredEvent += HandleGoalScored;
+        _eventChannel.ScoreUpdatedEvent += HandleGoalScored;
+        _eventChannel.CountdownOverEvent += HandleCountdownOver;
     }
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         _eventChannel.TimeoutEvent -= HandleGameOver;
         _eventChannel.GoalScoredEvent -= HandleGoalScored;
+        _eventChannel.CountdownOverEvent -= HandleCountdownOver;
     }
 
-    IEnumerator ResetScene()
+    IEnumerator ResetSceneRoutine()
     {
         yield return new WaitForSeconds(2f);
+        ReloadScene();
+    }
+
+    private void ReloadScene()
+    {
         SpawnBall();
         StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
         positionManager.PositionPlayers();
         positionManager.PositionBall();
-        isCountDown = true;
-        countDownTimer = countdownDuration;
+        countdownManager.StartCountdown();
     }
 
     // called second
@@ -96,42 +105,74 @@ public class GameManager : MonoBehaviour
         }
 
         isTimerStopped = false;
-        isCountDown = true;
         winText.text = "";
-        countDownTimer = countdownDuration;
         Time.timeScale = 1;
+        _matchState = MatchState.CountdownRegular;
+        endgameScreen.SetActive(false);
     }
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
+        // if (instance == null)
+        // {
+        //     instance = this;
+        // }
+        // else if (instance != this)
+        // {
+        //     Destroy(gameObject);
+        // }
 
         //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void HandleGameOver()
     {
-        Time.timeScale = 0;
+        if (scoreManagerTeam1.Score == scoreManagerTeam2.Score)
+        {
+            _matchState = MatchState.CountdownOvertime;
+            if (timerManager != null)
+            {
+                timerManager.InitOvertime();
+            }
+            ReloadScene();
+        } else if (scoreManagerTeam1.Score > scoreManagerTeam2.Score)
+        {
+            Time.timeScale = 0;
+            //_middleTextManager.DisplayText("TEAM 1 WON!");
+            _matchState = MatchState.Finished;
+            endgameScreen.SetActive(true);
+        } else
+        {
+            //_middleTextManager.DisplayText("TEAM 2 WON!");
+            Time.timeScale = 0;
+            _matchState = MatchState.Finished;
+            endgameScreen.SetActive(true);
+        }
     }
     
     private void HandleGoalScored(TeamEnum scored)
     {
-        Destroy(FindObjectOfType<Ball>().gameObject);
-        _timerManager.StopTimer();
-        _middleTextManager.DisplayText("GOAL!");
-        StartCoroutine(ResetScene());
+        timerManager.StopTimer();
+
+        if (_matchState == MatchState.RunningOvertime)
+        {
+            HandleGameOver();
+        }
+        else
+        {
+            StartCoroutine(ResetSceneRoutine());  
+        }
+
     }
 
     private void SpawnBall()
     {
+        var existingBall = FindObjectOfType<Ball>();
+        if (existingBall != null)
+        {
+            Destroy(existingBall.gameObject);
+        }
         Instantiate(ball, new Vector3(0, 0, 0), Quaternion.identity);
     }
     
@@ -177,9 +218,6 @@ public class GameManager : MonoBehaviour
     void Init()
     {
         timer = gameDuration;
-        countDownTimer = countdownDuration;
-        scoreTeam1 = 0;
-        scoreTeam2 = 0;
         winText.text = "";
         //restartButton.SetActive(false);
         //mainMenuButton.SetActive(false);
@@ -190,27 +228,20 @@ public class GameManager : MonoBehaviour
             playerConfigurations = gameSession.players;
         }
 
-        if (_timerManager != null)
+        if (timerManager != null)
         {
-            _timerManager.Init(180);
+            timerManager.Init(180);
         }
         
         players = FindObjectsOfType<Player>();
         pauseCanvas.SetActive(false);
         Time.timeScale = 1;
-    }
-    
-    IEnumerator ReloadScene()
-    {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        countdownManager.StartCountdown();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ManageCountDown();
-        UpdateEnergy();
 
         //restartButton.SetActive(IsGameOver());
         //mainMenuButton.SetActive(IsGameOver());
@@ -247,88 +278,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ManageCountDown()
+    private void HandleCountdownOver()
     {
-        if (!isCountDown)
-        {
-            return;
-        }
-        
-        var isFirst = Mathf.FloorToInt(countDownTimer) == 3;
-        var previousCountDown = Mathf.CeilToInt(countDownTimer);
-        countDownTimer -= Time.deltaTime;
-        var roundedCountDown = Mathf.CeilToInt(countDownTimer);
+       
+        var positionLockers = FindObjectsOfType<PositionLocker>();
+        var playersFound = FindObjectsOfType<Player>();
 
-        if (previousCountDown != roundedCountDown || isFirst)
+        foreach (PositionLocker positionLocker in positionLockers)
         {
-            Debug.Log("YO");
-            _middleTextManager.DisplayText(roundedCountDown != 0 ? roundedCountDown.ToString() : "Go");
+            positionLocker.UnlockObject();
         }
 
-        if (countDownTimer < 0)
-        {
-            isCountDown = false;
-            countDownText.text = "";
-            var positionLockers = FindObjectsOfType<PositionLocker>();
-            var playersFound = FindObjectsOfType<Player>();
-
-            foreach (PositionLocker positionLocker in positionLockers)
-            {
-                positionLocker.UnlockObject();
-            }
-
-            foreach (Player player in players)
-            {
-                Debug.Log("enabled");
-                player.EnableInputs();
-            }
-            
-            if (_timerManager != null)
-            {
-                _timerManager.StartTimer();
-            }
-            
-        }
-
-    }
-
-    public void AddScore(TeamEnum team)
-    {
-        if (team == TeamEnum.Team1)
-        {
-            winText.text = "RED TEAM SCORE";
-            winText.color = new Color32(255, 55, 55, 255);
-            scoreTeam1++;
-        } else
-        {
-            scoreTeam2++;
-            winText.text = "BLUE TEAM SCORE";
-            winText.color = new Color32(57, 105, 255, 255);
-        }
-    }
-
-    public void UpdateEnergy() 
-    {
         foreach (Player player in players)
         {
-            if (player.playerNumber == 0)
-            {
-                sliderEnergyBar1.value = (player.currentEnergy / GameSettings.energyAmount);
-            } else if (player.playerNumber == 1)
-            {
-                sliderEnergyBar2.value = (player.currentEnergy / GameSettings.energyAmount);
-            }
-            else if (player.playerNumber == 2)
-            {
-                sliderEnergyBar3.value = (player.currentEnergy / GameSettings.energyAmount);
-            }
-            else if (player.playerNumber == 3)
-            {
-                sliderEnergyBar4.value = (player.currentEnergy / GameSettings.energyAmount);
-            }
-        }  
-    }
+            Debug.Log("enabled");
+            player.EnableInputs();
+        }
+        
+        if (timerManager != null)
+        {
+            timerManager.StartTimer();
+        }
 
+        if (_matchState == MatchState.CountdownOvertime)
+        {
+            _matchState = MatchState.RunningOvertime;
+        }
+        else
+        {
+            _matchState = MatchState.RunningRegular;
+        }
+        
+    }
+    
     public bool IsPaused()
     {
         return pauseCanvas.activeSelf;

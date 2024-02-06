@@ -9,12 +9,32 @@ namespace ScriptableObjects.Events
     {
         public event UnityAction<TeamEnum> GoalScoredEvent;
         public event UnityAction TimeoutEvent;
+        
+        public event UnityAction CountdownOverEvent;
+        
+        public event UnityAction<TeamEnum> ScoreUpdatedEvent;
 
+        public void RaiseCountdownOver()
+        {
+            if (CountdownOverEvent != null)
+            {
+                CountdownOverEvent.Invoke();
+            }
+        }
+        
         public void RaiseGoalScored(TeamEnum teamEnum)
         {
             if (GoalScoredEvent != null)
             {
                 GoalScoredEvent.Invoke(teamEnum);
+            }
+        }
+        
+        public void RaiseScoreUpdated(TeamEnum teamEnum)
+        {
+            if (ScoreUpdatedEvent != null)
+            {
+                ScoreUpdatedEvent.Invoke(teamEnum);
             }
         }
         

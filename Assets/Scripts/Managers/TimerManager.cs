@@ -16,6 +16,7 @@ public class TimerManager : MonoBehaviour
     // State Variable
     private bool _isStarted;
     private float _currentTime;
+    private bool _isOvertime;
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class TimerManager : MonoBehaviour
     
     private void UpdateTimer()
     {
-        if (_timerText == null)
+        if (_timerText == null || _isOvertime)
         {
             return;
         }
@@ -63,6 +64,13 @@ public class TimerManager : MonoBehaviour
         }
 
         _timerText.text = minutes + ":" + secondsText;
+    }
+    
+    public void InitOvertime()
+    {
+        _isOvertime = true;
+        _timerText.text = "OT";
+        UpdateTimer();
     }
 
     public void Init(float seconds)
