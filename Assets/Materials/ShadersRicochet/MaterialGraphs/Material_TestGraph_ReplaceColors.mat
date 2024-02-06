@@ -124,8 +124,8 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.5413915, g: 0.38431373, b: 0.6117647, a: 1}
-    - _Color_replacing_01: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_replacing_02: {r: 1, g: 1, b: 1, a: 1}
+    - _Color_replacing_01: {r: 0.16365612, g: 0.6320754, b: 0.12820399, a: 1}
+    - _Color_replacing_02: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
     - _Color_replacing_03: {r: 1, g: 1, b: 1, a: 1}
     - _Color_replacing_04: {r: 1, g: 1, b: 1, a: 1}
     - _Color_replacing_05: {r: 1, g: 1, b: 1, a: 1}

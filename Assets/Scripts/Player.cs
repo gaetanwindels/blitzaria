@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
     [SerializeField] private ParticleSystem turboParticles;
     [SerializeField] private GameObject dashParticles;
     [SerializeField] private GameObject ballImpact;
+    [SerializeField] private ParticleSystem loadingShootParticles;
 
     public Brain brain;
     public InputManager inputManager;
@@ -557,12 +558,14 @@ public class Player : MonoBehaviour
         if (IsGrabbing() || isShootCoolDown || isAutoShootDisabled)
         {
             isLoadingAutoShoot = false;
+            loadingShootParticles.Stop();
             return;
         }
 
         if (inputManager.GetButtonDown("tackle"))
         {
             _animator.SetBool(AnimatorParameters.IsLoadingKick, true);
+            loadingShootParticles.Play();
             isLoadingAutoShoot = true;
             return;
         }
@@ -577,6 +580,7 @@ public class Player : MonoBehaviour
         {
             windupAutoShootTimer += Time.deltaTime;
             isShooting = true;
+            loadingShootParticles.Stop();
             isLoadingAutoShoot = false;
             _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
             return;
@@ -994,22 +998,32 @@ public class Player : MonoBehaviour
     IEnumerator ShootingRoutine(float power)
     {
         var ball = FindObjectOfType<Ball>();
-        var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
-        var adjustedPower = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, power);
         
-        Time.timeScale = 0;
-        _audioSource.clip = hitBallSound;
-        AudioUtils.PlaySound(gameObject);
-        isShooting = true;
-        var percentPower = Math.Min(1f, (adjustedPower - minShotPower) / (maxShotPower - minShotPower));
-        var shootFreezeTime = minShootFreezeTime + (maxShootFreezeTime - minShootFreezeTime) * percentPower;
-        yield return new WaitForSecondsRealtime(shootFreezeTime);
-        var impactVfx = Instantiate(ballImpact, ball.transform.position, Quaternion.identity);
-        Destroy(impactVfx, 0.5f);
-        //FindObjectOfType<CameraShaker>().ShakeFor(0.1f, 0.2f * percentPower);
-        Time.timeScale = 1;
+        var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
+        
+        if (rigidBodyBall == null)
+        {
+            yield return new WaitForSecondsRealtime(0);
+        }
+        else
+        {
+            var adjustedPower = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, power);
+        
+            Time.timeScale = 0;
+            _audioSource.clip = hitBallSound;
+            AudioUtils.PlaySound(gameObject);
+            isShooting = true;
+            var percentPower = Math.Min(1f, (adjustedPower - minShotPower) / (maxShotPower - minShotPower));
+            //var shootFreezeTime = minShootFreezeTime + (maxShootFreezeTime - minShootFreezeTime) * percentPower;
+            var shootFreezeTime = 0;
+            yield return new WaitForSecondsRealtime(shootFreezeTime);
+            var impactVfx = Instantiate(ballImpact, ball.transform.position, Quaternion.identity);
+            Destroy(impactVfx, 0.5f);
+            //FindObjectOfType<CameraShaker>().ShakeFor(0.1f, 0.2f * percentPower);
+            Time.timeScale = 1;
 
-        Shoot(power);
+            Shoot(power);
+        }
     }
 
     IEnumerator DisableEnergyReplenish()
@@ -1218,12 +1232,12 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableBody(GameObject newBall)
     {
-        if (newBall != null && newBall.GetComponent<Collider2D>() != null)
+        if (newBall != null && newBall.GetComponent<Collider2D>() != null && GetComponent<Collider2D>() != null)
         {
             Debug.Log("Disable body" + GetComponent<Collider2D>());
             Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
             yield return new WaitForSeconds(0.6f);
-            if (newBall != null)
+            if (newBall != null && newBall.GetComponent<Collider2D>() != null)
             {
                 Debug.Log("Enable body");
                 Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);

@@ -19,12 +19,18 @@ public class Ball : MonoBehaviour
 
     [SerializeField] public float mass = 1f;
     [SerializeField] public float massInWater = 0.5f;
+    
+    [SerializeField] public float minSpeedTrail = 0.5f;
+    [SerializeField] public AnimationCurve trailIntensity;
 
     [Header("Curl")]
     [SerializeField] public float velocityDragFactor = 0.5f;
     [SerializeField] public float minAngularVelocityCurl = 10f;
     [SerializeField] public float baseCurlRotation = 3000;
 
+    [Header("Vfx")]
+    [SerializeField] public ParticleSystem trailParticles;
+    
     [SerializeField] AudioClip hitSound;
 
     // Cached variables
@@ -116,7 +122,9 @@ public class Ball : MonoBehaviour
         {
             rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : gravityScale;
             rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? massInWater : mass;
-
+            
+            ManageTrail();
+            
             if (Mathf.Abs(rigidbody.angularVelocity) > minAngularVelocityCurl) 
             {
                 ManageCurl();
@@ -131,6 +139,20 @@ public class Ball : MonoBehaviour
         {
             this.transform.position = player.GetBallPoint().position;
             ManageRotation();
+        }
+    }
+    
+    public void ManageTrail()
+    {
+        var rigidbody = GetComponent<Rigidbody2D>();
+        if (trailParticles != null && GetComponent<Rigidbody2D>() != null)
+        {
+            if (GetComponent<Rigidbody2D>() != null)
+            {
+                var em = trailParticles.emission;
+                em.rateOverTimeMultiplier = trailIntensity.Evaluate(rigidbody.velocity.magnitude);
+            }
+            
         }
     }
 

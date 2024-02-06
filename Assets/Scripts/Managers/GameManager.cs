@@ -201,7 +201,13 @@ public class GameManager : MonoBehaviour
                 var player = go.GetComponent<Player>();
                 player.playerNumber = playerConf.playerNumber;
                 player.team = playerConf.team;
-                var clothes = go.GetComponentsInChildren<SpriteRenderer>();
+                var sprite = player.GetComponent<SpriteRenderer>();
+                sprite.material.SetColor("_Color_replacing_01", playerConf.color);
+
+                var color = playerConf.color;
+                var newColor = new Color(color.r + 20, color.g + 20, color.b + 20, color.a);
+                sprite.material.SetColor("_Color_replacing_02", color);
+                //var clothes = go.GetComponentsInChildren<SpriteRenderer>();
                 //clothes[clothes.Length - 1].color = playerConf.color;
             }
         }
