@@ -3,7 +3,7 @@ guid: 266935395faea294d9f5177aebf13627
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -25,7 +25,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -65,13 +65,14 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -2915,82 +2916,82 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LoadingShoot_2: 1850993995
-      PYthon_Spritesheet_V2_22: 1868238806
-      LoadingShoot_1: -381819950
-      Kick_24: -899086165
-      PYthon_Spritesheet_V2_43: 44680715
-      PYthon_Spritesheet_V2_25: -853804863
-      PYthon_Spritesheet_V2_14: 514696084
-      PYthon_Spritesheet_V2_20: 1132041885
-      Dash_1: 1101024260
-      PYthon_Spritesheet_V2_5: 1722695751
-      PYthon_Spritesheet_V2_58: 1752751567
-      PYthon_Spritesheet_V2_2: -1650540804
-      InAir_3: 457696826
-      PYthon_Spritesheet_V2_19: -95200870
-      PYthon_Spritesheet_V2_15: -1304751220
-      PYthon_Spritesheet_V2_9: 936175706
-      Diving_1: 865567367
-      Kick_32: 43327422
-      PYthon_Spritesheet_V2_55: 1419190264
-      PYthon_Spritesheet_V2_44: -1144061202
-      PYthon_Spritesheet_V2_6: -797266611
-      PYthon_Spritesheet_V2_0: -717458005
-      Swimming_3: 357484657
       Base_1: -1304751220
-      PYthon_Spritesheet_V2_21: 1101024260
-      PYthon_Spritesheet_V2_60: 366818545
-      LoadingShoot_21: 345228623
-      PYthon_Spritesheet_V2_1: -1798432361
-      PYthon_Spritesheet_V2_11: -94819769
-      Kick_23: 46718590
-      Swimming_21: 509152907
-      Shooting_2: 1631197499
-      Kick_22: -1472195447
-      Swimming_2: -1653356165
-      Swimming_1: -2050742446
-      PYthon_Spritesheet_V2_56: -1892349550
-      PYthon_Spritesheet_V2_57: 1549422250
-      Kick_1: 44680715
-      PYthon_Spritesheet_V2_34: 1631197499
-      PYthon_Spritesheet_V2_3: 520321285
-      PYthon_Spritesheet_V2_27: -2050742446
-      PYthon_Spritesheet_V2_38: 2071411923
-      InAir_2: 520321285
+      Dash_1: 1101024260
+      Diving_1: 865567367
       InAir_1: 366818545
-      Kick_31: 1895993685
-      Swimming_11: 1088960418
-      PYthon_Spritesheet_V2_41: 684944238
-      PYthon_Spritesheet_V2_12: -1465242455
-      PYthon_Spritesheet_V2_23: -212310894
-      PYthon_Spritesheet_V2_7: 304924797
-      Kick_3: 217099820
-      PYthon_Spritesheet_V2_30: 772840686
-      Kick_33: -1547049344
-      PYthon_Spritesheet_V2_40: -790545718
-      LoadingShoot_11: 936175706
-      Shooting_1: 244027263
-      PYthon_Spritesheet_V2_24: 1181927060
-      PYthon_Spritesheet_V2_29: -1723515749
-      PYthon_Spritesheet_V2_10: -1594536580
+      InAir_2: 520321285
+      InAir_3: 457696826
+      Kick_1: 44680715
+      Kick_11: -1144061202
       Kick_21: -1106370525
-      PYthon_Spritesheet_V2_59: 865567367
-      PYthon_Spritesheet_V2_8: -381819950
+      Kick_22: -1472195447
+      Kick_23: 46718590
+      Kick_24: -899086165
+      Kick_3: 217099820
+      Kick_31: 1895993685
+      Kick_32: 43327422
+      Kick_33: -1547049344
+      LoadingShoot_1: -381819950
+      LoadingShoot_11: 936175706
+      LoadingShoot_2: 1850993995
+      LoadingShoot_21: 345228623
+      LoadingShoot_3: -742562507
+      PYthon_Spritesheet_V2_0: -717458005
+      PYthon_Spritesheet_V2_1: -1798432361
+      PYthon_Spritesheet_V2_10: -1594536580
+      PYthon_Spritesheet_V2_11: -94819769
+      PYthon_Spritesheet_V2_12: -1465242455
+      PYthon_Spritesheet_V2_13: -1570527200
+      PYthon_Spritesheet_V2_14: 514696084
+      PYthon_Spritesheet_V2_15: -1304751220
       PYthon_Spritesheet_V2_16: 1123503019
       PYthon_Spritesheet_V2_17: -1659704661
-      PYthon_Spritesheet_V2_39: -438024551
-      PYthon_Spritesheet_V2_13: -1570527200
-      Kick_11: -1144061202
-      PYthon_Spritesheet_V2_26: -220806685
-      Tackled_1: 1123503019
-      PYthon_Spritesheet_V2_4: 729359369
-      Shooting_3: 2010855474
-      PYthon_Spritesheet_V2_28: 1088960418
-      PYthon_Spritesheet_V2_42: 1851423679
-      LoadingShoot_3: -742562507
       PYthon_Spritesheet_V2_18: -83440460
-  spritePackingTag: 
+      PYthon_Spritesheet_V2_19: -95200870
+      PYthon_Spritesheet_V2_2: -1650540804
+      PYthon_Spritesheet_V2_20: 1132041885
+      PYthon_Spritesheet_V2_21: 1101024260
+      PYthon_Spritesheet_V2_22: 1868238806
+      PYthon_Spritesheet_V2_23: -212310894
+      PYthon_Spritesheet_V2_24: 1181927060
+      PYthon_Spritesheet_V2_25: -853804863
+      PYthon_Spritesheet_V2_26: -220806685
+      PYthon_Spritesheet_V2_27: -2050742446
+      PYthon_Spritesheet_V2_28: 1088960418
+      PYthon_Spritesheet_V2_29: -1723515749
+      PYthon_Spritesheet_V2_3: 520321285
+      PYthon_Spritesheet_V2_30: 772840686
+      PYthon_Spritesheet_V2_34: 1631197499
+      PYthon_Spritesheet_V2_38: 2071411923
+      PYthon_Spritesheet_V2_39: -438024551
+      PYthon_Spritesheet_V2_4: 729359369
+      PYthon_Spritesheet_V2_40: -790545718
+      PYthon_Spritesheet_V2_41: 684944238
+      PYthon_Spritesheet_V2_42: 1851423679
+      PYthon_Spritesheet_V2_43: 44680715
+      PYthon_Spritesheet_V2_44: -1144061202
+      PYthon_Spritesheet_V2_5: 1722695751
+      PYthon_Spritesheet_V2_55: 1419190264
+      PYthon_Spritesheet_V2_56: -1892349550
+      PYthon_Spritesheet_V2_57: 1549422250
+      PYthon_Spritesheet_V2_58: 1752751567
+      PYthon_Spritesheet_V2_59: 865567367
+      PYthon_Spritesheet_V2_6: -797266611
+      PYthon_Spritesheet_V2_60: 366818545
+      PYthon_Spritesheet_V2_7: 304924797
+      PYthon_Spritesheet_V2_8: -381819950
+      PYthon_Spritesheet_V2_9: 936175706
+      Shooting_1: 244027263
+      Shooting_2: 1631197499
+      Shooting_3: 2010855474
+      Swimming_1: -2050742446
+      Swimming_11: 1088960418
+      Swimming_2: -1653356165
+      Swimming_21: 509152907
+      Swimming_3: 357484657
+      Tackled_1: 1123503019
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

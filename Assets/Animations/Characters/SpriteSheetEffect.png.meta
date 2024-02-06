@@ -737,7 +737,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_30
+      name: DashEffect_01
       rect:
         serializedVersion: 2
         x: 0
@@ -758,7 +758,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_31
+      name: DashEffect_02
       rect:
         serializedVersion: 2
         x: 24
@@ -779,7 +779,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_32
+      name: DashEffect_03
       rect:
         serializedVersion: 2
         x: 48
@@ -800,7 +800,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_33
+      name: DashEffect_04
       rect:
         serializedVersion: 2
         x: 72
@@ -821,7 +821,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_34
+      name: DashEffect_05
       rect:
         serializedVersion: 2
         x: 96
@@ -2218,21 +2218,20 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       SpriteSheetEffect_78: 1121395416
+      DashEffect_04: -110183303
       SpriteSheetEffect_4: 455035561
       SpriteSheetEffect_58: 360962371
+      DashEffect_02: 427404028
       SpriteSheetEffect_57: 383760537
       SpriteSheetEffect_62: 1181630641
       SpriteSheetEffect_82: 634436382
       SpriteSheetEffect_41: -2108610994
-      SpriteSheetEffect_32: -187838214
       SpriteSheetEffect_39: 1674733724
       SpriteSheetEffect_64: 1673089074
       SpriteSheetEffect_48: 1800641939
       SpriteSheetEffect_94: -1970855213
       SpriteSheetEffect_44: -1188204746
-      SpriteSheetEffect_33: -110183303
       SpriteSheetEffect_88: -1594434729
-      SpriteSheetEffect_34: -1798508270
       BurningCharge_10: -743173883
       SpriteSheetEffect_95: 1210063168
       SpriteSheetEffect_61: 73216461
@@ -2259,6 +2258,7 @@ TextureImporter:
       SpriteSheetEffect_17: 884013932
       SpriteSheetEffect_84: 1780056508
       EnergyCharge_07: -787374966
+      DashEffect_01: -2090302852
       SpriteSheetEffect_96: -770292068
       SpriteSheetEffect_42: -1351916081
       SpriteSheetEffect_0: -251454561
@@ -2266,7 +2266,6 @@ TextureImporter:
       SpriteSheetEffect_97: 993332229
       SpriteSheetEffect_2: -2018356505
       SpriteSheetEffect_45: -1808893350
-      SpriteSheetEffect_31: 427404028
       SpriteSheetEffect_35: 317755544
       SpriteSheetEffect_66: 1714920867
       SpriteSheetEffect_70: 454575160
@@ -2294,6 +2293,7 @@ TextureImporter:
       SpriteSheetEffect_91: 1000896877
       Empty: -133340794
       SpriteSheetEffect_49: -1111418592
+      DashEffect_03: -187838214
       SpriteSheetEffect_72: 1824488865
       SpriteSheetEffect_74: -789320049
       SpriteSheetEffect_90: -154583412
@@ -2306,7 +2306,6 @@ TextureImporter:
       SpriteSheetEffect_93: 1298536038
       SpriteSheetEffect_36: 438616480
       BurningCharge_07: -163369646
-      SpriteSheetEffect_30: -2090302852
       SpriteSheetEffect_7: -1990244879
       SpriteSheetEffect_76: -748710132
       EnergyCharge_03: -269214157
@@ -2317,6 +2316,7 @@ TextureImporter:
       SpriteSheetEffect_98: 670702735
       SpriteSheetEffect_1: 2140014785
       BurningCharge_08: -1747821257
+      DashEffect_05: -1798508270
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
