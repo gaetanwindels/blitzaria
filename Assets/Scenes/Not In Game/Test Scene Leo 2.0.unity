@@ -9836,9 +9836,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.055555556
+    width: 0.33333334
+    height: 0.3333333
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -10113,6 +10113,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4901862419130891398, guid: e0deeaa7c005657469d620ad35a623bd,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901862419130891398, guid: e0deeaa7c005657469d620ad35a623bd,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.08
       objectReference: {fileID: 0}
@@ -10161,6 +10166,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6964443490596722124, guid: e0deeaa7c005657469d620ad35a623bd,
+        type: 3}
+      propertyPath: m_DrawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964443490596722124, guid: e0deeaa7c005657469d620ad35a623bd,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0aee7dcd53c00194d8fe2d52c1ec35fe, type: 2}
     - target: {fileID: 6964443490596722126, guid: e0deeaa7c005657469d620ad35a623bd,
         type: 3}
       propertyPath: m_Name

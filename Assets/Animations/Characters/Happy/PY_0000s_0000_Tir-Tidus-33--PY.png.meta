@@ -3,7 +3,7 @@ guid: 344be0ea13aba8f4798d38cf233b1c0e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -25,7 +25,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -53,7 +53,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -65,6 +65,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -105,18 +106,79 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline: []
+    outline:
+    - - {x: 1, y: 6}
+      - {x: 1, y: 5}
+      - {x: -5, y: 5}
+      - {x: -5, y: 4}
+      - {x: -6, y: 4}
+      - {x: -6, y: 2}
+      - {x: -7, y: 2}
+      - {x: -7, y: -5}
+      - {x: -5, y: -5}
+      - {x: -5, y: -6}
+      - {x: -4, y: -6}
+      - {x: -4, y: -8}
+      - {x: -1, y: -8}
+      - {x: -1, y: -6}
+      - {x: -2, y: -6}
+      - {x: -2, y: 0}
+      - {x: 0, y: 0}
+      - {x: 0, y: -1}
+      - {x: 4, y: -1}
+      - {x: 4, y: 0}
+      - {x: 10, y: 0}
+      - {x: 10, y: -1}
+      - {x: 9, y: -1}
+      - {x: 9, y: -2}
+      - {x: 10, y: -2}
+      - {x: 10, y: -1}
+      - {x: 11, y: -1}
+      - {x: 11, y: 0}
+      - {x: 10, y: 0}
+      - {x: 10, y: 1}
+      - {x: 12, y: 1}
+      - {x: 12, y: 2}
+      - {x: 11, y: 2}
+      - {x: 10, y: 2}
+      - {x: 10, y: 3}
+      - {x: 11, y: 3}
+      - {x: 11, y: 4}
+      - {x: 12, y: 4}
+      - {x: 12, y: 5}
+      - {x: 11, y: 5}
+      - {x: 11, y: 4}
+      - {x: 10, y: 4}
+      - {x: 10, y: 6}
+      - {x: 11, y: 6}
+      - {x: 11, y: 7}
+      - {x: 10, y: 7}
+      - {x: 10, y: 6}
+      - {x: 9, y: 6}
+      - {x: 9, y: 8}
+      - {x: 8, y: 8}
+      - {x: 8, y: 9}
+      - {x: 7, y: 9}
+      - {x: 7, y: 8}
+      - {x: 8, y: 8}
+      - {x: 8, y: 7}
+      - {x: 5, y: 7}
+      - {x: 5, y: 6}
+      - {x: 4, y: 6}
+      - {x: 4, y: 5}
+      - {x: 3, y: 5}
+      - {x: 3, y: 6}
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable: {}
-  spritePackingTag: 
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
