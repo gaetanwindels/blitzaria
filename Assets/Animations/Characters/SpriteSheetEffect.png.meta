@@ -1010,7 +1010,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_43
+      name: EffectKick-04
       rect:
         serializedVersion: 2
         x: 72
@@ -1031,7 +1031,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_44
+      name: EffectKick-05
       rect:
         serializedVersion: 2
         x: 96
@@ -1052,7 +1052,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_45
+      name: EffectKick-06
       rect:
         serializedVersion: 2
         x: 120
@@ -1073,7 +1073,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_46
+      name: EffectKick-07
       rect:
         serializedVersion: 2
         x: 144
@@ -2235,6 +2235,10 @@ TextureImporter:
       EffectKick-01: -512962374
       EffectKick-02: -2108610994
       EffectKick-03: -1351916081
+      EffectKick-04: 349999103
+      EffectKick-05: -1188204746
+      EffectKick-06: -1808893350
+      EffectKick-07: -369522616
       Empty: -133340794
       EnergyCharge_01: 1260936209
       EnergyCharge_02: 642600630
@@ -2256,10 +2260,6 @@ TextureImporter:
       SpriteSheetEffect_38: 1061168776
       SpriteSheetEffect_39: 1674733724
       SpriteSheetEffect_4: 455035561
-      SpriteSheetEffect_43: 349999103
-      SpriteSheetEffect_44: -1188204746
-      SpriteSheetEffect_45: -1808893350
-      SpriteSheetEffect_46: -369522616
       SpriteSheetEffect_47: 2069117091
       SpriteSheetEffect_48: 1800641939
       SpriteSheetEffect_49: -1111418592
