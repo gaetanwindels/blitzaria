@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -2636,7 +2636,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PYthon_Spritesheet_V2_25
+      name: Kick_1-2
       rect:
         serializedVersion: 2
         x: 0
@@ -2737,6 +2737,7 @@ TextureImporter:
       InAir_2: 520321285
       InAir_3: 457696826
       Kick_1: 44680715
+      Kick_1-2: -853804863
       Kick_11: -1144061202
       Kick_21: -1106370525
       Kick_22: -1472195447
@@ -2769,7 +2770,6 @@ TextureImporter:
       PYthon_Spritesheet_V2_22: 1868238806
       PYthon_Spritesheet_V2_23: -212310894
       PYthon_Spritesheet_V2_24: 1181927060
-      PYthon_Spritesheet_V2_25: -853804863
       PYthon_Spritesheet_V2_26: -220806685
       PYthon_Spritesheet_V2_27: -2050742446
       PYthon_Spritesheet_V2_28: 1088960418

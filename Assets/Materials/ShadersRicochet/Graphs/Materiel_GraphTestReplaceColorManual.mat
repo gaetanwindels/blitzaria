@@ -71,7 +71,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d6ed09a60e7312f4084b3bd6f98a4853, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -100,9 +100,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Activate_replace: 0
+    - _ActivateOutline: 1
+    - _Activate_replace: 1
+    - _BUILTIN_AlphaClip: 0
+    - _BUILTIN_Blend: 0
+    - _BUILTIN_CullMode: 2
+    - _BUILTIN_DstBlend: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _BUILTIN_SrcBlend: 1
+    - _BUILTIN_Surface: 1
+    - _BUILTIN_ZTest: 4
+    - _BUILTIN_ZWrite: 0
+    - _BUILTIN_ZWriteControl: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -124,14 +134,15 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.5254902, g: 0.15686277, b: 0.35960776, a: 1}
+    - _ColorOutline: {r: 1, g: 1, b: 1, a: 0}
     - _Color_replacing_01: {r: 0.5849056, g: 0.4770219, b: 0.3724635, a: 1}
     - _Color_replacing_02: {r: 0.3679245, g: 0.27941436, b: 0.27941436, a: 1}
     - _Color_replacing_03: {r: 1, g: 0.59836304, b: 0, a: 1}
     - _Color_replacing_04: {r: 1, g: 1, b: 1, a: 1}
     - _Color_replacing_05: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_to_replace_01: {r: 0.38823533, g: 0.6509804, b: 0.21176472, a: 1}
-    - _Color_to_replace_02: {r: 0.34901962, g: 0.3372549, b: 0.32156864, a: 1}
-    - _Color_to_replace_03: {r: 0.19607845, g: 0.23529413, b: 0.22352943, a: 1}
+    - _Color_to_replace_01: {r: 0.7254902, g: 0.1686275, b: 0.1686275, a: 1}
+    - _Color_to_replace_02: {r: 0.6392157, g: 0.1529412, b: 0.1529412, a: 1}
+    - _Color_to_replace_03: {r: 0.24870951, g: 0.764151, b: 0.6095186, a: 1}
     - _Color_to_replace_04: {r: 1, g: 1, b: 1, a: 0}
     - _Color_to_replace_05: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
