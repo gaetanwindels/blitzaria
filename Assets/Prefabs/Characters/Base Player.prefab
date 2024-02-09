@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9166359889463082207
 Transform:
   m_ObjectHideFlags: 0
@@ -331,7 +331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1395937844778147565
 Transform:
   m_ObjectHideFlags: 0
@@ -1332,7 +1332,7 @@ MonoBehaviour:
   turboParticles: {fileID: 7157193096785850357}
   dashParticles: {fileID: 2131988584448966854, guid: b083fd6cc7f31d84aac785f4fb9bfc05,
     type: 3}
-  ballImpact: {fileID: 5253129891090821406, guid: 844a317ed76dade4a82d3c5de7b6977a,
+  ballImpact: {fileID: 4399908915594553200, guid: 4ae430a8f4cc2614487825aca6d438f9,
     type: 3}
   loadingShootParticles: {fileID: 955434385897534186}
   brain: {fileID: 0}

@@ -947,7 +947,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_40
+      name: EffectKick-01
       rect:
         serializedVersion: 2
         x: 0
@@ -968,7 +968,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_41
+      name: EffectKick-02
       rect:
         serializedVersion: 2
         x: 24
@@ -989,7 +989,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_42
+      name: EffectKick-03
       rect:
         serializedVersion: 2
         x: 48
@@ -2217,106 +2217,106 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SpriteSheetEffect_78: 1121395416
-      DashEffect_04: -110183303
-      SpriteSheetEffect_4: 455035561
-      SpriteSheetEffect_58: 360962371
-      DashEffect_02: 427404028
-      SpriteSheetEffect_57: 383760537
-      SpriteSheetEffect_62: 1181630641
-      SpriteSheetEffect_82: 634436382
-      SpriteSheetEffect_41: -2108610994
-      SpriteSheetEffect_39: 1674733724
-      SpriteSheetEffect_64: 1673089074
-      SpriteSheetEffect_48: 1800641939
-      SpriteSheetEffect_94: -1970855213
-      SpriteSheetEffect_44: -1188204746
-      SpriteSheetEffect_88: -1594434729
-      BurningCharge_10: -743173883
-      SpriteSheetEffect_95: 1210063168
-      SpriteSheetEffect_61: 73216461
-      SpriteSheetEffect_75: 1917132645
-      SpriteSheetEffect_54: 1929739359
-      SpriteSheetEffect_73: -1279809777
-      EnergyCharge_06: 255549728
-      BurningCharge_06: 2108898571
-      SpriteSheetEffect_92: -1047585302
-      SpriteSheetEffect_5: -384668270
-      SpriteSheetEffect_69: -1557259171
-      BurningCharge_09: -1655535949
-      BurningCharge_03: -1334771216
-      SpriteSheetEffect_81: -1332336448
-      EnergyCharge_02: 642600630
-      SpriteSheetEffect_85: 1322723827
-      SpriteSheetEffect_19: 2136159612
-      SpriteSheetEffect_51: 221313489
-      SpriteSheetEffect_80: 1750262666
-      SpriteSheetEffect_87: 1325795832
-      SpriteSheetEffect_52: 1043246735
-      SpriteSheetEffect_67: -644059380
-      SpriteSheetEffect_63: -1753086481
-      SpriteSheetEffect_17: 884013932
-      SpriteSheetEffect_84: 1780056508
-      EnergyCharge_07: -787374966
-      DashEffect_01: -2090302852
-      SpriteSheetEffect_96: -770292068
-      SpriteSheetEffect_42: -1351916081
-      SpriteSheetEffect_0: -251454561
-      SpriteSheetEffect_47: 2069117091
-      SpriteSheetEffect_97: 993332229
-      SpriteSheetEffect_2: -2018356505
-      SpriteSheetEffect_45: -1808893350
-      SpriteSheetEffect_35: 317755544
-      SpriteSheetEffect_66: 1714920867
-      SpriteSheetEffect_70: 454575160
-      SpriteSheetEffect_86: -1083987487
-      SpriteSheetEffect_50: 201122744
-      SpriteSheetEffect_65: 1342029780
-      SpriteSheetEffect_89: -661654686
-      BurningCharge_04: -1691040774
-      SpriteSheetEffect_83: -1375398386
-      SpriteSheetEffect_56: -924954670
-      SpriteSheetEffect_77: -1565286318
-      SpriteSheetEffect_46: -369522616
-      BurningCharge_05: 121680149
-      EnergyCharge_01: 1260936209
-      SpriteSheetEffect_6: -544470932
-      SpriteSheetEffect_79: 1340707693
-      EnergyCharge_04: 1265450226
-      SpriteSheetEffect_3: -684915621
       BurningCharge_01: 1586876666
-      SpriteSheetEffect_68: 486050909
-      SpriteSheetEffect_43: 349999103
-      SpriteSheetEffect_60: -1834721560
-      SpriteSheetEffect_38: 1061168776
-      SpriteSheetEffect_55: -1402532284
-      SpriteSheetEffect_91: 1000896877
-      Empty: -133340794
-      SpriteSheetEffect_49: -1111418592
-      DashEffect_03: -187838214
-      SpriteSheetEffect_72: 1824488865
-      SpriteSheetEffect_74: -789320049
-      SpriteSheetEffect_90: -154583412
-      SpriteSheetEffect_53: -1474165458
-      SpriteSheetEffect_40: -512962374
       BurningCharge_02: -978783264
-      SpriteSheetEffect_18: -783599347
-      SpriteSheetEffect_59: 1616320191
-      SpriteSheetEffect_99: -267280805
-      SpriteSheetEffect_93: 1298536038
-      SpriteSheetEffect_36: 438616480
+      BurningCharge_03: -1334771216
+      BurningCharge_04: -1691040774
+      BurningCharge_05: 121680149
+      BurningCharge_06: 2108898571
       BurningCharge_07: -163369646
-      SpriteSheetEffect_7: -1990244879
-      SpriteSheetEffect_76: -748710132
-      EnergyCharge_03: -269214157
-      SpriteSheetEffect_37: -1996102956
-      SpriteSheetEffect_8: -947946214
-      EnergyCharge_05: -446618461
-      SpriteSheetEffect_71: 1506627666
-      SpriteSheetEffect_98: 670702735
-      SpriteSheetEffect_1: 2140014785
       BurningCharge_08: -1747821257
+      BurningCharge_09: -1655535949
+      BurningCharge_10: -743173883
+      DashEffect_01: -2090302852
+      DashEffect_02: 427404028
+      DashEffect_03: -187838214
+      DashEffect_04: -110183303
       DashEffect_05: -1798508270
+      EffectKick-01: -512962374
+      EffectKick-02: -2108610994
+      EffectKick-03: -1351916081
+      Empty: -133340794
+      EnergyCharge_01: 1260936209
+      EnergyCharge_02: 642600630
+      EnergyCharge_03: -269214157
+      EnergyCharge_04: 1265450226
+      EnergyCharge_05: -446618461
+      EnergyCharge_06: 255549728
+      EnergyCharge_07: -787374966
+      SpriteSheetEffect_0: -251454561
+      SpriteSheetEffect_1: 2140014785
+      SpriteSheetEffect_17: 884013932
+      SpriteSheetEffect_18: -783599347
+      SpriteSheetEffect_19: 2136159612
+      SpriteSheetEffect_2: -2018356505
+      SpriteSheetEffect_3: -684915621
+      SpriteSheetEffect_35: 317755544
+      SpriteSheetEffect_36: 438616480
+      SpriteSheetEffect_37: -1996102956
+      SpriteSheetEffect_38: 1061168776
+      SpriteSheetEffect_39: 1674733724
+      SpriteSheetEffect_4: 455035561
+      SpriteSheetEffect_43: 349999103
+      SpriteSheetEffect_44: -1188204746
+      SpriteSheetEffect_45: -1808893350
+      SpriteSheetEffect_46: -369522616
+      SpriteSheetEffect_47: 2069117091
+      SpriteSheetEffect_48: 1800641939
+      SpriteSheetEffect_49: -1111418592
+      SpriteSheetEffect_5: -384668270
+      SpriteSheetEffect_50: 201122744
+      SpriteSheetEffect_51: 221313489
+      SpriteSheetEffect_52: 1043246735
+      SpriteSheetEffect_53: -1474165458
+      SpriteSheetEffect_54: 1929739359
+      SpriteSheetEffect_55: -1402532284
+      SpriteSheetEffect_56: -924954670
+      SpriteSheetEffect_57: 383760537
+      SpriteSheetEffect_58: 360962371
+      SpriteSheetEffect_59: 1616320191
+      SpriteSheetEffect_6: -544470932
+      SpriteSheetEffect_60: -1834721560
+      SpriteSheetEffect_61: 73216461
+      SpriteSheetEffect_62: 1181630641
+      SpriteSheetEffect_63: -1753086481
+      SpriteSheetEffect_64: 1673089074
+      SpriteSheetEffect_65: 1342029780
+      SpriteSheetEffect_66: 1714920867
+      SpriteSheetEffect_67: -644059380
+      SpriteSheetEffect_68: 486050909
+      SpriteSheetEffect_69: -1557259171
+      SpriteSheetEffect_7: -1990244879
+      SpriteSheetEffect_70: 454575160
+      SpriteSheetEffect_71: 1506627666
+      SpriteSheetEffect_72: 1824488865
+      SpriteSheetEffect_73: -1279809777
+      SpriteSheetEffect_74: -789320049
+      SpriteSheetEffect_75: 1917132645
+      SpriteSheetEffect_76: -748710132
+      SpriteSheetEffect_77: -1565286318
+      SpriteSheetEffect_78: 1121395416
+      SpriteSheetEffect_79: 1340707693
+      SpriteSheetEffect_8: -947946214
+      SpriteSheetEffect_80: 1750262666
+      SpriteSheetEffect_81: -1332336448
+      SpriteSheetEffect_82: 634436382
+      SpriteSheetEffect_83: -1375398386
+      SpriteSheetEffect_84: 1780056508
+      SpriteSheetEffect_85: 1322723827
+      SpriteSheetEffect_86: -1083987487
+      SpriteSheetEffect_87: 1325795832
+      SpriteSheetEffect_88: -1594434729
+      SpriteSheetEffect_89: -661654686
+      SpriteSheetEffect_90: -154583412
+      SpriteSheetEffect_91: 1000896877
+      SpriteSheetEffect_92: -1047585302
+      SpriteSheetEffect_93: 1298536038
+      SpriteSheetEffect_94: -1970855213
+      SpriteSheetEffect_95: 1210063168
+      SpriteSheetEffect_96: -770292068
+      SpriteSheetEffect_97: 993332229
+      SpriteSheetEffect_98: 670702735
+      SpriteSheetEffect_99: -267280805
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
