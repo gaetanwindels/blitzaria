@@ -151,6 +151,8 @@ public class Ball : MonoBehaviour
             {
                 var em = trailParticles.emission;
                 em.rateOverTimeMultiplier = trailIntensity.Evaluate(rigidbody.velocity.magnitude);
+                //Debug.Log(em.rateOverTimeMultiplier);
+                
             }
             
         }
