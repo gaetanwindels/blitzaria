@@ -1014,12 +1014,14 @@ public class Player : MonoBehaviour
             AudioUtils.PlaySound(gameObject);
             isShooting = true;
             var percentPower = Math.Min(1f, (adjustedPower - minShotPower) / (maxShotPower - minShotPower));
-            //var shootFreezeTime = minShootFreezeTime + (maxShootFreezeTime - minShootFreezeTime) * percentPower;
             var shootFreezeTime = 0;
             yield return new WaitForSecondsRealtime(shootFreezeTime);
-            var impactVfx = Instantiate(ballImpact, ball.transform.position, Quaternion.identity);
+            
+            float speedX = inputManager.GetAxis("Move Horizontal");
+            float speedY = inputManager.GetAxis("Move Vertical");
+            float angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
+            var impactVfx = Instantiate(ballImpact, ball.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
             Destroy(impactVfx, 0.5f);
-            //FindObjectOfType<CameraShaker>().ShakeFor(0.1f, 0.2f * percentPower);
             Time.timeScale = 1;
 
             Shoot(power);
@@ -1085,7 +1087,7 @@ public class Player : MonoBehaviour
         }
 
         // Manage rotation
-        if (IsLoadingShoot())
+        if (IsLoadingShoot() || isLoadingAutoShoot)
         {
             angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
             

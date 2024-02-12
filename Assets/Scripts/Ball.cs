@@ -77,6 +77,7 @@ public class Ball : MonoBehaviour
                 }
             } else if (tagName == "GrabHitbox")
             {
+                OnGrab();
                 player.Grab(this);
             } else if (tagName == "PerfectShotHitbox")
             {
@@ -141,8 +142,28 @@ public class Ball : MonoBehaviour
             ManageRotation();
         }
     }
+
+    private void OnGrab()
+    {
+        ResetTrail();
+        ResetScale();
+    }
     
-    public void ManageTrail()
+    private void ResetScale()
+    {
+        transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    private void ResetTrail()
+    {
+        if (trailParticles != null)
+        {
+            var em = trailParticles.emission;
+            em.rateOverTimeMultiplier = 0;
+        }
+    }
+    
+    private void ManageTrail()
     {
         var rigidbody = GetComponent<Rigidbody2D>();
         if (trailParticles != null && GetComponent<Rigidbody2D>() != null)
