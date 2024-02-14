@@ -1071,7 +1071,8 @@ public class Player : MonoBehaviour
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
-        var scaleX = _rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
+        //var scaleX = _rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
+        var scaleX = speedX < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
         var adjustedRotationSpeed = isTackling || IsDashing() ? 3000 : rotationSpeed;
 
         Quaternion currentAngle = transform.rotation;
@@ -1098,7 +1099,6 @@ public class Player : MonoBehaviour
             else
             {
                 angle = ((angle + 360) % 360) - 180;
-                Debug.Log(angle);
                 angle = Mathf.Clamp(angle, -maxAngleLoadingShot, maxAngleLoadingShot);
             }
             
@@ -1108,7 +1108,7 @@ public class Player : MonoBehaviour
         if (isTackling)
         {
             angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
+            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
         }
 
         if (IsLoadingShoot())
@@ -1118,7 +1118,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if (_rigidBody.velocity.x != 0)
+        if (_rigidBody.velocity.x != 0 || isLoadingAutoShoot)
         {
             transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }

@@ -5042,8 +5042,7 @@ MonoBehaviour:
   velocityDragFactor: 0.005
   minAngularVelocityCurl: 10
   baseCurlRotation: 3000
-  trailParticles: {fileID: 7103417660789211079, guid: 917b0d00f46e7b44ebc534b637575c4b,
-    type: 3}
+  trailParticles: {fileID: 418836201085596994}
   hitSound: {fileID: 8300000, guid: 19b478875096c73438b2aa46e3a2df5c, type: 3}
 --- !u!82 &6278694415930511144
 AudioSource:
@@ -5321,6 +5320,12 @@ PrefabInstance:
 --- !u!4 &418836201085596992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7103417660789211077, guid: 917b0d00f46e7b44ebc534b637575c4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7441188982397094533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &418836201085596994 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7103417660789211079, guid: 917b0d00f46e7b44ebc534b637575c4b,
     type: 3}
   m_PrefabInstance: {fileID: 7441188982397094533}
   m_PrefabAsset: {fileID: 0}
