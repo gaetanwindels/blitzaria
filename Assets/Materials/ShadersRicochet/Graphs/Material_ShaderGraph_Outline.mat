@@ -96,7 +96,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _1Down2Up3Leftt4Right: 1
-    - _Activate: 0
+    - _Activate: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _BUILTIN_QueueControl: 0

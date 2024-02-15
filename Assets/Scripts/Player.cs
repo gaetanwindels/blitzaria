@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float anticipationShotTime = 0.4f;
     [SerializeField] private float minFreezePower = 6f;
     [SerializeField] private float maxFreezePower = 20f;
+    [SerializeField] private float shootSpeedFactorPerChargeIntensityLevel = 0.35f;
     
     [Header("Move")]
     [SerializeField] private float rotationSpeed = 900f;
@@ -67,11 +68,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float grabWithoutBallSpeedFactor = 0.2f;
     [SerializeField] private float lockedTime = 0.2f;
+    [SerializeField] private float dashSpeedFactorPerChargeIntensityLevel = 0.2f;
 
     [Header("Rollover")]
     [SerializeField] private float rollOverSpeed = 5f;
     [SerializeField] private float rollOverDuration = 1f;
     [SerializeField] private float rollOverCountdown = 1f;
+    
+    [Header("Charge")]
+    [SerializeField] private float chargeDuration = 1.4f;
 
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
@@ -90,6 +95,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject dashParticles;
     [SerializeField] private GameObject ballImpact;
     [SerializeField] private ParticleSystem loadingShootParticles;
+    [SerializeField] private ChargeVfx chargeVfx;
 
     public Brain brain;
     public InputManager inputManager;
@@ -131,6 +137,7 @@ public class Player : MonoBehaviour
     public bool isAutoShootDisabled;
     public bool isLoadingAutoShoot;
     public List<PlayerState> playerStates = new();
+    private int _chargeLevel = 0;
 
     // Routines
     private IEnumerator _enteredWaterRoutine;
@@ -138,6 +145,7 @@ public class Player : MonoBehaviour
     private IEnumerator _disableGrabbingRoutine;
     private IEnumerator _replenishRoutine;
     private IEnumerator _rollingOverRoutine;
+    private IEnumerator _chargeRoutine;
 
     // Water management
     public bool canGoUp = true;
@@ -169,8 +177,7 @@ public class Player : MonoBehaviour
         {
             playerParent = collision.gameObject.GetComponentInParent<Player>();
         }
-        Debug.Log("GRAB 2" + playerParent);
-        Debug.Log("GRAB 3" + tagName);
+
         if (!isInvicible && playerParent != null && 
             (tagName == "DashHitbox" || tagName == "ShotHitbox") 
             && !playerParent.IsGrabbing() && playerParent.team != team)
@@ -178,7 +185,6 @@ public class Player : MonoBehaviour
             _audioSource.clip = hitPlayerSound;
             AudioUtils.PlaySound(gameObject);
             StartCoroutine(TriggerInvicibility());
-            Debug.Log("GRAB LOL");
             ReceiveTackle(this);
             DisableShotHitbox();
             DisableDashHitbox();
@@ -199,22 +205,10 @@ public class Player : MonoBehaviour
 
         if (ballGrabbed == null && ball != null)
         {
-            if (inputManager.GetButton("Grab"))
-            {
-                /*var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
-                Collider2D collider = ball.GetComponent<Collider2D>();
-                Grab(ball);
-                Destroy(rigidBodyBall);
-                Destroy(collider);*/
-            }
-            else
-            {
-                var impulseSpeed = IsDashing() ? ball.impulseSpeedFactor * 1.5f : ball.impulseSpeedFactor;
+            var impulseSpeed = IsDashing() ? ball.impulseSpeedFactor * 1.5f : ball.impulseSpeedFactor;
 
-                var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
-                rigidBodyBall.velocity = _rigidBody.velocity * impulseSpeed;
-
-            }
+            var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
+            rigidBodyBall.velocity = _rigidBody.velocity * impulseSpeed;
 
         }
     }
@@ -275,40 +269,23 @@ public class Player : MonoBehaviour
             _gameManager.ManagePause();
         }
 
-        ManageState();
         ManageWater();
         ManageGravity();
-        //ManageShoot();
         ManageAutoShoot();
         ManageThrow();
         ManageMove();
         ManageRollOver();
         ManageCurl();
         ManageDash();
+        ManageCharge();
         ManageRotation();
         ManageAnimation();
-        ManageGrab();
 
         if (isReplenishing)
         {
             AddEnergy(Time.deltaTime * GameSettings.replenishEnergyPerSecond);
         }
     }
-
-    private void ManageState()
-    {
-        playerStates = new();
-
-        // var isInWater = IsInWater();
-        // var isImmobile = inputManager.GetAxis("Move Horizontal") == 0 && inputManager.GetAxis("Move Vertical") == 0;
-        //
-        // if (isInWater && !isImmobile) playerStates.Add(PlayerState.Swimming);
-        // if (isImmobile) playerStates.Add(PlayerState.Idle);
-        // if (!isInWater) playerStates.Add(PlayerState.InAir);
-        // if (isLoadingAutoShoot) playerStates.Add(PlayerState.LoadingShoot);
-        // if (IsLoadingShoot()) playerStates.Add(PlayerState.LoadingThrow);
-    }
-
     private IEnumerator TriggerInvicibility()
     {
         isInvicible = true;
@@ -493,8 +470,51 @@ public class Player : MonoBehaviour
         }
     }
 
+    #region ChargeState
+
+    private void ManageCharge()
+    {
+        // TODO RENAME ACTION ?
+        var hasPressedCharge = inputManager.GetButtonDown("Dash") || inputManager.GetButtonDown("Grab");
+
+        if (hasPressedCharge && _orbManager.ConsumeOrbs(1))
+        {
+            _chargeLevel++;
+            
+            // If direction => dash
+            if (_chargeRoutine != null)
+            {
+                StopCoroutine(_chargeRoutine);
+            }
+
+            _chargeRoutine = ChargeCoRoutine();
+            StartCoroutine(_chargeRoutine);
+        }
+        
+        if (chargeVfx != null)
+        {
+            chargeVfx.SetIntensity(_chargeLevel);
+        }
+    }
+
+    IEnumerator ChargeCoRoutine()
+    {
+        yield return new WaitForSeconds(chargeDuration);
+        _chargeLevel = 0;
+    }
+
+    #endregion
+    
     private void ManageDash()
     {
+        float speedX = inputManager.GetAxis("Move Horizontal");
+        float speedY = inputManager.GetAxis("Move Vertical");
+
+        if (speedX == 0 && speedY == 0)
+        {
+            return;
+        }
+        
         if (IsDashing())
         {
             _rigidBody.velocity = currentDashVelocity;
@@ -503,17 +523,8 @@ public class Player : MonoBehaviour
         }
 
         var hasPressedDash = inputManager.GetButtonDown("Dash");
-        /*if (hasPressedDash && currentEnergy >= GameSettings.dashEnergyCost && !IsLoadingShoot())
-        {
-            var go = Instantiate(dashParticles, transform.position, Quaternion.identity, transform);
-            go.transform.localEulerAngles = new Vector3(0, 0, 0);
-            Destroy(go, dashDuration);
-            RemoveEnergy(GameSettings.dashEnergyCost);
-            dashTimer = dashDuration;
-            rigidBody.velocity = ComputeMoveSpeed(dashSpeed);
-        }*/
 
-        if (hasPressedDash && !IsLoadingShoot() && _orbManager.ConsumeOrbs(1))
+        if (hasPressedDash && !IsLoadingShoot())
         {
             var go = Instantiate(dashParticles, transform.position, transform.rotation, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -524,26 +535,8 @@ public class Player : MonoBehaviour
             Destroy(go, 5f);
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
-            _rigidBody.velocity = ComputeMoveSpeed(dashSpeed);
+            _rigidBody.velocity = ComputeMoveSpeed(dashSpeed * (1 + _chargeLevel * dashSpeedFactorPerChargeIntensityLevel));
             currentDashVelocity = _rigidBody.velocity;
-        }
-    }
-
-    private void ManageGrab()
-    {
-        var hasPressedGrab = inputManager.GetButton("Grab");
-
-        if (hasPressedGrab && !IsGrabbing() && !IsLoadingShoot() && !IsTackling())
-        {
-            EnableGrabbingMotion();
-
-            if (IsDashing())
-            {
-                CancelDash();
-            }
-        } else
-        {
-            DisableGrabbingMotion();
         }
     }
     
@@ -612,8 +605,9 @@ public class Player : MonoBehaviour
             var truc = ballPosition2 - position2;
             float angle = Mathf.Atan2(truc.y, truc.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
-            
-            var shotPower = minShotPower + ((maxShotPower - minShotPower) * (loadingAutoShootTimer / timeToBuildUp));
+
+            var chargeFactor = 1 + _chargeLevel * 0.6f;
+            var shotPower = chargeFactor * (minShotPower + (maxShotPower - minShotPower) * (loadingAutoShootTimer / timeToBuildUp));
             StartCoroutine(ShootingRoutine(shotPower));
             StartCoroutine(DisableAutoShoot());
             StartCoroutine(DisableGrabbing(0.3f));
@@ -646,7 +640,7 @@ public class Player : MonoBehaviour
             builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
         }
         
-        if (IsGrabbing() && (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonDown("Grab")))
+        if (IsGrabbing() && inputManager.GetButtonUp("Tackle"))
         {
             GameObject newBall = null;
             Destroy(FindObjectOfType<Ball>().gameObject);
@@ -671,6 +665,7 @@ public class Player : MonoBehaviour
             float velocityX;
             float velocityY;
 
+            computedShotPower *= 1 + shootSpeedFactorPerChargeIntensityLevel * _chargeLevel;
             if (curlingLeft || curlingRight)
             {
                 computedShotPower *= shotSpeedCurlFactor;
@@ -729,112 +724,6 @@ public class Player : MonoBehaviour
             }
 
             StartCoroutine(DisableAutoShoot());
-        }
-    }
-
-    private void ManageShoot()
-    {
-        if (isShootCoolDown)
-        {
-            return;
-        }
-
-        if (IsLoadingShoot())
-        {
-            builtupPower += Time.deltaTime;
-            builtupPower = Mathf.Min(timeToBuildUp, builtupPower);
-        }
-
-        // Generate Shot Hitbox
-        if (!IsGrabbing() && inputManager.GetButtonDown("Tackle"))
-        {
-            var ball = FindObjectOfType<Ball>();
-            StartCoroutine(CooldownShooting());
-            isTackling = true;
-            CancelDash();
-            //animator.SetBool("IsShooting", true);
-            // Either release or shoot the ball
-        } else if (IsGrabbing() && (inputManager.GetButtonUp("Tackle") || inputManager.GetButtonDown("Grab")))
-        {
-            GameObject newBall = null;
-            Destroy(FindObjectOfType<Ball>().gameObject);
-            DisableGrabbingMotion();
-            var trueThrowPoint = inputManager.GetButtonUp("Tackle") ? throwPointLoading : throwPoint;
-            newBall = Instantiate(ballPrefab, trueThrowPoint.position, Quaternion.identity);
-            Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-
-            var combinedVelocity = Mathf.Abs(_rigidBody.velocity.x) + Mathf.Abs(_rigidBody.velocity.y);
-
-            var computedShotPower = GetSpeed() + releasePower;
-
-            if (inputManager.GetButtonUp("Tackle"))
-            {
-                //StartCoroutine(ManageShootingAnimation());
-                computedShotPower = minShotPower + ((maxShotPower - minShotPower) * (builtupPower / timeToBuildUp));
-            }
-
-            var curlingLeft = inputManager.GetAxis("Curl Left") > 0;
-            var curlingRight = inputManager.GetAxis("Curl Right") > 0;
-
-            float velocityX;
-            float velocityY;
-
-            if (curlingLeft || curlingRight)
-            {
-                computedShotPower *= shotSpeedCurlFactor;
-            }
-
-            if (combinedVelocity == 0)
-            {
-                velocityX = transform.localScale.x * computedShotPower;
-                velocityY = 0f;
-            }
-            else
-            {
-                var speed = ComputeShotSpeed(computedShotPower);
-                velocityX = speed.x;
-                velocityY = speed.y;
-            }
-
-            newBallBody.velocity = new Vector2(velocityX, velocityY);
-            builtupPower = 0;
-
-            float computedCurlPower;
-            if (curlingRight)
-            {
-                computedCurlPower = transform.localScale.x < 0 ? -curlPower : curlPower;
-                computedCurlPower *= builtUpCurl;
-                newBallBody.angularVelocity = (computedCurlPower * inputManager.GetAxis("Curl Right"));
-            } else if (curlingLeft)
-            {
-                computedCurlPower = transform.localScale.x < 0 ? -curlPower : curlPower;
-                computedCurlPower *= builtUpCurl;
-                newBallBody.angularVelocity = (-computedCurlPower * inputManager.GetAxis("Curl Left"));
-            }
-
-            builtUpCurl = 0;
-
-            _audioSource.clip = launchBallSound;
-            AudioUtils.PlaySound(gameObject);
-
-            if (_disableGrabbingRoutine != null)
-            {
-                StopCoroutine(_disableGrabbingRoutine);
-            }
-            _disableGrabbingRoutine = DisableGrabbing(0.6f);
-
-            StartCoroutine(_disableGrabbingRoutine);
-
-            if (newBall != null)
-            {
-                if (_disableBodyRoutine != null)
-                {
-                    StopCoroutine(_disableBodyRoutine);
-                }
-                _disableBodyRoutine = DisableBody(newBall);
-
-                StartCoroutine(_disableBodyRoutine);
-            }
         }
     }
 
@@ -870,10 +759,7 @@ public class Player : MonoBehaviour
             computedSpeed *= shootSpeedFactor;
         } if (IsGrabbing()) {
              computedSpeed *= grabSpeedFactor;
-        } else if (inputManager.GetButton("Grab"))
-        {
-            computedSpeed *= grabWithoutBallSpeedFactor;
-        }
+        } 
         
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
@@ -1071,8 +957,13 @@ public class Player : MonoBehaviour
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
-        //var scaleX = _rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
-        var scaleX = speedX < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
+        var scaleX = _rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
+
+        if (isLoadingAutoShoot)
+        {
+            scaleX = speedX < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
+        }
+        
         var adjustedRotationSpeed = isTackling || IsDashing() ? 3000 : rotationSpeed;
 
         Quaternion currentAngle = transform.rotation;
@@ -1105,20 +996,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
         }
 
-        if (isTackling)
-        {
-            angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 270));
-        }
-
-        if (IsLoadingShoot())
-        {
-            //angle = scaleX > 0 ? angle + 90 : angle - 90;
-            //transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
-        }
-
-
-        if (_rigidBody.velocity.x != 0 || isLoadingAutoShoot)
+        if (_rigidBody.velocity.x != 0)
         {
             transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }

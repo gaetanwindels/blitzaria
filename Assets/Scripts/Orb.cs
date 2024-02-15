@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Orb : MonoBehaviour
@@ -18,8 +16,8 @@ public class Orb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.localPosition = Vector2.MoveTowards(this.transform.localPosition, destinationPoint, speed * Time.deltaTime);
-        if (this.transform.localPosition.x == destinationPoint.x)
+        transform.localPosition = Vector2.MoveTowards(this.transform.localPosition, destinationPoint, speed * Time.deltaTime);
+        if (transform.localPosition.x == destinationPoint.x)
         {
             PickNextDestination();
         }

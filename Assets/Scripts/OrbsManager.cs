@@ -43,9 +43,11 @@ public class OrbsManager : MonoBehaviour
 
         orbsPending++;
 
+        StartCoroutine(GenerateOrb());
+        
         if (!isGenerating)
         {
-            StartCoroutine(GenerateOrb());
+            
         }
         
         return true;
@@ -63,7 +65,7 @@ public class OrbsManager : MonoBehaviour
 
         if (orbsPending > 0)
         {
-            StartCoroutine(GenerateOrb());
+            //StartCoroutine(GenerateOrb());
         }
     }
 
