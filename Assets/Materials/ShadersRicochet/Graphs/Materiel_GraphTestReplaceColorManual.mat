@@ -100,7 +100,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ActivateOutline: 1
+    - _ActivateOutline: 0
     - _Activate_replace: 1
     - _BUILTIN_AlphaClip: 0
     - _BUILTIN_Blend: 0
@@ -134,14 +134,14 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.5254902, g: 0.15686277, b: 0.35960776, a: 1}
-    - _ColorOutline: {r: 1, g: 0.018845621, b: 0, a: 1}
+    - _ColorOutline: {r: 1, g: 0.85664076, b: 0.8537736, a: 1}
     - _Color_replacing_01: {r: 0.5849056, g: 0.4770219, b: 0.3724635, a: 1}
     - _Color_replacing_02: {r: 0.3679245, g: 0.27941436, b: 0.27941436, a: 1}
     - _Color_replacing_03: {r: 1, g: 0.59836304, b: 0, a: 1}
     - _Color_replacing_04: {r: 1, g: 1, b: 1, a: 1}
     - _Color_replacing_05: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_to_replace_01: {r: 0.7254902, g: 0.1686275, b: 0.1686275, a: 1}
-    - _Color_to_replace_02: {r: 0.6392157, g: 0.1529412, b: 0.1529412, a: 1}
+    - _Color_to_replace_01: {r: 1, g: 0.854902, b: 0.854902, a: 1}
+    - _Color_to_replace_02: {r: 0.58431375, g: 0.4784314, b: 0.37254903, a: 1}
     - _Color_to_replace_03: {r: 0.24870951, g: 0.764151, b: 0.6095186, a: 1}
     - _Color_to_replace_04: {r: 1, g: 1, b: 1, a: 0}
     - _Color_to_replace_05: {r: 1, g: 1, b: 1, a: 0}
