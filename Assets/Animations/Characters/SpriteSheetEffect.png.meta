@@ -947,7 +947,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EffectKick-01
+      name: SplashWall_01
       rect:
         serializedVersion: 2
         x: 0
@@ -968,7 +968,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EffectKick-02
+      name: SplashWall_02
       rect:
         serializedVersion: 2
         x: 24
@@ -989,7 +989,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EffectKick-03
+      name: SplashWall_03
       rect:
         serializedVersion: 2
         x: 48
@@ -1010,7 +1010,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EffectKick-04
+      name: SplashWall_04
       rect:
         serializedVersion: 2
         x: 72
@@ -1157,7 +1157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_50
+      name: DustEffect_01
       rect:
         serializedVersion: 2
         x: 0
@@ -1178,7 +1178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_51
+      name: DustEffect_02
       rect:
         serializedVersion: 2
         x: 24
@@ -2232,10 +2232,8 @@ TextureImporter:
       DashEffect_03: -187838214
       DashEffect_04: -110183303
       DashEffect_05: -1798508270
-      EffectKick-01: -512962374
-      EffectKick-02: -2108610994
-      EffectKick-03: -1351916081
-      EffectKick-04: 349999103
+      DustEffect_01: 201122744
+      DustEffect_02: 221313489
       EffectKick-05: -1188204746
       EffectKick-06: -1808893350
       EffectKick-07: -369522616
@@ -2247,6 +2245,10 @@ TextureImporter:
       EnergyCharge_05: -446618461
       EnergyCharge_06: 255549728
       EnergyCharge_07: -787374966
+      SplashWall_01: -512962374
+      SplashWall_02: -2108610994
+      SplashWall_03: -1351916081
+      SplashWall_04: 349999103
       SpriteSheetEffect_0: -251454561
       SpriteSheetEffect_1: 2140014785
       SpriteSheetEffect_17: 884013932
@@ -2264,8 +2266,6 @@ TextureImporter:
       SpriteSheetEffect_48: 1800641939
       SpriteSheetEffect_49: -1111418592
       SpriteSheetEffect_5: -384668270
-      SpriteSheetEffect_50: 201122744
-      SpriteSheetEffect_51: 221313489
       SpriteSheetEffect_52: 1043246735
       SpriteSheetEffect_53: -1474165458
       SpriteSheetEffect_54: 1929739359
