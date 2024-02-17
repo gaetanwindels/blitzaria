@@ -2237,7 +2237,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PYthon_Spritesheet_V2_0
+      name: WallSliding_01
       rect:
         serializedVersion: 2
         x: 24
@@ -2247,9 +2247,33 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: 8, y: -7}
+        - {x: 8, y: -5}
+        - {x: 6, y: -3}
+        - {x: 9, y: 0}
+        - {x: 9, y: 2}
+        - {x: 6, y: 4}
+        - {x: 6, y: 7}
+        - {x: 4, y: 10}
+        - {x: 4, y: 13}
+        - {x: 2, y: 15}
+        - {x: 1, y: 15}
+        - {x: -4, y: 10}
+        - {x: -5, y: 3}
+        - {x: -9, y: -1}
+        - {x: -9, y: -3}
+        - {x: -7, y: -5}
+        - {x: -5, y: -5}
+        - {x: -4, y: -4}
+        - {x: -4, y: -12}
+        - {x: -2, y: -14}
+        - {x: 0, y: -14}
+        - {x: 2, y: -13}
+        - {x: 3, y: -11}
+        - {x: 4, y: -11}
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: 1
       bones: []
       spriteID: 9671fc08beda7344a876221c71075c53
       internalID: -717458005
@@ -2779,7 +2803,6 @@ TextureImporter:
       LoadingShoot_2: 1850993995
       LoadingShoot_21: 345228623
       LoadingShoot_3: -742562507
-      PYthon_Spritesheet_V2_0: -717458005
       PYthon_Spritesheet_V2_1: -1798432361
       PYthon_Spritesheet_V2_10: -1594536580
       PYthon_Spritesheet_V2_11: -94819769
@@ -2832,6 +2855,7 @@ TextureImporter:
       Swimming_21: 509152907
       Swimming_3: 357484657
       Tackled_1: 1123503019
+      WallSliding_01: -717458005
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
