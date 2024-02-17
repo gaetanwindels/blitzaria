@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 29482808994985199}
   - component: {fileID: 7371945659589536070}
   m_Layer: 0
-  m_Name: ParticleAnimationImpactKick
+  m_Name: ParticleAnimationImpactKick_copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1545,16 +1545,9 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -9145553731669651436, guid: 64af7489112dc414296526f2636109bf,
-        type: 3}
-    - sprite: {fileID: 534744732472470602, guid: 64af7489112dc414296526f2636109bf,
-        type: 3}
-    - sprite: {fileID: -651623404881713722, guid: 64af7489112dc414296526f2636109bf,
-        type: 3}
-    - sprite: {fileID: -3901933442575070701, guid: 64af7489112dc414296526f2636109bf,
-        type: 3}
-    - sprite: {fileID: 1135018000508078331, guid: 64af7489112dc414296526f2636109bf,
-        type: 3}
+    - sprite: {fileID: -1834721560, guid: 913ebaa9ae1b5d74cbdc4920540b206c, type: 3}
+    - sprite: {fileID: 73216461, guid: 913ebaa9ae1b5d74cbdc4920540b206c, type: 3}
+    - sprite: {fileID: 1181630641, guid: 913ebaa9ae1b5d74cbdc4920540b206c, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4869,7 +4862,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 1
+  m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

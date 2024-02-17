@@ -1367,7 +1367,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_60
+      name: Impact_Effect_01
       rect:
         serializedVersion: 2
         x: 0
@@ -1388,7 +1388,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_61
+      name: Impact_Effect_02
       rect:
         serializedVersion: 2
         x: 24
@@ -1409,7 +1409,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_62
+      name: Impact_Effect_03
       rect:
         serializedVersion: 2
         x: 48
@@ -1430,7 +1430,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_63
+      name: Impact_Effect_04
       rect:
         serializedVersion: 2
         x: 72
@@ -1451,7 +1451,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_64
+      name: Impact_Effect_05
       rect:
         serializedVersion: 2
         x: 96
@@ -1472,7 +1472,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_65
+      name: Impact_Effect_06
       rect:
         serializedVersion: 2
         x: 120
@@ -1493,7 +1493,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheetEffect_66
+      name: Impact_Effect_07
       rect:
         serializedVersion: 2
         x: 144
@@ -2245,6 +2245,13 @@ TextureImporter:
       EnergyCharge_05: -446618461
       EnergyCharge_06: 255549728
       EnergyCharge_07: -787374966
+      Impact_Effect_01: -1834721560
+      Impact_Effect_02: 73216461
+      Impact_Effect_03: 1181630641
+      Impact_Effect_04: -1753086481
+      Impact_Effect_05: 1673089074
+      Impact_Effect_06: 1342029780
+      Impact_Effect_07: 1714920867
       SplashWall_01: -512962374
       SplashWall_02: -2108610994
       SplashWall_03: -1351916081
@@ -2275,13 +2282,6 @@ TextureImporter:
       SpriteSheetEffect_58: 360962371
       SpriteSheetEffect_59: 1616320191
       SpriteSheetEffect_6: -544470932
-      SpriteSheetEffect_60: -1834721560
-      SpriteSheetEffect_61: 73216461
-      SpriteSheetEffect_62: 1181630641
-      SpriteSheetEffect_63: -1753086481
-      SpriteSheetEffect_64: 1673089074
-      SpriteSheetEffect_65: 1342029780
-      SpriteSheetEffect_66: 1714920867
       SpriteSheetEffect_67: -644059380
       SpriteSheetEffect_68: 486050909
       SpriteSheetEffect_69: -1557259171
