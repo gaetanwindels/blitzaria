@@ -5006,9 +5006,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0385208
-    width: 1
-    height: 0.92218804
+    y: 0.061538458
+    width: 0.33333334
+    height: 0.36923075
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -20928,6 +20928,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8350055485388765162, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.74
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20983,6 +20988,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
         type: 3}
+      propertyPath: VelocityModule.inWorldSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
       propertyPath: ShapeModule.m_SpriteRenderer
       value: 
       objectReference: {fileID: 321503447}
@@ -21003,7 +21013,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
         type: 3}
+      propertyPath: VelocityModule.orbitalX.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: VelocityModule.orbitalY.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: VelocityModule.orbitalZ.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
       propertyPath: InitialModule.startSpeed.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: VelocityModule.orbitalZ.minScalar
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
@@ -21020,6 +21050,31 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: VelocityModule.orbitalX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: VelocityModule.orbitalY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: VelocityModule.orbitalZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: VelocityModule.speedModifier.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: VelocityModule.orbitalOffsetX.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
         type: 3}
@@ -21115,6 +21170,46 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281529863728315214, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 4283956671271634594, guid: 0ab687655f6a4ae428a54a6dbbb87ef3,
         type: 3}
