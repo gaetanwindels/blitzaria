@@ -5006,9 +5006,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.3327824
+    y: 0
     width: 1
-    height: 0.33471075
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -5190,8 +5190,8 @@ Transform:
   m_GameObject: {fileID: 272934031}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 2.33, z: -11.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.06, y: -2.4946, z: -11.65}
+  m_LocalScale: {x: 1, y: 0.5619, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5477,7 +5477,7 @@ PrefabInstance:
     - target: {fileID: 4901862419130891398, guid: e0deeaa7c005657469d620ad35a623bd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.41
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 4901862419130891398, guid: e0deeaa7c005657469d620ad35a623bd,
         type: 3}
@@ -5914,6 +5914,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1415532609, guid: 8d334a248253fa8498e7fee8ba8e0ced,
         type: 3}
+    - target: {fileID: 8240922884218118338, guid: 77fede7b478df2546b2283c4d6d52fb2,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 339ae9d08d2881c43a0e91bf5b39756d, type: 2}
     - target: {fileID: 8240922884218118339, guid: 77fede7b478df2546b2283c4d6d52fb2,
         type: 3}
       propertyPath: m_RootOrder
@@ -5927,7 +5932,7 @@ PrefabInstance:
     - target: {fileID: 8240922884218118339, guid: 77fede7b478df2546b2283c4d6d52fb2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9713141
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 8240922884218118339, guid: 77fede7b478df2546b2283c4d6d52fb2,
         type: 3}

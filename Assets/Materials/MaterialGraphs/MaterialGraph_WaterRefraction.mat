@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material Graphtest4
+  m_Name: MaterialGraph_WaterRefraction
   m_Shader: {fileID: -6465566751694194690, guid: 5130a950ef753d547bba9b56f880eaf0,
     type: 3}
   m_Parent: {fileID: 0}
@@ -99,7 +99,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Float: 1.4
+    - _Float: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -114,15 +114,15 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _Strength: 0.0015
+    - _Strength: 0.001
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _alpha: 1
-    - _pixel: 128
-    - _scale: -0.86
+    - _pixel: 320
+    - _scale: 6.17
     - _size: 3.7
-    - _speed: 0.41
+    - _speed: 0.4
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
