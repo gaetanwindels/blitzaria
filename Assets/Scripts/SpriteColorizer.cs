@@ -18,7 +18,6 @@ public class SpriteColorizer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         var mySprite = spriteRenderer.sprite;
 
         if (mySprite == null || mySprite.texture == null) return;

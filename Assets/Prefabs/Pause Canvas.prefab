@@ -91,7 +91,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2531156141678018383
 RectTransform:
   m_ObjectHideFlags: 0
@@ -458,7 +458,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 539500707425191540, guid: 0bb4cc5254eb7da45bdcdf2b85fd9c43,
+        type: 3}
     - target: {fileID: 6527744838912822890, guid: a87243d298af21640b34291e4468986a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -467,12 +468,12 @@ PrefabInstance:
     - target: {fileID: 6527744838912822890, guid: a87243d298af21640b34291e4468986a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
+      value: GoToPlay
       objectReference: {fileID: 0}
     - target: {fileID: 6527744838912822890, guid: a87243d298af21640b34291e4468986a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: CustomSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6527744838912822890, guid: a87243d298af21640b34291e4468986a,
         type: 3}
@@ -683,7 +684,7 @@ PrefabInstance:
     - target: {fileID: 6527744838912822890, guid: a87243d298af21640b34291e4468986a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ManagePause
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6527744838912822890, guid: a87243d298af21640b34291e4468986a,
         type: 3}
@@ -862,6 +863,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6527744838912822890, guid: a87243d298af21640b34291e4468986a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 539500707425191540, guid: 0bb4cc5254eb7da45bdcdf2b85fd9c43,
+        type: 3}
     - target: {fileID: 6527744838912822890, guid: a87243d298af21640b34291e4468986a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState

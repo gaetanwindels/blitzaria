@@ -140,8 +140,8 @@ Material:
     - _Color_replacing_03: {r: 1, g: 0.59836304, b: 0, a: 1}
     - _Color_replacing_04: {r: 1, g: 1, b: 1, a: 1}
     - _Color_replacing_05: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_to_replace_01: {r: 1, g: 0.854902, b: 0.854902, a: 1}
-    - _Color_to_replace_02: {r: 0.58431375, g: 0.4784314, b: 0.37254903, a: 1}
+    - _Color_to_replace_01: {r: 0.7254902, g: 0.1686275, b: 0.1686275, a: 1}
+    - _Color_to_replace_02: {r: 0.6392157, g: 0.1529412, b: 0.1529412, a: 1}
     - _Color_to_replace_03: {r: 0.24870951, g: 0.764151, b: 0.6095186, a: 1}
     - _Color_to_replace_04: {r: 1, g: 1, b: 1, a: 0}
     - _Color_to_replace_05: {r: 1, g: 1, b: 1, a: 0}

@@ -14,6 +14,7 @@ public class Water : MonoBehaviour
     [SerializeField] GameObject watermesh;
     [SerializeField] GameObject splash;
     [SerializeField] BuoyancyEffector2D effector;
+    [SerializeField] Material material;
 
     // Cached variables
     private SpriteRenderer spriteRenderer;
@@ -123,6 +124,7 @@ public class Water : MonoBehaviour
             meshobjects[i] = Instantiate(watermesh, Vector3.zero, Quaternion.identity) as GameObject;
             meshobjects[i].GetComponent<MeshFilter>().mesh = meshes[i];
             meshobjects[i].GetComponent<MeshRenderer>().material.color = spriteRenderer.color;
+            //meshobjects[i].GetComponent<MeshRenderer>().material = material;
             meshobjects[i].transform.parent = transform;
 
             //Create our colliders, set them be our child

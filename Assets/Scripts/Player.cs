@@ -293,7 +293,7 @@ public class Player : MonoBehaviour
         isInvicible = false;
     }
 
-    public void ReceiveTackle(Player player)
+    private void ReceiveTackle(Player player)
     {
         if (ballGrabbed != null)
         {
@@ -475,7 +475,7 @@ public class Player : MonoBehaviour
     private void ManageCharge()
     {
         // TODO RENAME ACTION ?
-        var hasPressedCharge = inputManager.GetButtonDown("Dash") || inputManager.GetButtonDown("Grab");
+        var hasPressedCharge = inputManager.GetButtonDown("Grab");
 
         if (hasPressedCharge && _orbManager.ConsumeOrbs(1))
         {
@@ -524,7 +524,7 @@ public class Player : MonoBehaviour
 
         var hasPressedDash = inputManager.GetButtonDown("Dash");
 
-        if (hasPressedDash && !IsLoadingShoot())
+        if (hasPressedDash && !IsLoadingShoot() &&  _orbManager.ConsumeOrbs(1))
         {
             var go = Instantiate(dashParticles, transform.position, transform.rotation, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -1057,7 +1057,7 @@ public class Player : MonoBehaviour
 
         _disableBodyRoutine = DisableBody(rigidBodyBall.gameObject);
         StartCoroutine(_disableBodyRoutine);
-        DisableShotHitbox();
+        //DisableShotHitbox();
         CancelDash();
     }
 
@@ -1112,15 +1112,14 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableBody(GameObject newBall)
     {
-        if (newBall != null && newBall.GetComponent<Collider2D>() != null && GetComponent<Collider2D>() != null)
+        var ballBody = newBall == null ? null : newBall.GetComponent<Collider2D>();
+        if (ballBody != null && grabHitbox != null)
         {
-            Debug.Log("Disable body" + GetComponent<Collider2D>());
-            Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+            Physics2D.IgnoreCollision(ballBody, grabHitbox, true);
             yield return new WaitForSeconds(0.6f);
-            if (newBall != null && newBall.GetComponent<Collider2D>() != null)
+            if (ballBody != null)
             {
-                Debug.Log("Enable body");
-                Physics2D.IgnoreCollision(newBall.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
+                Physics2D.IgnoreCollision(ballBody, grabHitbox, false);
             }   
         }
     }

@@ -8,11 +8,9 @@ public class TacklingBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var player = animator.GetComponent<Player>();
-        Debug.Log("mes couilles12");
         if (player != null)
         {
-            Debug.Log("mes cou");
-            player.EnableIsTackling();
+            //player.EnableIsTackling();
         }
     }
 
