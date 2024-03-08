@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: InAir
+    m_Hash: 861170204
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: InAir_1
+      m_Hash: 640988433
+      m_Sprite: {fileID: -7333115809985816378, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -7333115809985816378, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    - m_Name: InAir_2
+      m_Hash: 1061020843
+      m_Sprite: {fileID: -5309884130138556870, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5309884130138556870, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    - m_Name: InAir_3
+      m_Hash: 138073149
+      m_Sprite: {fileID: 3347698518403076005, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3347698518403076005, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 3
+  - m_Name: Swimming
+    m_Hash: 1073693988
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Swimming_1
+      m_Hash: 444233752
+      m_Sprite: {fileID: -5733536067087784308, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5733536067087784308, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    - m_Name: Swimming_2
+      m_Hash: 57878946
+      m_Sprite: {fileID: -4804559610008347429, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4804559610008347429, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    - m_Name: Swimming_3
+      m_Hash: 880023860
+      m_Sprite: {fileID: 3891183433412556667, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3891183433412556667, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    - m_Name: Swimming_11
+      m_Hash: 275385753
+      m_Sprite: {fileID: 90080961878081563, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 90080961878081563, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    - m_Name: Swimming_21
+      m_Hash: 994532954
+      m_Sprite: {fileID: -5404532777657274333, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5404532777657274333, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 5
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638455040807463437
+  m_Version: 1
