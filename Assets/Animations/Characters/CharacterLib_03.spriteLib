@@ -296,6 +296,36 @@ MonoBehaviour:
         type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 1
+  - m_Name: DashInAir
+    m_Hash: 895958016
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Clark_SpriteSheets_60
+      m_Hash: 363935912
+      m_Sprite: {fileID: 859336490, guid: ac632e8be78f5f743853dede463f329e, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 859336490, guid: ac632e8be78f5f743853dede463f329e,
+        type: 3}
+    - m_Name: Clark_SpriteSheets_61
+      m_Hash: 582355006
+      m_Sprite: {fileID: 1261092265, guid: ac632e8be78f5f743853dede463f329e, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1261092265, guid: ac632e8be78f5f743853dede463f329e,
+        type: 3}
+    - m_Name: Clark_SpriteSheets_62
+      m_Hash: 1002396036
+      m_Sprite: {fileID: -1604476399, guid: ac632e8be78f5f743853dede463f329e, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1604476399, guid: ac632e8be78f5f743853dede463f329e,
+        type: 3}
+    - m_Name: Clark_SpriteSheets_63
+      m_Hash: 213412114
+      m_Sprite: {fileID: -8996344, guid: ac632e8be78f5f743853dede463f329e, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8996344, guid: ac632e8be78f5f743853dede463f329e,
+        type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 638460250714288155
+  m_ModificationHash: 638460310368136245
   m_Version: 1
