@@ -1430,6 +1430,7 @@ MonoBehaviour:
   brain: {fileID: 0}
   builtupPower: 0
   builtUpCurl: 0
+  isDribbling: 0
   ballGrabbed: {fileID: 0}
   tackleStartPoint: {x: 0, y: 0}
   currentDashVelocity: {x: 0, y: 0}
@@ -1499,7 +1500,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 859336490, guid: ac632e8be78f5f743853dede463f329e, type: 3}
+  m_Sprite: {fileID: -3749228928362064068, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1657,7 +1659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 8390002387b7ab348a7195735195d905,
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: b76ec50fc74997348b9e8962ad410256,
     type: 3}
 --- !u!114 &834518355814536822
 MonoBehaviour:
@@ -1674,7 +1676,7 @@ MonoBehaviour:
   m_CategoryHash: 1.2100393e-15
   m_labelHash: 5.57387e-33
   m_SpriteKey: 0
-  m_SpriteHash: 135477361
+  m_SpriteHash: 871111770
 --- !u!1001 &2439622379195720924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2182,7 +2184,7 @@ PrefabInstance:
     - target: {fileID: 4548783866240806946, guid: 63dc13218cf29dd429b33008bd9638df,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.61
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4548783866240806946, guid: 63dc13218cf29dd429b33008bd9638df,
         type: 3}

@@ -4998,7 +4998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  impulseSpeedFactor: 0.5
+  impulseSpeedFactor: 1.2
   gravityScale: 0.6
   minScaleY: 0.7
   minVelocityTransform: 7

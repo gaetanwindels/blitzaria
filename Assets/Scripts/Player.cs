@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
     [Header("State")]
     public float builtupPower;
     public float builtUpCurl;
+    public bool isDribbling;
     public Ball ballGrabbed;
     public Vector2 tackleStartPoint;
     public Vector2 currentDashVelocity;
@@ -277,6 +278,7 @@ public class Player : MonoBehaviour
         ManageRollOver();
         ManageCurl();
         ManageDash();
+        ManageDribble();
         ManageCharge();
         ManageRotation();
         ManageAnimation();
@@ -494,6 +496,31 @@ public class Player : MonoBehaviour
         if (chargeVfx != null)
         {
             chargeVfx.SetIntensity(_chargeLevel);
+        }
+    }
+
+    private void ManageDribble()
+    {
+        if (inputManager.GetButtonDown("Dribble"))
+        {
+            isDribbling = true;
+        }
+        if (inputManager.GetButtonUp("Dribble"))
+        {
+            isDribbling = false;
+        }
+            
+        var ball = FindFirstObjectByType<Ball>();
+    
+        if (ball != null)
+        {
+            var ballCollider = ball.GetComponent<Collider2D>();
+            if (ballCollider != null)
+            {
+                Physics2D.IgnoreCollision(ballCollider, _bodyCollider, !isDribbling);
+            }
+            
+            grabHitbox.enabled = !isDribbling;
         }
     }
 
@@ -808,13 +835,15 @@ public class Player : MonoBehaviour
     public void EnableIsTackling()
     {
         var ball = FindObjectOfType<Ball>();
-        var collider = ball.GetComponent<Collider2D>();
-        grabHitbox.enabled = false;
-        if (collider != null)
+        if (ball != null)
         {
-            Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
-        }
-        
+            var collider = ball.GetComponent<Collider2D>(); 
+            if (collider != null)
+            {
+                Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+            }
+        };
+        grabHitbox.enabled = false;
         isTackling = true;
     }
 

@@ -4,16 +4,17 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using Rewired;
+using ScriptableObjects;
 using TMPro;
 
 public class PlayerSelect : MonoBehaviour
 {
-    private RawImage image;
     private Texture textureImage;
 
     private Rewired.Player rwPlayer;
 
     [SerializeField] public Button teamButton;
+    [SerializeField] public Button characterSelectButton;
     [SerializeField] public GameObject backgroundText;
     [SerializeField] public int playerNumber = -1;
     [SerializeField] public GameObject playerName;
@@ -21,23 +22,30 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] private Image clothes;
     [SerializeField] public Color[] team1Palette;
     [SerializeField] public Color[] team2Palette;
+    [SerializeField] public Image imageCharacter;
 
-    [SerializeField] GameObject player;
-
+    [SerializeField] PlayerAttributes[] players;
+    
+    private GameObject player;
     private bool isReady = false;    
     private TextMeshProUGUI teamText;
+    private TextMeshProUGUI characterSelectText;
     private TextMeshProUGUI playerNameText;
     private Image teamImageButton;
     private int colorIndex;
+    private int characterIndex;
 
     // Start is called before the first frame update
     void Start()
     {
-        image = GetComponentInChildren<RawImage>();
         teamText = teamButton.GetComponentInChildren<TextMeshProUGUI>();
+        characterSelectText = characterSelectButton.GetComponentInChildren<TextMeshProUGUI>();
         teamImageButton = teamButton.GetComponentInChildren<Image>();
         playerNameText = playerName.GetComponentInChildren<TextMeshProUGUI>();
         colorIndex = 0;
+        characterIndex = 0;
+        player = players[0].playerPrefab;
+        imageCharacter.sprite = players[0].selectSprite;
     }
 
     // Update is called once per frame
@@ -175,7 +183,6 @@ public class PlayerSelect : MonoBehaviour
     {
         var playerSelect = new PlayerSelectConfiguration();
         playerSelect.player = this.player;
-        var greenComponent = 0.25f * playerNumber;
 
         var palette = team1Palette;
         if (team == TeamEnum.Team2)
@@ -187,5 +194,13 @@ public class PlayerSelect : MonoBehaviour
         playerSelect.playerNumber = this.playerNumber;
 
         return playerSelect;
+    }
+
+    public void PickNextCharacter()
+    {
+        characterIndex = (characterIndex + 1) % players.Length;
+        player = players[characterIndex].playerPrefab;
+        characterSelectText.text = players[characterIndex].name;
+        imageCharacter.sprite = players[characterIndex].selectSprite;
     }
 }

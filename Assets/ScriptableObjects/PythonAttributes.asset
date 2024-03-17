@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016725c6ae304fa384096ef79aba10c8, type: 3}
+  m_Name: PythonAttributes
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 6964443490596722126, guid: e0deeaa7c005657469d620ad35a623bd,
+    type: 3}
+  selectSprite: {fileID: -1798432361, guid: 266935395faea294d9f5177aebf13627, type: 3}
+  sourcePrimaryColor: {r: 0.7254902, g: 0.16862746, b: 0.16862746, a: 0}
+  sourceSecondaryColor: {r: 0.6392157, g: 0.15294118, b: 0.15294118, a: 0}
+  primaryColors: []
+  secondaryColors: []
+  name: Python
