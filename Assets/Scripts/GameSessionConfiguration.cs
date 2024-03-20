@@ -5,17 +5,17 @@ using UnityEngine;
 public class GameSessionConfiguration : MonoBehaviour
 {
 
-    public List<PlayerSelectConfiguration> players = new List<PlayerSelectConfiguration>();
+    public List<PlayerSelectConfiguration> players = new();
 
-    public static GameSessionConfiguration instance = null;
+    private static GameSessionConfiguration _instance;
 
     void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
+            _instance = this;
         }
-        else if (instance != this)
+        else if (_instance != this)
         {
             Destroy(gameObject);
         }

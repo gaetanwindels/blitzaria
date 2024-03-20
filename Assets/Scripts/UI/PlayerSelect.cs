@@ -46,6 +46,7 @@ public class PlayerSelect : MonoBehaviour
         characterIndex = 0;
         player = players[0].playerPrefab;
         imageCharacter.sprite = players[0].selectSprite;
+        characterSelectText.text = players[0].name;
     }
 
     // Update is called once per frame

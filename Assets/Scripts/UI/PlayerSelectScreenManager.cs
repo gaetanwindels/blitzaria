@@ -28,6 +28,7 @@ public class PlayerSelectScreenManager : MonoBehaviour
         currentCountDown = countDownDuration;
         sceneManager = FindObjectOfType<CustomSceneManager>();
         gameSession = FindObjectOfType<GameSessionConfiguration>();
+        gameSession.players = new();
     }
 
     // Update is called once per frame

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using enums;
+using Extensions;
 using UnityEngine;
 using Rewired;
 using Random = UnityEngine.Random;
@@ -107,7 +108,6 @@ public class Player : MonoBehaviour
     private Animator _animator;
     private Collider2D _bodyCollider;
     private GameManager _gameManager;
-    private AudioLowPassFilter _audioFilter;
     private OrbsManager _orbManager;
     private InputBuffer _inputBuffer;
 
@@ -183,8 +183,7 @@ public class Player : MonoBehaviour
             (tagName == "DashHitbox" || tagName == "ShotHitbox") 
             && !playerParent.IsGrabbing() && playerParent.team != team)
         {
-            _audioSource.clip = hitPlayerSound;
-            AudioUtils.PlaySound(gameObject);
+            _audioSource.PlayClipWithRandomPitch(hitPlayerSound, isTouchingWater);
             StartCoroutine(TriggerInvicibility());
             ReceiveTackle(this);
             DisableShotHitbox();
@@ -223,7 +222,6 @@ public class Player : MonoBehaviour
         _bodyCollider = GetComponent<Collider2D>();
         _gameManager = FindObjectOfType<GameManager>();
         _audioSource = GetComponent<AudioSource>();
-        _audioFilter = GetComponent<AudioLowPassFilter>();
         _orbManager = GetComponentInChildren<OrbsManager>();
         _rwPlayer = ReInput.players.GetPlayer(playerNumber);
         _inputBuffer = GetComponent<InputBuffer>();
@@ -551,7 +549,7 @@ public class Player : MonoBehaviour
 
         var hasPressedDash = inputManager.GetButtonDown("Dash");
 
-        if (hasPressedDash && !IsLoadingShoot() &&  _orbManager.ConsumeOrbs(1))
+        if (hasPressedDash && !IsLoadingShoot() && !isLoadingAutoShoot && _orbManager.ConsumeOrbs(1))
         {
             var go = Instantiate(dashParticles, transform.position, transform.rotation, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -727,9 +725,7 @@ public class Player : MonoBehaviour
             }
 
             builtUpCurl = 0;
-
-            _audioSource.clip = launchBallSound;
-            AudioUtils.PlaySound(gameObject);
+            _audioSource.PlayClipWithRandomPitch(launchBallSound, isTouchingWater);
 
             if (_disableGrabbingRoutine != null)
             {
@@ -925,8 +921,7 @@ public class Player : MonoBehaviour
             var adjustedPower = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, power);
         
             Time.timeScale = 0;
-            _audioSource.clip = hitBallSound;
-            AudioUtils.PlaySound(gameObject);
+            _audioSource.PlayClipWithRandomPitch(hitBallSound, isTouchingWater);
             isShooting = true;
             var percentPower = Math.Min(1f, (adjustedPower - minShotPower) / (maxShotPower - minShotPower));
             var shootFreezeTime = 0;

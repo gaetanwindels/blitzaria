@@ -20,6 +20,8 @@ public class Ball : MonoBehaviour
     [SerializeField] public float mass = 1f;
     [SerializeField] public float massInWater = 0.5f;
     
+    [SerializeField] public float minSpeedCharged = 3f;
+    
     [SerializeField] public float minSpeedTrail = 0.5f;
     [SerializeField] public AnimationCurve trailIntensity;
 
@@ -34,14 +36,14 @@ public class Ball : MonoBehaviour
     [SerializeField] AudioClip hitSound;
 
     // Cached variables
-    private AudioSource audioSource;
-    private SpriteRenderer spriteRenderer;
-    private GameObject perfectShotLight;
+    private AudioSource _audioSource;
+    private SpriteRenderer _spriteRenderer;
+    private GameObject _perfectShotLight;
 
-    private bool hasJustSpawned = true;
-    private float curlRotation = 0f;
+    private bool _hasJustSpawned = true;
+    private float _curlRotation = 0f;
 
-    public bool HasJustSpawned { get => hasJustSpawned; set => hasJustSpawned = value; }
+    public bool HasJustSpawned { get => _hasJustSpawned; set => _hasJustSpawned = value; }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -49,9 +51,7 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Ball collided " + collision.gameObject.name);
         var tagName = collision.gameObject.tag;
-
         Player player = collision.gameObject.GetComponentInParent<Player>();
 
 
@@ -90,9 +90,9 @@ public class Ball : MonoBehaviour
 
     IEnumerator Blink()
     {
-        perfectShotLight.SetActive(true);
+        _perfectShotLight.SetActive(true);
         yield return new WaitForSecondsRealtime(0.15f);
-        perfectShotLight.SetActive(false);
+        _perfectShotLight.SetActive(false);
     }
 
 
@@ -106,8 +106,8 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
         //var light = GetComponentInChildren<Light2D>();
         //perfectShotLight = light.gameObject;
@@ -121,8 +121,14 @@ public class Ball : MonoBehaviour
 
         if (rigidbody != null)
         {
-            rigidbody.gravityScale = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? 0 : gravityScale;
-            rigidbody.mass = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area")) ? massInWater : mass;
+            var isTouchingWater = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area"));
+            rigidbody.gravityScale = isTouchingWater ? 0 : gravityScale;
+            rigidbody.mass = isTouchingWater ? massInWater : mass;
+
+            // if (isTouchingWater && rigidbody.velocity.magnitude < minSpeedCharged)
+            // {
+            //     rigidbody.velocity = rigidbody.velocity.normalized * minSpeedCharged;
+            // }
             
             ManageTrail();
             
@@ -136,9 +142,9 @@ public class Ball : MonoBehaviour
             }
         }
     
-        if (this.player != null)
+        if (player != null)
         {
-            this.transform.position = player.GetBallPoint().position;
+            transform.position = player.GetBallPoint().position;
             ManageRotation();
         }
     }
@@ -181,7 +187,7 @@ public class Ball : MonoBehaviour
 
     public void ApplyRotation(float percentage)
     {
-        curlRotation = this.baseCurlRotation * percentage;
+        _curlRotation = this.baseCurlRotation * percentage;
     }
 
     private void ManageCurl()
@@ -198,9 +204,9 @@ public class Ball : MonoBehaviour
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
-        if (this.player != null)
+        if (player != null)
         {
-            transform.Rotate(Vector3.forward * curlRotation * Time.deltaTime);
+            transform.Rotate(Vector3.forward * _curlRotation * Time.deltaTime);
         } else if (rigidbody != null)
         {
             rigidbody = GetComponent<Rigidbody2D>();
@@ -208,7 +214,7 @@ public class Ball : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         } else
         {
-            curlRotation = 0;
+            _curlRotation = 0;
         }
     }
 

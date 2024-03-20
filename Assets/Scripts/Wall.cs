@@ -1,30 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using Extensions;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
 
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // var ball = collision.gameObject.GetComponent<Ball>();
-        if (audioSource != null)
+        if (_audioSource != null)
         {
-            audioSource.Play();
+            _audioSource.PlayWithRandomPitch();
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
