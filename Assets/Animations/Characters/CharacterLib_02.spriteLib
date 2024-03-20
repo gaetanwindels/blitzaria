@@ -324,8 +324,20 @@ MonoBehaviour:
       m_FromMain: 0
       m_SpriteOverride: {fileID: -387577048, guid: 041c5ee0d2b689a4280a215ba9ed4250,
         type: 3}
+    - m_Name: DashInWater_05
+      m_Hash: 157723133
+      m_Sprite: {fileID: 575823273, guid: 041c5ee0d2b689a4280a215ba9ed4250, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 575823273, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
+    - m_Name: DashInWater_06
+      m_Hash: 275773511
+      m_Sprite: {fileID: -578569226, guid: 041c5ee0d2b689a4280a215ba9ed4250, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -578569226, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+        type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 4
+    m_EntryOverrideCount: 6
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 638461113909804156
+  m_ModificationHash: 638465419078941459
   m_Version: 1
