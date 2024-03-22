@@ -1,10 +1,85 @@
 fileFormatVersion: 2
-guid: c8d4e1c8153fdd2499ed837e0176ca6f
+guid: ea227b358d4fc7849beea72b00eb71d1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4759277838896186768
-    second: LETTERS 2-Sheet_0
+      213: 1628525444804594670
+    second: LETTERS 1-Sheet_0
+  - first:
+      213: 6064028171050802732
+    second: LETTERS 1-Sheet_1
+  - first:
+      213: -1707133241220515724
+    second: LETTERS 1-Sheet_2
+  - first:
+      213: -8819461387819918433
+    second: LETTERS 1-Sheet_3
+  - first:
+      213: 3575963370474286635
+    second: LETTERS 1-Sheet_4
+  - first:
+      213: 8991935505973845902
+    second: LETTERS 1-Sheet_5
+  - first:
+      213: 5920830480682466798
+    second: LETTERS 1-Sheet_6
+  - first:
+      213: 4643139204775110122
+    second: LETTERS 1-Sheet_7
+  - first:
+      213: 1498767138201892818
+    second: LETTERS 1-Sheet_8
+  - first:
+      213: 5994487540698698349
+    second: LETTERS 1-Sheet_9
+  - first:
+      213: -603256619752316627
+    second: LETTERS 1-Sheet_10
+  - first:
+      213: 3285980788186970917
+    second: LETTERS 1-Sheet_11
+  - first:
+      213: -3158099005677998951
+    second: LETTERS 1-Sheet_12
+  - first:
+      213: -1119473545183056485
+    second: LETTERS 1-Sheet_13
+  - first:
+      213: 8423393245073819629
+    second: LETTERS 1-Sheet_14
+  - first:
+      213: 3395354102670644258
+    second: LETTERS 1-Sheet_15
+  - first:
+      213: 8324452558741822061
+    second: LETTERS 1-Sheet_16
+  - first:
+      213: -5233768978729480460
+    second: LETTERS 1-Sheet_17
+  - first:
+      213: 6842073325647546456
+    second: LETTERS 1-Sheet_18
+  - first:
+      213: 7541983383187584512
+    second: LETTERS 1-Sheet_19
+  - first:
+      213: -6704999150173543617
+    second: LETTERS 1-Sheet_20
+  - first:
+      213: 4221636072962431112
+    second: LETTERS 1-Sheet_21
+  - first:
+      213: 4547013884738207242
+    second: LETTERS 1-Sheet_22
+  - first:
+      213: 5640543505393208580
+    second: LETTERS 1-Sheet_23
+  - first:
+      213: -2979228313802612373
+    second: LETTERS 1-Sheet_24
+  - first:
+      213: -8464244646365081363
+    second: LETTERS 1-Sheet_25
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -37,7 +112,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +126,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +150,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,13 +173,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_0
+      name: LETTERS 1-Sheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
-        width: 13
-        height: 16
+        x: 2
+        y: 78
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,533 +187,533 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07a34317506a3fdb0800000000000000
-      internalID: -4759277838896186768
+      spriteID: eeb4345834fa99610800000000000000
+      internalID: 1628525444804594670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_1
+      name: LETTERS 1-Sheet_1
       rect:
         serializedVersion: 2
-        x: 13
-        y: 64
-        width: 13
-        height: 16
+        x: 2
+        y: 58
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e482495de7e95044082efa63ab1a6f0b
-      internalID: 1966387954
+      spriteID: c2ed1733e71c72450800000000000000
+      internalID: 6064028171050802732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_2
+      name: LETTERS 1-Sheet_2
       rect:
         serializedVersion: 2
-        x: 26
-        y: 64
-        width: 13
-        height: 16
+        x: 22
+        y: 78
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d546639c8e5dbdb4bb8e51be8fd833e0
-      internalID: -1731896426
+      spriteID: 4783ac4ac5b0f48e0800000000000000
+      internalID: -1707133241220515724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_3
+      name: LETTERS 1-Sheet_3
       rect:
         serializedVersion: 2
-        x: 39
-        y: 64
-        width: 13
-        height: 16
+        x: 22
+        y: 58
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 40a3db34c1574ae4cbae27d5826136bf
-      internalID: -2093722100
+      spriteID: f9b58b4689afa9580800000000000000
+      internalID: -8819461387819918433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_4
+      name: LETTERS 1-Sheet_4
       rect:
         serializedVersion: 2
-        x: 52
-        y: 64
-        width: 13
-        height: 16
+        x: 42
+        y: 78
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8359d6bffc35b3842acb4a57f15cec19
-      internalID: -378336790
+      spriteID: b2eadea3dbf50a130800000000000000
+      internalID: 3575963370474286635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_5
+      name: LETTERS 1-Sheet_5
       rect:
         serializedVersion: 2
-        x: 65
-        y: 64
-        width: 13
-        height: 16
+        x: 45
+        y: 58
+        width: 9
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f5b224c53f6ed9e44ad8010c7e4e3e81
-      internalID: -148046509
+      spriteID: e8f1bcc83b5c9cc70800000000000000
+      internalID: 8991935505973845902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_6
+      name: LETTERS 1-Sheet_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
-        width: 13
-        height: 16
+        x: 62
+        y: 78
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: faa12f67c4d824047859c28b1b52d71b
-      internalID: -870146651
+      spriteID: eed3268c3f30b2250800000000000000
+      internalID: 5920830480682466798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_7
+      name: LETTERS 1-Sheet_7
       rect:
         serializedVersion: 2
-        x: 13
-        y: 48
-        width: 13
-        height: 16
+        x: 62
+        y: 58
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 268c2ddbf84f3c340b9d3496d764418c
-      internalID: -1814126032
+      spriteID: ae56f4f918ebf6040800000000000000
+      internalID: 4643139204775110122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_8
+      name: LETTERS 1-Sheet_8
       rect:
         serializedVersion: 2
-        x: 26
-        y: 48
-        width: 13
-        height: 16
+        x: 82
+        y: 78
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: b4c4954f57a45bd4fbc547ed71cdc7d4
-      internalID: 689790590
+      spriteID: 2d77d8975c0bcc410800000000000000
+      internalID: 1498767138201892818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_9
+      name: LETTERS 1-Sheet_9
       rect:
         serializedVersion: 2
-        x: 39
-        y: 48
-        width: 13
-        height: 16
+        x: 82
+        y: 58
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 39d1574d1937cc54885e1a60d0d6ca1c
-      internalID: 846067811
+      spriteID: d62d9d978a2b03350800000000000000
+      internalID: 5994487540698698349
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_10
+      name: LETTERS 1-Sheet_10
       rect:
         serializedVersion: 2
-        x: 52
-        y: 48
-        width: 13
-        height: 16
+        x: 102
+        y: 78
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: ec4d6e1918346754082c39f174016515
-      internalID: -941514552
+      spriteID: d21a24fec4dc0a7f0800000000000000
+      internalID: -603256619752316627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_11
+      name: LETTERS 1-Sheet_11
       rect:
         serializedVersion: 2
-        x: 65
-        y: 48
-        width: 13
-        height: 16
+        x: 102
+        y: 58
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7dec396da81de804e93779a8de456eba
-      internalID: -393889862
+      spriteID: 52b74a2fd162a9d20800000000000000
+      internalID: 3285980788186970917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_12
+      name: LETTERS 1-Sheet_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
-        width: 13
-        height: 16
+        x: 2
+        y: 38
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a0714bed76cc69845bbfd4e8fc47ef12
-      internalID: 710525771
+      spriteID: 99c6c09cfad2c24d0800000000000000
+      internalID: -3158099005677998951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_13
+      name: LETTERS 1-Sheet_13
       rect:
         serializedVersion: 2
-        x: 13
-        y: 32
-        width: 13
-        height: 16
+        x: 2
+        y: 18
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 4e2ff521c9fad10459bb2f7767301033
-      internalID: 1118159919
+      spriteID: b9daaebedb4d670f0800000000000000
+      internalID: -1119473545183056485
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_14
+      name: LETTERS 1-Sheet_14
       rect:
         serializedVersion: 2
-        x: 26
-        y: 32
-        width: 13
-        height: 16
+        x: 22
+        y: 38
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e60ef03fc3ca4034fbb0dd43472d9a9b
-      internalID: -790216563
+      spriteID: de7cc000787e5e470800000000000000
+      internalID: 8423393245073819629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_15
+      name: LETTERS 1-Sheet_15
       rect:
         serializedVersion: 2
-        x: 39
-        y: 32
-        width: 13
-        height: 16
+        x: 22
+        y: 18
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 731890cc740a6a94c9a86674348988d7
-      internalID: -1490045373
+      spriteID: 22459582198be1f20800000000000000
+      internalID: 3395354102670644258
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_16
+      name: LETTERS 1-Sheet_16
       rect:
         serializedVersion: 2
-        x: 52
-        y: 32
-        width: 13
-        height: 16
+        x: 42
+        y: 38
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 79878a03c835ab04195aa66296a27d6a
-      internalID: -271008757
+      spriteID: d6ad5615f75668370800000000000000
+      internalID: 8324452558741822061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_17
+      name: LETTERS 1-Sheet_17
       rect:
         serializedVersion: 2
-        x: 65
-        y: 32
-        width: 13
-        height: 16
+        x: 42
+        y: 18
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: aeb3aa1baac1ae04eaeb8cb2fffc558f
-      internalID: -598376271
+      spriteID: 4fece52f7daed57b0800000000000000
+      internalID: -5233768978729480460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_18
+      name: LETTERS 1-Sheet_18
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
-        width: 13
-        height: 16
+        x: 62
+        y: 38
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 076a7810b80b2b2418af3cb599db863d
-      internalID: 616203391
+      spriteID: 858c566507de3fe50800000000000000
+      internalID: 6842073325647546456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_19
+      name: LETTERS 1-Sheet_19
       rect:
         serializedVersion: 2
-        x: 13
-        y: 16
-        width: 13
-        height: 16
+        x: 62
+        y: 18
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e27d2f84b42471e4883a9c6e088f1ebc
-      internalID: -1799038275
+      spriteID: 0067bc88de18aa860800000000000000
+      internalID: 7541983383187584512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_20
+      name: LETTERS 1-Sheet_20
       rect:
         serializedVersion: 2
-        x: 26
-        y: 16
-        width: 13
-        height: 16
+        x: 82
+        y: 38
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 22b24a86746b8f447aecdb49d9f33a35
-      internalID: -855995525
+      spriteID: f332c9a2cce03f2a0800000000000000
+      internalID: -6704999150173543617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_21
+      name: LETTERS 1-Sheet_21
       rect:
         serializedVersion: 2
-        x: 39
-        y: 16
-        width: 13
-        height: 16
+        x: 82
+        y: 18
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 22bb9c15c801a5f489953cd1cf067ed5
-      internalID: -193085166
+      spriteID: 88896e324a3469a30800000000000000
+      internalID: 4221636072962431112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_22
+      name: LETTERS 1-Sheet_22
       rect:
         serializedVersion: 2
-        x: 52
-        y: 16
-        width: 13
-        height: 16
+        x: 102
+        y: 38
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 98b78b8e779e60d4c8e5dd57787f738e
-      internalID: 7741465
+      spriteID: a0ef69c790d3a1f30800000000000000
+      internalID: 4547013884738207242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_23
+      name: LETTERS 1-Sheet_23
       rect:
         serializedVersion: 2
-        x: 65
-        y: 16
-        width: 13
-        height: 16
+        x: 102
+        y: 18
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8088f9d6f26731440b2280152704a83c
-      internalID: -1618449571
+      spriteID: 40d491bee6c374e40800000000000000
+      internalID: 5640543505393208580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_24
+      name: LETTERS 1-Sheet_24
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 13
-        height: 16
+        width: 17
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 9f049e4a2933b5c4ab96535c2ccc91aa
-      internalID: 495837439
+      spriteID: b61620b12a7a7a6d0800000000000000
+      internalID: -2979228313802612373
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LETTERS 2-Sheet_25
+      name: LETTERS 1-Sheet_25
       rect:
         serializedVersion: 2
-        x: 13
+        x: 22
         y: 0
-        width: 13
-        height: 16
+        width: 17
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 607347cb649ca834e917d7d5219fe915
-      internalID: -1323820948
+      spriteID: de05861f656f88a80800000000000000
+      internalID: -8464244646365081363
       vertices: []
       indices: 
       edges: []
@@ -646,40 +721,14 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 7a89230f3bda1f743a5703f11cbcac3c
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      LETTERS 2-Sheet_0: -4759277838896186768
-      LETTERS 2-Sheet_1: 1966387954
-      LETTERS 2-Sheet_10: -941514552
-      LETTERS 2-Sheet_11: -393889862
-      LETTERS 2-Sheet_12: 710525771
-      LETTERS 2-Sheet_13: 1118159919
-      LETTERS 2-Sheet_14: -790216563
-      LETTERS 2-Sheet_15: -1490045373
-      LETTERS 2-Sheet_16: -271008757
-      LETTERS 2-Sheet_17: -598376271
-      LETTERS 2-Sheet_18: 616203391
-      LETTERS 2-Sheet_19: -1799038275
-      LETTERS 2-Sheet_2: -1731896426
-      LETTERS 2-Sheet_20: -855995525
-      LETTERS 2-Sheet_21: -193085166
-      LETTERS 2-Sheet_22: 7741465
-      LETTERS 2-Sheet_23: -1618449571
-      LETTERS 2-Sheet_24: 495837439
-      LETTERS 2-Sheet_25: -1323820948
-      LETTERS 2-Sheet_3: -2093722100
-      LETTERS 2-Sheet_4: -378336790
-      LETTERS 2-Sheet_5: -148046509
-      LETTERS 2-Sheet_6: -870146651
-      LETTERS 2-Sheet_7: -1814126032
-      LETTERS 2-Sheet_8: 689790590
-      LETTERS 2-Sheet_9: 846067811
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
