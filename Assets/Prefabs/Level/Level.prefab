@@ -589,6 +589,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6463833840362472504, guid: b8c3ed1c57ee09c49b0033ea8c90aef3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9217289928489097053, guid: b8c3ed1c57ee09c49b0033ea8c90aef3,
         type: 3}
       propertyPath: m_IsActive
@@ -1445,7 +1450,15 @@ PrefabInstance:
     - {fileID: 573793603778477686, guid: bb47000d154e99d4eaf6a65c02f21695, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6010050397457060087, guid: bb47000d154e99d4eaf6a65c02f21695,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8894985647672878083}
+    - targetCorrespondingSourceObject: {fileID: 6246619202893978364, guid: bb47000d154e99d4eaf6a65c02f21695,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5274717125859744445}
   m_SourcePrefab: {fileID: 100100000, guid: bb47000d154e99d4eaf6a65c02f21695, type: 3}
 --- !u!4 &3050482417122413525 stripped
 Transform:
@@ -1453,3 +1466,107 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8651033122879705259}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3128128397285097564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6010050397457060087, guid: bb47000d154e99d4eaf6a65c02f21695,
+    type: 3}
+  m_PrefabInstance: {fileID: 8651033122879705259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &8894985647672878083
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3128128397285097564}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -12.731371, y: -5.582435}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.7349854, y: 12.16487}
+  m_EdgeRadius: 0
+--- !u!1 &3368366910923278935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6246619202893978364, guid: bb47000d154e99d4eaf6a65c02f21695,
+    type: 3}
+  m_PrefabInstance: {fileID: 8651033122879705259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &5274717125859744445
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368366910923278935}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -10.2899685, y: 4.892132}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.7915382, y: 10.784264}
+  m_EdgeRadius: 0

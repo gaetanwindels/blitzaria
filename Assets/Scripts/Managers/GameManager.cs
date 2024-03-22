@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI countDownText;
     [SerializeField] TextMeshProUGUI winText;
     [SerializeField] GameObject restartButton;
-    [SerializeField] GameObject mainMenuButton;
+    [SerializeField] GameObject endScreenMainButton;
+    [SerializeField] GameObject mainPauseButton;
     [SerializeField] Slider sliderEnergyBar1;
     [SerializeField] Slider sliderEnergyBar2;
     [SerializeField] Slider sliderEnergyBar3;
@@ -139,15 +140,15 @@ public class GameManager : MonoBehaviour
         } else if (scoreManagerTeam1.Score > scoreManagerTeam2.Score)
         {
             Time.timeScale = 0;
-            //_middleTextManager.DisplayText("TEAM 1 WON!");
             _matchState = MatchState.Finished;
             endgameScreen.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(endScreenMainButton);
         } else
         {
-            //_middleTextManager.DisplayText("TEAM 2 WON!");
             Time.timeScale = 0;
             _matchState = MatchState.Finished;
             endgameScreen.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(endScreenMainButton);
         }
     }
     
@@ -225,8 +226,6 @@ public class GameManager : MonoBehaviour
     {
         timer = gameDuration;
         winText.text = "";
-        //restartButton.SetActive(false);
-        //mainMenuButton.SetActive(false);
         gameSession = FindObjectOfType<GameSessionConfiguration>();
 
         if (gameSession != null)
@@ -236,7 +235,7 @@ public class GameManager : MonoBehaviour
 
         if (timerManager != null)
         {
-            timerManager.Init(180);
+            timerManager.Init(gameDuration);
         }
         
         players = FindObjectsOfType<Player>();
@@ -263,7 +262,7 @@ public class GameManager : MonoBehaviour
             //     winText.text += " win";
             // }
 
-            EventSystem.current.SetSelectedGameObject(mainMenuButton);
+            
         //}
     }
 
@@ -297,7 +296,6 @@ public class GameManager : MonoBehaviour
 
         foreach (Player player in players)
         {
-            Debug.Log("enabled");
             player.EnableInputs();
         }
         
@@ -324,10 +322,10 @@ public class GameManager : MonoBehaviour
 
     private void Pause()
     {
-        Debug.Log("pausing" + pauseCanvas);
-        if (pauseCanvas != null && !pauseCanvas.activeSelf)
+        if (pauseCanvas && !pauseCanvas.activeSelf)
         {
             pauseCanvas.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(mainPauseButton);
         }
         
         Time.timeScale = 0;
@@ -335,7 +333,7 @@ public class GameManager : MonoBehaviour
 
     private void Resume()
     {
-        if (pauseCanvas != null && pauseCanvas.activeSelf)
+        if (pauseCanvas && pauseCanvas.activeSelf)
         {
             pauseCanvas.SetActive(false);
         }
