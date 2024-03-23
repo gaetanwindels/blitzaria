@@ -56,6 +56,11 @@ namespace Managers
             }
         }
 
+        public void ResetScore()
+        {
+            _score = 0;
+        }
+
         void UpdateScore()
         {
             _scoreText.text = _score.ToString();

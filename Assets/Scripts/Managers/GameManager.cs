@@ -269,7 +269,9 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Init();
+        //Init();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
     public void ManagePause()

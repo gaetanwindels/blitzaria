@@ -255,19 +255,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 539500707425191540, guid: 0bb4cc5254eb7da45bdcdf2b85fd9c43,
+      objectReference: {fileID: 1856046644}
+    - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToMenu
+      value: GoToSelect
       objectReference: {fileID: 0}
     - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CustomSceneManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -713,19 +732,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 539500707425191540, guid: 0bb4cc5254eb7da45bdcdf2b85fd9c43,
+      objectReference: {fileID: 1856046644}
+    - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToSelect
+      value: GoToMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CustomSceneManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958398138969697463, guid: 272940e2874cfb14187d6a0d93de9694,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

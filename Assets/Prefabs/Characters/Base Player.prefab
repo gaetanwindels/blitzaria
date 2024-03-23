@@ -1343,8 +1343,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.1004391, y: 0.045447648}
-  m_Size: {x: 0.46806592, y: 1.2882177}
+  m_Offset: {x: 0.073883355, y: 0.0343827}
+  m_Size: {x: 0.5211774, y: 1.2660878}
   m_Direction: 0
 --- !u!114 &6988621117747625792
 MonoBehaviour:
@@ -1443,6 +1443,7 @@ MonoBehaviour:
   isShootCoolDown: 0
   isTackling: 0
   isShooting: 0
+  isThrowing: 0
   hasJustEnteredWater: 0
   isMotionGrabbing: 0
   isRollingOver: 0
