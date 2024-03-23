@@ -90,6 +90,8 @@ public class Player : MonoBehaviour
     [SerializeField] public AudioClip hitPlayerSound;
     [SerializeField] public AudioClip launchBallSound;
     [SerializeField] public AudioClip hitBallSound;
+    [SerializeField] public AudioClip dashSound;
+    [SerializeField] public AudioClip chargeSound;
 
     [Header("VFX")]
     [SerializeField] private ParticleSystem turboParticles;
@@ -126,6 +128,7 @@ public class Player : MonoBehaviour
     public bool isShootCoolDown;
     public bool isTackling;
     public bool isShooting;
+    public bool isThrowing;
     public bool hasJustEnteredWater;
     private bool isInvicible;
     public bool isMotionGrabbing;
@@ -481,12 +484,12 @@ public class Player : MonoBehaviour
         {
             _chargeLevel++;
             
-            // If direction => dash
             if (_chargeRoutine != null)
             {
                 StopCoroutine(_chargeRoutine);
             }
 
+            _audioSource.PlayClipWithRandomPitch(chargeSound, isTouchingWater, 1 + 0.3f * _chargeLevel, 1 + 0.3f * _chargeLevel);
             _chargeRoutine = ChargeCoRoutine();
             StartCoroutine(_chargeRoutine);
         }
@@ -510,10 +513,10 @@ public class Player : MonoBehaviour
             
         var ball = FindFirstObjectByType<Ball>();
     
-        if (ball != null)
+        if (ball)
         {
             var ballCollider = ball.GetComponent<Collider2D>();
-            if (ballCollider != null)
+            if (ballCollider)
             {
                 Physics2D.IgnoreCollision(ballCollider, _bodyCollider, !isDribbling);
             }
@@ -551,6 +554,17 @@ public class Player : MonoBehaviour
 
         if (hasPressedDash && !IsLoadingShoot() && !isLoadingAutoShoot && _orbManager.ConsumeOrbs(1))
         {
+            // if (IsLoadingShoot())
+            // {
+            //     // TODO PROPER SHOOT STATE
+            //     //CancelAutoShoot();
+            // }
+            //
+            // if (isLoadingAutoShoot)
+            // {
+            //     CancelAutoShoot();
+            // }
+            
             var go = Instantiate(dashParticles, transform.position, transform.rotation, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
             var ps = go.GetComponent<ParticleSystem>();
@@ -562,7 +576,22 @@ public class Player : MonoBehaviour
             dashTimer = dashDuration;
             _rigidBody.velocity = ComputeMoveSpeed(dashSpeed * (1 + _chargeLevel * dashSpeedFactorPerChargeIntensityLevel));
             currentDashVelocity = _rigidBody.velocity;
+            _audioSource.PlayClip(dashSound, isTouchingWater);
         }
+    }
+
+    private void CancelShoot()
+    {
+        builtupPower = 0;
+        isThrowing = false;
+    }
+    
+    private void CancelAutoShoot()
+    {
+        loadingAutoShootTimer = 0;
+        isLoadingAutoShoot = false;
+        windupAutoShootTimer = 0;
+        _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
     }
     
     private void ManageAutoShoot()
@@ -1055,7 +1084,8 @@ public class Player : MonoBehaviour
         return ballGrabbed != null;
     }
 
-    public void Shoot(float shotSpeed)
+    public void 
+        Shoot(float shotSpeed)
     {
         var ball = FindObjectOfType<Ball>();
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
@@ -1065,14 +1095,12 @@ public class Player : MonoBehaviour
         float velocityX;
         float velocityY;
 
-        var speed = ComputeShotSpeed(shotSpeed);
-        velocityX = speed.x;
-        velocityY = speed.y;
+        var comutedSpeed = ComputeShotSpeed(shotSpeed);
+        velocityX = comutedSpeed.x;
+        velocityY = comutedSpeed.y;
 
         rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
-        Debug.DrawRay(transform.position, Vector2.down * 0.8f);
         Vector3 endLine = new Vector3(rigidBodyBall.velocity.x, rigidBodyBall.velocity.y, 0);
-        Debug.DrawLine(rigidBodyBall.transform.position, rigidBodyBall.transform.position + endLine);
 
         if (_disableBodyRoutine != null)
         {
@@ -1081,7 +1109,6 @@ public class Player : MonoBehaviour
 
         _disableBodyRoutine = DisableBody(rigidBodyBall.gameObject);
         StartCoroutine(_disableBodyRoutine);
-        //DisableShotHitbox();
         CancelDash();
     }
 

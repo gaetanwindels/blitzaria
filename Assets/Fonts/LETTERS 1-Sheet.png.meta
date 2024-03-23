@@ -169,6 +169,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -728,7 +740,33 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      LETTERS 1-Sheet_0: 1628525444804594670
+      LETTERS 1-Sheet_1: 6064028171050802732
+      LETTERS 1-Sheet_10: -603256619752316627
+      LETTERS 1-Sheet_11: 3285980788186970917
+      LETTERS 1-Sheet_12: -3158099005677998951
+      LETTERS 1-Sheet_13: -1119473545183056485
+      LETTERS 1-Sheet_14: 8423393245073819629
+      LETTERS 1-Sheet_15: 3395354102670644258
+      LETTERS 1-Sheet_16: 8324452558741822061
+      LETTERS 1-Sheet_17: -5233768978729480460
+      LETTERS 1-Sheet_18: 6842073325647546456
+      LETTERS 1-Sheet_19: 7541983383187584512
+      LETTERS 1-Sheet_2: -1707133241220515724
+      LETTERS 1-Sheet_20: -6704999150173543617
+      LETTERS 1-Sheet_21: 4221636072962431112
+      LETTERS 1-Sheet_22: 4547013884738207242
+      LETTERS 1-Sheet_23: 5640543505393208580
+      LETTERS 1-Sheet_24: -2979228313802612373
+      LETTERS 1-Sheet_25: -8464244646365081363
+      LETTERS 1-Sheet_3: -8819461387819918433
+      LETTERS 1-Sheet_4: 3575963370474286635
+      LETTERS 1-Sheet_5: 8991935505973845902
+      LETTERS 1-Sheet_6: 5920830480682466798
+      LETTERS 1-Sheet_7: 4643139204775110122
+      LETTERS 1-Sheet_8: 1498767138201892818
+      LETTERS 1-Sheet_9: 5994487540698698349
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

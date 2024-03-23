@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using UnityEngine.UI;
 using Rewired;
 using ScriptableObjects;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerSelect : MonoBehaviour
 {

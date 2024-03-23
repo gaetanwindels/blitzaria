@@ -13,10 +13,13 @@ namespace UI
     {
         // Config parameters
         [SerializeField] private EventChannel eventChannel;
+        [SerializeField] private AudioClip tickSound;
+        [SerializeField] private AudioClip goSound;
     
         // Cached variables
         private Animator _animator;
         private TextMeshProUGUI _countdownText;
+        private AudioSource _audioSource;
         
         // State variables
         private float _countDownTimer;
@@ -26,6 +29,7 @@ namespace UI
         {
             _countdownText = GetComponent<TextMeshProUGUI>();
             _animator = GetComponent<Animator>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         void Update()
@@ -59,6 +63,11 @@ namespace UI
 
             if (previousCountDown != roundedCountDown || isFirst)
             {
+                if (_audioSource)
+                {
+                    _audioSource.clip = roundedCountDown != 0 ? tickSound : goSound;
+                    _audioSource.Play();
+                }
                 DisplayText(roundedCountDown != 0 ? roundedCountDown.ToString() : "GO!");
             }
 

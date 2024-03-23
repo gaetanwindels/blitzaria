@@ -285,7 +285,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleCountdownOver()
     {
-       
+        StartCoroutine(CountDownOverRoutine());
+    }
+
+    IEnumerator CountDownOverRoutine()
+    {
+        yield return new WaitForSeconds(0.8f);
         var positionLockers = FindObjectsOfType<PositionLocker>();
         var playersFound = FindObjectsOfType<Player>();
 
@@ -312,7 +317,6 @@ public class GameManager : MonoBehaviour
         {
             _matchState = MatchState.RunningRegular;
         }
-        
     }
     
     public bool IsPaused()
