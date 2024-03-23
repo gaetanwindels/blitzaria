@@ -241,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 5657629373360323982, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
       propertyPath: m_text
-      value: MAIN MENU
+      value: SELECT MENU
       objectReference: {fileID: 0}
     - target: {fileID: 5657629373360323982, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
@@ -718,7 +718,7 @@ PrefabInstance:
     - target: {fileID: 5657629373360323982, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
       propertyPath: m_text
-      value: SELECT MENU
+      value: MAIN MENU
       objectReference: {fileID: 0}
     - target: {fileID: 5657629373360323982, guid: 272940e2874cfb14187d6a0d93de9694,
         type: 3}
