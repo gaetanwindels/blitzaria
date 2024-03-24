@@ -25,6 +25,7 @@ public class PlayerSelectScreenManager : MonoBehaviour
     {
         playersToPoll = ReInput.players.GetPlayers();
         playerSelects = FindObjectsOfType<PlayerSelect>();
+        Array.Sort(playerSelects, (a, b) => String.Compare(a.gameObject.name, b.gameObject.name, StringComparison.Ordinal));
         currentCountDown = countDownDuration;
         sceneManager = FindObjectOfType<CustomSceneManager>();
         gameSession = FindObjectOfType<GameSessionConfiguration>();
@@ -34,7 +35,7 @@ public class PlayerSelectScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerSelects = FindObjectsOfType<PlayerSelect>();
+        //playerSelects = FindObjectsOfType<PlayerSelect>();
         Poll();
         //readyText.text = EveryOneIsReady()  ? "Match starting in " + Mathf.Ceil(currentCountDown).ToString() : "";
 
@@ -111,12 +112,10 @@ public class PlayerSelectScreenManager : MonoBehaviour
 
             if (playerToPoll.GetButtonDown("UISubmit") && !HasPlayerAlreadyJoined(playerToPoll.id))
             {
-                Debug.Log("ye1");
                 PlayerSelect playerSelect = GetFirstPlayerSelectFree();
 
-                if (playerSelect != null)
+                if (playerSelect)
                 {
-                    Debug.Log("ye2");
                     playerSelect.WakeUp(playerToPoll.id);
                 }
             }
@@ -156,13 +155,10 @@ public class PlayerSelectScreenManager : MonoBehaviour
         }
 
         var teamToChoose = countTeam1 > countTeam2 ? TeamEnum.Team2 : TeamEnum.Team1;
-        Debug.Log("hoy");
         foreach (PlayerSelect playerSelect in playerSelects)
         {
-            Debug.Log("hoy1");
             if (playerSelect.playerNumber == -1)
             {
-                Debug.Log("hoy2");
                 playerSelect.team = teamToChoose;
                 return playerSelect;
             }

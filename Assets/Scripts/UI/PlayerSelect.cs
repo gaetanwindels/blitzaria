@@ -20,6 +20,7 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] public Color[] team1Palette;
     [SerializeField] public Color[] team2Palette;
     [SerializeField] public Image imageCharacter;
+    [SerializeField] public GameObject playerBoard;
 
     [SerializeField] PlayerAttributes[] players;
     
@@ -88,6 +89,7 @@ public class PlayerSelect : MonoBehaviour
             {
                 playerNumber = -1;
                 backgroundText.SetActive(true);
+                playerBoard.SetActive(false);
                 rwPlayer = null;
             }
         }
@@ -147,6 +149,7 @@ public class PlayerSelect : MonoBehaviour
     {
         this.playerNumber = playerNumber;
         backgroundText.SetActive(false);
+        playerBoard.SetActive(true);
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
 
         var cursors = FindObjectsOfType<CursorController>(true);

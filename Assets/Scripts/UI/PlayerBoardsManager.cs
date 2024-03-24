@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBoardsManager : MonoBehaviour
@@ -14,6 +12,7 @@ public class PlayerBoardsManager : MonoBehaviour
     {
         res = new Vector2(Screen.width, Screen.height);
 
+        return;
         for (var i = 0; i < 4; i++)
         {
             var go = Instantiate(playerBoard, transform);
