@@ -64,9 +64,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float airThrust = 0.02f;
     [SerializeField] private float downAirThrust = 10f;
     [SerializeField] private float boostSpeed = 10f;
+    [SerializeField] private AnimationCurve dashSpeedCurve;
     [SerializeField] private float dashSpeed = 20f;
-    [SerializeField] private float grabSpeedFactor = 0.8f;
     [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float grabSpeedFactor = 0.8f;
     [SerializeField] private float grabWithoutBallSpeedFactor = 0.2f;
     [SerializeField] private float lockedTime = 0.2f;
     [SerializeField] private float dashSpeedFactorPerChargeIntensityLevel = 0.2f;
@@ -545,7 +546,7 @@ public class Player : MonoBehaviour
         
         if (IsDashing())
         {
-            _rigidBody.velocity = currentDashVelocity;
+            _rigidBody.velocity = currentDashVelocity.normalized * dashSpeedCurve.Evaluate(dashDuration - dashTimer);
             dashTimer -= Time.deltaTime;
             return;
         }
@@ -574,7 +575,7 @@ public class Player : MonoBehaviour
             Destroy(go, 5f);
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
-            _rigidBody.velocity = ComputeMoveSpeed(dashSpeed * (1 + _chargeLevel * dashSpeedFactorPerChargeIntensityLevel));
+            _rigidBody.velocity = ComputeMoveSpeed(dashSpeedCurve.Evaluate(0) * (1 + _chargeLevel * dashSpeedFactorPerChargeIntensityLevel));
             currentDashVelocity = _rigidBody.velocity;
             _audioSource.PlayClip(dashSound, isTouchingWater);
         }
