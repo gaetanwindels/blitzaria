@@ -15,8 +15,20 @@ MonoBehaviour:
   playerPrefab: {fileID: 6964443490596722126, guid: e0deeaa7c005657469d620ad35a623bd,
     type: 3}
   selectSprite: {fileID: -1798432361, guid: 266935395faea294d9f5177aebf13627, type: 3}
-  sourcePrimaryColor: {r: 0.7254902, g: 0.16862746, b: 0.16862746, a: 0}
-  sourceSecondaryColor: {r: 0.6392157, g: 0.15294118, b: 0.15294118, a: 0}
-  primaryColors: []
-  secondaryColors: []
+  sourcePrimaryColor: {r: 0.7176471, g: 0.16862746, b: 0.16862746, a: 1}
+  sourceSecondaryColor: {r: 0.6313726, g: 0.15294118, b: 0.15294118, a: 1}
+  sourceTertiaryColor: {r: 0.44705886, g: 0.5921569, b: 0.18431373, a: 1}
+  colors:
+  - primaryColor: {r: 0.9811321, g: 0, b: 0, a: 0}
+    secondaryColor: {r: 0.95662975, g: 0.990566, b: 0, a: 0}
+    tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
+  - primaryColor: {r: 0.735849, g: 0.17817721, b: 0.17817721, a: 0}
+    secondaryColor: {r: 0.19132398, g: 0.9056604, b: 0.09113557, a: 0}
+    tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
+  - primaryColor: {r: 0, g: 0.8117647, b: 0.6392157, a: 0}
+    secondaryColor: {r: 0, g: 0.8392157, b: 0.80784315, a: 0}
+    tertiaryColor: {r: 0.7921569, g: 0, b: 0, a: 0}
+  - primaryColor: {r: 0, g: 0, b: 0, a: 0}
+    secondaryColor: {r: 0, g: 0, b: 0, a: 0}
+    tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
   name: Python

@@ -23,6 +23,7 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] public GameObject playerBoard;
 
     [SerializeField] PlayerAttributes[] players;
+    [SerializeField] Material plarerImageMaterial;
     
     private GameObject player;
     private bool isReady = false;    
@@ -45,6 +46,7 @@ public class PlayerSelect : MonoBehaviour
         player = players[0].playerPrefab;
         imageCharacter.sprite = players[0].selectSprite;
         characterSelectText.text = players[0].name;
+        imageCharacter.material = Instantiate(plarerImageMaterial);
     }
 
     // Update is called once per frame
@@ -120,29 +122,40 @@ public class PlayerSelect : MonoBehaviour
 
     public void PickNextColor()
     {
+        var palette = players[characterIndex].colors;
 
-        var palette = team1Palette;
-        if (team == TeamEnum.Team2)
+        if (palette.Length == 0)
         {
-            palette = team2Palette;
+            return;
         }
-
+        
+        // TODO REFACTO
         colorIndex = (colorIndex + 1) % palette.Length;
-
-        clothes.color = palette[colorIndex];
+        
+        imageCharacter.material.SetColor("_Color_replacing_01", palette[colorIndex].primaryColor);
+        imageCharacter.material.SetColor("_Color_replacing_02", palette[colorIndex].secondaryColor);
+        imageCharacter.material.SetColor("_Color_replacing_03", palette[colorIndex].tertiaryColor);
+        // var palette = team1Palette;
+        // if (team == TeamEnum.Team2)
+        // {
+        //     palette = team2Palette;
+        // }
+        //
+        // colorIndex = (colorIndex + 1) % palette.Length;
+        //
+        // clothes.color = palette[colorIndex];
     }
 
     public void ApplyColor()
     {
-
-        var palette = team1Palette;
-        if (team == TeamEnum.Team2)
-        {
-            palette = team2Palette;
-        }
-
         colorIndex = 0;
-        clothes.color = palette[colorIndex];
+        var palette = players[characterIndex].colors;
+        imageCharacter.material.SetColor("_Color_replacing_01", palette[colorIndex].primaryColor);
+        imageCharacter.material.SetColor("_Color_replacing_02", palette[colorIndex].secondaryColor);
+        imageCharacter.material.SetColor("_Color_replacing_03", palette[colorIndex].tertiaryColor);
+        imageCharacter.material.SetColor("_Color_to_replace_01", players[characterIndex].sourcePrimaryColor);
+        imageCharacter.material.SetColor("_Color_to_replace_02", players[characterIndex].sourceSecondaryColor);
+        imageCharacter.material.SetColor("_Color_to_replace_03", players[characterIndex].sourceTertiaryColor);
     }
 
     public void WakeUp(int playerNumber)
@@ -183,16 +196,19 @@ public class PlayerSelect : MonoBehaviour
     public PlayerSelectConfiguration GetPlayer()
     {
         var playerSelect = new PlayerSelectConfiguration();
-        playerSelect.player = this.player;
-
-        var palette = team1Palette;
-        if (team == TeamEnum.Team2)
-        {
-            palette = team2Palette;
-        }
-        playerSelect.color = palette[colorIndex];
+        playerSelect.player = player;
+        
+        // Color
+        var palette = players[characterIndex].colors;
+        playerSelect.destColor1 = palette[colorIndex].primaryColor;
+        playerSelect.destColor2 = palette[colorIndex].secondaryColor;
+        playerSelect.destColor3 = palette[colorIndex].tertiaryColor;
+        playerSelect.sourceColor1 = players[characterIndex].sourcePrimaryColor;
+        playerSelect.sourceColor2 = players[characterIndex].sourceSecondaryColor;
+        playerSelect.sourceColor3 = players[characterIndex].sourceTertiaryColor;
+        
         playerSelect.team = team;
-        playerSelect.playerNumber = this.playerNumber;
+        playerSelect.playerNumber = playerNumber;
 
         return playerSelect;
     }
@@ -203,5 +219,19 @@ public class PlayerSelect : MonoBehaviour
         player = players[characterIndex].playerPrefab;
         characterSelectText.text = players[characterIndex].name;
         imageCharacter.sprite = players[characterIndex].selectSprite;
+        colorIndex = 0;
+        imageCharacter.material.SetColor("_Color_to_replace_01", players[characterIndex].sourcePrimaryColor);
+        imageCharacter.material.SetColor("_Color_to_replace_02", players[characterIndex].sourceSecondaryColor);
+        imageCharacter.material.SetColor("_Color_to_replace_03", players[characterIndex].sourceTertiaryColor);
+        var palette = players[characterIndex].colors;
+
+        if (palette.Length > 0)
+        {
+            imageCharacter.material.SetColor("_Color_replacing_01", palette[0].primaryColor);
+            imageCharacter.material.SetColor("_Color_replacing_02", palette[0].secondaryColor);
+            imageCharacter.material.SetColor("_Color_replacing_03", palette[0].tertiaryColor);
+        }
+
+        
     }
 }

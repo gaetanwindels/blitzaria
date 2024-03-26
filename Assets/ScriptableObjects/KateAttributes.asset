@@ -15,8 +15,14 @@ MonoBehaviour:
   playerPrefab: {fileID: 8076081186143647982, guid: 0674e3ef3442a9b4da526973ff70bf20,
     type: 3}
   selectSprite: {fileID: 262045329, guid: 257312b226c3cd74abd7e09a12c891cb, type: 3}
-  sourcePrimaryColor: {r: 0.854902, g: 0.7607844, b: 0.67058825, a: 0}
-  sourceSecondaryColor: {r: 0.4039216, g: 0.1764706, b: 0.17254902, a: 0}
-  primaryColors: []
-  secondaryColors: []
+  sourcePrimaryColor: {r: 0.4039216, g: 0.1764706, b: 0.17254902, a: 1}
+  sourceSecondaryColor: {r: 0.85098046, g: 0.7568628, b: 0.654902, a: 1}
+  sourceTertiaryColor: {r: 0.7568628, g: 0.5764706, b: 0.76470596, a: 1}
+  colors:
+  - primaryColor: {r: 0.6509804, g: 0.8117647, b: 0, a: 0}
+    secondaryColor: {r: 0.7294118, g: 0.4392157, b: 0.5529412, a: 0}
+    tertiaryColor: {r: 0.32156864, g: 0.84705883, b: 0, a: 0}
+  - primaryColor: {r: 0.6509804, g: 0.2901961, b: 0, a: 0}
+    secondaryColor: {r: 0.31764707, g: 0.4392157, b: 0.5529412, a: 0}
+    tertiaryColor: {r: 0.8627451, g: 0.15294118, b: 0.80784315, a: 0}
   name: Kate

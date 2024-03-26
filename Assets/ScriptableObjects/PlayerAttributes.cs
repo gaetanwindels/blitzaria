@@ -9,8 +9,17 @@ namespace ScriptableObjects
         public Sprite selectSprite;
         public Color sourcePrimaryColor;
         public Color sourceSecondaryColor;
-        public Color[] primaryColors;
-        public Color[] secondaryColors;
+        public Color sourceTertiaryColor;
+        public SkinColor[] colors;
         public string name;
+        
+        [System.Serializable]
+        public struct SkinColor {
+    
+            public Color primaryColor;
+            public Color secondaryColor;
+            public Color tertiaryColor;
+    
+        }
     }
 }

@@ -189,9 +189,9 @@ Canvas:
   m_GameObject: {fileID: 74672614}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 1848602677}
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -352,6 +352,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307054487}
     m_Modifications:
+    - target: {fileID: 956395348214042473, guid: 1419e7801f23fe744a2d4a78186fd5a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -44.757004
+      objectReference: {fileID: 0}
     - target: {fileID: 3791751217009661137, guid: 1419e7801f23fe744a2d4a78186fd5a5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1128,6 +1133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParticleBubblesBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 539346477935672144, guid: bdc08b390fec2964994bf7e7e4d67c05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 539346477935672149, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1253,6 +1263,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307054487}
     m_Modifications:
+    - target: {fileID: 956395348214042473, guid: 1419e7801f23fe744a2d4a78186fd5a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -44.757004
+      objectReference: {fileID: 0}
     - target: {fileID: 3791751217009661137, guid: 1419e7801f23fe744a2d4a78186fd5a5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1513,7 +1528,7 @@ Transform:
   m_GameObject: {fileID: 1300038174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2138,6 +2153,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307054487}
     m_Modifications:
+    - target: {fileID: 956395348214042473, guid: 1419e7801f23fe744a2d4a78186fd5a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -44.757004
+      objectReference: {fileID: 0}
     - target: {fileID: 3791751217009661137, guid: 1419e7801f23fe744a2d4a78186fd5a5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2891,6 +2911,11 @@ PrefabInstance:
       propertyPath: m_AspectRatio
       value: 0.6077
       objectReference: {fileID: 0}
+    - target: {fileID: 956395348214042473, guid: 1419e7801f23fe744a2d4a78186fd5a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -44.757004
+      objectReference: {fileID: 0}
     - target: {fileID: 4747180443564001517, guid: 1419e7801f23fe744a2d4a78186fd5a5,
         type: 3}
       propertyPath: m_IsActive
@@ -3016,6 +3041,11 @@ PrefabInstance:
       propertyPath: players.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5694611826919825662, guid: 1419e7801f23fe744a2d4a78186fd5a5,
+        type: 3}
+      propertyPath: plarerImageMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 339ae9d08d2881c43a0e91bf5b39756d, type: 2}
     - target: {fileID: 5694611826919825662, guid: 1419e7801f23fe744a2d4a78186fd5a5,
         type: 3}
       propertyPath: 'players.Array.data[1]'
