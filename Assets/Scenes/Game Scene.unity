@@ -362,7 +362,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 8.4375
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -451,8 +451,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
   m_AssetsPPU: 16
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
+  m_RefResolutionX: 480
+  m_RefResolutionY: 270
   m_CropFrame: 0
   m_GridSnapping: 0
   m_FilterMode: 0
@@ -1010,13 +1010,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6324931999950087540, guid: 04e92ca6f1d43b84999b4d1e8abb451e,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324931999950087540, guid: 04e92ca6f1d43b84999b4d1e8abb451e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324931999950087540, guid: 04e92ca6f1d43b84999b4d1e8abb451e,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6324931999950087540, guid: 04e92ca6f1d43b84999b4d1e8abb451e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: -0.44
       objectReference: {fileID: 0}
     - target: {fileID: 6324931999950087540, guid: 04e92ca6f1d43b84999b4d1e8abb451e,
         type: 3}
@@ -1952,6 +1962,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050482418217038491, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050482418217038491, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3050482418217038491, guid: e8cf381f079eaea4988d0a5e2732d2f1,
         type: 3}
