@@ -82,7 +82,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
-      objectReference: {fileID: 7108339969198208228, guid: 85f0e1842a131a341a40c5bea26f4650,
+      objectReference: {fileID: 7108339969198208228, guid: eb8d445bf7f74fb44b081e378c26fc16,
         type: 3}
     - target: {fileID: 6570302659864017054, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
@@ -123,12 +123,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 684944238, guid: 266935395faea294d9f5177aebf13627,
+      objectReference: {fileID: -2000917157, guid: d8bdd456e760ccd46840a1ade91134e7,
         type: 3}
     - target: {fileID: 6988621117747625798, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: m_Name
-      value: Python
+      value: Antonin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
