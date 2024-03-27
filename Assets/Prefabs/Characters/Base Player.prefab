@@ -1407,7 +1407,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 16
+      value: 10
       inSlope: 2
       outSlope: 2
       tangentMode: 0

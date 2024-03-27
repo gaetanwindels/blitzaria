@@ -513,7 +513,7 @@ public class Player : MonoBehaviour
                 Destroy(ballGrabbed.gameObject);
                 var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
                 Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-                newBallBody.velocity = -_rigidBody.velocity.normalized * releasePower;
+                newBallBody.velocity = _rigidBody.velocity.normalized * releasePower;
                 DisableBallCollision(newBall);
             }
         }
