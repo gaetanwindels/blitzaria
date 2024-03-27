@@ -134,7 +134,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.5254902, g: 0.15686277, b: 0.35960776, a: 1}
-    - _ColorOutline: {r: 1, g: 0.85664076, b: 0.8537736, a: 1}
+    - _ColorOutline: {r: 0.7830189, g: 0.1735938, b: 0.1735938, a: 1}
     - _Color_replacing_01: {r: 0.18114388, g: 0.8113208, b: 0.30275515, a: 0}
     - _Color_replacing_02: {r: 0.18046154, g: 0.548251, b: 0.745283, a: 0}
     - _Color_replacing_03: {r: 1, g: 0.59836304, b: 0, a: 1}

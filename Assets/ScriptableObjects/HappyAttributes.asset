@@ -16,23 +16,23 @@ MonoBehaviour:
     type: 3}
   selectSprite: {fileID: -5526961241204316049, guid: 041c5ee0d2b689a4280a215ba9ed4250,
     type: 3}
-  sourcePrimaryColor: {r: 0.6784314, g: 0.21960786, b: 0.21568629, a: 1}
-  sourceSecondaryColor: {r: 0.25490198, g: 0.3803922, b: 0.49411768, a: 1}
-  sourceTertiaryColor: {r: 1, g: 0.35686275, b: 0.03137255, a: 1}
+  sourcePrimaryColor: {r: 0.2509804, g: 0.3803922, b: 0.49803925, a: 1}
+  sourceSecondaryColor: {r: 0.21176472, g: 0.32156864, b: 0.42352945, a: 1}
+  sourceTertiaryColor: {r: 0.6784314, g: 0.20784315, b: 0.20392159, a: 1}
   colors:
-  - primaryColor: {r: 1, g: 0, b: 0, a: 0}
-    secondaryColor: {r: 0.741266, g: 1, b: 0, a: 0}
+  - primaryColor: {r: 0.20000002, g: 0.30588236, b: 0.40000004, a: 0}
+    secondaryColor: {r: 0.16862746, g: 0.25882354, b: 0.3372549, a: 0}
+    tertiaryColor: {r: 0.5411765, g: 0.16470589, b: 0.16470589, a: 0}
+  - primaryColor: {r: 0.5686275, g: 0.13333334, b: 0.13333334, a: 0}
+    secondaryColor: {r: 0.49803925, g: 0.121568635, b: 0.121568635, a: 0}
+    tertiaryColor: {r: 0.43137258, g: 0.13333334, b: 0.13333334, a: 0}
+  - primaryColor: {r: 0.56078434, g: 0.5647059, b: 0.19607845, a: 0}
+    secondaryColor: {r: 0.3921569, g: 0.3921569, b: 0.19607845, a: 0}
     tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
-  - primaryColor: {r: 1, g: 0, b: 0.8389268, a: 0}
-    secondaryColor: {r: 0, g: 0.2911358, b: 1, a: 0}
+  - primaryColor: {r: 0.42352945, g: 0.42352945, b: 0.42352945, a: 0}
+    secondaryColor: {r: 0.24313727, g: 0.24313727, b: 0.24313727, a: 0}
     tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
-  - primaryColor: {r: 0.24474896, g: 0.7075472, b: 0.2974474, a: 0}
-    secondaryColor: {r: 0.6415094, g: 0.5654884, b: 0.11297016, a: 0}
-    tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
-  - primaryColor: {r: 0.18114388, g: 0.8113208, b: 0.30275515, a: 0}
-    secondaryColor: {r: 0.18046154, g: 0.548251, b: 0.745283, a: 0}
-    tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
-  - primaryColor: {r: 0.18114388, g: 0.8113208, b: 0.30275515, a: 0}
-    secondaryColor: {r: 0.18046154, g: 0.548251, b: 0.745283, a: 0}
+  - primaryColor: {r: 0, g: 0, b: 0, a: 0}
+    secondaryColor: {r: 0, g: 0, b: 0, a: 0}
     tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
   name: Happy

@@ -1,0 +1,291 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Python_PresetAttributes_save
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 016725c6ae304fa384096ef79aba10c8,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: playerPrefab
+    value: 
+    objectReference: {fileID: 6964443490596722126, guid: e0deeaa7c005657469d620ad35a623bd,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: selectSprite
+    value: 
+    objectReference: {fileID: -1798432361, guid: 266935395faea294d9f5177aebf13627,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: sourcePrimaryColor.r
+    value: 0.7176471
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourcePrimaryColor.g
+    value: 0.16862746
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourcePrimaryColor.b
+    value: 0.16862746
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourcePrimaryColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourceSecondaryColor.r
+    value: 0.6313726
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourceSecondaryColor.g
+    value: 0.15294118
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourceSecondaryColor.b
+    value: 0.15294118
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourceSecondaryColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourceTertiaryColor.r
+    value: 0.44705886
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourceTertiaryColor.g
+    value: 0.5921569
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourceTertiaryColor.b
+    value: 0.18431373
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sourceTertiaryColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].primaryColor.r
+    value: 0.57254905
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].primaryColor.g
+    value: 0.13333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].primaryColor.b
+    value: 0.13333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].primaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].secondaryColor.r
+    value: 0.5058824
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].secondaryColor.g
+    value: 0.121568635
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].secondaryColor.b
+    value: 0.121568635
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].secondaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].tertiaryColor.r
+    value: 0.35686275
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].tertiaryColor.g
+    value: 0.47450984
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].tertiaryColor.b
+    value: 0.14901961
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[0].tertiaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].primaryColor.r
+    value: 0.26148093
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].primaryColor.g
+    value: 0.35233188
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].primaryColor.b
+    value: 0.49056602
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].primaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].secondaryColor.r
+    value: 0.17332682
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].secondaryColor.g
+    value: 0.2537613
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].secondaryColor.b
+    value: 0.38679248
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].secondaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].tertiaryColor.r
+    value: 0.35686275
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].tertiaryColor.g
+    value: 0.47450984
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].tertiaryColor.b
+    value: 0.14901961
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[1].tertiaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].primaryColor.r
+    value: 0.6226415
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].primaryColor.g
+    value: 0.55931467
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].primaryColor.b
+    value: 0.3495016
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].primaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].secondaryColor.r
+    value: 0.44205046
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].secondaryColor.g
+    value: 0.46226418
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].secondaryColor.b
+    value: 0.14173195
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].secondaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].tertiaryColor.r
+    value: 0.35686275
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].tertiaryColor.g
+    value: 0.47450984
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].tertiaryColor.b
+    value: 0.14901961
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[2].tertiaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].primaryColor.r
+    value: 0.4245283
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].primaryColor.g
+    value: 0.4245283
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].primaryColor.b
+    value: 0.4245283
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].primaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].secondaryColor.r
+    value: 0.24528301
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].secondaryColor.g
+    value: 0.24528301
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].secondaryColor.b
+    value: 0.24528301
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].secondaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].tertiaryColor.r
+    value: 0.35686275
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].tertiaryColor.g
+    value: 0.47450984
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].tertiaryColor.b
+    value: 0.14901961
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colors.Array.data[3].tertiaryColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: name
+    value: Python
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
+  m_CoupledType:
+    m_NativeTypeID: 0
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_CoupledProperties: []

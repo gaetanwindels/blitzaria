@@ -19,10 +19,16 @@ MonoBehaviour:
   sourceSecondaryColor: {r: 0.85098046, g: 0.7568628, b: 0.654902, a: 1}
   sourceTertiaryColor: {r: 0.7568628, g: 0.5764706, b: 0.76470596, a: 1}
   colors:
-  - primaryColor: {r: 0.6509804, g: 0.8117647, b: 0, a: 0}
-    secondaryColor: {r: 0.7294118, g: 0.4392157, b: 0.5529412, a: 0}
-    tertiaryColor: {r: 0.32156864, g: 0.84705883, b: 0, a: 0}
-  - primaryColor: {r: 0.6509804, g: 0.2901961, b: 0, a: 0}
-    secondaryColor: {r: 0.31764707, g: 0.4392157, b: 0.5529412, a: 0}
-    tertiaryColor: {r: 0.8627451, g: 0.15294118, b: 0.80784315, a: 0}
+  - primaryColor: {r: 0.32156864, g: 0.14117648, b: 0.13725491, a: 0}
+    secondaryColor: {r: 0.68235296, g: 0.6039216, b: 0.5254902, a: 0}
+    tertiaryColor: {r: 0.6039216, g: 0.46274513, b: 0.6117647, a: 0}
+  - primaryColor: {r: 0.25882354, g: 0.1137255, b: 0.10980393, a: 0}
+    secondaryColor: {r: 0.5686275, g: 0.13333334, b: 0.13333334, a: 0}
+    tertiaryColor: {r: 0.6039216, g: 0.46274513, b: 0.6117647, a: 0}
+  - primaryColor: {r: 0.20784315, g: 0.28235295, b: 0.38823533, a: 0}
+    secondaryColor: {r: 0.17254902, g: 0.2509804, b: 0.38431376, a: 0}
+    tertiaryColor: {r: 0.6039216, g: 0.46274513, b: 0.6117647, a: 0}
+  - primaryColor: {r: 0.32156864, g: 0.14117648, b: 0.13725491, a: 0}
+    secondaryColor: {r: 0.68235296, g: 0.6039216, b: 0.5254902, a: 0}
+    tertiaryColor: {r: 0.754717, g: 0.71841514, b: 0.11035956, a: 0}
   name: Kate
