@@ -539,18 +539,18 @@ public class Player : MonoBehaviour
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
-        if (speedX == 0 && speedY == 0)
-        {
-            return;
-        }
-        
         if (IsDashing())
         {
             _rigidBody.velocity = currentDashVelocity.normalized * dashSpeedCurve.Evaluate(dashDuration - dashTimer);
             dashTimer -= Time.deltaTime;
             return;
         }
-
+        
+        if (speedX == 0 && speedY == 0)
+        {
+            return;
+        }
+        
         var hasPressedDash = inputManager.GetButtonDown("Dash");
 
         if (hasPressedDash && !IsLoadingShoot() && !isLoadingAutoShoot && _orbManager.ConsumeOrbs(1))
