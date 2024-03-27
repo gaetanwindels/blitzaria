@@ -1077,6 +1077,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7bb7ab2744f8ea478840c9c7a66f9e8, type: 2}
   - {fileID: 11400000, guid: ab3179cd5520ace4eaee0b5c03e2f22e, type: 2}
   - {fileID: 11400000, guid: 82dc88d6f8caf1e4db3bb98fdcdde5ca, type: 2}
+  - {fileID: 11400000, guid: 965f553de426e7f498b1a72ebb2c3cfc, type: 2}
   plarerImageMaterial: {fileID: 2100000, guid: 339ae9d08d2881c43a0e91bf5b39756d, type: 2}
 --- !u!225 &980124809
 CanvasGroup:

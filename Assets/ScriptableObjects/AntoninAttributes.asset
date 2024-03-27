@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016725c6ae304fa384096ef79aba10c8, type: 3}
+  m_Name: AntoninAttributes
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 6964443490596722126, guid: e0deeaa7c005657469d620ad35a623bd,
+    type: 3}
+  selectSprite: {fileID: -1798432361, guid: 266935395faea294d9f5177aebf13627, type: 3}
+  sourcePrimaryColor: {r: 0.7176471, g: 0.16862746, b: 0.16862746, a: 1}
+  sourceSecondaryColor: {r: 0.6313726, g: 0.15294118, b: 0.15294118, a: 1}
+  sourceTertiaryColor: {r: 0.44705886, g: 0.5921569, b: 0.18431373, a: 1}
+  colors:
+  - primaryColor: {r: 0.57254905, g: 0.13333334, b: 0.13333334, a: 0}
+    secondaryColor: {r: 0.5058824, g: 0.121568635, b: 0.121568635, a: 0}
+    tertiaryColor: {r: 0.35686275, g: 0.47450984, b: 0.14901961, a: 0}
+  - primaryColor: {r: 0.26148093, g: 0.35233188, b: 0.49056602, a: 0}
+    secondaryColor: {r: 0.17332682, g: 0.2537613, b: 0.38679248, a: 0}
+    tertiaryColor: {r: 0.35686275, g: 0.47450984, b: 0.14901961, a: 0}
+  - primaryColor: {r: 0.6226415, g: 0.55931467, b: 0.3495016, a: 0}
+    secondaryColor: {r: 0.44205046, g: 0.46226418, b: 0.14173195, a: 0}
+    tertiaryColor: {r: 0.35686275, g: 0.47450984, b: 0.14901961, a: 0}
+  - primaryColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0}
+    secondaryColor: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0}
+    tertiaryColor: {r: 0.35686275, g: 0.47450984, b: 0.14901961, a: 0}
+  name: Antonin
