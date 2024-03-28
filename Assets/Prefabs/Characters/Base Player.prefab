@@ -1454,7 +1454,8 @@ MonoBehaviour:
   launchBallSound: {fileID: 8300000, guid: c4984e0932c438c419969bb2aeeca63d, type: 3}
   hitBallSound: {fileID: 8300000, guid: 19b478875096c73438b2aa46e3a2df5c, type: 3}
   dashSound: {fileID: 8300000, guid: f0de626445c8a004fb18e1d9fd4caa01, type: 3}
-  chargeSound: {fileID: 8300000, guid: ad47b975d604d5b41be95a7ac01dba2c, type: 3}
+  chargeSound: {fileID: 8300000, guid: 0fa8ef3e26c48c04994238ec93351f01, type: 3}
+  impactBallSound: {fileID: 8300000, guid: c09dd6b372f05c945b4ccea7ff83ae24, type: 3}
   turboParticles: {fileID: 7157193096785850357}
   dashParticles: {fileID: 2131988584448966854, guid: b083fd6cc7f31d84aac785f4fb9bfc05,
     type: 3}

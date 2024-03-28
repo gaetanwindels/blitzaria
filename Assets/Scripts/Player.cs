@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
     [SerializeField] public AudioClip hitBallSound;
     [SerializeField] public AudioClip dashSound;
     [SerializeField] public AudioClip chargeSound;
+    [SerializeField] public AudioClip impactBallSound;
 
     [Header("VFX")]
     [SerializeField] private ParticleSystem turboParticles;
@@ -202,13 +203,13 @@ public class Player : MonoBehaviour
         var go = collision.gameObject;
         var player = go.GetComponent<Player>();
 
-        Debug.Log("Body collided " + collision.gameObject.name);
-
         // BALL GRAB COLLISION
         Ball ball = collision.gameObject.GetComponent<Ball>();
 
         if (ballGrabbed == null && ball != null)
         {
+            Debug.Log("Body collided " + collision.gameObject.name);   
+            _audioSource.PlayClipWithRandomPitch(impactBallSound, isTouchingWater);
             var impulseSpeed = IsDashing() ? ball.impulseSpeedFactor * 1.5f : ball.impulseSpeedFactor;
 
             var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
@@ -511,9 +512,9 @@ public class Player : MonoBehaviour
             {
                 ballGrabbed.player = null;
                 Destroy(ballGrabbed.gameObject);
-                var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
+                var newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
                 Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-                newBallBody.velocity = _rigidBody.velocity.normalized * releasePower;
+                newBallBody.velocity = _rigidBody.velocity + (_rigidBody.velocity.normalized * releasePower);
                 DisableBallCollision(newBall);
             }
         }
@@ -1134,7 +1135,14 @@ public class Player : MonoBehaviour
 
     public void DisableBallCollision(GameObject newBall)
     {
-        StartCoroutine(DisableBody(newBall));
+        _disableBodyRoutine = DisableBody(newBall);
+
+        if (_disableBodyRoutine != null)
+        {
+            StopCoroutine(_disableBodyRoutine);
+        }
+
+        StartCoroutine(_disableBodyRoutine);
     }
 
     public void EnableShotHitbox()
@@ -1174,14 +1182,16 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableBody(GameObject newBall)
     {
-        var ballBody = newBall == null ? null : newBall.GetComponent<Collider2D>();
-        if (ballBody != null && grabHitbox != null)
+        var ballBody = !newBall ? null : newBall.GetComponent<Collider2D>();
+        if (ballBody && grabHitbox && _bodyCollider)
         {
             Physics2D.IgnoreCollision(ballBody, grabHitbox, true);
+            Physics2D.IgnoreCollision(ballBody, _bodyCollider, true);
             yield return new WaitForSeconds(0.6f);
-            if (ballBody != null)
+            if (ballBody)
             {
                 Physics2D.IgnoreCollision(ballBody, grabHitbox, false);
+                Physics2D.IgnoreCollision(ballBody, _bodyCollider, false);
             }   
         }
     }
