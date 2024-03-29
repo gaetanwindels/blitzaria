@@ -15,13 +15,18 @@ public class CameraShaker : MonoBehaviour
 
     void Start()
     {
-        cameraComp = GetComponent<Camera>();
-        zPos = transform.position.z;
+        cameraComp = FindFirstObjectByType<Camera>();
+        zPos = cameraComp.transform.position.z;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!cameraComp)
+        {
+            return;
+        }
+        
         if (shake > 0)
         {
             cameraComp.transform.localPosition = Random.insideUnitSphere * shakeAmount;

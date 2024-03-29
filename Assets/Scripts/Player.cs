@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float minFreezePower = 6f;
     [SerializeField] private float maxFreezePower = 20f;
     [SerializeField] private float shootSpeedFactorPerChargeIntensityLevel = 0.35f;
+    [SerializeField] private AnimationCurve powerShotCameraShake;
     
     [Header("Move")]
     [SerializeField] private float rotationSpeed = 900f;
@@ -114,6 +115,7 @@ public class Player : MonoBehaviour
     private GameManager _gameManager;
     private OrbsManager _orbManager;
     private InputBuffer _inputBuffer;
+    private CameraShaker _cameraShaker;
 
     // State variable
     [Header("State")]
@@ -231,6 +233,7 @@ public class Player : MonoBehaviour
         _rwPlayer = ReInput.players.GetPlayer(playerNumber);
         _inputBuffer = GetComponent<InputBuffer>();
         inputManager = new RewiredInputManager(playerNumber);
+        _cameraShaker = GetComponent<CameraShaker>();
         
         currentEnergy = GameSettings.energyAmount;
 
@@ -456,7 +459,6 @@ public class Player : MonoBehaviour
     private void ManageGravity()
     {
         _rigidBody.gravityScale = IsTouchingWater() ? 0 : gravityScale;
-        //_rigidBody.gravityScale =  gravityScale;
     }
 
     private void ManageTackle()
@@ -652,7 +654,7 @@ public class Player : MonoBehaviour
 
         // Is ball from reachable distance?
         var ball = FindObjectOfType<Ball>();
-        if (ball == null)
+        if (!ball)
         {
             return;
         }
@@ -690,6 +692,7 @@ public class Player : MonoBehaviour
         loadingAutoShootTimer = 0;
         isLoadingAutoShoot = false;
         windupAutoShootTimer = 0;
+        
         _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
     }
 
@@ -974,6 +977,11 @@ public class Player : MonoBehaviour
             var impactVfx = Instantiate(ballImpact, ball.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
             Destroy(impactVfx, 0.5f);
             Time.timeScale = 1;
+            
+            if (_cameraShaker)
+            {
+                _cameraShaker.ShakeFor(0.3f, powerShotCameraShake.Evaluate(power) / 10);
+            }
 
             Shoot(power);
         }
