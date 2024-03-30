@@ -1151,13 +1151,12 @@ public class Player : MonoBehaviour
 
     public void DisableBallCollision(GameObject newBall)
     {
-        _disableBodyRoutine = DisableBody(newBall);
-
         if (_disableBodyRoutine != null)
         {
             StopCoroutine(_disableBodyRoutine);
         }
-
+        
+        _disableBodyRoutine = DisableBody(newBall);
         StartCoroutine(_disableBodyRoutine);
     }
 
