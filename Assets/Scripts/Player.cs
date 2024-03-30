@@ -316,6 +316,8 @@ public class Player : MonoBehaviour
             player.DisableBallCollision(newBall);
         }
 
+        CancelAutoShoot();
+        
         StartCoroutine(FinishBeingTackled());
     }
 
@@ -602,9 +604,12 @@ public class Player : MonoBehaviour
     
     private void CancelAutoShoot()
     {
+        isShooting = false;
+        isAutoShootDisabled = false;
         loadingAutoShootTimer = 0;
         isLoadingAutoShoot = false;
         windupAutoShootTimer = 0;
+        loadingShootParticles.Stop();
         _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
     }
     
@@ -653,7 +658,7 @@ public class Player : MonoBehaviour
         }
 
         // Is ball from reachable distance?
-        var ball = FindObjectOfType<Ball>();
+        var ball = FindFirstObjectByType<Ball>();
         if (!ball)
         {
             return;
@@ -712,7 +717,7 @@ public class Player : MonoBehaviour
         if (IsGrabbing() && inputManager.GetButtonUp("Tackle"))
         {
             GameObject newBall = null;
-            Destroy(FindObjectOfType<Ball>().gameObject);
+            Destroy(FindFirstObjectByType<Ball>().gameObject);
             DisableGrabbingMotion();
             var trueThrowPoint = inputManager.GetButtonUp("Tackle") ? throwPointLoading : throwPoint;
             newBall = Instantiate(ballPrefab, trueThrowPoint.position, Quaternion.identity);
@@ -797,6 +802,7 @@ public class Player : MonoBehaviour
     private void ManageMove()
     {
         float computedSpeed = speed;
+        
         if (isShooting || isTackling || IsDashing() || isRollingOver || isLoadingAutoShoot)
         {
             return;
