@@ -104,21 +104,11 @@ PrefabInstance:
       propertyPath: releasePower
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6988621117747625793, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.3987372
-      objectReference: {fileID: 0}
-    - target: {fileID: 6988621117747625793, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0.061743498
-      objectReference: {fileID: 0}
     - target: {fileID: 6988621117747625796, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -513419032528077564, guid: 041c5ee0d2b689a4280a215ba9ed4250,
+      objectReference: {fileID: -5733536067087784308, guid: 041c5ee0d2b689a4280a215ba9ed4250,
         type: 3}
     - target: {fileID: 6988621117747625798, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}

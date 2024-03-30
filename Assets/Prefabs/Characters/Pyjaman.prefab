@@ -10,8 +10,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 834518355814536822, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
+      propertyPath: m_labelHash
+      value: 5.17958e-23
+      objectReference: {fileID: 0}
+    - target: {fileID: 834518355814536822, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
       propertyPath: m_SpriteHash
       value: 198719398
+      objectReference: {fileID: 0}
+    - target: {fileID: 834518355814536822, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
+        type: 3}
+      propertyPath: m_CategoryHash
+      value: 1.9942975
       objectReference: {fileID: 0}
     - target: {fileID: 4926045685579339278, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}

@@ -84,26 +84,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7108339969198208228, guid: eb8d445bf7f74fb44b081e378c26fc16,
         type: 3}
-    - target: {fileID: 6570302659864017054, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.2466995
-      objectReference: {fileID: 0}
-    - target: {fileID: 6570302659864017054, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.62891203
-      objectReference: {fileID: 0}
-    - target: {fileID: 6570302659864017054, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.026718555
-      objectReference: {fileID: 0}
-    - target: {fileID: 6570302659864017054, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.5345569
-      objectReference: {fileID: 0}
     - target: {fileID: 6988621117747625792, guid: bd17a079cbfe6204e9a6f4ebf3c5c67c,
         type: 3}
       propertyPath: minFreezePower
