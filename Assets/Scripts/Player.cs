@@ -1113,8 +1113,7 @@ public class Player : MonoBehaviour
         return ballGrabbed != null;
     }
 
-    public void 
-        Shoot(float shotSpeed)
+    public void Shoot(float shotSpeed)
     {
         var ball = FindObjectOfType<Ball>();
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
