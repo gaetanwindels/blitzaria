@@ -508,6 +508,7 @@ public class Player : MonoBehaviour
 
     private void ManageDribble()
     {
+        inputManager.ForceRegisterInputEvents();
         if (inputManager.GetButtonDown("Dribble"))
         {
             isDribbling = true;
@@ -539,6 +540,8 @@ public class Player : MonoBehaviour
             
             grabHitbox.enabled = !isDribbling;
         }
+        
+        inputManager.UnForceRegisterInputEvents();
     }
 
     IEnumerator ChargeCoRoutine()

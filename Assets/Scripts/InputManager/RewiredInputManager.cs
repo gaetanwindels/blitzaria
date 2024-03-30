@@ -9,13 +9,14 @@ public class RewiredInputManager : InputManager
     private int playerNumber;
     private Rewired.Player rwPlayer;
     private bool registeredInputEvents = true;
+    private bool forceRegisteredInputEvents = true;
 
     public RewiredInputManager(int playerNumber)
     {
-        init(playerNumber);
+        Init(playerNumber);
     }
 
-    public void init(int playerNumber)
+    public void Init(int playerNumber)
     {
         this.playerNumber = playerNumber;
         rwPlayer = ReInput.players.GetPlayer(playerNumber);
@@ -23,22 +24,22 @@ public class RewiredInputManager : InputManager
 
     public float GetAxis(string actionName)
     {
-        return registeredInputEvents ? rwPlayer.GetAxis(actionName) : 0f;
+        return (forceRegisteredInputEvents || registeredInputEvents)  ? rwPlayer.GetAxis(actionName) : 0f;
     }
 
     public bool GetButton(string actionName)
     {
-        return registeredInputEvents && rwPlayer.GetButton(actionName);
+        return (forceRegisteredInputEvents || registeredInputEvents)  && rwPlayer.GetButton(actionName);
     }
 
     public bool GetButtonUp(string actionName)
     {
-        return registeredInputEvents && rwPlayer.GetButtonUp(actionName);
+        return (forceRegisteredInputEvents || registeredInputEvents)  && rwPlayer.GetButtonUp(actionName);
     }
 
     public bool GetButtonDown(string actionName)
     {
-        return registeredInputEvents && rwPlayer.GetButtonDown(actionName);
+        return (forceRegisteredInputEvents || registeredInputEvents) && rwPlayer.GetButtonDown(actionName);
     }
 
     public void UnregisterInputEvents()
@@ -49,5 +50,15 @@ public class RewiredInputManager : InputManager
     public void RegisterInputEvents()
     {
         registeredInputEvents = true;
+    }
+    
+    public void ForceRegisterInputEvents()
+    {
+        forceRegisteredInputEvents = true;
+    }
+    
+    public void UnForceRegisterInputEvents()
+    {
+        forceRegisteredInputEvents = false;
     }
 }

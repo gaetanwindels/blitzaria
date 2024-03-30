@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface InputManager
 {
-    void init(int playernumber);
+    void Init(int playernumber);
 
     bool GetButtonUp(string actionName);
 
@@ -17,5 +17,9 @@ public interface InputManager
     void UnregisterInputEvents();
 
     void RegisterInputEvents();
+
+    void ForceRegisterInputEvents();
+    
+    void UnForceRegisterInputEvents();
 
 }

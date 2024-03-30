@@ -10,13 +10,14 @@ public class SimulatedInputManager : InputManager
     private Dictionary<string, float> simulatedAxis = new Dictionary<string, float>();
     private Dictionary<string, Buttonpress> simulatedButtons = new Dictionary<string, Buttonpress>();
     private bool registeredInputEvents = true;
+    private bool forceRegisteredInputEvents = true;
 
     public SimulatedInputManager(int playerNumber)
     {
-        init(playerNumber);
+        Init(playerNumber);
     }
 
-    public void init(int playerNumber)
+    public void Init(int playerNumber)
     {
         this.playerNumber = playerNumber;
     }
@@ -64,5 +65,15 @@ public class SimulatedInputManager : InputManager
     public void RegisterInputEvents()
     {
         registeredInputEvents = true;
+    }
+    
+    public void ForceRegisterInputEvents()
+    {
+        forceRegisteredInputEvents = true;
+    }
+    
+    public void UnForceRegisterInputEvents()
+    {
+        forceRegisteredInputEvents = false;
     }
 }
