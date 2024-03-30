@@ -208,7 +208,7 @@ public class Player : MonoBehaviour
         // BALL GRAB COLLISION
         Ball ball = collision.gameObject.GetComponent<Ball>();
 
-        if (ballGrabbed == null && ball != null)
+        if (!ballGrabbed && ball)
         {
             Debug.Log("Body collided " + collision.gameObject.name);   
             _audioSource.PlayClipWithRandomPitch(impactBallSound, isTouchingWater);
