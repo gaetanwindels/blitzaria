@@ -306,7 +306,7 @@ public class Player : MonoBehaviour
         if (ballGrabbed != null)
         {
             ballGrabbed.player = null;
-            Destroy(FindObjectOfType<Ball>().gameObject);
+            Destroy(FindFirstObjectByType<Ball>().gameObject);
             var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
             
