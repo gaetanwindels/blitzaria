@@ -479,7 +479,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    #region ChargeState
+    #region ChargeStatel
 
     private void ManageCharge()
     {
