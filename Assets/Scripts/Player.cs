@@ -233,7 +233,7 @@ public class Player : MonoBehaviour
         _rwPlayer = ReInput.players.GetPlayer(playerNumber);
         _inputBuffer = GetComponent<InputBuffer>();
         inputManager = new RewiredInputManager(playerNumber);
-        _cameraShaker = GetComponent<CameraShaker>();
+        _cameraShaker = FindFirstObjectByType<CameraShaker>();
         
         currentEnergy = GameSettings.energyAmount;
 

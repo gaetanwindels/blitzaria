@@ -30,7 +30,9 @@ public class CameraShaker : MonoBehaviour
         if (shake > 0)
         {
             cameraComp.transform.localPosition = Random.insideUnitSphere * shakeAmount;
-            cameraComp.transform.localPosition = new Vector3(cameraComp.transform.localPosition.x, cameraComp.transform.localPosition.y, zPos);
+            cameraComp.transform.localPosition = new Vector3(cameraComp.transform
+                
+                .localPosition.x, cameraComp.transform.localPosition.y, zPos);
             shake -= Time.deltaTime * decreaseFactor;
         }
         else

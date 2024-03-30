@@ -1225,7 +1225,6 @@ GameObject:
   - component: {fileID: 5058420489387657277}
   - component: {fileID: 6234522770492006246}
   - component: {fileID: 834518355814536822}
-  - component: {fileID: 8060166809533432954}
   m_Layer: 7
   m_Name: Base Player
   m_TagString: Player
@@ -1748,21 +1747,6 @@ MonoBehaviour:
   m_labelHash: 6.435315e-28
   m_SpriteKey: 0
   m_SpriteHash: 871111770
---- !u!114 &8060166809533432954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6988621117747625798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cfdc1e827fa53d4696b5ae01dae0923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shake: 0
-  defaultShakeAmount: 0.1
-  decreaseFactor: 1
 --- !u!1001 &2439622379195720924
 PrefabInstance:
   m_ObjectHideFlags: 0
