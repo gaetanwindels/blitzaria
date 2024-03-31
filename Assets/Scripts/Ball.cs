@@ -47,14 +47,14 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var tagName = collision.gameObject.tag;
-        Player player = collision.gameObject.GetComponentInParent<Player>();
+        Player collisionPlayer = collision.gameObject.GetComponentInParent<Player>();
         
         if (collision.GetComponent<Goal>())
         {
             Destroy(gameObject);
         }
         
-        if (player != null)
+        if (collisionPlayer != null)
         {
             if (tagName == "ShotHitbox")
             {
@@ -67,8 +67,11 @@ public class Ball : MonoBehaviour
                 }
             } else if (tagName == "GrabHitbox")
             {
-                OnGrab();
-                player.Grab(this);
+                if (!player)
+                {
+                    OnGrab();
+                    collisionPlayer.Grab(this); 
+                }
             } else if (tagName == "PerfectShotHitbox")
             {
                 Debug.Log("Blink");

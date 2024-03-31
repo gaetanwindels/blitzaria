@@ -2454,9 +2454,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
         type: 3}
-      propertyPath: ShapeModule.m_SpriteRenderer
-      value: 
-      objectReference: {fileID: 6988621117747625796}
+      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].time
+      value: 0.16263285
+      objectReference: {fileID: 0}
+    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].value
+      value: 0.2460624
+      objectReference: {fileID: 0}
+    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].inSlope
+      value: -1.1678592
+      objectReference: {fileID: 0}
+    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].outSlope
+      value: -1.1678592
+      objectReference: {fileID: 0}
+    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.13289294
+      objectReference: {fileID: 0}
     - target: {fileID: 8385861322673219462, guid: fc4fd3d88d6401340b8681b57e1f1189,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2507,8 +2527,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6735665598698169436, guid: fc4fd3d88d6401340b8681b57e1f1189, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

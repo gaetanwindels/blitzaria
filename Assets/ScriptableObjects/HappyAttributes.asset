@@ -35,4 +35,7 @@ MonoBehaviour:
   - primaryColor: {r: 0, g: 0, b: 0, a: 0}
     secondaryColor: {r: 0, g: 0, b: 0, a: 0}
     tertiaryColor: {r: 0, g: 0, b: 0, a: 0}
+  - primaryColor: {r: 0.28627452, g: 0.36862746, b: 0.7254902, a: 0}
+    secondaryColor: {r: 0.7725491, g: 0.7725491, b: 0.7725491, a: 0}
+    tertiaryColor: {r: 0.75294125, g: 0.09411766, b: 0.08235294, a: 0}
   name: Happy

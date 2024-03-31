@@ -2003,59 +2003,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3121511927651361067, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 2.457119
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121511927651361067, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 7.429467
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121511927651361067, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -1.3775368
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121511927651361067, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.058507442
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121511927651361067, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4064645641697291071, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 2.4554112
-      objectReference: {fileID: 0}
-    - target: {fileID: 4064645641697291071, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -1.3783907
-      objectReference: {fileID: 0}
-    - target: {fileID: 4064645641697291071, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4648376084991028477, guid: e8cf381f079eaea4988d0a5e2732d2f1,
-        type: 3}
-      propertyPath: UVModule.sprites.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8350055485388765156, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+    - target: {fileID: 6178685536869459073, guid: e8cf381f079eaea4988d0a5e2732d2f1,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3506868468908586158, guid: e8cf381f079eaea4988d0a5e2732d2f1, type: 3}
-    - {fileID: 2563592077118635706, guid: e8cf381f079eaea4988d0a5e2732d2f1, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

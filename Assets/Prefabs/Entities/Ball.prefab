@@ -5423,98 +5423,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
         type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.minMaxState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
       propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].time
-      value: 0.1380662
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[2].time
-      value: 0.947937
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[0].value
-      value: 1
+      value: 0.16263285
       objectReference: {fileID: 0}
     - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].value
-      value: 0.40946114
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[2].value
-      value: 0.012939453
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[0].inSlope
-      value: -2
+      value: 0.2460624
       objectReference: {fileID: 0}
     - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].inSlope
-      value: -1.5768874
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[2].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[0].outSlope
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].inWeight
-      value: 0.33333334
+      value: -1.1678592
       objectReference: {fileID: 0}
     - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].outSlope
-      value: -1.5768874
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[2].inWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[2].outSlope
-      value: 0
+      value: -1.1678592
       objectReference: {fileID: 0}
     - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[1].outWeight
-      value: 0.13511203
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992812808294938513, guid: fc4fd3d88d6401340b8681b57e1f1189,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[2].outWeight
-      value: 0
+      value: 0.13289294
       objectReference: {fileID: 0}
     - target: {fileID: 4992812808294938515, guid: fc4fd3d88d6401340b8681b57e1f1189,
         type: 3}
