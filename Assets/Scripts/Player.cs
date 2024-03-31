@@ -351,7 +351,6 @@ public class Player : MonoBehaviour
     
     private void ManageRollOver()
     {
-        
         if (IsDashing() || IsLoadingShoot() || IsTackling())
         {
             return;
@@ -366,7 +365,7 @@ public class Player : MonoBehaviour
             axis = xAxis;
             if (transform.localScale.x < 0)
             {
-                axis = -xAxis;
+                //axis = -xAxis;
             }
         } else
         {
@@ -380,7 +379,7 @@ public class Player : MonoBehaviour
         var isUp = axis > 0;
         var isDown = axis < 0;
         
-        if (!IsInWater() || (!isUp && !isDown))
+        if (!isTouchingWater || (!isUp && !isDown))
         {
             return;
         }
@@ -394,9 +393,9 @@ public class Player : MonoBehaviour
         adjusted.Normalize();
 
         var computedSpeed = isUp ? -rollOverSpeed : rollOverSpeed;
-        if (transform.localScale.x > 0 && isUp)
+        if (transform.localScale.x < 0 && isUp)
         {
-           // computedSpeed *= -1;
+           //computedSpeed *= -1;
         } else if (transform.localScale.x < 0 && isDown)
         {
             //computedSpeed *= -1;
@@ -519,7 +518,7 @@ public class Player : MonoBehaviour
                 Destroy(ballGrabbed.gameObject);
                 var newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
                 Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-                newBallBody.velocity = _rigidBody.velocity + (_rigidBody.velocity.normalized * releasePower);
+                newBallBody.velocity = _rigidBody.velocity.normalized * (_rigidBody.velocity.magnitude + releasePower);
                 DisableBallCollision(newBall);
             }
         }
