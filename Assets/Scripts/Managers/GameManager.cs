@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     private void ReloadScene()
     {
         SpawnBall();
-        StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
+        StartingPositionsManager positionManager = FindFirstObjectByType<StartingPositionsManager>();
         positionManager.PositionPlayers();
         positionManager.PositionBall();
         countdownManager.StartCountdown();
@@ -92,13 +92,13 @@ public class GameManager : MonoBehaviour
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        gameSession = FindObjectOfType<GameSessionConfiguration>();
+        gameSession = FindFirstObjectByType<GameSessionConfiguration>();
         playerConfigurations = gameSession.players;
 
         InitPlayers();
         SpawnBall();
 
-        players = FindObjectsOfType<Player>();
+        players = FindObjectsByType<Player>(FindObjectsSortMode.None);
 
         foreach (Player player in players)
         {
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
         if (scoreManagerTeam1.Score == scoreManagerTeam2.Score)
         {
             _matchState = MatchState.CountdownOvertime;
-            if (timerManager != null)
+            if (timerManager)
             {
                 timerManager.InitOvertime();
             }
@@ -169,8 +169,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawnBall()
     {
-        var existingBall = FindObjectOfType<Ball>();
-        if (existingBall != null)
+        var existingBall = FindFirstObjectByType<Ball>();
+        if (existingBall)
         {
             Destroy(existingBall.gameObject);
         }
@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
     
     private void InitPlayers()
     {
-        StartingPositionsManager positionManager = FindObjectOfType<StartingPositionsManager>();
+        StartingPositionsManager positionManager = FindFirstObjectByType<StartingPositionsManager>();
 
         if (gameSession == null)
         {
@@ -232,7 +232,7 @@ public class GameManager : MonoBehaviour
     {
         timer = gameDuration;
         winText.text = "";
-        gameSession = FindObjectOfType<GameSessionConfiguration>();
+        gameSession = FindFirstObjectByType<GameSessionConfiguration>();
 
         if (gameSession != null)
         {
@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
             timerManager.Init(gameDuration);
         }
         
-        players = FindObjectsOfType<Player>();
+        players = FindObjectsByType<Player>(FindObjectsSortMode.None);
         pauseCanvas.SetActive(false);
         Time.timeScale = 1;
         countdownManager.StartCountdown();
@@ -299,8 +299,8 @@ public class GameManager : MonoBehaviour
     IEnumerator CountDownOverRoutine()
     {
         yield return new WaitForSeconds(0.8f);
-        var positionLockers = FindObjectsOfType<PositionLocker>();
-        var playersFound = FindObjectsOfType<Player>();
+        var positionLockers = FindObjectsByType<PositionLocker>(FindObjectsSortMode.None);
+        var playersFound = FindObjectsByType<Player>(FindObjectsSortMode.None);
 
         foreach (PositionLocker positionLocker in positionLockers)
         {
@@ -312,7 +312,7 @@ public class GameManager : MonoBehaviour
             player.EnableInputs();
         }
         
-        if (timerManager != null)
+        if (timerManager)
         {
             timerManager.StartTimer();
         }

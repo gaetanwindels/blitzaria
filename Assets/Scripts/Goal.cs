@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class Goal : MonoBehaviour
 {
-
+    // Config parameters
     [SerializeField] private TeamEnum teamScoring = TeamEnum.Team1;
     [SerializeField] private int explosionForce = 1300;
     [SerializeField] private ParticleSystem goalParticleSystem;
@@ -18,55 +18,57 @@ public class Goal : MonoBehaviour
     
     [SerializeField] private EventChannel eventChannel;
 
-    // Cached variable
-    private GameManager gameManager;
-    private AudioSource audioSource;
+    // Cached variables
+    private GameManager _gameManager;
+    private AudioSource _audioSource;
+    private Collider2D _collider;
 
-    private bool isReloading = false;
+    // State variables
+    private bool _isReloading = false;
     
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Ball ball = collision.gameObject.GetComponent<Ball>();
-        
-        if (ball != null && !isReloading)
+
+        if (ball)
         {
-            if (audioSource != null && explosionSound != null)
+            Destroy(ball.gameObject);
+            ScoreGoal();
+        }
+    }
+
+    private void ScoreGoal()
+    {
+        if (!_isReloading)
+        {
+            if (_audioSource && explosionSound)
             {
-                audioSource.clip = explosionSound;
-                audioSource.Play();
+                _audioSource.clip = explosionSound;
+                _audioSource.Play();
             }
-            
-            if (goalParticleSystem != null)
+
+            if (goalParticleSystem)
             {
                 goalParticleSystem.gameObject.SetActive(true);
                 goalParticleSystem.Play();
             }
 
-            //ExplodePlayers();
-            //var shaker = FindObjectOfType<CameraShaker>();
-            //var gameManager = FindObjectOfType<GameManager>();
-            //shaker.ShakeFor(0.5f, 0.3f);
-            //gameManager.AddScore(teamScoring);
-            //Destroy(collision.gameObject);
-            //StartCoroutine(ReldoaScene());
-            
             eventChannel.RaiseGoalScored(teamScoring);
-
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Ball ball = collision.gameObject.GetComponent<Ball>();
-
-        if (ball != null)
+        
+        if (ball)
         {
-            if (audioSource != null && hitSound != null)
+            if (_audioSource != null && hitSound != null)
             {
                 //audioSource.volume = 1f;
-                audioSource.clip = hitSound;
-                audioSource.Play();
+                _audioSource.clip = hitSound;
+                _audioSource.Play();
             }
             
         }
@@ -100,8 +102,9 @@ public class Goal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GetComponent<GameManager>();
-        audioSource = GetComponent<AudioSource>();
+        _gameManager = GetComponent<GameManager>();
+        _audioSource = GetComponent<AudioSource>();
+        _collider = GetComponent<Collider2D>();
 
         if (goalParticleSystem != null)
         {
@@ -113,12 +116,21 @@ public class Goal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        var ball = FindFirstObjectByType<Ball>();
+        if (ball)
+        {
+            var ballPosition = new Vector3(ball.transform.position.x, ball.transform.position.y, transform.position.z);
+            if (_collider.bounds.Contains(ballPosition))
+            {
+                Destroy(ball.gameObject);
+                ScoreGoal();
+            }
+        }
     }
 
     IEnumerator ReloadScene()
     {
-        isReloading = true;
+        _isReloading = true;
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

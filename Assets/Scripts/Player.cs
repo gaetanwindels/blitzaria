@@ -210,14 +210,12 @@ public class Player : MonoBehaviour
         Ball ball = collision.gameObject.GetComponent<Ball>();
 
         if (!ballGrabbed && ball)
-        {
-            Debug.Log("Body collided " + collision.gameObject.name);   
+        {  
             _audioSource.PlayClipWithRandomPitch(impactBallSound, isTouchingWater);
             var impulseSpeed = IsDashing() ? ball.impulseSpeedFactor * 1.5f : ball.impulseSpeedFactor;
 
             var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
             rigidBodyBall.velocity = _rigidBody.velocity * impulseSpeed;
-
         }
     }
 
@@ -920,7 +918,7 @@ public class Player : MonoBehaviour
     private bool IsInWater()
     {
         var bounds = _bodyCollider.bounds;
-        var waterBounds = FindObjectOfType<Water>().GetComponent<Collider2D>().bounds;
+        var waterBounds = FindFirstObjectByType<Water>().GetComponent<Collider2D>().bounds;
         return waterBounds.Contains(bounds.min) && waterBounds.Contains(bounds.max);
     }
 
@@ -1099,7 +1097,8 @@ public class Player : MonoBehaviour
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
         Collider2D collider = ball.GetComponent<Collider2D>();
         Destroy(rigidBodyBall);
-        Destroy(collider);
+        //Destroy(collider);
+        collider.isTrigger = true;
         DisableGrabbingMotion();
 
         ball.player = this;

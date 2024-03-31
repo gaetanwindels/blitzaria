@@ -1,10 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-//using Rewired;
-using System;
-using System.Security.Cryptography;
-using UnityEngine.Experimental.Rendering.Universal;
 
 public class Ball : MonoBehaviour
 {
@@ -53,9 +48,8 @@ public class Ball : MonoBehaviour
     {
         var tagName = collision.gameObject.tag;
         Player player = collision.gameObject.GetComponentInParent<Player>();
-
-
-        if (collision.GetComponent<Goal>() != null)
+        
+        if (collision.GetComponent<Goal>())
         {
             Destroy(gameObject);
         }
@@ -64,10 +58,6 @@ public class Ball : MonoBehaviour
         {
             if (tagName == "ShotHitbox")
             {
-                Debug.Log("BALL HIT SHOT");
-                //FindObjectOfType<CameraShaker>().ShakeFor(0.1f);
-                //audioSource.clip = hitSound;
-                //AudioUtils.PlaySound(gameObject);
                 if (tagName == "ShotHitbox")
                 {
                     //player.Shoot();
@@ -119,7 +109,7 @@ public class Ball : MonoBehaviour
 
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
-        if (rigidbody != null)
+        if (rigidbody)
         {
             var isTouchingWater = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Water Area"));
             rigidbody.gravityScale = isTouchingWater ? 0 : gravityScale;
