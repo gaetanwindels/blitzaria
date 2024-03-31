@@ -31,4 +31,7 @@ MonoBehaviour:
   - primaryColor: {r: 0.32156864, g: 0.14117648, b: 0.13725491, a: 0}
     secondaryColor: {r: 0.68235296, g: 0.6039216, b: 0.5254902, a: 0}
     tertiaryColor: {r: 0.754717, g: 0.71841514, b: 0.11035956, a: 0}
-  name: Kate
+  - primaryColor: {r: 0.7169812, g: 0.13110593, b: 0.11836952, a: 0}
+    secondaryColor: {r: 0.17000657, g: 0.5137255, b: 0.06666667, a: 0}
+    tertiaryColor: {r: 0.007843138, g: 0.007843138, b: 0.007843138, a: 0}
+  name: Fatima

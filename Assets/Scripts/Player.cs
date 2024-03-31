@@ -133,6 +133,7 @@ public class Player : MonoBehaviour
     public bool isTackling;
     public bool isShooting;
     public bool isThrowing;
+    public bool isStunned;
     public bool hasJustEnteredWater;
     private bool isInvicible;
     public bool isMotionGrabbing;
@@ -303,13 +304,14 @@ public class Player : MonoBehaviour
 
     private void ReceiveTackle(Player player)
     {
-        if (ballGrabbed != null)
+        isStunned = true;
+        grabHitbox.enabled = false;
+        if (ballGrabbed)
         {
             ballGrabbed.player = null;
             Destroy(FindFirstObjectByType<Ball>().gameObject);
             var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-            
             var velX = Random.Range(-0.5f, 0.5f);
             newBallBody.velocity = new Vector2(velX, 4f);
             DisableBallCollision(newBall);
@@ -530,7 +532,7 @@ public class Player : MonoBehaviour
             
         var ball = FindFirstObjectByType<Ball>();
     
-        if (ball)
+        if (ball && !isStunned)
         {
             var ballCollider = ball.GetComponent<Collider2D>();
             if (ballCollider)
@@ -1008,6 +1010,8 @@ public class Player : MonoBehaviour
         _animator.SetBool(AnimatorParameters.IsTackled, true);
         DisableInputs();
         yield return new WaitForSeconds(tackleStunDuration);
+        grabHitbox.enabled = true;
+        isStunned = false;
         _animator.SetBool(AnimatorParameters.IsTackled, false);
         EnableInputs();
     }

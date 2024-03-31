@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class StartingPositionsManager : MonoBehaviour
     [SerializeField] private PositionLocker[] team2Positions;
     [SerializeField] private PositionLocker ballPosition;
 
+    private bool isEven = false;
+    
     // Update is called once per frame
     void Update()
     {
@@ -17,7 +20,7 @@ public class StartingPositionsManager : MonoBehaviour
     
     public void PositionBall()
     {
-        if (ballPosition == null)
+        if (!ballPosition)
         {
             return;
         }
@@ -27,8 +30,15 @@ public class StartingPositionsManager : MonoBehaviour
 
     public void PositionPlayers()
     {
-        var players = FindObjectsOfType<Player>();
+        var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
 
+        isEven = !isEven;
+
+        if (isEven)
+        {
+            Array.Reverse(players);
+        }
+        
         foreach (Player player in players)
         {
             PositionPlayer(player);
@@ -40,7 +50,7 @@ public class StartingPositionsManager : MonoBehaviour
         Player playerToPosition = player.GetComponent<Player>();
         var positionLocker = GetFreePositionLocker(playerToPosition.team);
 
-        if (positionLocker != null)
+        if (positionLocker)
         {
             positionLocker.SetObjectToLock(player.gameObject);
         }
@@ -62,7 +72,7 @@ public class StartingPositionsManager : MonoBehaviour
         
         foreach (PositionLocker positionLocker in positionLockers)
         {
-            if (positionLocker.GetObjectTolock() == null)
+            if (!positionLocker.GetObjectTolock())
             {
                 return positionLocker;
             }

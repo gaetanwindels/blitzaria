@@ -31,4 +31,7 @@ MonoBehaviour:
   - primaryColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0}
     secondaryColor: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0}
     tertiaryColor: {r: 0.35686275, g: 0.47450984, b: 0.14901961, a: 0}
+  - primaryColor: {r: 0.28439835, g: 0.36709827, b: 0.7264151, a: 0}
+    secondaryColor: {r: 0.5915361, g: 0.5943396, b: 0.5942538, a: 0}
+    tertiaryColor: {r: 0.754717, g: 0.095619746, b: 0.08187969, a: 0}
   name: Python
