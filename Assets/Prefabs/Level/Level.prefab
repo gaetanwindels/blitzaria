@@ -689,6 +689,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1354283293, guid: b8c3ed1c57ee09c49b0033ea8c90aef3, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -4678559066795855017, guid: 12d551ff93c89744083882afb150493c,
+        type: 2}
     - target: {fileID: 2669947933361879242, guid: b8c3ed1c57ee09c49b0033ea8c90aef3,
         type: 3}
       propertyPath: m_LocalScale.x

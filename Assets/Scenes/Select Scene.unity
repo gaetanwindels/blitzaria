@@ -1900,7 +1900,7 @@ PrefabInstance:
     - target: {fileID: 1424789194600006528, guid: fcc222a532995c4458f08462a7a301c0,
         type: 3}
       propertyPath: m_Name
-      value: Music Player
+      value: Audio Manager
       objectReference: {fileID: 0}
     - target: {fileID: 6564009661959015067, guid: fcc222a532995c4458f08462a7a301c0,
         type: 3}

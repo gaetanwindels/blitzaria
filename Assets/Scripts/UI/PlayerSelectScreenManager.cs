@@ -24,11 +24,11 @@ public class PlayerSelectScreenManager : MonoBehaviour
     void Start()
     {
         playersToPoll = ReInput.players.GetPlayers();
-        playerSelects = FindObjectsOfType<PlayerSelect>();
+        playerSelects = FindObjectsByType<PlayerSelect>(FindObjectsSortMode.None);
         Array.Sort(playerSelects, (a, b) => String.Compare(a.gameObject.name, b.gameObject.name, StringComparison.Ordinal));
         currentCountDown = countDownDuration;
-        sceneManager = FindObjectOfType<CustomSceneManager>();
-        gameSession = FindObjectOfType<GameSessionConfiguration>();
+        sceneManager = FindFirstObjectByType<CustomSceneManager>();
+        gameSession = FindFirstObjectByType<GameSessionConfiguration>();
         gameSession.players = new();
     }
 
