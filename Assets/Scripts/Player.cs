@@ -102,6 +102,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject ballImpact;
     [SerializeField] private ParticleSystem loadingShootParticles;
     [SerializeField] private ChargeVfx chargeVfx;
+    [SerializeField] private GameObject whiteFlashVfx;
 
     public Brain brain;
     public InputManager inputManager;
@@ -673,15 +674,21 @@ public class Player : MonoBehaviour
 
         if (bodyBallDistance < feetBodyDistance + shootTolerance)
         {
-            var ballPosition2 = new Vector3(ballPosition.x, ballPosition.y);
-            var position2 = new Vector3(transform.position.x, transform.position.y);
-            var direction = -(ballPosition2 - position2).normalized;
+            var ballPosition2d = new Vector3(ballPosition.x, ballPosition.y);
+            var position2d = new Vector3(transform.position.x, transform.position.y);
             
-            var truc = ballPosition2 - position2;
-            float angle = Mathf.Atan2(truc.y, truc.x) * Mathf.Rad2Deg;
+            var truc = ballPosition2d - position2d;
+            var angle = Mathf.Atan2(truc.y, truc.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
 
             var chargeFactor = 1 + _chargeLevel * 0.6f;
+
+            if (whiteFlashVfx && _chargeLevel == 3)
+            {
+                Instantiate(whiteFlashVfx, ballPosition2d, Quaternion.identity);
+                
+            }
+            
             var shotPower = chargeFactor * (minShotPower + (maxShotPower - minShotPower) * (loadingAutoShootTimer / timeToBuildUp));
             StartCoroutine(ShootingRoutine(shotPower));
             StartCoroutine(DisableAutoShoot());
@@ -689,9 +696,9 @@ public class Player : MonoBehaviour
         }
         else
         {
-            float speedX = inputManager.GetAxis("Move Horizontal");
-            float speedY = inputManager.GetAxis("Move Vertical");
-            float angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg + 90;
+            var speedX = inputManager.GetAxis("Move Horizontal");
+            var speedY = inputManager.GetAxis("Move Vertical");
+            var angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg + 90;
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, angle));
         }
         
@@ -977,7 +984,7 @@ public class Player : MonoBehaviour
             isShooting = true;
             var percentPower = Math.Min(1f, (adjustedPower - minShotPower) / (maxShotPower - minShotPower));
             var shootFreezeTime = 0;
-            yield return new WaitForSecondsRealtime(shootFreezeTime);
+            yield return new WaitForSecondsRealtime(_chargeLevel == 3 ? 0 : 0);
             
             float speedX = inputManager.GetAxis("Move Horizontal");
             float speedY = inputManager.GetAxis("Move Vertical");
