@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 8240922884218118336, guid: 77fede7b478df2546b2283c4d6d52fb2,
     type: 3}
-  gravityScale: 0.8
+  gravityScale: 0.7
   ballPointNormal: {fileID: 3030431394573542114}
   ballPointLoading: {fileID: 5930026757788296440}
   throwPoint: {fileID: 3030431395449246340}
@@ -1426,7 +1426,7 @@ MonoBehaviour:
   rotationSpeed: 10000
   maxAngleLoadingShot: 45
   speed: 6.5
-  airSpeed: 0.5
+  airSpeed: 0.3
   airThrust: 0
   downAirThrust: 25
   boostSpeed: 5.5

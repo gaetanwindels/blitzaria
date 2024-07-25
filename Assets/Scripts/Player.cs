@@ -685,7 +685,7 @@ public class Player : MonoBehaviour
 
             if (whiteFlashVfx && _chargeLevel == 3)
             {
-                Instantiate(whiteFlashVfx, ballPosition2d, Quaternion.identity);
+                Instantiate(whiteFlashVfx, ballPosition2d, Quaternion.identity, ball.transform);
                 
             }
             
