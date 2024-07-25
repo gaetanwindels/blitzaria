@@ -2292,6 +2292,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1603865235}
     m_Modifications:
+    - target: {fileID: 433406659818476979, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1279577675820972783, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1279577675820972783, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1279577675820972783, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 1279577675820972783, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.8
+      objectReference: {fileID: 0}
     - target: {fileID: 3050482418217038490, guid: e8cf381f079eaea4988d0a5e2732d2f1,
         type: 3}
       propertyPath: m_Name
@@ -2346,6 +2371,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6178685536869459073, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909426033071478472, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909426033071478472, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909426033071478472, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

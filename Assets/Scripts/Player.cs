@@ -677,15 +677,16 @@ public class Player : MonoBehaviour
             var ballPosition2d = new Vector3(ballPosition.x, ballPosition.y);
             var position2d = new Vector3(transform.position.x, transform.position.y);
             
-            var truc = ballPosition2d - position2d;
-            var angle = Mathf.Atan2(truc.y, truc.x) * Mathf.Rad2Deg;
+            var distanceFromBall = ballPosition2d - position2d;
+            var angle = Mathf.Atan2(distanceFromBall.y, distanceFromBall.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
 
             var chargeFactor = 1 + _chargeLevel * 0.6f;
 
             if (whiteFlashVfx && _chargeLevel == 3)
             {
-                Instantiate(whiteFlashVfx, ballPosition2d, Quaternion.identity, ball.transform);
+                var ballPositionWithZ = new Vector3(ballPosition2d.x, ballPosition2d.y, -5);
+                Instantiate(whiteFlashVfx, ballPositionWithZ, Quaternion.identity, ball.transform);
                 
             }
             
