@@ -19,6 +19,8 @@ namespace enums
         public static readonly int IsShooting = Animator.StringToHash("IsShooting");
         public static readonly int IsHovering = Animator.StringToHash("IsHovering");
         public static readonly int IsLoadingKick = Animator.StringToHash("IsLoadingKick");
+        public static readonly int IsLoadingShoulder = Animator.StringToHash("IsLoadingShoulder");
+        public static readonly int IsShouldering = Animator.StringToHash("IsShouldering");
         
         // Middle Text
         public static readonly int TriggerText = Animator.StringToHash("TriggerText");

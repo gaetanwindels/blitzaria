@@ -17,7 +17,7 @@ public class OrbsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateOrbs();
+        //GenerateOrbs();
     }
 
     private void GenerateOrbs()
@@ -25,6 +25,16 @@ public class OrbsManager : MonoBehaviour
         for (var i = 0; i < maxOrbs;  i++)
         {
             Instantiate(orb, transform.position, Quaternion.identity, transform.GetChild(i));
+        }
+    }
+
+    public void AddOrbs(int number)
+    {
+        var orbs = GetComponentsInChildren<Orb>();
+        var orbsToGenerate = Mathf.Min(maxOrbs - orbs.Length, number); 
+        for (var i = 0; i < orbsToGenerate; i++)
+        {
+            Instantiate(orb, transform.position, Quaternion.identity, transform.GetChild(orbs.Length));
         }
     }
 
@@ -43,7 +53,7 @@ public class OrbsManager : MonoBehaviour
 
         orbsPending++;
 
-        StartCoroutine(GenerateOrb());
+        //StartCoroutine(GenerateOrb());
         
         if (!isGenerating)
         {

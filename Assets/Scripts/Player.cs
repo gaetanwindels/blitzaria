@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D shotHitbox;
     [SerializeField] private Collider2D dashHitbox;
     [SerializeField] private Collider2D grabHitbox;
+    [SerializeField] private Collider2D shouldHitbox;
 
     [Header("Tackle")]
     [SerializeField] private float tackleSpeed = 8f;
@@ -80,6 +81,10 @@ public class Player : MonoBehaviour
     
     [Header("Charge")]
     [SerializeField] private float chargeDuration = 1.4f;
+    
+    [Header("Shoulder")]
+    [SerializeField] private AnimationCurve shoulderPower;
+    [SerializeField] private float shouldDuration = 0.4f;
 
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
@@ -148,6 +153,11 @@ public class Player : MonoBehaviour
     public bool isLoadingAutoShoot;
     public List<PlayerState> playerStates = new();
     private int _chargeLevel = 0;
+    
+    // Shoulder state
+    private bool _isShouldering;
+    private float _shoulderTimer = -1;
+    private Vector2 _currentShoulderVelocity;
 
     // Routines
     private IEnumerator _enteredWaterRoutine;
@@ -286,6 +296,7 @@ public class Player : MonoBehaviour
         ManageDash();
         ManageDribble();
         ManageCharge();
+        ManageShoulder();
         ManageRotation();
         ManageAnimation();
 
@@ -479,7 +490,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    #region ChargeStatel
+    public void AddOrbs(int number)
+    {
+        _orbManager.AddOrbs(number);
+    }
+
+    #region ChargeState
 
     private void ManageCharge()
     {
@@ -500,12 +516,61 @@ public class Player : MonoBehaviour
             StartCoroutine(_chargeRoutine);
         }
         
-        if (chargeVfx != null)
+        if (chargeVfx)
         {
             chargeVfx.SetIntensity(_chargeLevel);
         }
     }
+    
+    #endregion
+    
+    #region ShoulderState
 
+    private void ManageShoulder()
+    {
+        if (_shoulderTimer > -1)
+        {
+            _shoulderTimer += Time.deltaTime;
+        }
+
+        if (_isShouldering)
+        {
+            _rigidBody.velocity = _currentShoulderVelocity;
+        }
+        
+        if (isShooting || IsDashing() || _isShouldering)
+        {
+            return;
+        }
+
+        if (inputManager.GetButtonDown("Shoulder"))
+        {
+            _shoulderTimer = 0;
+        }
+        
+        if (inputManager.GetButtonUp("Shoulder") && _shoulderTimer > -1)
+        {
+            var speedX = inputManager.GetAxis("Move Horizontal");
+            var speedY = inputManager.GetAxis("Move Vertical");
+            _currentShoulderVelocity = shoulderPower.Evaluate(_shoulderTimer) * new Vector2(speedX, speedY).normalized;
+            _shoulderTimer = -1;
+            StartCoroutine(ShoulderingRoutine());
+        }
+    }
+
+    IEnumerator ShoulderingRoutine()
+    {
+        _isShouldering = true;
+        shouldHitbox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(shouldDuration);
+        _isShouldering = false;
+        shouldHitbox.gameObject.SetActive(false);
+    }
+    
+    #endregion
+
+    #region DribbleState
+    
     private void ManageDribble()
     {
         inputManager.ForceRegisterInputEvents();
@@ -725,7 +790,7 @@ public class Player : MonoBehaviour
         
         if (IsGrabbing() && inputManager.GetButtonUp("Tackle"))
         {
-            GameObject newBall = null;
+            GameObject newBall;
             Destroy(FindFirstObjectByType<Ball>().gameObject);
             DisableGrabbingMotion();
             var trueThrowPoint = inputManager.GetButtonUp("Tackle") ? throwPointLoading : throwPoint;
@@ -793,7 +858,7 @@ public class Player : MonoBehaviour
 
             StartCoroutine(_disableGrabbingRoutine);
 
-            if (newBall != null)
+            if (newBall)
             {
                 if (_disableBodyRoutine != null)
                 {
@@ -812,7 +877,7 @@ public class Player : MonoBehaviour
     {
         float computedSpeed = speed;
         
-        if (isShooting || isTackling || IsDashing() || isRollingOver || isLoadingAutoShoot)
+        if (isShooting || isTackling || IsDashing() || isRollingOver || isLoadingAutoShoot || _isShouldering || _shoulderTimer > -1)
         {
             return;
         }
@@ -1034,6 +1099,8 @@ public class Player : MonoBehaviour
         _animator.SetBool(AnimatorParameters.IsLoadingShoot, IsLoadingShoot());
         _animator.SetBool(AnimatorParameters.IsGrabbing, isMotionGrabbing);
         _animator.SetBool(AnimatorParameters.IsRolling, isRollingOver);
+        _animator.SetBool(AnimatorParameters.IsLoadingShoulder, _shoulderTimer > -1);
+        _animator.SetBool(AnimatorParameters.IsShouldering, _isShouldering);
         //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
@@ -1069,7 +1136,7 @@ public class Player : MonoBehaviour
         }
 
         // Manage rotation
-        if (IsLoadingShoot() || isLoadingAutoShoot)
+        if (IsLoadingShoot() || isLoadingAutoShoot || _shoulderTimer > -1)
         {
             angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
             

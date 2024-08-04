@@ -75,8 +75,7 @@ public class WaterDetector : MonoBehaviour
         {
             return;
         }
-
-        Debug.Log(ball == null || !ball.HasJustSpawned);
+        
         if (rigidBody && rigidBody.velocity.magnitude > 0.4f && (!ball || !ball.HasJustSpawned))
         {
             var mass = Mathf.Min(maxMass, rigidBody.mass);

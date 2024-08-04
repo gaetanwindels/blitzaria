@@ -850,6 +850,75 @@ Transform:
   - {fileID: 9035568124978874123}
   m_Father: {fileID: 4926045685579339278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5084059326189991198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7965087776132716297}
+  - component: {fileID: 3988818678295114572}
+  m_Layer: 0
+  m_Name: Shoulder Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7965087776132716297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084059326189991198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6799266050881583199}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &3988818678295114572
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084059326189991198}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.07383883, y: 0.45341194}
+  m_Size: {x: 0.80312777, y: 0.80312777}
+  m_Direction: 0
 --- !u!1 &5415023241133225049
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +1020,7 @@ Transform:
   - {fileID: 578324290}
   - {fileID: 3369844353986879261}
   - {fileID: 7289296857922638131}
+  - {fileID: 7965087776132716297}
   m_Father: {fileID: 4926045685579339278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5686597022836882554
@@ -1364,6 +1434,7 @@ MonoBehaviour:
   shotHitbox: {fileID: 6570302659864017054}
   dashHitbox: {fileID: 4868546763010638193}
   grabHitbox: {fileID: 8711122042717401639}
+  shouldHitbox: {fileID: 0}
   tackleSpeed: 2
   invicibilityFrames: 1.5
   tackleReturnSpeed: 8
@@ -1473,6 +1544,31 @@ MonoBehaviour:
   rollOverDuration: 0.4
   rollOverCountdown: 1
   chargeDuration: 1.4
+  shoulderPower:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 8
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 14
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shouldDuration: 0.4
   playerNumber: 0
   team: 0
   isAI: 0
