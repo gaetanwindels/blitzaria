@@ -38,6 +38,11 @@ public class OrbsManager : MonoBehaviour
         }
     }
 
+    public bool HasNumbersOrbs(int number)
+    {
+        return GetComponentsInChildren<Orb>().Length >= number;
+    }
+
     public bool ConsumeOrbs(int number)
     {
         var orbs = GetComponentsInChildren<Orb>();

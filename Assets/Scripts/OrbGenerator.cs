@@ -18,13 +18,11 @@ public class OrbGenerator : MonoBehaviour
     
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("wut");
         if (_isRespawning)
         {
             return;
         }
         
-        Debug.Log("wu2t");
         var player = other.GetComponent<Player>();
         if (player)
         {

@@ -1434,7 +1434,7 @@ MonoBehaviour:
   shotHitbox: {fileID: 6570302659864017054}
   dashHitbox: {fileID: 4868546763010638193}
   grabHitbox: {fileID: 8711122042717401639}
-  shouldHitbox: {fileID: 0}
+  shoulderHitbox: {fileID: 3988818678295114572}
   tackleSpeed: 2
   invicibilityFrames: 1.5
   tackleReturnSpeed: 8
@@ -1549,9 +1549,9 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 8
-      inSlope: 2
-      outSlope: 2
+      value: 5
+      inSlope: 3
+      outSlope: 3
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -1559,8 +1559,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 3
       value: 14
-      inSlope: 2
-      outSlope: 2
+      inSlope: 3
+      outSlope: 3
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -1568,7 +1568,30 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shouldDuration: 0.4
+  shoulderDuration:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 0.1
+      outSlope: 0.1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 0.4
+      inSlope: 0.1
+      outSlope: 0.1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerNumber: 0
   team: 0
   isAI: 0

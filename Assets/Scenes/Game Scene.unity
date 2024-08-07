@@ -2513,6 +2513,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 8350055485388765160, guid: e8cf381f079eaea4988d0a5e2732d2f1,
+        type: 3}
+      propertyPath: splash
+      value: 
+      objectReference: {fileID: 2317758746817559672, guid: 134dd9a4ddf16424e957e7a3691d5a1f,
+        type: 3}
     - target: {fileID: 8350055485388765162, guid: e8cf381f079eaea4988d0a5e2732d2f1,
         type: 3}
       propertyPath: m_LocalPosition.z

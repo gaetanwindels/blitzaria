@@ -42,7 +42,7 @@ public class WaterDetector : MonoBehaviour
         if (rigidBody != null && rigidBody.velocity.magnitude > 0.4f && (ball == null || !ball.HasJustSpawned))
         {
             var mass = Mathf.Min(maxMass, rigidBody.mass);
-            _water.Splash(rigidBody.transform.position.x, rigidBody.velocity.y * mass / massMitigator);
+            _water.Splash(rigidBody.transform.position.x, rigidBody);
             _audioSource.volume = 0.3f;
             _audioSource.clip = enterSound;
             _audioSource.Play();
@@ -79,7 +79,7 @@ public class WaterDetector : MonoBehaviour
         if (rigidBody && rigidBody.velocity.magnitude > 0.4f && (!ball || !ball.HasJustSpawned))
         {
             var mass = Mathf.Min(maxMass, rigidBody.mass);
-            GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody.velocity.y * mass / massMitigator);
+            GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody);
             _audioSource.volume = 0.3f;
             _audioSource.clip = exitSound;
             _audioSource.Play();

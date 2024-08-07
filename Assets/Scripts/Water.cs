@@ -156,7 +156,7 @@ public class Water : MonoBehaviour
         }
     }
 
-    public void Splash(float xpos, float velocity)
+    public void Splash(float xpos, Rigidbody2D rigidbody)
     {
         //If the position is within the bounds of the water:
         if (xpos >= xpositions[0] && xpos <= xpositions[xpositions.Length - 1])
@@ -168,7 +168,7 @@ public class Water : MonoBehaviour
             int index = Mathf.RoundToInt((xpositions.Length - 1) * (xpos / (xpositions[xpositions.Length - 1] - xpositions[0])));
 
             //Add the velocity of the falling object to the spring
-            velocities[index] += velocity;
+            velocities[index] += rigidbody.velocity.y / 40f;
 
             //Set the lifetime of the particle system.
             //float lifetime = 0.93f + Mathf.Abs(velocity) * 0.07f;
@@ -190,8 +190,22 @@ public class Water : MonoBehaviour
 
             //Create the splash and tell it to destroy itself.
             var angle = Quaternion.Euler(-90, 0, 0);
-            GameObject splish = Instantiate(splash, position, angle) as GameObject;
-            Destroy(splish, 1f);
+            GameObject splish = Instantiate(splash, position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+            var paticleSystem = splish.GetComponent<ParticleSystem>();
+            var triggerModule = paticleSystem.trigger;
+            triggerModule.inside = ParticleSystemOverlapAction.Kill;
+            triggerModule.enabled = true;
+
+            var normalizedVector = rigidbody.velocity.normalized;
+            var velocityModule = paticleSystem.velocityOverLifetime;
+            velocityModule.x =  new ParticleSystem.MinMaxCurve(rigidbody.velocity.y > 0 ? Mathf.Abs(normalizedVector.x) : -normalizedVector.x);
+            velocityModule.y = new ParticleSystem.MinMaxCurve(normalizedVector.y);
+            Debug.Log(normalizedVector.x +'/' + normalizedVector.y);
+            
+            var waterCollider = FindFirstObjectByType<WaterDetector>().gameObject.GetComponent<Collider2D>();
+            
+            triggerModule.SetCollider(0, waterCollider);
+            Destroy(splish, 2f);
         }
     }
 

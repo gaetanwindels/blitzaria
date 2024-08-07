@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D shotHitbox;
     [SerializeField] private Collider2D dashHitbox;
     [SerializeField] private Collider2D grabHitbox;
-    [SerializeField] private Collider2D shouldHitbox;
+    [SerializeField] private Collider2D shoulderHitbox;
 
     [Header("Tackle")]
     [SerializeField] private float tackleSpeed = 8f;
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
     
     [Header("Shoulder")]
     [SerializeField] private AnimationCurve shoulderPower;
-    [SerializeField] private float shouldDuration = 0.4f;
+    [SerializeField] private AnimationCurve shoulderDuration;
 
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
@@ -196,6 +196,13 @@ public class Player : MonoBehaviour
         if (parentGO != null)
         {
             playerParent = collision.gameObject.GetComponentInParent<Player>();
+        }
+        
+        if (shoulderHitbox.IsTouching(collision) && playerParent)
+        {
+            playerParent.ReceiveTackle(this);
+            _shoulderTimer = -1;
+            _isShouldering = false;
         }
 
         if (!isInvicible && playerParent != null && 
@@ -502,24 +509,30 @@ public class Player : MonoBehaviour
         // TODO RENAME ACTION ?
         var hasPressedCharge = inputManager.GetButtonDown("Grab");
 
-        if (hasPressedCharge && _orbManager.ConsumeOrbs(1))
+        if (hasPressedCharge && _orbManager.HasNumbersOrbs(1))
         {
-            _chargeLevel++;
-            
-            if (_chargeRoutine != null)
-            {
-                StopCoroutine(_chargeRoutine);
-            }
-
-            _audioSource.PlayClipWithRandomPitch(chargeSound, isTouchingWater, 1 + 0.3f * _chargeLevel, 1 + 0.3f * _chargeLevel);
-            _chargeRoutine = ChargeCoRoutine();
-            StartCoroutine(_chargeRoutine);
+            ConsumeCharge();
         }
         
         if (chargeVfx)
         {
             chargeVfx.SetIntensity(_chargeLevel);
         }
+    }
+
+    private void ConsumeCharge()
+    {
+        _orbManager.ConsumeOrbs(1);
+        _chargeLevel++;
+            
+        if (_chargeRoutine != null)
+        {
+            StopCoroutine(_chargeRoutine);
+        }
+
+        _audioSource.PlayClipWithRandomPitch(chargeSound, isTouchingWater, 1 + 0.3f * _chargeLevel, 1 + 0.3f * _chargeLevel);
+        _chargeRoutine = ChargeCoRoutine();
+        StartCoroutine(_chargeRoutine);
     }
     
     #endregion
@@ -553,18 +566,18 @@ public class Player : MonoBehaviour
             var speedX = inputManager.GetAxis("Move Horizontal");
             var speedY = inputManager.GetAxis("Move Vertical");
             _currentShoulderVelocity = shoulderPower.Evaluate(_shoulderTimer) * new Vector2(speedX, speedY).normalized;
+            StartCoroutine(ShoulderingRoutine(shoulderDuration.Evaluate(_shoulderTimer)));
             _shoulderTimer = -1;
-            StartCoroutine(ShoulderingRoutine());
         }
     }
 
-    IEnumerator ShoulderingRoutine()
+    IEnumerator ShoulderingRoutine(float duration)
     {
         _isShouldering = true;
-        shouldHitbox.gameObject.SetActive(true);
-        yield return new WaitForSeconds(shouldDuration);
+        shoulderHitbox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
         _isShouldering = false;
-        shouldHitbox.gameObject.SetActive(false);
+        shoulderHitbox.gameObject.SetActive(false);
     }
     
     #endregion
@@ -636,7 +649,7 @@ public class Player : MonoBehaviour
         
         var hasPressedDash = inputManager.GetButtonDown("Dash");
 
-        if (hasPressedDash && !IsLoadingShoot() && !isLoadingAutoShoot && _orbManager.ConsumeOrbs(1))
+        if (hasPressedDash && !IsLoadingShoot() && !isLoadingAutoShoot && _orbManager.HasNumbersOrbs(1))
         {
             // if (IsLoadingShoot())
             // {
@@ -648,7 +661,7 @@ public class Player : MonoBehaviour
             // {
             //     CancelAutoShoot();
             // }
-            
+            ConsumeCharge();
             var go = Instantiate(dashParticles, transform.position, transform.rotation, transform);
             go.transform.localEulerAngles = new Vector3(0, 0, 0);
             var ps = go.GetComponent<ParticleSystem>();
@@ -712,6 +725,7 @@ public class Player : MonoBehaviour
 
         if (_inputBuffer.GetButtonUp("tackle"))
         {
+            CancelDash();
             windupAutoShootTimer += Time.deltaTime;
             isShooting = true;
             loadingShootParticles.Stop();

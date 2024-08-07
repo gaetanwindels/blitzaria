@@ -9,6 +9,7 @@ TagManager:
   - DashHitbox
   - GrabHitbox
   - PerfectShotHitbox
+  - ShoulderHitbox
   layers:
   - Default
   - TransparentFX
