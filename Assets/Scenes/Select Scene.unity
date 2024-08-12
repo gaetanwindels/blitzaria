@@ -1256,7 +1256,7 @@ PrefabInstance:
     - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
       propertyPath: UVModule.sprites.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
@@ -1293,6 +1293,12 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.minMaxState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
+        type: 3}
+      propertyPath: UVModule.sprites.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: -90222521, guid: e1176400b3253d74bbbe73878e024819,
+        type: 3}
     - target: {fileID: 539346477935672151, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
       propertyPath: m_SortingOrder

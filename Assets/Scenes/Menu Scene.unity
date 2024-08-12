@@ -593,11 +593,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParticleBubblesBackground
       objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672144, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 539346477935672149, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -650,64 +645,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
-      propertyPath: NoiseModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
       propertyPath: UVModule.sprites.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
+      propertyPath: UVModule.sprites.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: -90222521, guid: e1176400b3253d74bbbe73878e024819,
         type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.09803922
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
-      propertyPath: InitialModule.startColor.minColor.a
-      value: 0.39215687
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
-      propertyPath: InitialModule.startColor.minMaxState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 539346477935672151, guid: bdc08b390fec2964994bf7e7e4d67c05,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 539346477935672151, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 701ad29874086a04a94c55f1dbd45734, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
