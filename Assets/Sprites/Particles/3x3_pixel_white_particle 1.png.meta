@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      3x3_pixel_white_particle 1_0: -7182580520077434848
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

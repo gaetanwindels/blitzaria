@@ -338,6 +338,30 @@ MonoBehaviour:
         type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 6
+  - m_Name: IsLoadingShoulder
+    m_Hash: 29186724
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: PYthon_Spritesheet_V2_2
+      m_Hash: 669640353
+      m_Sprite: {fileID: -1650540804, guid: 266935395faea294d9f5177aebf13627, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1650540804, guid: 266935395faea294d9f5177aebf13627,
+        type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  - m_Name: Shouldering
+    m_Hash: 263726662
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: PYthon_Spritesheet_V2_3
+      m_Hash: 284087863
+      m_Sprite: {fileID: 520321285, guid: 266935395faea294d9f5177aebf13627, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 520321285, guid: 266935395faea294d9f5177aebf13627,
+        type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 638465419513047854
+  m_ModificationHash: 638594269322801503
   m_Version: 1

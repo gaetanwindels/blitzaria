@@ -1571,7 +1571,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9e703c4f132e58b419ed3c005611ca62, type: 2}
+  m_Motion: {fileID: 7400000, guid: fd431ab60bbf0f34bbbe491d9e27aefd, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1648,7 +1648,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9e703c4f132e58b419ed3c005611ca62, type: 2}
+  m_Motion: {fileID: 7400000, guid: eb9d8c557f215434489d61bfb640a1e2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1724,109 +1724,109 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsSwimming
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsInAir
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsShooting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Speed Multiplier
     m_Type: 1
     m_DefaultFloat: 2
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsTurbo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsUp
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDown
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDashing
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsTackling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsLoadingShoot
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsTackled
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDiving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsGrabbing
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsRolling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsLoadingKick
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsLoadingShoulder
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsShouldering
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Refonte
@@ -1851,25 +1851,25 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -4619755319170666358}
-    m_Position: {x: 230, y: 280, z: 0}
+    m_Position: {x: 150, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6283430461057932212}
-    m_Position: {x: 170, y: -180, z: 0}
+    m_Position: {x: 160, y: -200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8131434919278213333}
     m_Position: {x: 330, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3508725974609533481}
-    m_Position: {x: 750, y: 160, z: 0}
+    m_Position: {x: 980, y: 290, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 410, y: -240, z: 0}
-  m_EntryPosition: {x: 420, y: 10, z: 0}
+  m_EntryPosition: {x: 450, y: 30, z: 0}
   m_ExitPosition: {x: 620, y: -240, z: 0}
-  m_ParentStateMachinePosition: {x: 990, y: -220, z: 0}
+  m_ParentStateMachinePosition: {x: 990, y: -200, z: 0}
   m_DefaultState: {fileID: 8131434919278213333}
 --- !u!1102 &223989105065478051
 AnimatorState:
@@ -3535,10 +3535,10 @@ AnimatorStateMachine:
     m_Position: {x: -1710, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4876561251346157242}
-    m_Position: {x: -940, y: -330, z: 0}
+    m_Position: {x: -500, y: -330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1166219074649956838}
-    m_Position: {x: -1290, y: 20, z: 0}
+    m_Position: {x: -1320, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6362230766423085635}
     m_Position: {x: -1570, y: 170, z: 0}
@@ -3550,13 +3550,13 @@ AnimatorStateMachine:
     m_Position: {x: -2060, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1261891635299919948}
-    m_Position: {x: -1260, y: -330, z: 0}
+    m_Position: {x: -910, y: -340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -226922614611505413}
-    m_Position: {x: -2010, y: 250, z: 0}
+    m_Position: {x: -1250, y: -460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -590680146933329772}
-    m_Position: {x: -1930, y: 370, z: 0}
+    m_Position: {x: -950, y: -460, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 3193776898410582412}
