@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D dashHitbox;
     [SerializeField] private Collider2D grabHitbox;
     [SerializeField] private Collider2D shoulderHitbox;
+    [SerializeField] private Collider2D controlHitbox;
 
     [Header("Tackle")]
     [SerializeField] private float tackleSpeed = 8f;
@@ -233,7 +234,7 @@ public class Player : MonoBehaviour
             var impulseSpeed = IsDashing() ? ball.impulseSpeedFactor * 1.5f : ball.impulseSpeedFactor;
 
             var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
-            rigidBodyBall.velocity = _rigidBody.velocity * impulseSpeed;
+            //rigidBodyBall.velocity = _rigidBody.velocity * impulseSpeed;
         }
     }
 
@@ -590,6 +591,7 @@ public class Player : MonoBehaviour
         if (inputManager.GetButtonDown("Dribble"))
         {
             isDribbling = true;
+            controlHitbox.gameObject.SetActive(true);
 
             if (IsGrabbing())
             {
@@ -604,6 +606,7 @@ public class Player : MonoBehaviour
         if (inputManager.GetButtonUp("Dribble"))
         {
             isDribbling = false;
+            controlHitbox.gameObject.SetActive(false);
         }
             
         var ball = FindFirstObjectByType<Ball>();
@@ -613,7 +616,7 @@ public class Player : MonoBehaviour
             var ballCollider = ball.GetComponent<Collider2D>();
             if (ballCollider)
             {
-                Physics2D.IgnoreCollision(ballCollider, _bodyCollider, !isDribbling);
+               Physics2D.IgnoreCollision(ballCollider, _bodyCollider, !isDribbling);
             }
             
             grabHitbox.enabled = !isDribbling;

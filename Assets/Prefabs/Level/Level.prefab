@@ -1308,7 +1308,7 @@ PrefabInstance:
     - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
       propertyPath: UVModule.sprites.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
@@ -1340,6 +1340,12 @@ PrefabInstance:
       propertyPath: TriggerModule.primitives.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
+        type: 3}
+      propertyPath: UVModule.sprites.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: -90222521, guid: e1176400b3253d74bbbe73878e024819,
+        type: 3}
     - target: {fileID: 539346477935672150, guid: bdc08b390fec2964994bf7e7e4d67c05,
         type: 3}
       propertyPath: 'TriggerModule.primitives.Array.data[0]'
