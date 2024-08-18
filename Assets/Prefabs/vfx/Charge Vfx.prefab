@@ -107,7 +107,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -1497,8 +1497,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 1703326964, guid: e1176400b3253d74bbbe73878e024819, type: 3}
-    - sprite: {fileID: -1762458358, guid: e1176400b3253d74bbbe73878e024819, type: 3}
+    - sprite: {fileID: 785110622, guid: e1176400b3253d74bbbe73878e024819, type: 3}
+    - sprite: {fileID: 438982261, guid: e1176400b3253d74bbbe73878e024819, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
