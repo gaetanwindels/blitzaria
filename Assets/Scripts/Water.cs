@@ -17,45 +17,48 @@ public class Water : MonoBehaviour
     [SerializeField] Material material;
 
     // Cached variables
-    private SpriteRenderer spriteRenderer;
-    private AudioSource audioSource;
+    private SpriteRenderer _spriteRenderer;
+    private AudioSource _audioSource;
+    private LineRenderer _lineRenderer;
 
     // State variables
-    float z = -2f;
-    float[] xpositions;
-    float[] ypositions;
-    float[] velocities;
-    float[] accelerations;
+    private float _z = -2f;
+    private float[] _xPositions;
+    private float[] _yPositions;
+    private float[] _velocities;
+    private float[] _accelerations;
 
-    float baseheight;
-    float left;
-    float bottom;
-
-    LineRenderer body;
-
-    GameObject[] meshobjects;
-    Mesh[] meshes;
-    GameObject[] colliders;
+    private float _baseHeight;
+    private float _left;
+    private float _bottom;
+    
+    private GameObject[] _meshObjects;
+    private Mesh[] _meshes;
+    private GameObject[] _colliders;
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();
-        Sprite sprite = spriteRenderer.sprite;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
+        Sprite sprite = _spriteRenderer.sprite;
         Vector4 border = sprite.border;
-        Debug.Log(spriteRenderer.bounds.size);
+        Debug.Log(_spriteRenderer.bounds.size);
         Debug.Log(sprite.name);
 
-        this.z = transform.position.z;
+        var position = transform.position;
+        
+        _z = position.z;
 
-        float width = spriteRenderer.bounds.size.x;
-        float height = spriteRenderer.bounds.size.y;
-        float left = transform.position.x - (width / 2);
-        float top = transform.position.y + (height / 2);
-        float bottom = top - height;
+        var bounds = _spriteRenderer.bounds;
+        
+        var width = bounds.size.x;
+        var height = bounds.size.y;
+        var left = position.x - (width / 2);
+        var top = position.y + (height / 2);
+        var bottom = top - height;
         SpawnWater(left, width, top, bottom);
-        Destroy(spriteRenderer);
+        Destroy(_spriteRenderer);
     }
 
     // Update is called once per frame
@@ -65,50 +68,50 @@ public class Water : MonoBehaviour
 
     public void SpawnWater(float left, float width, float top, float bottom)
     {
-        int edgecount = Mathf.RoundToInt(width) * edgeCountMultiplier;
-        int nodecount = edgecount + 1;
+        var edgeCount = Mathf.RoundToInt(width) * edgeCountMultiplier;
+        var nodeCount = edgeCount + 1;
 
-        body = gameObject.AddComponent<LineRenderer>();
-        body.material = mat;
-        body.material.renderQueue = 1000;
-        body.positionCount = nodecount;
-        body.startWidth = 0.1f;
-        body.sortingLayerName = "Water";
+        _lineRenderer = gameObject.AddComponent<LineRenderer>();
+        _lineRenderer.material = mat;
+        _lineRenderer.material.renderQueue = 1000;
+        _lineRenderer.positionCount = nodeCount;
+        _lineRenderer.startWidth = 0.0625f;
+        _lineRenderer.sortingLayerName = "Water";
         //body.sortingOrder = 3;
 
-        xpositions = new float[nodecount];
-        ypositions = new float[nodecount];
-        velocities = new float[nodecount];
-        accelerations = new float[nodecount];
+        _xPositions = new float[nodeCount];
+        _yPositions = new float[nodeCount];
+        _velocities = new float[nodeCount];
+        _accelerations = new float[nodeCount];
 
-        meshobjects = new GameObject[edgecount];
-        meshes = new Mesh[edgecount];
-        colliders = new GameObject[edgecount];
+        _meshObjects = new GameObject[edgeCount];
+        _meshes = new Mesh[edgeCount];
+        _colliders = new GameObject[edgeCount];
 
-        baseheight = top;
-        this.bottom = bottom;
-        this.left = left;
+        _baseHeight = top;
+        _bottom = bottom;
+        _left = left;
 
-        for (int i = 0; i < nodecount; i++)
+        for (int i = 0; i < nodeCount; i++)
         {
-            ypositions[i] = top;
-            xpositions[i] = left + width * i / edgecount;
-            accelerations[i] = 0;
-            velocities[i] = 0;
-            body.SetPosition(i, new Vector3(xpositions[i], ypositions[i], z));
+            _yPositions[i] = top;
+            _xPositions[i] = left + width * i / edgeCount;
+            _accelerations[i] = 0;
+            _velocities[i] = 0;
+            _lineRenderer.SetPosition(i, new Vector3(_xPositions[i], _yPositions[i], _z));
         }
 
-        Debug.Log("Edge count : " + edgecount);
+        Debug.Log("Edge count : " + edgeCount);
 
         // Creating meshes
-        for (int i = 0; i < edgecount; i++)
+        for (int i = 0; i < edgeCount; i++)
         {
-            meshes[i] = new Mesh();
+            _meshes[i] = new Mesh();
             Vector3[] vertices = new Vector3[4];
-            vertices[0] = new Vector3(xpositions[i], ypositions[i], z);
-            vertices[1] = new Vector3(xpositions[i + 1], ypositions[i + 1], z);
-            vertices[2] = new Vector3(xpositions[i], bottom, z);
-            vertices[3] = new Vector3(xpositions[i + 1], bottom, z);
+            vertices[0] = new Vector3(_xPositions[i], _yPositions[i], _z);
+            vertices[1] = new Vector3(_xPositions[i + 1], _yPositions[i + 1], _z);
+            vertices[2] = new Vector3(_xPositions[i], bottom, _z);
+            vertices[3] = new Vector3(_xPositions[i + 1], bottom, _z);
 
             Vector2[] uvs = new Vector2[4];
             uvs[0] = new Vector2(0, 1);
@@ -116,16 +119,16 @@ public class Water : MonoBehaviour
             uvs[2] = new Vector2(0, 0);
             uvs[3] = new Vector2(1, 0);
 
-            int[] tris = new int[6] { 0, 1, 3, 3, 2, 0 };
+            int[] tris = { 0, 1, 3, 3, 2, 0 };
 
-            meshes[i].vertices = vertices;
-            meshes[i].uv = uvs;
-            meshes[i].triangles = tris;
-            meshobjects[i] = Instantiate(watermesh, Vector3.zero, Quaternion.identity) as GameObject;
-            meshobjects[i].GetComponent<MeshFilter>().mesh = meshes[i];
-            meshobjects[i].GetComponent<MeshRenderer>().material.color = spriteRenderer.color;
+            _meshes[i].vertices = vertices;
+            _meshes[i].uv = uvs;
+            _meshes[i].triangles = tris;
+            _meshObjects[i] = Instantiate(watermesh, Vector3.zero, Quaternion.identity) as GameObject;
+            _meshObjects[i].GetComponent<MeshFilter>().mesh = _meshes[i];
+            _meshObjects[i].GetComponent<MeshRenderer>().material.color = _spriteRenderer.color;
             //meshobjects[i].GetComponent<MeshRenderer>().material = material;
-            meshobjects[i].transform.parent = transform;
+            _meshObjects[i].transform.parent = transform;
 
             //Create our colliders, set them be our child
             /*colliders[i] = new GameObject();
@@ -156,19 +159,19 @@ public class Water : MonoBehaviour
         }
     }
 
-    public void Splash(float xpos, Rigidbody2D rigidbody)
+    public void Splash(float xPosition, Rigidbody2D rigidbody)
     {
         //If the position is within the bounds of the water:
-        if (xpos >= xpositions[0] && xpos <= xpositions[xpositions.Length - 1])
+        if (xPosition >= _xPositions[0] && xPosition <= _xPositions[_xPositions.Length - 1])
         {
             //Offset the x position to be the distance from the left side
-            xpos -= xpositions[0];
+            xPosition -= _xPositions[0];
 
             //Find which spring we're touching
-            int index = Mathf.RoundToInt((xpositions.Length - 1) * (xpos / (xpositions[xpositions.Length - 1] - xpositions[0])));
+            int index = Mathf.RoundToInt((_xPositions.Length - 1) * (xPosition / (_xPositions[_xPositions.Length - 1] - _xPositions[0])));
 
             //Add the velocity of the falling object to the spring
-            velocities[index] += rigidbody.velocity.y / 40f;
+            _velocities[index] += rigidbody.velocity.y / 40f;
 
             //Set the lifetime of the particle system.
             //float lifetime = 0.93f + Mathf.Abs(velocity) * 0.07f;
@@ -183,7 +186,7 @@ public class Water : MonoBehaviour
             // main.startLifetime = lifetime;
 
             //Set the correct position of the particle system.
-            Vector3 position = new Vector3(xpositions[index], ypositions[index], -3);
+            Vector3 position = new Vector3(_xPositions[index], _yPositions[index], -3);
 
             //This line aims the splash towards the middle. Only use for small bodies of water:
             //Quaternion rotation = Quaternion.LookRotation(new Vector3(xpositions[Mathf.FloorToInt(xpositions.Length / 2)], baseheight + 8, 5) - position);
@@ -212,17 +215,18 @@ public class Water : MonoBehaviour
     //Same as the code from in the meshes before, set the new mesh positions
     void UpdateMeshes()
     {
-        body.material = mat;
+        _lineRenderer.material = mat;
 
-        for (int i = 0; i < meshes.Length; i++)
+        for (int i = 0; i < _meshes.Length; i++)
         {
             Vector3[] vertices = new Vector3[4];
-            vertices[0] = new Vector3(xpositions[i], ypositions[i], z);
-            vertices[1] = new Vector3(xpositions[i + 1], ypositions[i + 1], z);
-            vertices[2] = new Vector3(xpositions[i], bottom, z);
-            vertices[3] = new Vector3(xpositions[i + 1], bottom, z);
+            vertices[0] = new Vector3(_xPositions[i], _yPositions[i], _z);
+            //vertices[1] = new Vector3(_xPositions[i + 1], _yPositions[i + 1], _z);
+            vertices[1] = new Vector3(_xPositions[i + 1], _yPositions[i], _z);
+            vertices[2] = new Vector3(_xPositions[i], _bottom, _z);
+            vertices[3] = new Vector3(_xPositions[i + 1], _bottom, _z);
 
-            meshes[i].vertices = vertices;
+            _meshes[i].vertices = vertices;
         }
     }
 
@@ -231,48 +235,63 @@ public class Water : MonoBehaviour
     {
 
         //Here we use the Euler method to handle all the physics of our springs:
-        for (int i = 0; i < xpositions.Length; i++)
+        for (int i = 0; i < _xPositions.Length; i++)
         {
-            float force = springconstant * (ypositions[i] - baseheight) + velocities[i] * damping;
-            accelerations[i] = -force;
-            ypositions[i] += velocities[i];
-            velocities[i] += accelerations[i];
-            body.SetPosition(i, new Vector3(xpositions[i], ypositions[i], z));
+            float force = springconstant * (_yPositions[i] - _baseHeight) + _velocities[i] * damping;
+            _accelerations[i] = -force;
+            _yPositions[i] += _velocities[i];
+            _velocities[i] += _accelerations[i];
+            //_lineRenderer.SetPosition(i, new Vector3(_xPositions[i], _yPositions[i], _z));
         }
 
         //Now we store the difference in heights:
-        float[] leftDeltas = new float[xpositions.Length];
-        float[] rightDeltas = new float[xpositions.Length];
+        float[] leftDeltas = new float[_xPositions.Length];
+        float[] rightDeltas = new float[_xPositions.Length];
 
         //We make 8 small passes for fluidity:
         for (int j = 0; j < 8; j++)
         {
-            for (int i = 0; i < xpositions.Length; i++)
+            for (int i = 0; i < _xPositions.Length; i++)
             {
                 //We check the heights of the nearby nodes, adjust velocities accordingly, record the height differences
                 if (i > 0)
                 {
-                    leftDeltas[i] = spread * (ypositions[i] - ypositions[i - 1]);
-                    velocities[i - 1] += leftDeltas[i];
+                    leftDeltas[i] = spread * (_yPositions[i] - _yPositions[i - 1]);
+                    _velocities[i - 1] += leftDeltas[i];
                 }
-                if (i < xpositions.Length - 1)
+                if (i < _xPositions.Length - 1)
                 {
-                    rightDeltas[i] = spread * (ypositions[i] - ypositions[i + 1]);
-                    velocities[i + 1] += rightDeltas[i];
+                    rightDeltas[i] = spread * (_yPositions[i] - _yPositions[i + 1]);
+                    _velocities[i + 1] += rightDeltas[i];
                 }
             }
 
             //Now we apply a difference in position
-            for (int i = 0; i < xpositions.Length; i++)
+            for (int i = 0; i < _yPositions.Length; i++)
             {
                 if (i > 0)
-                    ypositions[i - 1] += leftDeltas[i];
-                if (i < xpositions.Length - 1)
-                    ypositions[i + 1] += rightDeltas[i];
+                    _yPositions[i - 1] += leftDeltas[i];
+                if (i < _xPositions.Length - 1)
+                    _yPositions[i + 1] += rightDeltas[i];
             }
         }
+
+        DrawLine();
         //Finally we update the meshes to reflect this
         UpdateMeshes();
+    }
+
+    void DrawLine()
+    {
+        List<Vector3> positions = new(); 
+        for (var linePos = 0; linePos < _xPositions.Length - 1; linePos++)
+        {
+            positions.Add(new Vector3(_xPositions[linePos], _yPositions[linePos], _z));
+            positions.Add(new Vector3(_xPositions[linePos+1], _yPositions[linePos], _z));
+        }
+
+        _lineRenderer.positionCount = positions.Count;
+        _lineRenderer.SetPositions(positions.ToArray());
     }
 
 }
