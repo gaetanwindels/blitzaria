@@ -43,40 +43,40 @@ public class WaterPushback : MonoBehaviour
             IsLocked = lockedTimeTracker < lockedTime;
 
             // Manage pushback on y
-            if (body.velocity.y < 0)
+            if (body.linearVelocity.y < 0)
             {
                 var newVelocityY = pushbackTracker * Time.deltaTime;
-                body.velocity += new Vector2(0, newVelocityY);
+                body.linearVelocity += new Vector2(0, newVelocityY);
             }
 
-            if (body.velocity.y > 0)
+            if (body.linearVelocity.y > 0)
             {
-                body.velocity = new Vector2(body.velocity.x, 0);
+                body.linearVelocity = new Vector2(body.linearVelocity.x, 0);
             }
 
             // Manage pushback on x
-            if (body.velocity.x < 0)
+            if (body.linearVelocity.x < 0)
             {
                 var newVelocityX = pushbackTracker * Time.deltaTime;
-                body.velocity += new Vector2(newVelocityX, 0);
+                body.linearVelocity += new Vector2(newVelocityX, 0);
 
-                if (body.velocity.x > 0)
+                if (body.linearVelocity.x > 0)
                 {
-                    body.velocity = new Vector2(0, body.velocity.y);
+                    body.linearVelocity = new Vector2(0, body.linearVelocity.y);
                 }
             }
-            else if (body.velocity.x > 0)
+            else if (body.linearVelocity.x > 0)
             {
                 var newVelocityX = pushbackTracker * Time.deltaTime;
-                body.velocity -= new Vector2(newVelocityX, 0);
+                body.linearVelocity -= new Vector2(newVelocityX, 0);
 
-                if (body.velocity.x < 0)
+                if (body.linearVelocity.x < 0)
                 {
-                    body.velocity = new Vector2(0, body.velocity.y);
+                    body.linearVelocity = new Vector2(0, body.linearVelocity.y);
                 }
             }
 
-            if (body.velocity.y == 0 && body.velocity.x == 0)
+            if (body.linearVelocity.y == 0 && body.linearVelocity.x == 0)
             {
                 this.isPushBack = false;
                 IsLocked = false;

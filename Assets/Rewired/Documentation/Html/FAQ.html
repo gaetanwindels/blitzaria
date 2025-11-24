@@ -90,16 +90,19 @@
             <strong>Extras:</strong>
             <ul>
               <li><a href="ControlMapper.html" title="Control Mapper">Control Mapper</a></li>
+              <li><a href="Glyphs.html" title="Glyphs">Glyphs</a></li>
 	          <li><a href="TouchControls.html" title="Touch Controls">Touch Controls</a></li>
-              <li><a href="RewiredStandaloneInputModule.html">Rewired Standalone Input Module</a></li>
 	          <li><a href="UnityInputOverride.html" title="Unity Input Override">Unity Input Override</a></li>
             </ul>
             <strong>Misc:</strong>
             <ul>
+              <li><a href="RewiredStandaloneInputModule.html">Rewired Standalone Input Module</a></li>
 	          <li><a href="ComponentControls.html" title="Component Controls">Component Controls</a></li>
 	          <li><a href="PlayerControllers.html" title="Player Controllers">Player Controllers</a></li>
 	          <li><a href="InputMapper.html" title="Input Mapper">Input Mapper</a></li>
 	          <li><a href="UserDataStore.html" title="User Data Store">User Data Store</a></li>
+	          <li><a href="CustomPlatforms.html" title="User Data Store">Custom Platforms</a></li>
+              <li><a href="Localization.html" title="Localization">Localization</a></li>
             </ul>
             <strong>How To's:</strong>
             <ul>
@@ -159,6 +162,9 @@
       <li><a href="#multiple-mice-and-keyboards">Does Rewired support multiple independent mice and keyboards?</a></li>
       <li><a href="#where-is-data-saved">Where is Rewired's input configuration data saved?</a></li>
       <li><a href="#copy-input-config">How can I copy my input configuration to another project?</a></li>
+      <li><a href="#code-purist">I don't like using visual editors and like to code everything myself. Can I use Rewired without using the Rewired Editor?</a></li>
+      <li><a href="#edit-rewired-input-manager-data-scripting">Can I create new Players, Actions, Controller Map definitions, Input Behaviors, and other data managed by the Rewired Editor through scripting in the Unity Editor instead of using the Rewired Editor?</a></li>
+      <li><a href="#edit-rewired-input-manager-data-at-runtime">Can I create new Players, Actions, Controller Map definitions, Input Behaviors, and other data managed by the Rewired Editor at runtime?</a></li>
       <li><a href="#consume-input">How do you consume/use an input?</a></li>
       <li><a href="#default-dead-zone">My joystick's dead zone is too large/small. How do I change it?</a></li>
       <li><a href="#gesture-bindings">How can I bind an Action to a button short-press  and another Action to a long-press?</a></li>
@@ -222,16 +228,16 @@
 <hr />
 <h3><a name="touch-gyro-accelerometer" id="touch-gyro-accelerometer"></a>Does Rewired support touch and gyro/accelerometer control?</h3>
   <p><strong>On-screen touch joysticks</strong><br />
-    Rewired comes with set of pre-built <a href="TouchControls.html">touch controls</a> for use directly in your games. For   other special needs, you can use the <a href="CustomControllers.html">Custom Controller</a> system to pipe in data from any kind of control which you can   either build or download from the <a href="https://www.assetstore.unity3d.com/en/" target="_blank">Unity Asset Store</a> or elsewhere. There is a simple <a href="http://guavaman.com/projects/rewired/docs/Examples.html#touch-controls-1">on-screen touch joystick example</a> included with Rewired showing the concept.</p>
+    Rewired comes with set of pre-built <a href="TouchControls.html">touch controls</a> for use directly in your games. For   other special needs, you can use the <a href="CustomControllers.html">Custom Controller</a> system to pipe in data from any kind of control which you can   either build or download from the <a href="https://www.assetstore.unity3d.com/en/" target="_blank">Unity Asset Store</a> or elsewhere. There is a simple <a href="https://guavaman.com/projects/rewired/docs/Examples.html#touch-controls-1">on-screen touch joystick example</a> included with Rewired showing the concept.</p>
 
 <p><strong>Touch swipes and gestures</strong><br />
   Rewired does not include any handling of swipe or gesture recognition. For   gestures, if it makes sense to map them to input <a href="Actions.html">Actions</a>, you can  use the <a href="CustomControllers.html">Custom Controller</a> system coupled with a gesture recognizer script/asset and pipe   the gestures in as button values in a <a href="CustomControllers.html">Custom Controller</a> and then map those buttons to Actions.</p>
 <p><strong>Gyro and accelerometer input</strong><br />
-  Rewired comes with a <a href="ComponentControls.html#tilt-control">Tilt Control</a> component which can be used for basic tilt input. It also supports <a href="HowTos.html#appletv-siri-remote">tilt and rotate on the Siri Remote on tvOS</a>, and the <a href="HowTos.html#dualshock-4-special-features">gyro on the Sony Dual Shock 4</a> and Nintendo Joy-Cons (Switch platform only). For any other tilt/motion needs,  you can use UnityEngine.Input to get the motion data, process it, and then use that information to feed into a <a href="CustomControllers.html">Custom Controller</a> to map certain types of motion to Actions. Rewired also comes with a simple tilt control  <a href="http://guavaman.com/projects/rewired/docs/Examples.html">example</a>.</p>
+  Rewired comes with a <a href="ComponentControls.html#tilt-control">Tilt Control</a> component which can be used for basic tilt input. It also supports <a href="HowTos.html#appletv-siri-remote">tilt and rotate on the Siri Remote on tvOS</a>, and the <a href="HowTos.html#dualshock-4-special-features">gyro on the Sony Dual Shock 4</a> and Nintendo Joy-Cons (Switch platform only). For any other tilt/motion needs,  you can use UnityEngine.Input to get the motion data, process it, and then use that information to feed into a <a href="CustomControllers.html">Custom Controller</a> to map certain types of motion to Actions. Rewired also comes with a simple tilt control  <a href="https://guavaman.com/projects/rewired/docs/Examples.html">example</a>.</p>
 <p>&nbsp;</p>
 <hr />
 <h3><a name="force-feedback" id="default-dead-zone5"></a>Does Rewired support force feedback?</h3>
-<p>The only form of force feedback currently supported by Rewired is gamepad vibration. Vibration works with certain controllers on certain platforms and input sources.</p>
+<p>The only forms of force feedback currently supported by Rewired are gamepad vibration and DualSense trigger haptics. Vibration works with certain controllers on certain platforms and input sources.</p>
 <p>Currently vibration is only supported on the following controllers and platforms and input sources:</p>
 <table width="100%" border="0" class="supported-controllers-table">
   <tr>
@@ -241,9 +247,11 @@
     <td align="center"><strong>Linux</strong></td>
     <td align="center"><strong>Windows 8.0 &amp; 8.1 Store</strong></td>
     <td align="center"><strong>Windows 10 Universal</strong></td>
-    <td align="center"><strong>XBox One</strong></td>
+    <td align="center"><strong>Xbox One</strong></td>
+    <td align="center"><strong>Xbox Series S/X</strong></td>
     <td align="center"><strong>PlayStation 4</strong></td>
-    <td align="center"><strong>Nintendo Switch</strong></td>
+    <td align="center"><strong>PlayStation 5</strong></td>
+    <td align="center"><strong>Nintendo Switch 1 &amp; 2</strong></td>
     <td align="center"><strong>Stadia</strong></td>
   </tr>
   <tr>
@@ -252,14 +260,19 @@
       <li>XInput</li>
       <li> SDL2*</li>
     </ul></td>
-    <td align="center" valign="top">Native<br />
-      <span class="note">(<a href="https://github.com/360Controller/360Controller/releases" target="_blank">Driver required</a>)</span></td>
+    <td align="center" valign="top"><ul>
+      <li>Native<br />
+      </li>
+      <li>Game Controller Framework</li>
+    </ul>      </td>
     <td align="center" valign="top"><ul>
       <li> Native</li>
       <li>SDL2*</li>
     </ul></td>
     <td align="center" valign="top">Native</td>
     <td align="center" valign="top">Native</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&nbsp;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
@@ -270,18 +283,26 @@
     <td align="center" valign="top"><ul>
       <li>XInput<br />
         <span class="note">(2 of 4 motors supported)</span></li>
+      <li>Windows Gaming Input<br />
+        <span class="note">(All motors supported)</span>      </li>
       <li> SDL2*</li>
     </ul></td>
-    <td align="center" valign="top">Native<br />
-      <span class="note">(2 of 4 motors supported)<br />
-      (<a href="https://github.com/360Controller/360Controller/releases" target="_blank">Driver required</a>) </span></td>
-    <td align="center" valign="top">Not tested</td>
+    <td align="center" valign="top"><ul>
+      <li>Native<br />
+        <span class="note">(2 of 4 motors supported)<br />
+        </span></li>
+      <li>Game Controller Framework</li>
+    </ul>      </td>
+    <td align="center" valign="top">Native</td>
     <td align="center" valign="top">Native<br />
       <span class="note">(2 of 4 motors supported)</span></td>
     <td align="center" valign="top">Native<br />
       <span class="note">(All 4 motors supported)</span></td>
     <td align="center" valign="top">Native<br />
       <span class="note">(All 4 motors supported)</span></td>
+    <td align="center" valign="top">Native<br />
+      <span class="note">(All 4 motors supported)</span></td>
+    <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">Native</td>
@@ -291,15 +312,22 @@
     <td align="center" valign="top"><ul>
       <li>XInput<br />
         <span class="note">(2 of 4 motors supported)</span></li>
+      <li>Windows Gaming Input<br />
+        <span class="note">(All motors supported)<br />
+        </span></li>
+      <li> SDL2*</li>
     </ul></td>
-    <td align="center" valign="top">&mdash;</td>
-    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">Game Controller Framework</td>
+    <td align="center" valign="top">Native</td>
     <td align="center" valign="top">Native<br />
       <span class="note">(2 of 4 motors supported)</span></td>
     <td align="center" valign="top">Native<br />
       <span class="note">(All 4 motors supported)</span></td>
     <td align="center" valign="top">Native<br />
       <span class="note">(All 4 motors supported)</span></td>
+    <td align="center" valign="top">Native<br />
+      <span class="note">(All 4 motors supported)</span></td>
+    <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">Native</td>
@@ -308,13 +336,18 @@
     <td valign="top">Sony DualShock 4</td>
     <td align="center" valign="top">Raw Input<br />
       <span class="note">(<a href="RewiredEditor.html#settings-windows-enhanced-device-support">Enhanced Device Support</a> required)</span></td>
-    <td align="center" valign="top">Native<br />
-      <span class="note">(<a href="RewiredEditor.html#settings-osx-enhanced-device-support">Enhanced Device Support</a> required, wired only)</span></td>
-    <td align="center" valign="top">&mdash;</td>
-    <td align="center" valign="top">&mdash;</td>
-    <td align="center" valign="top">&mdash;</td>
-    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top"><ul>
+      <li>Native<br />
+        <span class="note">(<a href="RewiredEditor.html#settings-osx-enhanced-device-support">Enhanced Device Support</a> required,)</span></li>
+      <li>Game Controller Framework</li>
+    </ul>      </td>
     <td align="center" valign="top">Native</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&nbsp;</td>
+    <td align="center" valign="top">Native</td>
+    <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">Native</td>
   </tr>
@@ -322,30 +355,60 @@
     <td valign="top">Sony DualSense</td>
     <td align="center" valign="top">Raw Input<br />
       <span class="note">(<a href="RewiredEditor.html#settings-windows-enhanced-device-support">Enhanced Device Support</a> required)</span></td>
+    <td align="center" valign="top"><ul>
+      <li>Native<br />
+        <span class="note">(<a href="RewiredEditor.html#settings-osx-enhanced-device-support">Enhanced Device Support</a> required)</span></li>
+      <li>Game Controller Framework</li>
+    </ul>      </td>
     <td align="center" valign="top">Native<br />
-      <span class="note">(<a href="RewiredEditor.html#settings-osx-enhanced-device-support">Enhanced Device Support</a> required, wired only)</span></td>
+      <span class="note">(<a href="RewiredEditor.html#settings-linux-enhanced-device-support">Enhanced Device Support</a> required for haptic triggers)</span></td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&nbsp;</td>
     <td align="center" valign="top">&mdash;</td>
-    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">Native</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">Native</td>
   </tr>
   <tr>
-    <td valign="top">Nintendo Joy-Cons and Pro Controller</td>
+    <td valign="top">Nintendo Joy-Cons </td>
+    <td align="center" valign="top">Raw Input<br />
+      <span class="note">(<a href="RewiredEditor.html#settings-windows-enhanced-device-support">Enhanced Device Support</a> required)</span></td>
+    <td align="center" valign="top">Native<br />
+      <span class="note">(<a href="RewiredEditor.html#settings-windows-enhanced-device-support">Enhanced Device Support</a> required)</span></td>
+    <td align="center" valign="top">Native</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
-    <td align="center" valign="top">&mdash;</td>
-    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&nbsp;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">Native<br />
       <span class="note">(All motors and features supported)</span></td>
-    <td align="center" valign="top">Native<br />
-      <span class="note">(Pro Controller)</span></td>
+    <td align="center" valign="top">&mdash;</td>
   </tr>
+  <tr>
+    <td valign="top">Nintendo Pro Controller</td>
+    <td align="center" valign="top">Raw Input<br />
+      <span class="note">(<a href="RewiredEditor.html#settings-windows-enhanced-device-support">Enhanced Device Support</a> required)</span></td>
+    <td align="center" valign="top"><ul>
+      <li>Native<br />
+        <span class="note">(<a href="RewiredEditor.html#settings-osx-enhanced-device-support">Enhanced Device Support</a> required,)</span></li>
+      <li>Game Controller Framework<br />
+        <span class="note">(Wireless only.)</span></li>
+    </ul></td>
+    <td align="center" valign="top">Native</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&nbsp;</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">Native<br />
+      <span class="note">(All motors and features supported)</span></td>
+    <td align="center" valign="top">Native</td>
+    </tr>
   <tr>
     <td valign="top">Stadia Controller</td>
     <td align="center" valign="top">&mdash;</td>
@@ -353,6 +416,8 @@
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&mdash;</td>
+    <td align="center" valign="top">&nbsp;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
     <td align="center" valign="top">&mdash;</td>
@@ -407,6 +472,22 @@
   is not a correct   usage. This way there is no need for something like 
   consuming input and   injecting your game state permission management into the input 
   system.</p>
+<p>&nbsp;</p>
+<hr />
+<h3><a name="code-purist" id="code-purist"></a>I don't like using visual editors and like to code everything myself. Can I use Rewired without using the Rewired Editor?</h3>
+<p>Generally, no. The Rewired Editor is the heart of Rewired. The entire Player-Action system is dependent on data configured in the editor before runtime. If you want to use Rewired's Player-Action system (Controller Maps, etc.), you must configure the data using the Rewired Editor.</p>
+<p>The only way you could use Rewired without using the Rewired Editor to configure data is if you completely ignore the entire Player-Action system and read input directly from the Controllers, largely defeating the purpose of using Rewired.</p>
+<p>If you want to manage and configure every single thing in code instead of in an editor or you don't want to rely on Unity's serialization system for storing this data, you should use a different input system.</p>
+<p>&nbsp;</p>
+<hr />
+<h3><a name="edit-rewired-input-manager-data-scripting" id="edit-rewired-input-manager-data-scripting"></a>Can I create new Players, Actions, Controller Map definitions, Input Behaviors, and other data managed by the Rewired Editor through scripting in the Unity Editor instead of using the Rewired Editor?</h3>
+<p>No. The Rewired Editor is the only supported way to configure the data stored in the Rewired Input Manager. The API for modifying this data through scripting is undocumented and partially internal. Rewired's data is intended to be configured using the Rewired Editor, not through scripting.</p>
+<p>Do not mistake this for meaning you cannot change settings and bindings at runtime. The developer-defined data stored in the Rewired Input Manager is static at runtime and cannot be changed, but the live instances created from that static data can certainly be changed at runtime through scripting. (Live instances include Players, Controller Maps, Input Behaviors, Rules and Rule Sets, etc.)</p>
+<p>&nbsp;</p>
+<hr />
+<h3><a name="edit-rewired-input-manager-data-at-runtime" id="edit-rewired-input-manager-data-at-runtime"></a>Can I create new Players, Actions, Controller Map definitions, Input Behaviors, and other data managed by the Rewired Editor at runtime?</h3>
+<p>No. The majority of data stored in the Rewired Input Manager is totally static at runtime (everything except settings). Upon initialization, Rewired instantiates all objects in the system including  Players, Actions, Input Behaviors, Controller Maps, Custom Controllers, Rules and Rule Sets, etc. based on what you've configured in the editor. The static data in the Rewired Input Manager cannot be changed at runtime. This means you cannot define new Actions, Players, Input Behaviors, etc. at runtime. However, the live instances of these objects (Players, Controller Maps, etc.) can be modified at runtime through scripting, and can even be saved to XML/JSON and reloaded at runtime. This means you can change controller bindings and various other properties at runtime and have those changes persist to the next game session.</p>
+<p>You could think of the data stored in the Rewired Input Manager as the &quot;parent&quot; data (similar to the Prefab system in Unity) and the runtime Players, Controller Maps, etc., as instances of their parent. The parent cannot be changed at runtime, but the instances can. Parent data (Players, Actions, etc.) can only be created or modified at edit time in the Rewired Editor.</p>
 <p>&nbsp;</p>
 <hr />
 <h3><a name="default-dead-zone" id="default-dead-zone"></a>My joystick's dead zone is too large/small. How do I change it?</h3>
@@ -474,7 +555,7 @@
 <hr />
 <h3><a name="set-mouse-cursor-position" id="set-mouse-cursor-position"></a>Can Rewired set the mouse cursor position?</h3>
 <p>No. Rewired does not allow you to set the OS mouse cursor position on any platform.</p>
-<p>You can use <a href="http://guavaman.com/projects/rewired/docs/PlayerControllers.html#player-mouse">Player Mouse</a> to move one or more sprite-based cursors with a joystick, keyboard, etc.</p>
+<p>You can use <a href="https://guavaman.com/projects/rewired/docs/PlayerControllers.html#player-mouse">Player Mouse</a> to move one or more sprite-based cursors with a joystick, keyboard, etc.</p>
 <p>&nbsp;</p>
 <hr />
 <h3><a name="source-code" id="default-dead-zone4"></a>Can I get the Rewired source code?</h3>
@@ -499,7 +580,7 @@
         
     </div>
   <div class="footer clearfix">
-   	<p class="left">Copyright &copy;2014-2019 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
+   	<p class="left">Copyright &copy;2014-2021 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
   	<p class="right"><a href="http://guavaman.com/projects/rewired" title="Return to Rewired Website">Return to Rewired Website</a></p>
   </div>
   <!-- end .content --></div>

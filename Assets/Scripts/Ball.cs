@@ -170,7 +170,7 @@ public class Ball : MonoBehaviour
             if (GetComponent<Rigidbody2D>() != null)
             {
                 var em = trailParticles.emission;
-                em.rateOverTimeMultiplier = trailIntensity.Evaluate(rigidbody.velocity.magnitude);
+                em.rateOverTimeMultiplier = trailIntensity.Evaluate(rigidbody.linearVelocity.magnitude);
                 //Debug.Log(em.rateOverTimeMultiplier);
                 
             }
@@ -188,7 +188,7 @@ public class Ball : MonoBehaviour
         transform.localScale = new Vector3(1, 1, 1);
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         var angVelocity = rigidbody.angularVelocity;
-        var adjusted = Vector2.Perpendicular(rigidbody.velocity);
+        var adjusted = Vector2.Perpendicular(rigidbody.linearVelocity);
         adjusted *= (angVelocity * velocityDragFactor * Time.deltaTime);
         rigidbody.AddForce(adjusted);
     }
@@ -203,7 +203,7 @@ public class Ball : MonoBehaviour
         } else if (rigidbody != null)
         {
             rigidbody = GetComponent<Rigidbody2D>();
-            float angle = Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(rigidbody.linearVelocity.y, rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         } else
         {
@@ -221,7 +221,7 @@ public class Ball : MonoBehaviour
             return;
         }
         
-        var speed = rigidbody.velocity.magnitude;
+        var speed = rigidbody.linearVelocity.magnitude;
 
         if (speed < minVelocityTransform)
         {

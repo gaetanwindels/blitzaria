@@ -331,7 +331,7 @@ public class Player : MonoBehaviour
             var newBall = Instantiate(ballPrefab, GetThrowPoint().position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
             var velX = Random.Range(-0.5f, 0.5f);
-            newBallBody.velocity = new Vector2(velX, 4f);
+            newBallBody.linearVelocity = new Vector2(velX, 4f);
             DisableBallCollision(newBall);
             player.DisableBallCollision(newBall);
         }
@@ -409,7 +409,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var adjusted = Vector2.Perpendicular(_rigidBody.velocity);
+        var adjusted = Vector2.Perpendicular(_rigidBody.linearVelocity);
         adjusted.Normalize();
 
         var computedSpeed = isUp ? -rollOverSpeed : rollOverSpeed;
@@ -494,7 +494,7 @@ public class Player : MonoBehaviour
         if (hasPressedTackle)
         {
             tackleTimer = tackleDuration;
-            _rigidBody.velocity = ComputeMoveSpeed(tackleSpeed);
+            _rigidBody.linearVelocity = ComputeMoveSpeed(tackleSpeed);
         }
     }
 
@@ -549,7 +549,7 @@ public class Player : MonoBehaviour
 
         if (_isShouldering)
         {
-            _rigidBody.velocity = _currentShoulderVelocity;
+            _rigidBody.linearVelocity = _currentShoulderVelocity;
         }
         
         if (isShooting || IsDashing() || _isShouldering)
@@ -599,7 +599,7 @@ public class Player : MonoBehaviour
                 Destroy(ballGrabbed.gameObject);
                 var newBall = Instantiate(ballPrefab, throwPoint.position, Quaternion.identity);
                 Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
-                newBallBody.velocity = _rigidBody.velocity.normalized * (_rigidBody.velocity.magnitude + releasePower);
+                newBallBody.linearVelocity = _rigidBody.linearVelocity.normalized * (_rigidBody.linearVelocity.magnitude + releasePower);
                 DisableBallCollision(newBall);
             }
         }
@@ -640,7 +640,7 @@ public class Player : MonoBehaviour
 
         if (IsDashing())
         {
-            _rigidBody.velocity = currentDashVelocity.normalized * dashSpeedCurve.Evaluate(dashDuration - dashTimer);
+            _rigidBody.linearVelocity = currentDashVelocity.normalized * dashSpeedCurve.Evaluate(dashDuration - dashTimer);
             dashTimer -= Time.deltaTime;
             return;
         }
@@ -674,8 +674,8 @@ public class Player : MonoBehaviour
             Destroy(go, 5f);
             RemoveEnergy(GameSettings.dashEnergyCost);
             dashTimer = dashDuration;
-            _rigidBody.velocity = ComputeMoveSpeed(dashSpeedCurve.Evaluate(0) * (1 + _chargeLevel * dashSpeedFactorPerChargeIntensityLevel));
-            currentDashVelocity = _rigidBody.velocity;
+            _rigidBody.linearVelocity = ComputeMoveSpeed(dashSpeedCurve.Evaluate(0) * (1 + _chargeLevel * dashSpeedFactorPerChargeIntensityLevel));
+            currentDashVelocity = _rigidBody.linearVelocity;
             _audioSource.PlayClip(dashSound, isTouchingWater);
         }
     }
@@ -815,7 +815,7 @@ public class Player : MonoBehaviour
             newBall = Instantiate(ballPrefab, trueThrowPoint.position, Quaternion.identity);
             Rigidbody2D newBallBody = newBall.GetComponent<Rigidbody2D>();
 
-            var combinedVelocity = Mathf.Abs(_rigidBody.velocity.x) + Mathf.Abs(_rigidBody.velocity.y);
+            var combinedVelocity = Mathf.Abs(_rigidBody.linearVelocity.x) + Mathf.Abs(_rigidBody.linearVelocity.y);
 
             var computedShotPower = GetSpeed() + releasePower;
 
@@ -849,7 +849,7 @@ public class Player : MonoBehaviour
                 velocityY = speed.y;
             }
 
-            newBallBody.velocity = new Vector2(velocityX, velocityY);
+            newBallBody.linearVelocity = new Vector2(velocityX, velocityY);
             builtupPower = 0;
 
             float computedCurlPower;
@@ -943,7 +943,7 @@ public class Player : MonoBehaviour
         _animator.SetBool("IsDiving", false);
         if ((speedX != 0 || speedY != 0) && isTouchingWater)
         {
-            _rigidBody.velocity = speedVector;
+            _rigidBody.linearVelocity = speedVector;
         }
         else if (!isTouchingWater)
         {
@@ -953,7 +953,7 @@ public class Player : MonoBehaviour
                 downAirForce = Time.deltaTime * downAirThrust * inputManager.GetAxis("Move Vertical");
                 _animator.SetBool("IsDiving", true);
             }
-            _rigidBody.velocity = new Vector2(Mathf.Clamp(_rigidBody.velocity.x + counterForce, -speed, speed), _rigidBody.velocity.y + downAirForce);
+            _rigidBody.linearVelocity = new Vector2(Mathf.Clamp(_rigidBody.linearVelocity.x + counterForce, -speed, speed), _rigidBody.linearVelocity.y + downAirForce);
         }
     }
     public bool IsLoadingShoot()
@@ -1060,7 +1060,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            var adjustedPower = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, power);
+            var adjustedPower = Mathf.Max(accelerationBall * rigidBodyBall.linearVelocity.magnitude, power);
         
             Time.timeScale = 0;
             _audioSource.PlayClipWithRandomPitch(hitBallSound, isTouchingWater);
@@ -1106,7 +1106,7 @@ public class Player : MonoBehaviour
     private void ManageAnimation()
     {
         var isImmobile = inputManager.GetAxis("Move Horizontal") == 0 && inputManager.GetAxis("Move Vertical") == 0;
-        var isUp = _rigidBody.velocity.y >= 0;
+        var isUp = _rigidBody.linearVelocity.y >= 0;
         _animator.SetBool(AnimatorParameters.IsSwimming, isTouchingWater && !isImmobile);
         _animator.SetBool(AnimatorParameters.IsIdle, isTouchingWater && isImmobile);
         _animator.SetBool(AnimatorParameters.IsInAir, !isTouchingWater);
@@ -1132,7 +1132,7 @@ public class Player : MonoBehaviour
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
 
-        var scaleX = _rigidBody.velocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
+        var scaleX = _rigidBody.linearVelocity.x < 0 ? - Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x);
 
         if (isLoadingAutoShoot)
         {
@@ -1142,7 +1142,7 @@ public class Player : MonoBehaviour
         var adjustedRotationSpeed = isTackling || IsDashing() ? 3000 : rotationSpeed;
 
         Quaternion currentAngle = transform.rotation;
-        float angle = Mathf.Atan2(_rigidBody.velocity.y, _rigidBody.velocity.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(_rigidBody.linearVelocity.y, _rigidBody.linearVelocity.x) * Mathf.Rad2Deg;
         
         if (!IsTouchingWater() && !IsDashing())
         {
@@ -1171,7 +1171,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
         }
 
-        if (_rigidBody.velocity.x != 0)
+        if (_rigidBody.linearVelocity.x != 0)
         {
             transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
@@ -1212,7 +1212,7 @@ public class Player : MonoBehaviour
         var ball = FindObjectOfType<Ball>();
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
 
-        shotSpeed = Mathf.Max(accelerationBall * rigidBodyBall.velocity.magnitude, shotSpeed);
+        shotSpeed = Mathf.Max(accelerationBall * rigidBodyBall.linearVelocity.magnitude, shotSpeed);
 
         float velocityX;
         float velocityY;
@@ -1221,8 +1221,8 @@ public class Player : MonoBehaviour
         velocityX = comutedSpeed.x;
         velocityY = comutedSpeed.y;
 
-        rigidBodyBall.velocity = new Vector2(velocityX, velocityY);
-        Vector3 endLine = new Vector3(rigidBodyBall.velocity.x, rigidBodyBall.velocity.y, 0);
+        rigidBodyBall.linearVelocity = new Vector2(velocityX, velocityY);
+        Vector3 endLine = new Vector3(rigidBodyBall.linearVelocity.x, rigidBodyBall.linearVelocity.y, 0);
 
         if (_disableBodyRoutine != null)
         {
@@ -1340,8 +1340,8 @@ public class Player : MonoBehaviour
         
         if (Mathf.Abs(speedX) + Mathf.Abs(speedY) == 0)
         {
-            speedX = _rigidBody.velocity.x;
-            speedY = _rigidBody.velocity.y;
+            speedX = _rigidBody.linearVelocity.x;
+            speedY = _rigidBody.linearVelocity.y;
         }
 
         var newSpeed = new Vector2(speedX, speedY);
@@ -1358,7 +1358,7 @@ public class Player : MonoBehaviour
 
     private float GetSpeed()
     {
-        return _rigidBody.velocity.magnitude;
+        return _rigidBody.linearVelocity.magnitude;
     }
 
     public void DisableInputs()

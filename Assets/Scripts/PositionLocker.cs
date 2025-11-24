@@ -26,7 +26,7 @@ public class PositionLocker : MonoBehaviour
         {
             if (rigidBody != null)
             {
-                rigidBody.velocity = Vector3.zero;
+                rigidBody.linearVelocity = Vector3.zero;
             }
 
             objectToLock.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, objectToLock.transform.position.z);

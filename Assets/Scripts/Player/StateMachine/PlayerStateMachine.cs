@@ -54,10 +54,10 @@ public class PlayerStateMachine : MonoBehaviour {
 		
 		if (PreventYMove)
 		{
-			speedY = RigidBody.velocity.y;
+			speedY = RigidBody.linearVelocity.y;
 		}
 		
-		_rigidBody.velocity = new Vector2(speedX, speedY).normalized * (12 * SpeedMultiplier);
+		_rigidBody.linearVelocity = new Vector2(speedX, speedY).normalized * (12 * SpeedMultiplier);
 	}
 
 	private void RegisterInputs()
