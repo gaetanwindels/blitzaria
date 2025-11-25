@@ -171,7 +171,7 @@ public class Water : MonoBehaviour
             int index = Mathf.RoundToInt((_xPositions.Length - 1) * (xPosition / (_xPositions[_xPositions.Length - 1] - _xPositions[0])));
 
             //Add the velocity of the falling object to the spring
-            _velocities[index] += rigidbody.velocity.y / 40f;
+            _velocities[index] += rigidbody.linearVelocity.y / 40f;
 
             //Set the lifetime of the particle system.
             //float lifetime = 0.93f + Mathf.Abs(velocity) * 0.07f;
@@ -199,9 +199,9 @@ public class Water : MonoBehaviour
             triggerModule.inside = ParticleSystemOverlapAction.Kill;
             triggerModule.enabled = true;
 
-            var normalizedVector = rigidbody.velocity.normalized;
+            var normalizedVector = rigidbody.linearVelocity.normalized;
             var velocityModule = paticleSystem.velocityOverLifetime;
-            velocityModule.x =  new ParticleSystem.MinMaxCurve(rigidbody.velocity.y > 0 ? Mathf.Abs(normalizedVector.x) : -normalizedVector.x);
+            velocityModule.x =  new ParticleSystem.MinMaxCurve(rigidbody.linearVelocity.y > 0 ? Mathf.Abs(normalizedVector.x) : -normalizedVector.x);
             velocityModule.y = new ParticleSystem.MinMaxCurve(normalizedVector.y);
             Debug.Log(normalizedVector.x +'/' + normalizedVector.y);
             

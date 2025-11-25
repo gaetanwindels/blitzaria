@@ -39,7 +39,7 @@ public class WaterDetector : MonoBehaviour
             player.canGoUp = false;
         }
 
-        if (rigidBody != null && rigidBody.velocity.magnitude > 0.4f && (ball == null || !ball.HasJustSpawned))
+        if (rigidBody != null && rigidBody.linearVelocity.magnitude > 0.4f && (ball == null || !ball.HasJustSpawned))
         {
             var mass = Mathf.Min(maxMass, rigidBody.mass);
             _water.Splash(rigidBody.transform.position.x, rigidBody);
@@ -71,12 +71,12 @@ public class WaterDetector : MonoBehaviour
             return;
         }
 
-        if (player && rigidBody.velocity.magnitude <= minVelocityExit)
+        if (player && rigidBody.linearVelocity.magnitude <= minVelocityExit)
         {
             return;
         }
         
-        if (rigidBody && rigidBody.velocity.magnitude > 0.4f && (!ball || !ball.HasJustSpawned))
+        if (rigidBody && rigidBody.linearVelocity.magnitude > 0.4f && (!ball || !ball.HasJustSpawned))
         {
             var mass = Mathf.Min(maxMass, rigidBody.mass);
             GetComponent<Water>().Splash(rigidBody.transform.position.x, rigidBody);
