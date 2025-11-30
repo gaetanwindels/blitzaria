@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform throwPoint;
     [SerializeField] private Transform throwPointLoading;
     [SerializeField] private Transform feetPoint;
+    [SerializeField] private Transform neckPoint;
 
     [Header("Hitboxes")]
     [SerializeField] private Collider2D shotHitbox;
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D grabHitbox;
     [SerializeField] private Collider2D shoulderHitbox;
     [SerializeField] private Collider2D controlHitbox;
+    [SerializeField] private Collider2D immersionHitbox;
 
     [Header("Tackle")]
     [SerializeField] private float tackleSpeed = 8f;
@@ -59,11 +61,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float shootSpeedFactorPerChargeIntensityLevel = 0.35f;
     [SerializeField] private AnimationCurve powerShotCameraShake;
     
+    [Header("Water")]
+    [SerializeField] private float maximumAngleWaterRotation = 20f;
+    
+    [Header("Glide")]
+    [SerializeField] private float glideSpeed = 1f;
+    
     [Header("Move")]
     [SerializeField] private float rotationSpeed = 900f;
     [SerializeField] private float maxAngleLoadingShot = 45;
     [SerializeField] private float speed = 7f;
-    [SerializeField] private float airSpeed = 0.02f;
+    [SerializeField] private float airSpeed = 2f;
+    [SerializeField] private float maxAirVelocityX = 2f;
     [SerializeField] private float airThrust = 0.02f;
     [SerializeField] private float downAirThrust = 10f;
     [SerializeField] private float boostSpeed = 10f;
@@ -141,6 +150,7 @@ public class Player : MonoBehaviour
     public bool isShooting;
     public bool isThrowing;
     public bool isStunned;
+    public bool isGliding;
     public bool hasJustEnteredWater;
     private bool isInvicible;
     public bool isMotionGrabbing;
@@ -150,10 +160,12 @@ public class Player : MonoBehaviour
     public GameObject dashParticlesObject;
     public bool isInWater = true;
     public bool isTouchingWater = true;
+    public bool isImmerged = true;
     public bool isAutoShootDisabled;
     public bool isLoadingAutoShoot;
     public List<PlayerState> playerStates = new();
     private int _chargeLevel = 0;
+    private bool isDiving;
     
     // Shoulder state
     private bool _isShouldering;
@@ -304,6 +316,7 @@ public class Player : MonoBehaviour
         ManageDash();
         ManageDribble();
         ManageCharge();
+        ManageGliding();
         ManageShoulder();
         ManageRotation();
         ManageAnimation();
@@ -350,12 +363,33 @@ public class Player : MonoBehaviour
     {
         moveEnabled = true;
     }
+    
+    private void ManageGliding()
+    {
+        if (_rigidBody.linearVelocityY < 0 && !IsTouchingWater() && !IsLoadingShoot() && inputManager.GetButton("Glide"))
+        {
+            isGliding = true;
+        }
+        else
+        {
+            isGliding = false;
+        }
+
+    }
 
     private void ManageWater()
     {
         var previousTouchingWater = isTouchingWater;
-        isTouchingWater = IsTouchingWater();
+        //isTouchingWater = IsTouchingWater();
         isInWater = IsInWater();
+        //isTouchingWater = isImmerged;
+        isTouchingWater = IsTouchingWater();
+        isImmerged = isImmerged;
+
+        if (!isTouchingWater)
+        {
+            isImmerged = false;
+        }
 
         if (!previousTouchingWater && isTouchingWater)
         {
@@ -603,6 +637,7 @@ public class Player : MonoBehaviour
                 DisableBallCollision(newBall);
             }
         }
+        
         if (inputManager.GetButtonUp("Dribble"))
         {
             isDribbling = false;
@@ -893,70 +928,102 @@ public class Player : MonoBehaviour
 
     private void ManageMove()
     {
-        float computedSpeed = speed;
+        isDiving = false;
         
-        if (isShooting || isTackling || IsDashing() || isRollingOver || isLoadingAutoShoot || _isShouldering || _shoulderTimer > -1)
+        if (isShooting || isTackling || IsDashing() || isRollingOver || 
+            isLoadingAutoShoot || _isShouldering || _shoulderTimer > -1)
         {
             return;
         }
-
-        var currentAirThrust = 0f;
-        if (inputManager.GetButton("Turbo") && currentEnergy > 0)
+        
+        var waterBounds = FindFirstObjectByType<Water>().GetComponent<Collider2D>().bounds;
+        if (IsTouchingWater() && 
+            _rigidBody.linearVelocity.magnitude >= 0 && 
+            _rigidBody.linearVelocity.magnitude < 2 && 
+            neckPoint.transform.position.y > waterBounds.max.y)
         {
-            RemoveEnergy(Time.deltaTime * GameSettings.turboEnergyCostPerSecond);
-            currentAirThrust = airThrust;
-            computedSpeed = boostSpeed;
-            _animator.SetFloat("Speed Multiplier", 1.5f);
+            var distance = transform.position.y - neckPoint.transform.position.y;
+            transform.position = new Vector3(transform.position.x, waterBounds.max.y + distance, transform.position.z);
+            return;
+        }
 
-            if (!turboParticles.isPlaying)
-            {
-                turboParticles.Play();
-            }
+        if (IsTouchingWater())
+        {
+            ManageMoveInWater();
         }
         else
         {
-            turboParticles.Stop();
-            _animator.SetFloat("Speed Multiplier", 1f);
+            ManageMoveInAir();
         }
+
+    }
+
+    private void ManageMoveInWater()
+    {
+        float computedSpeed = speed;
+        
+        var currentAirThrust = 0f;
 
         if (IsLoadingShoot())
         {
             computedSpeed *= shootSpeedFactor;
-        } if (IsGrabbing()) {
-             computedSpeed *= grabSpeedFactor;
+        } 
+        
+        if (IsGrabbing()) {
+            computedSpeed *= grabSpeedFactor;
         } 
         
         float speedX = inputManager.GetAxis("Move Horizontal");
         float speedY = inputManager.GetAxis("Move Vertical");
-
-        if (hasJustEnteredWater)
-        {
-            //speedY = Mathf.Clamp(speedY, -1, 0);
-        }
         
         var speedVector = new Vector2(speedX, speedY);
+        
+        if (!isImmerged && speedY > 0)
+        {
+            return;
+            // speedVector = new Vector2(speedX, _rigidBody.linearVelocity.y);
+        }
+        
         if (speedVector.magnitude > 1)
         {
             speedVector.Normalize();
         }
+        
         speedVector *= computedSpeed;
-        _animator.SetBool("IsDiving", false);
-        if ((speedX != 0 || speedY != 0) && isTouchingWater)
+        
+        if (speedX != 0 || speedY != 0)
         {
             _rigidBody.linearVelocity = speedVector;
         }
-        else if (!isTouchingWater)
-        {
-            var counterForce = airSpeed * inputManager.GetAxis("Move Horizontal");
-            var downAirForce = 0f;
-            if (!IsLoadingShoot() && inputManager.GetAxis("Move Vertical") < 0) {
-                downAirForce = Time.deltaTime * downAirThrust * inputManager.GetAxis("Move Vertical");
-                _animator.SetBool("IsDiving", true);
-            }
-            _rigidBody.linearVelocity = new Vector2(Mathf.Clamp(_rigidBody.linearVelocity.x + counterForce, -speed, speed), _rigidBody.linearVelocity.y + downAirForce);
-        }
     }
-    public bool IsLoadingShoot()
+    private void ManageMoveInAir()
+    {
+        var downAirForce = 0f;
+        if (!IsLoadingShoot() && inputManager.GetAxis("Move Vertical") < 0) {
+            downAirForce = Time.deltaTime * downAirThrust * inputManager.GetAxis("Move Vertical");
+            if (_rigidBody.linearVelocityY < 0)
+            {
+                isDiving = true;
+            }
+        }
+
+        var airVelocityY = isGliding ? Mathf.Sign(_rigidBody.linearVelocity.y) * glideSpeed : (_rigidBody.linearVelocity.y + downAirForce);
+        
+        var airVelocityX = _rigidBody.linearVelocity.x;
+        var hasChangedDirectionX = Mathf.RoundToInt(Mathf.Sign(_rigidBody.linearVelocity.x)) !=
+                                   Mathf.RoundToInt(Mathf.Sign(inputManager.GetAxis("Move Horizontal")));
+        
+        if (!IsLoadingShoot())
+        {
+            var sideAirForce = Time.deltaTime * airThrust * inputManager.GetAxis("Move Horizontal");
+            //airVelocityX = airSpeed * inputManager.GetAxis("Move Horizontal");
+            airVelocityX = Mathf.Clamp(airVelocityX + sideAirForce, -maxAirVelocityX, maxAirVelocityX);
+        }
+        
+        _rigidBody.linearVelocity = new Vector2(airVelocityX, airVelocityY);
+    }
+    
+    private bool IsLoadingShoot()
     {
         return IsGrabbing() && inputManager.GetButton("Tackle");
     }
@@ -964,7 +1031,7 @@ public class Player : MonoBehaviour
     private void CancelDash()
     {
         dashTimer = 0f;
-        if (dashParticlesObject != null)
+        if (dashParticlesObject)
         {
             Destroy(dashParticlesObject);
         }
@@ -972,11 +1039,11 @@ public class Player : MonoBehaviour
 
     public void EnableIsTackling()
     {
-        var ball = FindObjectOfType<Ball>();
+        var ball = FindFirstObjectByType<Ball>();
         if (ball != null)
         {
-            var collider = ball.GetComponent<Collider2D>(); 
-            if (collider != null)
+            var ballCollider2D = ball.GetComponent<Collider2D>(); 
+            if (ballCollider2D != null)
             {
                 Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
             }
@@ -987,16 +1054,16 @@ public class Player : MonoBehaviour
 
     public void DisableIsTackling()
     {
-        var ball = FindObjectOfType<Ball>();
+        var ball = FindFirstObjectByType<Ball>();
 
-        Collider2D collider2D = null;
+        Collider2D ballCollider2D = null;
         if (ball != null)
         {
-            collider2D = ball.GetComponent<Collider2D>();
+            ballCollider2D = ball.GetComponent<Collider2D>();
         }
         
         grabHitbox.enabled = true;
-        if (collider2D != null)
+        if (ballCollider2D != null)
         {
             Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>(), false);
         }
@@ -1004,16 +1071,42 @@ public class Player : MonoBehaviour
         isTackling = false;
     }
     
+    bool Contains2D(Bounds outer, Vector3 point)
+    {
+        return  point.x >= outer.min.x &&
+                point.x <= outer.max.x &&
+                point.y >= outer.min.y &&
+                point.y <= outer.max.y;
+    }
+    
     private bool IsInWater()
     {
-        var bounds = _bodyCollider.bounds;
+        var bounds = immersionHitbox.bounds;
         var waterBounds = FindFirstObjectByType<Water>().GetComponent<Collider2D>().bounds;
+        
+        isImmerged = Contains2D(waterBounds, bounds.min) && Contains2D(waterBounds, bounds.max);
+        
         return waterBounds.Contains(bounds.min) && waterBounds.Contains(bounds.max);
+    }
+    
+    private bool IsImmerged()
+    {
+        var bounds = immersionHitbox.bounds;
+        var waterBounds = FindFirstObjectByType<Water>().GetComponent<Collider2D>().bounds;
+        
+        return Contains2D(waterBounds, bounds.min) && Contains2D(waterBounds, bounds.max);
+    }
+    
+    private bool IsInLowAirZone()
+    {
+        var waterBounds = FindFirstObjectByType<Water>().GetComponent<Collider2D>().bounds;
+        return transform.position.y > waterBounds.max.y && Mathf.Abs(waterBounds.max.y - transform.position.y) < 0.75f;
     }
 
     private bool IsTouchingWater()
     {
         return _bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water Area"));
+        //return immersionHitbox.IsTouchingLayers(LayerMask.GetMask("Water Area"));
     }
 
     private void RemoveEnergy(float energy)
@@ -1054,7 +1147,7 @@ public class Player : MonoBehaviour
         
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
         
-        if (rigidBodyBall == null)
+        if (!rigidBodyBall)
         {
             yield return new WaitForSecondsRealtime(0);
         }
@@ -1119,6 +1212,7 @@ public class Player : MonoBehaviour
         _animator.SetBool(AnimatorParameters.IsRolling, isRollingOver);
         _animator.SetBool(AnimatorParameters.IsLoadingShoulder, _shoulderTimer > -1);
         _animator.SetBool(AnimatorParameters.IsShouldering, _isShouldering);
+        _animator.SetBool(AnimatorParameters.IsDiving, isDiving);
         //animator.SetBool("IsShooting", inputManager.GetButtonUp("Shoot"));
     }
 
@@ -1143,13 +1237,20 @@ public class Player : MonoBehaviour
 
         Quaternion currentAngle = transform.rotation;
         float angle = Mathf.Atan2(_rigidBody.linearVelocity.y, _rigidBody.linearVelocity.x) * Mathf.Rad2Deg;
+
+        var hasLowAngle = (angle > 0 && angle < maximumAngleWaterRotation) ||
+                          (angle < 180 && angle > 180 - maximumAngleWaterRotation);
         
-        if (!IsTouchingWater() && !IsDashing())
+        if (!isDiving && !IsDashing() && !IsTouchingWater() && (!IsInLowAirZone()))
         {
             angle = 0f;
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle)), adjustedRotationSpeed * Time.deltaTime);
         } else
         {
+            if (isDiving)
+            {
+                angle += 180;
+            }
             transform.rotation = Quaternion.RotateTowards(currentAngle, Quaternion.Euler(new Vector3(0, 0, angle + 270)), adjustedRotationSpeed * Time.deltaTime);
         }
 
@@ -1197,17 +1298,17 @@ public class Player : MonoBehaviour
         ballGrabbed = ball;
     }
 
-    public bool IsTackling()
+    private bool IsTackling()
     {
         return isTackling;
     }
 
-    public bool IsGrabbing()
+    private bool IsGrabbing()
     {
         return ballGrabbed != null;
     }
 
-    public void Shoot(float shotSpeed)
+    private void Shoot(float shotSpeed)
     {
         var ball = FindObjectOfType<Ball>();
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
@@ -1243,7 +1344,7 @@ public class Player : MonoBehaviour
         Shoot(dashShotPower);
     }
 
-    public void DisableBallCollision(GameObject newBall)
+    private void DisableBallCollision(GameObject newBall)
     {
         if (_disableBodyRoutine != null)
         {
@@ -1268,7 +1369,6 @@ public class Player : MonoBehaviour
 
     public void EnableDashHitbox()
     {
-        Debug.Log("Enabling");
         dashHitbox.enabled = true;
     }
 

@@ -1281,6 +1281,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9191152558396046822, guid: 4e1b9378a46dedd47964d18b3ec6c482,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[3]._actionId
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 9191152558396046823, guid: 4e1b9378a46dedd47964d18b3ec6c482,
         type: 3}
       propertyPath: m_LocalPosition.x

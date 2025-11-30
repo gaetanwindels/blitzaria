@@ -69,6 +69,84 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0000000069049335, y: -0.057922788}
   m_Size: {x: 0.48584765, y: 0.48584765}
   m_Direction: 1
+--- !u!1 &616568943535321152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2142163309150303611}
+  - component: {fileID: 6463492098599299294}
+  m_Layer: 10
+  m_Name: Immersion Hitbox
+  m_TagString: ShotHitbox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2142163309150303611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616568943535321152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.91, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6799266050881583199}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &6463492098599299294
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616568943535321152}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.010486335, y: 0.8871391}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.553243, y: 0.6084719}
+  m_EdgeRadius: 0
 --- !u!1 &980038258833229656
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +495,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2055350728807667510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1186769176036748294}
+  m_Layer: 0
+  m_Name: Neck Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1186769176036748294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055350728807667510}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6880211434180998369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2121135585501483985
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +989,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7095943508888501459}
+  - {fileID: 1186769176036748294}
   - {fileID: 3030431394573542114}
   - {fileID: 5930026757788296440}
   - {fileID: 3030431395449246340}
@@ -1122,6 +1232,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3030431394282516271}
+  - {fileID: 2142163309150303611}
   - {fileID: 5357183732649514797}
   - {fileID: 578324290}
   - {fileID: 3369844353986879261}
@@ -1543,11 +1654,13 @@ MonoBehaviour:
   throwPoint: {fileID: 3030431395449246340}
   throwPointLoading: {fileID: 7095943508888501459}
   feetPoint: {fileID: 9035568124978874123}
+  neckPoint: {fileID: 1186769176036748294}
   shotHitbox: {fileID: 6570302659864017054}
   dashHitbox: {fileID: 4868546763010638193}
   grabHitbox: {fileID: 8711122042717401639}
   shoulderHitbox: {fileID: 3988818678295114572}
   controlHitbox: {fileID: 7073885344465235849}
+  immersionHitbox: {fileID: 6463492098599299294}
   tackleSpeed: 2
   invicibilityFrames: 1.5
   tackleReturnSpeed: 8
@@ -1607,11 +1720,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  maximumAngleWaterRotation: 20
+  glideSpeed: 1
   rotationSpeed: 10000
   maxAngleLoadingShot: 45
   speed: 6.5
-  airSpeed: 0.3
-  airThrust: 0
+  airSpeed: 3
+  maxAirVelocityX: 4
+  airThrust: 15
   downAirThrust: 25
   boostSpeed: 5.5
   dashSpeedCurve:
@@ -1741,6 +1857,7 @@ MonoBehaviour:
   isShooting: 0
   isThrowing: 0
   isStunned: 0
+  isGliding: 0
   hasJustEnteredWater: 0
   isMotionGrabbing: 0
   isRollingOver: 0
@@ -1749,6 +1866,7 @@ MonoBehaviour:
   dashParticlesObject: {fileID: 0}
   isInWater: 1
   isTouchingWater: 1
+  isImmerged: 1
   isAutoShootDisabled: 0
   isLoadingAutoShoot: 0
   playerStates: 
