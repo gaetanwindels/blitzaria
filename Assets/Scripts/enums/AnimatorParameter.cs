@@ -2,7 +2,7 @@
 
 namespace enums
 {
-    public class AnimatorParameters
+    public static class AnimatorParameters
     {
         // Player
         public static readonly int IsSwimming = Animator.StringToHash("IsSwimming");
@@ -21,6 +21,7 @@ namespace enums
         public static readonly int IsLoadingKick = Animator.StringToHash("IsLoadingKick");
         public static readonly int IsLoadingShoulder = Animator.StringToHash("IsLoadingShoulder");
         public static readonly int IsShouldering = Animator.StringToHash("IsShouldering");
+        public static readonly int IsDiving = Animator.StringToHash("IsDiving");
         
         // Middle Text
         public static readonly int TriggerText = Animator.StringToHash("TriggerText");
