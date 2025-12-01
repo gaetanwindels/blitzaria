@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrarySourceAsset
   m_Library:
   - m_Name: InAir
     m_Hash: 861170204
@@ -313,9 +313,9 @@ MonoBehaviour:
     m_OverrideEntries:
     - m_Name: PYthon_Spritesheet_V2_2
       m_Hash: 669640353
-      m_Sprite: {fileID: -1650540804, guid: 266935395faea294d9f5177aebf13627, type: 3}
+      m_Sprite: {fileID: 729359369, guid: 266935395faea294d9f5177aebf13627, type: 3}
       m_FromMain: 0
-      m_SpriteOverride: {fileID: -1650540804, guid: 266935395faea294d9f5177aebf13627,
+      m_SpriteOverride: {fileID: 729359369, guid: 266935395faea294d9f5177aebf13627,
         type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 1
@@ -332,5 +332,5 @@ MonoBehaviour:
     m_FromMain: 0
     m_EntryOverrideCount: 1
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 638594268396477721
+  m_ModificationHash: 639001951605094427
   m_Version: 1
