@@ -95,6 +95,8 @@ public class Player : MonoBehaviour
     [Header("Shoulder")]
     [SerializeField] private AnimationCurve shoulderPower;
     [SerializeField] private AnimationCurve shoulderDuration;
+    [SerializeField] private float shoulderCooldown = 0.5f;
+    [SerializeField] private float shoulderDelay = 0.5f;
 
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
@@ -166,9 +168,11 @@ public class Player : MonoBehaviour
     public List<PlayerState> playerStates = new();
     private int _chargeLevel = 0;
     private bool isDiving;
+    private bool isShoulderCooldown;
     
     // Shoulder state
     private bool _isShouldering;
+    private bool _isInDelayShouldering;
     private float _shoulderTimer = -1;
     private Vector2 _currentShoulderVelocity;
 
@@ -576,12 +580,22 @@ public class Player : MonoBehaviour
 
     private void ManageShoulder()
     {
+        if (isShoulderCooldown)
+        {
+            return;
+        }
+        
         if (_shoulderTimer > -1)
         {
             _shoulderTimer += Time.deltaTime;
+            if (IsTouchingWater())
+            {
+                _rigidBody.linearVelocity = Vector2.zero;  
+            }
+            
         }
 
-        if (_isShouldering)
+        if (_isShouldering && !_isInDelayShouldering)
         {
             _rigidBody.linearVelocity = _currentShoulderVelocity;
         }
@@ -609,10 +623,22 @@ public class Player : MonoBehaviour
     IEnumerator ShoulderingRoutine(float duration)
     {
         _isShouldering = true;
+        _isInDelayShouldering = true;
+        
+        yield return new WaitForSeconds(shoulderDelay);
+
+        _isInDelayShouldering = false;
         shoulderHitbox.gameObject.SetActive(true);
+        
         yield return new WaitForSeconds(duration);
+        
         _isShouldering = false;
         shoulderHitbox.gameObject.SetActive(false);
+        isShoulderCooldown = true;
+        
+        yield return new WaitForSeconds(shoulderCooldown);
+        
+        isShoulderCooldown = false;
     }
     
     #endregion
@@ -625,6 +651,7 @@ public class Player : MonoBehaviour
         if (inputManager.GetButtonDown("Dribble"))
         {
             isDribbling = true;
+            GetComponent<SpriteRenderer>().material.SetFloat("_ActivateOutline", 1f);
             controlHitbox.gameObject.SetActive(true);
 
             if (IsGrabbing())
@@ -640,6 +667,7 @@ public class Player : MonoBehaviour
         
         if (inputManager.GetButtonUp("Dribble"))
         {
+            GetComponent<SpriteRenderer>().material.SetFloat("_ActivateOutline", 0f);
             isDribbling = false;
             controlHitbox.gameObject.SetActive(false);
         }
