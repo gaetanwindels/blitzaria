@@ -1821,6 +1821,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  shoulderCooldown: 0.5
+  shoulderDelay: 0.5
   playerNumber: 0
   team: 0
   isAI: 0

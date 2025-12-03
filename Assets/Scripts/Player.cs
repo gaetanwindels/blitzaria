@@ -134,6 +134,7 @@ public class Player : MonoBehaviour
     private OrbsManager _orbManager;
     private InputBuffer _inputBuffer;
     private CameraShaker _cameraShaker;
+    private Material _material;
 
     // State variable
     [Header("State")]
@@ -219,6 +220,7 @@ public class Player : MonoBehaviour
         {
             playerParent.ReceiveTackle(this);
             _shoulderTimer = -1;
+            _material.SetFloat("_BlinkSpeed", 0f);
             _isShouldering = false;
         }
 
@@ -268,6 +270,7 @@ public class Player : MonoBehaviour
         _inputBuffer = GetComponent<InputBuffer>();
         inputManager = new RewiredInputManager(playerNumber);
         _cameraShaker = FindFirstObjectByType<CameraShaker>();
+        _material = GetComponent<SpriteRenderer>().material;
         
         currentEnergy = GameSettings.energyAmount;
 
@@ -588,6 +591,16 @@ public class Player : MonoBehaviour
         if (_shoulderTimer > -1)
         {
             _shoulderTimer += Time.deltaTime;
+
+            
+            if (_shoulderTimer is >= 0.3f and <= 1f)
+            {
+                _material.SetFloat("_BlinkSpeed", 2f);
+            } else if (shoulderPower.Evaluate(10000) == shoulderPower.Evaluate(_shoulderTimer))
+            {
+                _material.SetFloat("_BlinkSpeed", 7f);
+            }
+            
             if (IsTouchingWater())
             {
                 _rigidBody.linearVelocity = Vector2.zero;  
@@ -617,6 +630,7 @@ public class Player : MonoBehaviour
             _currentShoulderVelocity = shoulderPower.Evaluate(_shoulderTimer) * new Vector2(speedX, speedY).normalized;
             StartCoroutine(ShoulderingRoutine(shoulderDuration.Evaluate(_shoulderTimer)));
             _shoulderTimer = -1;
+            _material.SetFloat("_BlinkSpeed", 0f);
         }
     }
 
@@ -755,6 +769,7 @@ public class Player : MonoBehaviour
         isAutoShootDisabled = false;
         loadingAutoShootTimer = 0;
         isLoadingAutoShoot = false;
+        _material.SetFloat("_BlinkSpeed", 0);
         windupAutoShootTimer = 0;
         loadingShootParticles.Stop();
         _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
@@ -771,6 +786,7 @@ public class Player : MonoBehaviour
         if (IsGrabbing() || isShootCoolDown || isAutoShootDisabled)
         {
             isLoadingAutoShoot = false;
+            _material.SetFloat("_BlinkSpeed", 0);
             loadingShootParticles.Stop();
             return;
         }
@@ -782,11 +798,22 @@ public class Player : MonoBehaviour
             isLoadingAutoShoot = true;
             return;
         }
-
+        
         if (inputManager.GetButton("tackle"))
         {
             loadingAutoShootTimer += Time.deltaTime;
-            loadingAutoShootTimer = Mathf.Min(maxShotPower, loadingAutoShootTimer);
+            loadingAutoShootTimer = Mathf.Min(timeToBuildUp, loadingAutoShootTimer);
+            //Debug.Log();
+            //_material.SetFloat("_BlinkSpeed", Mathf.Floor(Mathf.Lerp(0f, 8f, loadingAutoShootTimer / timeToBuildUp)));
+            if (loadingAutoShootTimer >= timeToBuildUp)
+            {
+                _material.SetFloat("_BlinkSpeed", 7f);
+            }
+            else if (loadingAutoShootTimer > 0.3f)
+            {
+                _material.SetFloat("_BlinkSpeed", 2f);
+            }
+            
         }
 
         if (_inputBuffer.GetButtonUp("tackle"))
@@ -796,6 +823,7 @@ public class Player : MonoBehaviour
             isShooting = true;
             loadingShootParticles.Stop();
             isLoadingAutoShoot = false;
+            _material.SetFloat("_BlinkSpeed", 0);
             _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
             return;
         }
@@ -851,9 +879,19 @@ public class Player : MonoBehaviour
         StartCoroutine(CooldownShooting());
         loadingAutoShootTimer = 0;
         isLoadingAutoShoot = false;
+        _material.SetFloat("_BlinkSpeed", 0);
         windupAutoShootTimer = 0;
         
         _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
+    }
+
+    private IEnumerator Blink()
+    {
+       var isBlinking = true;
+       _material.SetFloat("_Blink", 0); 
+       yield return new WaitForSeconds(0.2f);
+       _material.SetFloat("_Blink", 0);
+       isBlinking = false;
     }
 
     private void ManageThrow()

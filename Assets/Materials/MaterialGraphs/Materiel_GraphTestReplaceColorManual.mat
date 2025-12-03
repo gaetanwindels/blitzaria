@@ -102,7 +102,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ActivateOutline: 0
-    - _Activate_replace: 1
+    - _Activate_replace: 0
     - _BUILTIN_AlphaClip: 0
     - _BUILTIN_Blend: 0
     - _BUILTIN_CullMode: 2
@@ -114,6 +114,8 @@ Material:
     - _BUILTIN_ZTest: 4
     - _BUILTIN_ZWrite: 0
     - _BUILTIN_ZWriteControl: 0
+    - _BlinkOpacity: 1
+    - _BlinkSpeed: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
