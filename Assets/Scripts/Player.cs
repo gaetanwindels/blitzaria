@@ -97,6 +97,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AnimationCurve shoulderDuration;
     [SerializeField] private float shoulderCooldown = 0.5f;
     [SerializeField] private float shoulderDelay = 0.5f;
+    [SerializeField] private float shoulderRecover = 0f;
 
     [Header("Player Config")]
     [SerializeField] public int playerNumber = 0;
@@ -216,12 +217,14 @@ public class Player : MonoBehaviour
             playerParent = collision.gameObject.GetComponentInParent<Player>();
         }
         
-        if (shoulderHitbox.IsTouching(collision) && playerParent)
+        if (shoulderHitbox.isActiveAndEnabled && shoulderHitbox.IsTouching(collision) && playerParent)
         {
             playerParent.ReceiveTackle(this);
+            _rigidBody.linearVelocity = Vector2.zero;
             _shoulderTimer = -1;
             _material.SetFloat("_BlinkSpeed", 0f);
             _isShouldering = false;
+            _audioSource.PlayClipWithRandomPitch(hitPlayerSound, isTouchingWater);
         }
 
         if (!isInvicible && playerParent != null && 
@@ -229,7 +232,9 @@ public class Player : MonoBehaviour
             && !playerParent.IsGrabbing() && playerParent.team != team)
         {
             _audioSource.PlayClipWithRandomPitch(hitPlayerSound, isTouchingWater);
-            StartCoroutine(TriggerInvicibility());
+            StartCoroutine(TriggerInvicibilityFor());
+            var impactVfx = Instantiate(ballImpact, collision.transform.position, Quaternion.identity);
+            Destroy(impactVfx, 0.5f);
             ReceiveTackle(this);
             DisableShotHitbox();
             DisableDashHitbox();
@@ -333,11 +338,28 @@ public class Player : MonoBehaviour
             AddEnergy(Time.deltaTime * GameSettings.replenishEnergyPerSecond);
         }
     }
-    private IEnumerator TriggerInvicibility()
+    private IEnumerator TriggerInvicibilityFor(float time = -1f)
     {
         isInvicible = true;
-        yield return new WaitForSeconds(invicibilityFrames);
+        BlinkFast();
+        yield return new WaitForSeconds(time <= 0 ? invicibilityFrames : time);
+        CancelBlink();
         isInvicible = false;
+    }
+
+    private void BlinkFast()
+    {
+        Blink(9f);
+    }
+    
+    private void CancelBlink()
+    {
+        Blink(0f);
+    }
+    
+    private void Blink(float blinkSpeed)
+    {
+        _material.SetFloat("_BlinkSpeed", blinkSpeed);
     }
 
     private void ReceiveTackle(Player player)
@@ -354,6 +376,7 @@ public class Player : MonoBehaviour
             newBallBody.linearVelocity = new Vector2(velX, 4f);
             DisableBallCollision(newBall);
             player.DisableBallCollision(newBall);
+            _rigidBody.linearVelocity =  Vector2.zero;
         }
 
         CancelAutoShoot();
@@ -595,10 +618,10 @@ public class Player : MonoBehaviour
             
             if (_shoulderTimer is >= 0.3f and <= 1f)
             {
-                _material.SetFloat("_BlinkSpeed", 2f);
+                Blink(2f);
             } else if (shoulderPower.Evaluate(10000) == shoulderPower.Evaluate(_shoulderTimer))
             {
-                _material.SetFloat("_BlinkSpeed", 7f);
+                BlinkFast();
             }
             
             if (IsTouchingWater())
@@ -630,7 +653,7 @@ public class Player : MonoBehaviour
             _currentShoulderVelocity = shoulderPower.Evaluate(_shoulderTimer) * new Vector2(speedX, speedY).normalized;
             StartCoroutine(ShoulderingRoutine(shoulderDuration.Evaluate(_shoulderTimer)));
             _shoulderTimer = -1;
-            _material.SetFloat("_BlinkSpeed", 0f);
+            CancelBlink();
         }
     }
 
@@ -649,10 +672,18 @@ public class Player : MonoBehaviour
         _isShouldering = false;
         shoulderHitbox.gameObject.SetActive(false);
         isShoulderCooldown = true;
+        DisableInputs();
+        _rigidBody.linearVelocity = Vector2.zero;
+        
+        yield return new WaitForSeconds(shoulderRecover);
+        
+        EnableInputs();
         
         yield return new WaitForSeconds(shoulderCooldown);
         
         isShoulderCooldown = false;
+        
+
     }
     
     #endregion
@@ -769,7 +800,7 @@ public class Player : MonoBehaviour
         isAutoShootDisabled = false;
         loadingAutoShootTimer = 0;
         isLoadingAutoShoot = false;
-        _material.SetFloat("_BlinkSpeed", 0);
+        CancelBlink();
         windupAutoShootTimer = 0;
         loadingShootParticles.Stop();
         _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
@@ -777,7 +808,7 @@ public class Player : MonoBehaviour
     
     private void ManageAutoShoot()
     {
-        if (windupAutoShootTimer != 0 && windupAutoShootTimer < anticipationShotTime)
+        if (!IsDashing() && windupAutoShootTimer != 0 && windupAutoShootTimer < anticipationShotTime)
         {
             windupAutoShootTimer += Time.deltaTime;
             return;
@@ -786,7 +817,7 @@ public class Player : MonoBehaviour
         if (IsGrabbing() || isShootCoolDown || isAutoShootDisabled)
         {
             isLoadingAutoShoot = false;
-            _material.SetFloat("_BlinkSpeed", 0);
+            CancelBlink();
             loadingShootParticles.Stop();
             return;
         }
@@ -803,15 +834,14 @@ public class Player : MonoBehaviour
         {
             loadingAutoShootTimer += Time.deltaTime;
             loadingAutoShootTimer = Mathf.Min(timeToBuildUp, loadingAutoShootTimer);
-            //Debug.Log();
-            //_material.SetFloat("_BlinkSpeed", Mathf.Floor(Mathf.Lerp(0f, 8f, loadingAutoShootTimer / timeToBuildUp)));
+
             if (loadingAutoShootTimer >= timeToBuildUp)
             {
-                _material.SetFloat("_BlinkSpeed", 7f);
+                BlinkFast();
             }
             else if (loadingAutoShootTimer > 0.3f)
             {
-                _material.SetFloat("_BlinkSpeed", 2f);
+                Blink(2f);
             }
             
         }
@@ -819,6 +849,7 @@ public class Player : MonoBehaviour
         if (_inputBuffer.GetButtonUp("tackle"))
         {
             CancelDash();
+            _rigidBody.linearVelocity = Vector2.zero;
             windupAutoShootTimer += Time.deltaTime;
             isShooting = true;
             loadingShootParticles.Stop();
@@ -840,12 +871,14 @@ public class Player : MonoBehaviour
             return;
         }
         
+        StartCoroutine(EnableShotHitboxFor(0.3f));
+        
         var ballPosition = ball.gameObject.transform.position;
 
         var feetBodyDistance = Vector2.Distance(feetPoint.position, transform.position);
         var bodyBallDistance = Vector2.Distance(ballPosition, transform.position);
 
-        if (bodyBallDistance < feetBodyDistance + shootTolerance)
+        if (!ball.player && bodyBallDistance < feetBodyDistance + shootTolerance)
         {
             var ballPosition2d = new Vector3(ballPosition.x, ballPosition.y);
             var position2d = new Vector3(transform.position.x, transform.position.y);
@@ -1209,7 +1242,7 @@ public class Player : MonoBehaviour
 
     IEnumerator ShootingRoutine(float power)
     {
-        var ball = FindObjectOfType<Ball>();
+        var ball = FindFirstObjectByType<Ball>();
         
         var rigidBodyBall = ball.GetComponent<Rigidbody2D>();
         
@@ -1228,11 +1261,12 @@ public class Player : MonoBehaviour
             var shootFreezeTime = 0;
             yield return new WaitForSecondsRealtime(_chargeLevel == 3 ? 0 : 0);
             
-            float speedX = inputManager.GetAxis("Move Horizontal");
-            float speedY = inputManager.GetAxis("Move Vertical");
-            float angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
+            var speedX = inputManager.GetAxis("Move Horizontal");
+            var speedY = inputManager.GetAxis("Move Vertical");
+            var angle = Mathf.Atan2(speedY, speedX) * Mathf.Rad2Deg;
             var impactVfx = Instantiate(ballImpact, ball.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
             Destroy(impactVfx, 0.5f);
+            
             Time.timeScale = 1;
             
             if (_cameraShaker)
@@ -1255,8 +1289,10 @@ public class Player : MonoBehaviour
     {
         _animator.SetBool(AnimatorParameters.IsTackled, true);
         DisableInputs();
+        BlinkFast();
         yield return new WaitForSeconds(tackleStunDuration);
         grabHitbox.enabled = true;
+        CancelBlink();
         isStunned = false;
         _animator.SetBool(AnimatorParameters.IsTackled, false);
         EnableInputs();
@@ -1420,16 +1456,23 @@ public class Player : MonoBehaviour
         _disableBodyRoutine = DisableBody(newBall);
         StartCoroutine(_disableBodyRoutine);
     }
+    
+    IEnumerator EnableShotHitboxFor(float time)
+    {
+        EnableShotHitbox();
+        yield return new WaitForSeconds(time);
+        DisableShotHitbox();
+    }
 
     public void EnableShotHitbox()
     {
-        shotHitbox.enabled = true;
+        shotHitbox.gameObject.SetActive(true);
         builtupPower = 0;
     }
 
     public void DisableShotHitbox()
     {
-        shotHitbox.enabled = false;
+        shotHitbox.gameObject.SetActive(false);
         builtupPower = 0;
     }
 
