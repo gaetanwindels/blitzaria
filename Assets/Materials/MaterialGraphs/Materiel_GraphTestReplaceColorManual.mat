@@ -102,7 +102,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ActivateOutline: 0
-    - _Activate_replace: 0
+    - _Activate_replace: 1
     - _BUILTIN_AlphaClip: 0
     - _BUILTIN_Blend: 0
     - _BUILTIN_CullMode: 2
