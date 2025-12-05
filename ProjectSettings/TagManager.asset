@@ -50,17 +50,20 @@ TagManager:
   - name: Background
     uniqueID: 1318283027
     locked: 0
-  - name: Ball
-    uniqueID: 2891223317
-    locked: 0
   - name: Players
     uniqueID: 2854329975
+    locked: 0
+  - name: Ball
+    uniqueID: 2891223317
     locked: 0
   - name: Interactables
     uniqueID: 1312660351
     locked: 0
   - name: Water
     uniqueID: 549863221
+    locked: 0
+  - name: UI
+    uniqueID: 2514561881
     locked: 0
   m_RenderingLayers:
   - Default

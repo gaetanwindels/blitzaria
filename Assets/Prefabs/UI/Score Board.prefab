@@ -23,6 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6324931999950087541}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -30,7 +31,6 @@ Transform:
   m_Children:
   - {fileID: 6324932000646338382}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6324932000646338370
 GameObject:
@@ -67,7 +67,6 @@ RectTransform:
   - {fileID: 5775514814826104552}
   - {fileID: 4532675351063964647}
   m_Father: {fileID: 6324931999950087540}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -91,10 +90,11 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: -6
+  m_SortingLayerID: -1780405415
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6324932000646338380
 MonoBehaviour:
@@ -158,6 +158,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_margin.z
       value: 0.8904908
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104719252939299107, guid: ddbb14f325fdd0649bfcfdec1d1c63b1,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 7575582423479712126, guid: ddbb14f325fdd0649bfcfdec1d1c63b1,
         type: 3}
@@ -297,6 +302,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_margin.x
       value: -0.35348606
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104719252939299107, guid: ddbb14f325fdd0649bfcfdec1d1c63b1,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 4077527180688110077, guid: ddbb14f325fdd0649bfcfdec1d1c63b1,
         type: 3}
@@ -536,6 +546,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812964744064763863, guid: 0329402ffe7aece439ed55b02a121d50,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

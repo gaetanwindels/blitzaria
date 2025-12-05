@@ -55,6 +55,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -76,9 +81,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 549863221
   m_SortingLayer: 5
-  m_SortingOrder: 100
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fc19388fff7954b43a07711a4a30b184, type: 3}
   m_Color: {r: 0.11372549, g: 1, b: 0.87276167, a: 0.14901961}
   m_FlipX: 0
@@ -159,6 +165,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!253 &1124535272
 BuoyancyEffector2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,8 +178,8 @@ BuoyancyEffector2D:
     m_Bits: 2039
   m_SurfaceLevel: 0.46
   m_Density: 8
-  m_LinearDrag: 7.84
-  m_AngularDrag: 5
+  m_LinearDamping: 5
+  m_AngularDamping: 5
   m_FlowAngle: 0
   m_FlowMagnitude: 0
   m_FlowVariation: 0
@@ -205,6 +212,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -4678559066795855017, guid: 12d551ff93c89744083882afb150493c,
     type: 2}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
