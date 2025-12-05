@@ -93,6 +93,11 @@ PrefabInstance:
       propertyPath: orbsContained
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7497504788117245060, guid: 2a7fa468d338ca148ae07aaf543c9c02,
+        type: 3}
+      propertyPath: opacityWhenRespawning
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
