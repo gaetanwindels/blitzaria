@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 6463492098599299294}
   m_Layer: 10
   m_Name: Immersion Hitbox
-  m_TagString: ShotHitbox
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -682,8 +682,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.032714963, y: 0.54553574}
-  m_Size: {x: 1.1564122, y: 0.6069544}
+  m_Offset: {x: -0.03271502, y: 0.06563975}
+  m_Size: {x: 1.1564126, y: 0.5600811}
   m_Direction: 1
 --- !u!1 &3030431394573542113
 GameObject:
@@ -1456,7 +1456,7 @@ Transform:
   m_GameObject: {fileID: 6555290508705513892}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.232, y: -0.118, z: 0}
+  m_LocalPosition: {x: -0.076, y: 0.173, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1496,9 +1496,9 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.26931232, y: 0.06945044}
-  m_Size: {x: 0.78134644, y: 0.78134644}
-  m_Direction: 0
+  m_Offset: {x: 0.073158614, y: -0.20689103}
+  m_Size: {x: 0.551886, y: 0.36683407}
+  m_Direction: 1
 --- !u!1 &6988621117747625798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,19 +1778,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 5
-      inSlope: 3
-      outSlope: 3
+      time: -0.5581398
+      value: 9.78244
+      inSlope: 1.1853268
+      outSlope: 1.1853268
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
+      time: 1.1003196
+      value: 11.748257
+      inSlope: 1.185327
+      outSlope: 1.185327
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 3
       value: 14
-      inSlope: 3
-      outSlope: 3
+      inSlope: 1.1853274
+      outSlope: 1.1853274
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -1802,10 +1811,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0.1
-      inSlope: 0.1
-      outSlope: 0.1
+      time: -1.2172744
+      value: 0.30612177
+      inSlope: 0.022260405
+      outSlope: 0.022260405
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -1813,8 +1822,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 3
       value: 0.4
-      inSlope: 0.1
-      outSlope: 0.1
+      inSlope: 0.022260405
+      outSlope: 0.022260405
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -1823,7 +1832,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shoulderCooldown: 0.5
-  shoulderDelay: 0.5
+  shoulderDelay: 0.3
+  shoulderRecover: 0
   playerNumber: 0
   team: 0
   isAI: 0
@@ -2413,7 +2423,7 @@ PrefabInstance:
     - target: {fileID: 5186812673161185856, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.2586665
+      value: -7.435
       objectReference: {fileID: 0}
     - target: {fileID: 5186812673161185856, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
         type: 3}
@@ -2454,6 +2464,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: ShapeModule.angle
+      value: 10.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956985737065469613, guid: 8a7442dcf6c5c234cb040d1b5ce6efc0,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
