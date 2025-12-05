@@ -10099,7 +10099,7 @@ MonoBehaviour:
   minVelocityTransform: 7
   maxVelocityTransform: 12
   mass: 1
-  massInWater: 1
+  massInWater: 0.5
   minSpeedCharged: 6
   minSpeedTrail: 0.5
   trailIntensity:
