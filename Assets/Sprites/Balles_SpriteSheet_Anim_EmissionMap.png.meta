@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0b62dd61bbd91314db60dce3fe65abdd
+guid: 5761f748bd3e7724d94c8db41a004ccd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5599610276745964893
-    second: Balles_SpriteSheet_Anim_0
+      213: -688846460803430937
+    second: Balles_SpriteSheet_Anim_EmissionMap_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_0
+      name: Balles_SpriteSheet_Anim_EmissionMap_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,14 +115,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5de112f0efc5bd40800000000000000
-      internalID: 5599610276745964893
+      spriteID: 7e5c6072bc9b076f0800000000000000
+      internalID: -688846460803430937
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_1
+      name: Balles_SpriteSheet_Anim_EmissionMap_1
       rect:
         serializedVersion: 2
         x: 8
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04939400ab6265245bd58e364d7528a6
-      internalID: -1395218161
+      spriteID: 33d3631dc48c2f6478be8686c65e06c1
+      internalID: -357360428
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_2
+      name: Balles_SpriteSheet_Anim_EmissionMap_2
       rect:
         serializedVersion: 2
         x: 16
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc7f0aede3547084c84bd8bb62304271
-      internalID: 847463197
+      spriteID: ad97af80e444a3840b1fb4faca228905
+      internalID: 1664994752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_3
+      name: Balles_SpriteSheet_Anim_EmissionMap_3
       rect:
         serializedVersion: 2
         x: 24
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d913719f86ee8ee42b6aaddd5599754b
-      internalID: 54417910
+      spriteID: c8aac50e03ec35544bed19f172901344
+      internalID: 254576847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_4
+      name: Balles_SpriteSheet_Anim_EmissionMap_4
       rect:
         serializedVersion: 2
         x: 32
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f39b7f6a9956d414c8f607216d9dcd03
-      internalID: -1448570624
+      spriteID: 3ebe06e345a8d094baa11fa5b8e617cb
+      internalID: -17570585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_5
+      name: Balles_SpriteSheet_Anim_EmissionMap_5
       rect:
         serializedVersion: 2
         x: 40
@@ -225,58 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9331699a79eedff4eb9dabcdbe011bf2
-      internalID: 1936343951
+      spriteID: f25297ee40e933447933b283cd2a5ff3
+      internalID: -321190304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_6
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 8
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 76854c68ccb4a6d43b601f3288c995b3
-      internalID: -935408560
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_7
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 8
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e363c78a53c95c44a43782fead1067a
-      internalID: -884461029
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_8
+      name: Balles_SpriteSheet_Anim_EmissionMap_6
       rect:
         serializedVersion: 2
         x: 0
@@ -291,14 +247,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66639c0b07218d949846b45b5022a26c
-      internalID: 1244898182
+      spriteID: 32ef97a3677b56d438353bff540090ab
+      internalID: 508647459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_9
+      name: Balles_SpriteSheet_Anim_EmissionMap_7
       rect:
         serializedVersion: 2
         x: 8
@@ -313,14 +269,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9be46cea42566248b1ffe209687b453
-      internalID: 1672391529
+      spriteID: 4ac1756a3d3179044915736c234c9dbf
+      internalID: 1284864049
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_10
+      name: Balles_SpriteSheet_Anim_EmissionMap_8
       rect:
         serializedVersion: 2
         x: 16
@@ -335,14 +291,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8352b2abb1d80e64f98d9536aba901e8
-      internalID: -1354464734
+      spriteID: 1b67ee8162820754481e9263c4c5d4d9
+      internalID: -790824941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_11
+      name: Balles_SpriteSheet_Anim_EmissionMap_9
       rect:
         serializedVersion: 2
         x: 24
@@ -357,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3498ebb01828a194ab38315b780c41da
-      internalID: -1648304125
+      spriteID: bd5aaa8402404e54e898f8022ae6f65a
+      internalID: -115348293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_12
+      name: Balles_SpriteSheet_Anim_EmissionMap_10
       rect:
         serializedVersion: 2
         x: 32
@@ -379,14 +335,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 225b320a7a5118045b0c2285e510646f
-      internalID: 1860984962
+      spriteID: e92d094c68e03fb4cb820d32d3c6a932
+      internalID: -728006607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_13
+      name: Balles_SpriteSheet_Anim_EmissionMap_11
       rect:
         serializedVersion: 2
         x: 40
@@ -401,14 +357,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 373a485d41073374383840bd26c0d0c7
-      internalID: -518299018
+      spriteID: 46d3cc4bec3112448a83c0566366abfe
+      internalID: -1684113596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_14
+      name: Balles_SpriteSheet_Anim_EmissionMap_12
       rect:
         serializedVersion: 2
         x: 48
@@ -423,30 +379,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dcee367a1b581a45ac4290934d5ef60
-      internalID: -1514211035
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Balles_SpriteSheet_Anim_15
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 11a9a6f0d9b66674fbfd0cd0a5714b53
-      internalID: -618007383
+      spriteID: f35f81da38c3eb84883fa0c2eef4f4fa
+      internalID: -1723615114
       vertices: []
       indices: 
       edges: []
@@ -455,34 +389,33 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e7778060868e6fa4d80fda8d197440c5
+    spriteID: 1438eba3d77f7e647aa36780a7206058
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 5761f748bd3e7724d94c8db41a004ccd, type: 3}
-      name: _EmissionMap
+    secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceOnImport
+        value: False
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":8.0,"y":8.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Balles_SpriteSheet_Anim_0: 5599610276745964893
-      Balles_SpriteSheet_Anim_1: -1395218161
-      Balles_SpriteSheet_Anim_10: -1354464734
-      Balles_SpriteSheet_Anim_11: -1648304125
-      Balles_SpriteSheet_Anim_12: 1860984962
-      Balles_SpriteSheet_Anim_13: -518299018
-      Balles_SpriteSheet_Anim_14: -1514211035
-      Balles_SpriteSheet_Anim_15: -618007383
-      Balles_SpriteSheet_Anim_2: 847463197
-      Balles_SpriteSheet_Anim_3: 54417910
-      Balles_SpriteSheet_Anim_4: -1448570624
-      Balles_SpriteSheet_Anim_5: 1936343951
-      Balles_SpriteSheet_Anim_6: -935408560
-      Balles_SpriteSheet_Anim_7: -884461029
-      Balles_SpriteSheet_Anim_8: 1244898182
-      Balles_SpriteSheet_Anim_9: 1672391529
+      Balles_SpriteSheet_Anim_EmissionMap_0: -688846460803430937
+      Balles_SpriteSheet_Anim_EmissionMap_1: -357360428
+      Balles_SpriteSheet_Anim_EmissionMap_10: -728006607
+      Balles_SpriteSheet_Anim_EmissionMap_11: -1684113596
+      Balles_SpriteSheet_Anim_EmissionMap_12: -1723615114
+      Balles_SpriteSheet_Anim_EmissionMap_2: 1664994752
+      Balles_SpriteSheet_Anim_EmissionMap_3: 254576847
+      Balles_SpriteSheet_Anim_EmissionMap_4: -17570585
+      Balles_SpriteSheet_Anim_EmissionMap_5: -321190304
+      Balles_SpriteSheet_Anim_EmissionMap_6: 508647459
+      Balles_SpriteSheet_Anim_EmissionMap_7: 1284864049
+      Balles_SpriteSheet_Anim_EmissionMap_8: -790824941
+      Balles_SpriteSheet_Anim_EmissionMap_9: -115348293
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
