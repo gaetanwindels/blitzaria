@@ -144,6 +144,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "23c96752352b427badea486a484c7c57"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "baa78ee672554bdda32eb6fe9b92dff4"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "27d4585644284a4aaa19c22333bd436a"
                 },
                 "m_SlotId": 2
@@ -307,6 +321,20 @@
                     "m_Id": "613d84b80331444595ea51c0a3221dd5"
                 },
                 "m_SlotId": 2
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "9a44f0968acb484f80f93cf012517a69"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "90f0cf2e39cc494daf1a0ffe743f4e09"
+                },
+                "m_SlotId": 0
             }
         },
         {
@@ -1013,7 +1041,7 @@
     },
     "m_Name": "Sample Texture 2D",
     "m_DrawState": {
-        "m_Expanded": false,
+        "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
             "x": 145.0347442626953,
@@ -1298,10 +1326,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -50.00004959106445,
-            "y": 568.0,
-            "width": 135.00003051757813,
-            "height": 33.99993896484375
+            "x": -13.999977111816407,
+            "y": 568.0000610351563,
+            "width": 135.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -2415,7 +2443,7 @@
     },
     "m_Name": "Sample Texture 2D",
     "m_DrawState": {
-        "m_Expanded": false,
+        "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
             "x": 167.0,

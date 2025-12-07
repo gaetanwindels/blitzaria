@@ -2601,6 +2601,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Particle Loading Power
       objectReference: {fileID: 0}
+    - target: {fileID: 7640645614340719776, guid: 20f9a78ee9dd1164ea6c5da0318183b2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
