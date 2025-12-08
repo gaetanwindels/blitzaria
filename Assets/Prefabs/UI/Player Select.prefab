@@ -683,15 +683,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -890,15 +892,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1073,11 +1077,12 @@ MonoBehaviour:
   imageCharacter: {fileID: 3898622205201133079}
   playerBoard: {fileID: 4747180443564001517}
   players:
+  - {fileID: 11400000, guid: 82dc88d6f8caf1e4db3bb98fdcdde5ca, type: 2}
+  - {fileID: 11400000, guid: 965f553de426e7f498b1a72ebb2c3cfc, type: 2}
+  - {fileID: 11400000, guid: 848aa7d4fc2420a4493d5dcc41585220, type: 2}
   - {fileID: 11400000, guid: 2726f98ffd0bc8448beeab8e58ab0d8f, type: 2}
   - {fileID: 11400000, guid: b7bb7ab2744f8ea478840c9c7a66f9e8, type: 2}
   - {fileID: 11400000, guid: ab3179cd5520ace4eaee0b5c03e2f22e, type: 2}
-  - {fileID: 11400000, guid: 82dc88d6f8caf1e4db3bb98fdcdde5ca, type: 2}
-  - {fileID: 11400000, guid: 965f553de426e7f498b1a72ebb2c3cfc, type: 2}
   plarerImageMaterial: {fileID: 2100000, guid: 339ae9d08d2881c43a0e91bf5b39756d, type: 2}
 --- !u!225 &980124809
 CanvasGroup:
@@ -1228,15 +1233,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1585,15 +1592,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
