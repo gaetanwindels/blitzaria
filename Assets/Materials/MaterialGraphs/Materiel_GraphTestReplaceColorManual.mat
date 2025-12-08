@@ -87,6 +87,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_df10b76a9d3f4dff8c4f6ff3dde20c97_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c1bfa118f6e053b4cb0db85467f8b1f6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -132,6 +136,7 @@ Material:
     - _QueueOffset: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpeedOutline: 10
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
