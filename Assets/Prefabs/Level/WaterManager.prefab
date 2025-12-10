@@ -114,7 +114,7 @@ MonoBehaviour:
   edgeCountMultiplier: 16
   mat: {fileID: 2100000, guid: 06b3d2075b8456940a1eb34300e10c98, type: 2}
   watermesh: {fileID: 100000, guid: 16fbc499ae374d642aacafd84f2d4518, type: 3}
-  splash: {fileID: 0}
+  splash: {fileID: 2317758746817559672, guid: 134dd9a4ddf16424e957e7a3691d5a1f, type: 3}
   effector: {fileID: 0}
   material: {fileID: 0}
 --- !u!61 &1124535277
