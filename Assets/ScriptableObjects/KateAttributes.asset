@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   selectSprite: {fileID: 262045329, guid: 257312b226c3cd74abd7e09a12c891cb, type: 3}
   sourcePrimaryColor: {r: 0.4039216, g: 0.1764706, b: 0.17254902, a: 1}
-  sourceSecondaryColor: {r: 0.85098046, g: 0.7568628, b: 0.654902, a: 1}
+  sourceSecondaryColor: {r: 0.52156866, g: 0.5294118, b: 0.07450981, a: 1}
   sourceTertiaryColor: {r: 0.7568628, g: 0.5764706, b: 0.76470596, a: 1}
   colors:
   - primaryColor: {r: 0.32156864, g: 0.14117648, b: 0.13725491, a: 0}

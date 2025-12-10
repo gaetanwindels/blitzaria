@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToSpawn: 3
   orbsContained: 1
-  opacityWhenRespawning: 0.6
+  opacityWhenRespawning: 0
 --- !u!212 &2323832126741166069
 SpriteRenderer:
   m_ObjectHideFlags: 0

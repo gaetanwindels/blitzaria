@@ -834,7 +834,7 @@ public class Player : MonoBehaviour
         {
             loadingAutoShootTimer += Time.deltaTime;
             loadingAutoShootTimer = Mathf.Min(timeToBuildUp, loadingAutoShootTimer);
-
+            _material.SetFloat("_Blink", 1);
             if (loadingAutoShootTimer >= timeToBuildUp)
             {
                 BlinkFast();
@@ -854,6 +854,7 @@ public class Player : MonoBehaviour
             isShooting = true;
             loadingShootParticles.Stop();
             isLoadingAutoShoot = false;
+            _material.SetFloat("_Blink", 0);
             _material.SetFloat("_BlinkSpeed", 0);
             _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
             return;

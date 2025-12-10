@@ -8,6 +8,7 @@ public class OrbGenerator : MonoBehaviour
     [SerializeField] float timeToSpawn = 3f;
     [SerializeField] int orbsContained = 1;
     [SerializeField] float opacityWhenRespawning = 0.6f;
+    
 
     // Cached variables
     private SpriteRenderer _spriteRenderer;

@@ -15,7 +15,7 @@ public class Water : MonoBehaviour
     [SerializeField] GameObject splash;
     [SerializeField] BuoyancyEffector2D effector;
     [SerializeField] Material material;
-
+    
     // Cached variables
     private SpriteRenderer _spriteRenderer;
     private AudioSource _audioSource;
