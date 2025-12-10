@@ -222,7 +222,7 @@ public class Player : MonoBehaviour
             playerParent.ReceiveTackle(this);
             _rigidBody.linearVelocity = Vector2.zero;
             _shoulderTimer = -1;
-            _material.SetFloat("_BlinkSpeed", 0f);
+            CancelBlink();
             _isShouldering = false;
             _audioSource.PlayClipWithRandomPitch(hitPlayerSound, isTouchingWater);
         }
@@ -359,6 +359,7 @@ public class Player : MonoBehaviour
     
     private void Blink(float blinkSpeed)
     {
+        _material.SetFloat("_Blink", blinkSpeed > 0 ? 1 : 0);
         _material.SetFloat("_BlinkSpeed", blinkSpeed);
     }
 
@@ -834,7 +835,7 @@ public class Player : MonoBehaviour
         {
             loadingAutoShootTimer += Time.deltaTime;
             loadingAutoShootTimer = Mathf.Min(timeToBuildUp, loadingAutoShootTimer);
-            _material.SetFloat("_Blink", 1);
+            
             if (loadingAutoShootTimer >= timeToBuildUp)
             {
                 BlinkFast();
@@ -854,8 +855,7 @@ public class Player : MonoBehaviour
             isShooting = true;
             loadingShootParticles.Stop();
             isLoadingAutoShoot = false;
-            _material.SetFloat("_Blink", 0);
-            _material.SetFloat("_BlinkSpeed", 0);
+            CancelBlink();
             _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
             return;
         }
@@ -913,19 +913,10 @@ public class Player : MonoBehaviour
         StartCoroutine(CooldownShooting());
         loadingAutoShootTimer = 0;
         isLoadingAutoShoot = false;
-        _material.SetFloat("_BlinkSpeed", 0);
+        CancelBlink();
         windupAutoShootTimer = 0;
         
         _animator.SetBool(AnimatorParameters.IsLoadingKick, false);
-    }
-
-    private IEnumerator Blink()
-    {
-       var isBlinking = true;
-       _material.SetFloat("_Blink", 0); 
-       yield return new WaitForSeconds(0.2f);
-       _material.SetFloat("_Blink", 0);
-       isBlinking = false;
     }
 
     private void ManageThrow()
