@@ -754,10 +754,10 @@ SpriteMask:
   m_Sprite: {fileID: 7482667652216324306, guid: 09e20ca1b11a27442bba077d3ba08b9e,
     type: 3}
   m_MaskAlphaCutoff: 0.2
-  m_FrontSortingLayerID: 52176599
-  m_BackSortingLayerID: 52176599
-  m_FrontSortingLayer: 7
-  m_BackSortingLayer: 7
+  m_FrontSortingLayerID: 1318283027
+  m_BackSortingLayerID: 1318283027
+  m_FrontSortingLayer: 1
+  m_BackSortingLayer: 1
   m_FrontSortingOrder: 2
   m_BackSortingOrder: -2
   m_IsCustomRangeActive: 1
