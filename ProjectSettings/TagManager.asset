@@ -50,6 +50,9 @@ TagManager:
   - name: Background
     uniqueID: 1318283027
     locked: 0
+  - name: Shadow
+    uniqueID: 52176599
+    locked: 0
   - name: Players
     uniqueID: 2854329975
     locked: 0
@@ -64,9 +67,6 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2514561881
-    locked: 0
-  - name: Shadow
-    uniqueID: 52176599
     locked: 0
   m_RenderingLayers:
   - Default
