@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016725c6ae304fa384096ef79aba10c8, type: 3}
+  m_Name: EclairAttributes
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 8076081186143647982, guid: 901c711adbbf8584799b14148d140d9a,
+    type: 3}
+  selectSprite: {fileID: -8609317210173779135, guid: 6f9124535a1b46641804a0d8bc983c65,
+    type: 3}
+  sourcePrimaryColor: {r: 0.3372549, g: 0.5294118, b: 0.6117647, a: 1}
+  sourceSecondaryColor: {r: 0.30980393, g: 0.42352945, b: 0.47450984, a: 1}
+  sourceTertiaryColor: {r: 0.21176472, g: 0.32156864, b: 0.42352945, a: 1}
+  colors:
+  - primaryColor: {r: 0.3372549, g: 0.5294118, b: 0.6117647, a: 0}
+    secondaryColor: {r: 0.30980393, g: 0.42352945, b: 0.47450984, a: 0}
+    tertiaryColor: {r: 0.21176472, g: 0.32156864, b: 0.42352945, a: 1}
+  - primaryColor: {r: 0.57254905, g: 0.13333334, b: 0.13333334, a: 0}
+    secondaryColor: {r: 0.5058824, g: 0.121568635, b: 0.121568635, a: 0}
+    tertiaryColor: {r: 0.2735849, g: 0.1509879, b: 0.1509879, a: 0}
+  - primaryColor: {r: 0.26148093, g: 0.35233188, b: 0.49056602, a: 0}
+    secondaryColor: {r: 0.17332682, g: 0.2537613, b: 0.38679248, a: 0}
+    tertiaryColor: {r: 0.14778392, g: 0.18909895, b: 0.254717, a: 0}
+  - primaryColor: {r: 0.3243273, g: 0.49019608, b: 0.2627451, a: 1}
+    secondaryColor: {r: 0.17254904, g: 0.3882353, b: 0.18315078, a: 1}
+    tertiaryColor: {r: 0.14901961, g: 0.25490198, b: 0.15195037, a: 0}
+  - primaryColor: {r: 0.24870951, g: 0.764151, b: 0.75473315, a: 0}
+    secondaryColor: {r: 0.2948113, g: 0.5, b: 0.49533662, a: 0}
+    tertiaryColor: {r: 0.6981132, g: 0.06233587, b: 0.055980783, a: 1}
+  - primaryColor: {r: 0.8207547, g: 0.4219918, b: 0.7799722, a: 0}
+    secondaryColor: {r: 0.654902, g: 0.3372549, b: 0.62352943, a: 0}
+    tertiaryColor: {r: 0.41509432, g: 0.24866499, b: 0.39865687, a: 1}
+  name: Eclair

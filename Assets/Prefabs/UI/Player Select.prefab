@@ -1078,9 +1078,11 @@ MonoBehaviour:
   playerBoard: {fileID: 4747180443564001517}
   players:
   - {fileID: 11400000, guid: 82dc88d6f8caf1e4db3bb98fdcdde5ca, type: 2}
-  - {fileID: 11400000, guid: 965f553de426e7f498b1a72ebb2c3cfc, type: 2}
+  - {fileID: 11400000, guid: 400809e5474a59d449e521fb2ddd48e2, type: 2}
+  - {fileID: 11400000, guid: 5cc29dee313f5aa499c6040efeb30b3b, type: 2}
   - {fileID: 11400000, guid: 848aa7d4fc2420a4493d5dcc41585220, type: 2}
   - {fileID: 11400000, guid: 2726f98ffd0bc8448beeab8e58ab0d8f, type: 2}
+  - {fileID: 11400000, guid: 965f553de426e7f498b1a72ebb2c3cfc, type: 2}
   - {fileID: 11400000, guid: b7bb7ab2744f8ea478840c9c7a66f9e8, type: 2}
   - {fileID: 11400000, guid: ab3179cd5520ace4eaee0b5c03e2f22e, type: 2}
   plarerImageMaterial: {fileID: 2100000, guid: 339ae9d08d2881c43a0e91bf5b39756d, type: 2}

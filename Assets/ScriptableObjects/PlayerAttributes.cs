@@ -19,7 +19,7 @@ namespace ScriptableObjects
             public Color primaryColor;
             public Color secondaryColor;
             public Color tertiaryColor;
-    
+        
         }
     }
 }
