@@ -1936,10 +1936,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1440637321
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5085776278090463208, guid: 2b28dd2969ecd654686fc0b3c39eb1e6,
-    type: 3}
+  m_Sprite: {fileID: -208857567, guid: 041c5ee0d2b689a4280a215ba9ed4250, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2099,7 +2098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 3147b96d50b61b84ca0250f66f76b30a,
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: b76ec50fc74997348b9e8962ad410256,
     type: 3}
 --- !u!114 &834518355814536822
 MonoBehaviour:
@@ -2116,7 +2115,7 @@ MonoBehaviour:
   m_CategoryHash: 1.2100393e-15
   m_labelHash: 1.7185983e-30
   m_SpriteKey: 0
-  m_SpriteHash: 335045072
+  m_SpriteHash: 5149604
 --- !u!114 &8520130523125036118
 MonoBehaviour:
   m_ObjectHideFlags: 0

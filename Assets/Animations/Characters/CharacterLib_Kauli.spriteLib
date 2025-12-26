@@ -121,8 +121,8 @@ MonoBehaviour:
     m_Hash: 282280408
     m_CategoryList: []
     m_OverrideEntries:
-    - m_Name: Diving_1
-      m_Hash: 622787996
+    - m_Name: Diving_5
+      m_Hash: 577976709
       m_Sprite: {fileID: 4292661957673736129, guid: 2ed95b7930f21d248a239dd0cd0eb1f1,
         type: 3}
       m_FromMain: 0
@@ -160,14 +160,14 @@ MonoBehaviour:
     m_Hash: 283196921
     m_CategoryList: []
     m_OverrideEntries:
-    - m_Name: Kick_1-2
-      m_Hash: 826517616
+    - m_Name: Kick_1
+      m_Hash: 26440637
       m_Sprite: {fileID: -2030792388, guid: 2ed95b7930f21d248a239dd0cd0eb1f1, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -2030792388, guid: 2ed95b7930f21d248a239dd0cd0eb1f1,
         type: 3}
-    - m_Name: Kick_1
-      m_Hash: 26440637
+    - m_Name: Kick_2
+      m_Hash: 412754439
       m_Sprite: {fileID: 1254389168, guid: 2ed95b7930f21d248a239dd0cd0eb1f1, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 1254389168, guid: 2ed95b7930f21d248a239dd0cd0eb1f1,
@@ -348,5 +348,5 @@ MonoBehaviour:
     m_FromMain: 0
     m_EntryOverrideCount: 1
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 639016697364434219
+  m_ModificationHash: 639023588858797530
   m_Version: 1
