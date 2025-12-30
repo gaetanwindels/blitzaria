@@ -10005,7 +10005,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1403743979
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1244898182, guid: 0b62dd61bbd91314db60dce3fe65abdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10100,7 +10100,7 @@ MonoBehaviour:
   minVelocityTransform: 7
   maxVelocityTransform: 12
   mass: 1
-  massInWater: 0.5
+  massInWater: 0.3
   minSpeedCharged: 6
   minSpeedTrail: 0.5
   trailIntensity:
