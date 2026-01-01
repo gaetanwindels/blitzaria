@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEditor.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DefaultNamespace
 {
